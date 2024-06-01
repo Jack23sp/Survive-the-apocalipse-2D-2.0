@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: First Encounter - Phase 74
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for First Encounter - Phase 74.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: First Encounter - Phase 75
+  rewardGold: 166
+  rewardCoins: 83
+  rewardExperience: 465
+  rewards:
+  - item: Trailblazer Backpack
+    amount: 4
+  - item: The Leader's Journey Inspiring and Influencing Others
+    amount: 4
+  kills:
+  - name: Animals_Wild_rabbit 1
+    amountRequest: 34
+    actual: 0
+  - name: Zombie_BioHazard
+    amountRequest: 38
+    actual: 0
+  - name: Animals_Chicken 3
+    amountRequest: 23
+    actual: 0
+  players: []
+  craft:
+  - item: Sniper bottom
+    amountRequest: 4
+    actual: 0
+  - item: Pistol Bottom
+    amountRequest: 3
+    actual: 0
+  pick:
+  - item: Enchantberry
+    amountRequest: 74
+    actual: 0
+  - item: Copper
+    amountRequest: 60
+    actual: 0
+  - item: Crystalbloom
+    amountRequest: 20
+    actual: 0
+  building:
+  - item: Billboard
+    amountRequest: 2
+    actual: 0

@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 89
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 89.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 90
+  rewardGold: 196
+  rewardCoins: 98
+  rewardExperience: 540
+  rewards:
+  - item: Nitrate Potassium
+    amount: 5
+  kills:
+  - name: Zombie_BioHazard
+    amountRequest: 2
+    actual: 0
+  - name: Animals_Ibex
+    amountRequest: 78
+    actual: 0
+  players: []
+  craft:
+  - item: Cooked white meat
+    amountRequest: 6
+    actual: 0
+  - item: Sniper ammo 7.62 mm
+    amountRequest: 3
+    actual: 0
+  - item: AR1 barrell
+    amountRequest: 7
+    actual: 0
+  pick:
+  - item: Mysticwillow
+    amountRequest: 40
+    actual: 0
+  building:
+  - item: Wood Fence
+    amountRequest: 4
+    actual: 0
+  - item: Rug
+    amountRequest: 1
+    actual: 0

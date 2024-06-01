@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Urban Recon - Phase 39
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Urban Recon - Phase 39.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Urban Recon - Phase 40
+  rewardGold: 96
+  rewardCoins: 48
+  rewardExperience: 290
+  rewards:
+  - item: Black sofa
+    amount: 2
+  kills:
+  - name: Zombie_Mechanic
+    amountRequest: 40
+    actual: 0
+  - name: Animals_Goat
+    amountRequest: 16
+    actual: 0
+  - name: Animals_Cattle
+    amountRequest: 10
+    actual: 0
+  players: []
+  craft:
+  - item: Pistol
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Thunderbloom
+    amountRequest: 1
+    actual: 0
+  - item: Celestialstem
+    amountRequest: 43
+    actual: 0
+  building:
+  - item: Stove
+    amountRequest: 3
+    actual: 0
+  - item: Wood Gate
+    amountRequest: 3
+    actual: 0

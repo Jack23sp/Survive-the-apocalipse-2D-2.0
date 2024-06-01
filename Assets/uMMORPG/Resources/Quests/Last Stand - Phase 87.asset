@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 87
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 87.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 88
+  rewardGold: 192
+  rewardCoins: 96
+  rewardExperience: 530
+  rewards:
+  - item: Machete
+    amount: 5
+  kills:
+  - name: Animals_yellow_fattail_scorpion
+    amountRequest: 68
+    actual: 0
+  - name: Animals_Crocodile
+    amountRequest: 86
+    actual: 0
+  - name: Animals_Brown bear
+    amountRequest: 54
+    actual: 0
+  players: []
+  craft:
+  - item: AR1 magazine large
+    amountRequest: 4
+    actual: 0
+  - item: Magazine small
+    amountRequest: 10
+    actual: 0
+  - item: Caliber 9 mm
+    amountRequest: 6
+    actual: 0
+  pick:
+  - item: Celestialstem
+    amountRequest: 50
+    actual: 0
+  - item: Skyblossom
+    amountRequest: 82
+    actual: 0
+  - item: White meat
+    amountRequest: 44
+    actual: 0
+  building:
+  - item: Basement blueprint
+    amountRequest: 4
+    actual: 0

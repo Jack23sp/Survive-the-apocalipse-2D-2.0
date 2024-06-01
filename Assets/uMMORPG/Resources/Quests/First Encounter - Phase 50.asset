@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: First Encounter - Phase 50
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for First Encounter - Phase 50.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: First Encounter - Phase 51
+  rewardGold: 118
+  rewardCoins: 59
+  rewardExperience: 345
+  rewards:
+  - item: TV
+    amount: 3
+  - item: White male sleeveless shirt
+    amount: 3
+  - item: Rug 6
+    amount: 3
+  kills:
+  - name: Animals_Wild_rabbit 1
+    amountRequest: 24
+    actual: 0
+  - name: Animals_Chicken 3
+    amountRequest: 43
+    actual: 0
+  players: []
+  craft:
+  - item: Gun powder
+    amountRequest: 6
+    actual: 0
+  - item: SMG Bottom
+    amountRequest: 6
+    actual: 0
+  - item: Knife
+    amountRequest: 5
+    actual: 0
+  pick:
+  - item: Copper
+    amountRequest: 26
+    actual: 0
+  - item: Zombie blood
+    amountRequest: 53
+    actual: 0
+  building:
+  - item: Black sofa
+    amountRequest: 1
+    actual: 0
+  - item: Rug 8
+    amountRequest: 3
+    actual: 0

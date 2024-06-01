@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Nightfall Defense - Phase 91
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Nightfall Defense - Phase 91.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Nightfall Defense - Phase 92
+  rewardGold: 200
+  rewardCoins: 100
+  rewardExperience: 550
+  rewards:
+  - item: Grey Male Pants
+    amount: 5
+  kills:
+  - name: Animals_Crocodile
+    amountRequest: 35
+    actual: 0
+  - name: Animals_Scorpion
+    amountRequest: 7
+    actual: 0
+  players: []
+  craft:
+  - item: Sniper bottom
+    amountRequest: 11
+    actual: 0
+  - item: Gold threads
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Lumiflora
+    amountRequest: 66
+    actual: 0
+  - item: Crystalbloom
+    amountRequest: 17
+    actual: 0
+  - item: Gold
+    amountRequest: 60
+    actual: 0
+  building:
+  - item: Sewing table
+    amountRequest: 3
+    actual: 0

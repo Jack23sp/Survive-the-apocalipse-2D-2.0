@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Nightfall Defense - Phase 21
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Nightfall Defense - Phase 21.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Nightfall Defense - Phase 22
+  rewardGold: 60
+  rewardCoins: 30
+  rewardExperience: 200
+  rewards:
+  - item: Trailblazer Backpack
+    amount: 2
+  kills:
+  - name: Animals_Cattle
+    amountRequest: 21
+    actual: 0
+  - name: Animals_Scorpion
+    amountRequest: 10
+    actual: 0
+  - name: Zombie_Infected
+    amountRequest: 11
+    actual: 0
+  players: []
+  craft:
+  - item: Eggs creme
+    amountRequest: 4
+    actual: 0
+  pick:
+  - item: Cottom
+    amountRequest: 22
+    actual: 0
+  - item: Wood
+    amountRequest: 23
+    actual: 0
+  building:
+  - item: Kitchen Sink
+    amountRequest: 1
+    actual: 0
+  - item: Wood Table
+    amountRequest: 1
+    actual: 0
+  - item: Black and red sofa
+    amountRequest: 1
+    actual: 0

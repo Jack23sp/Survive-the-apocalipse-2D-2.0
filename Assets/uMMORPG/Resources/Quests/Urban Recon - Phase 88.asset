@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Urban Recon - Phase 88
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Urban Recon - Phase 88.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Urban Recon - Phase 89
+  rewardGold: 194
+  rewardCoins: 97
+  rewardExperience: 535
+  rewards:
+  - item: Summit Pack
+    amount: 5
+  kills:
+  - name: Animals_Boar
+    amountRequest: 78
+    actual: 0
+  - name: Animals_Wolf
+    amountRequest: 34
+    actual: 0
+  players: []
+  craft:
+  - item: Baseball bat
+    amountRequest: 9
+    actual: 0
+  - item: Stock light
+    amountRequest: 10
+    actual: 0
+  - item: Pistol magazine
+    amountRequest: 10
+    actual: 0
+  pick:
+  - item: Copper
+    amountRequest: 85
+    actual: 0
+  building:
+  - item: Rug 9
+    amountRequest: 5
+    actual: 0
+  - item: Water container
+    amountRequest: 6
+    actual: 0
+  - item: Armchair
+    amountRequest: 5
+    actual: 0

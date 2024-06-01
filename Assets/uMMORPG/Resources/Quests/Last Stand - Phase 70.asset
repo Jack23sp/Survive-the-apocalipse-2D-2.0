@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 70
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 70.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 71
+  rewardGold: 158
+  rewardCoins: 79
+  rewardExperience: 445
+  rewards:
+  - item: Mysticwillow
+    amount: 4
+  - item: Basement blueprint
+    amount: 4
+  kills:
+  - name: Zombie_Prisoner
+    amountRequest: 6
+    actual: 0
+  players: []
+  craft:
+  - item: SMG Body
+    amountRequest: 8
+    actual: 0
+  - item: Sniper scope
+    amountRequest: 4
+    actual: 0
+  - item: Silver threads
+    amountRequest: 6
+    actual: 0
+  pick:
+  - item: Celestialstem
+    amountRequest: 54
+    actual: 0
+  - item: Nitrate Potassium
+    amountRequest: 8
+    actual: 0
+  building:
+  - item: Warehouse
+    amountRequest: 3
+    actual: 0
+  - item: Rug 7
+    amountRequest: 1
+    actual: 0

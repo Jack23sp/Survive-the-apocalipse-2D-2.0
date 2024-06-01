@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: First Encounter - Phase 53
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for First Encounter - Phase 53.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: First Encounter - Phase 54
+  rewardGold: 124
+  rewardCoins: 62
+  rewardExperience: 360
+  rewards:
+  - item: Firefighter Cover Hat
+    amount: 3
+  - item: Green Male Sportive Shoes
+    amount: 3
+  kills:
+  - name: Animals_Crocodile
+    amountRequest: 2
+    actual: 0
+  players: []
+  craft:
+  - item: Tomato asparagus
+    amountRequest: 7
+    actual: 0
+  - item: Cooked white meat
+    amountRequest: 4
+    actual: 0
+  - item: Red dot
+    amountRequest: 2
+    actual: 0
+  pick:
+  - item: Copper
+    amountRequest: 9
+    actual: 0
+  - item: Cottom
+    amountRequest: 42
+    actual: 0
+  building:
+  - item: Warehouse
+    amountRequest: 1
+    actual: 0
+  - item: Rug 4
+    amountRequest: 1
+    actual: 0
+  - item: Rug 6
+    amountRequest: 1
+    actual: 0

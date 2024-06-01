@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d891a383b56988e4a8e72299078b0f32, type: 3}
+  m_Name: Wood Fence
+  m_EditorClassIdentifier: 
+  coinToCraft: 0
+  goldToCraft: 0
+  repairItems: []
+  upgradeItems: []
+  armor:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxArmorLevel: 0
+  productAfterCooking: {fileID: 0}
+  coverTemperature: 0
+  additionalSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  protectedSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxBagLevel: 0
+  maxWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  possibleBagWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxWeightLevel: 0
+  skinImages: []
+  weaponToSpawn: {fileID: 0}
+  munitionImage: {fileID: 0}
+  maxMunition: 0
+  attackRange: 1
+  needMunitionInMagazine: 0
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  requiredSkill: {fileID: 0}
+  maxUnsanity: 0
+  maxDurability:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxDurabilityLevel: 0
+  canUseFurnace: 0
+  canUseWarehouse: 1
+  canUseCabinet: 0
+  canUseWeaponStorage: 0
+  canUseUpgrade: 0
+  canUseCook: 0
+  canUseFridge: 0
+  canUseLibrary: 0
+  itemtoCraftBuilding:
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c99498768077daa4aa521b54f63f8e51, type: 2}
+      amount: 15
+    ingredients: []
+    timeToCraft: 0
+    gold: 0
+    coin: 0
+  itemtoCraft: []
+  itemtoCraftFemale: []
+  continuePlacing: 1
+  canAddSkin: 0
+  accessoriesType: 0
+  accessoryToAdd: []
+  weaponType: -1
+  weight: 0.1
+  maxStack: 100
+  buyPrice: 0
+  sellPrice: 0
+  itemMallPrice: 0
+  sellable: 1
+  tradable: 1
+  destroyable: 1
+  toolTip: Delimitate your base. Use this in combination with concrete to make your
+    base secure
+  image: {fileID: -564960447, guid: 90879ca92a9d39d49a810ad5387c3395, type: 3}
+  minLevel: 0
+  cooldown: 0
+  _cooldownCategory: 
+  necessaryTagObject: 
+  buildingList:
+  - buildingName: 
+    buildingObject: {fileID: 203251253726611786, guid: 131051c8f184ef74f8067ea340f2bfab,
+      type: 3}
+  - buildingName: 
+    buildingObject: {fileID: 6816874964235752371, guid: adfb8790f8f6d0e4ca18bdfa605d9163,
+      type: 3}
+  isMetal: 0
+  isWood: 1
+  isStone: 0
+  isConcrete: 0

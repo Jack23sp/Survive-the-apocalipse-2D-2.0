@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 94
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 94.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 95
+  rewardGold: 206
+  rewardCoins: 103
+  rewardExperience: 565
+  rewards:
+  - item: Magazine small
+    amount: 5
+  - item: Red tissue
+    amount: 5
+  kills:
+  - name: Animals_Cattle male
+    amountRequest: 5
+    actual: 0
+  - name: Animals_Goat
+    amountRequest: 16
+    actual: 0
+  - name: Animals_Boar
+    amountRequest: 23
+    actual: 0
+  players: []
+  craft:
+  - item: Sniper magazine large
+    amountRequest: 3
+    actual: 0
+  - item: Cooked white meat
+    amountRequest: 7
+    actual: 0
+  - item: Medium torch
+    amountRequest: 3
+    actual: 0
+  pick:
+  - item: Crystalbloom
+    amountRequest: 10
+    actual: 0
+  - item: Mysticwillow
+    amountRequest: 23
+    actual: 0
+  - item: White meat
+    amountRequest: 53
+    actual: 0
+  building:
+  - item: Wood Fence
+    amountRequest: 6
+    actual: 0
+  - item: Weapon storage
+    amountRequest: 4
+    actual: 0
+  - item: Rug 2
+    amountRequest: 2
+    actual: 0

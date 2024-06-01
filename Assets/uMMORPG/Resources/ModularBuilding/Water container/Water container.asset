@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a86736d66145f7c4eb87d71202fdc8bd, type: 3}
+  m_Name: Water container
+  m_EditorClassIdentifier: 
+  coinToCraft: 0
+  goldToCraft: 0
+  repairItems: []
+  upgradeItems: []
+  armor:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxArmorLevel: 0
+  productAfterCooking: {fileID: 0}
+  coverTemperature: 0
+  additionalSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  protectedSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxBagLevel: 0
+  maxWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  possibleBagWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxWeightLevel: 0
+  skinImages: []
+  weaponToSpawn: {fileID: 0}
+  munitionImage: {fileID: 0}
+  maxMunition: 0
+  attackRange: 1
+  needMunitionInMagazine: 0
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  requiredSkill: {fileID: 0}
+  maxUnsanity: 0
+  maxDurability:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxDurabilityLevel: 0
+  canUseFurnace: 0
+  canUseWarehouse: 1
+  canUseCabinet: 0
+  canUseWeaponStorage: 0
+  canUseUpgrade: 0
+  canUseCook: 0
+  canUseFridge: 0
+  canUseLibrary: 0
+  itemtoCraftBuilding:
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 402b0067f88f5da40ac76d802cd558df, type: 2}
+      amount: 10
+    ingredients: []
+    timeToCraft: 0
+    gold: 0
+    coin: 0
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    ingredients: []
+    timeToCraft: 0
+    gold: 0
+    coin: 0
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 3
+    ingredients: []
+    timeToCraft: 0
+    gold: 0
+    coin: 0
+  itemtoCraft: []
+  itemtoCraftFemale: []
+  continuePlacing: 0
+  canAddSkin: 0
+  accessoriesType: -1
+  accessoryToAdd: []
+  weaponType: -1
+  weight: 0.1
+  maxStack: 100
+  buyPrice: 0
+  sellPrice: 0
+  itemMallPrice: 0
+  sellable: 0
+  tradable: 0
+  destroyable: 1
+  toolTip: A collection of rainy water
+  image: {fileID: -395248617, guid: 0038b8790889372439c08b1985c64b66, type: 3}
+  minLevel: 0
+  cooldown: 0
+  _cooldownCategory: 
+  necessaryTagObject: 
+  buildingList:
+  - buildingName: 
+    buildingObject: {fileID: 6816874964235752371, guid: d4c9b5f233818a740b760d8f5c3d753d,
+      type: 3}
+  isMetal: 1
+  isWood: 0
+  isStone: 0
+  isConcrete: 0

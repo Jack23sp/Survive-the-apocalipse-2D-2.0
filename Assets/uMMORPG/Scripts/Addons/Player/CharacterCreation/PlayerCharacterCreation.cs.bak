@@ -1,0 +1,412 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Mirror;
+
+public partial class Player
+{
+    [HideInInspector] public PlayerCharacterCreation playerCharacterCreation;
+}
+
+public partial class Database
+{
+    class characterCreation
+    {
+        //[PrimaryKey] // important for performance: O(log n) instead of O(n)
+        //[Collation("NOCASE")] // [COLLATE NOCASE for case insensitive compare. this way we can't both create 'Archer' and 'archer' as characters]
+        public string characterName { get; set; }
+        public int sex { get; set; }
+        public int hairType { get; set; }
+        public int beard { get; set; }
+        public string hairColor { get; set; }
+        public string underwearColor { get; set; }
+        public string eyesColor { get; set; }
+        public string skinColor { get; set; }
+        public float fat { get; set; }
+        public float thin { get; set; }
+        public float muscle { get; set; }
+        public float height { get; set; }
+        public float breast { get; set; }
+        public int bag { get; set; }
+    }
+
+    public void Connect_CharacterCreation()
+    {
+        connection.CreateTable<characterCreation>();
+    }
+
+    public void SaveCharacterCreation(Player player)
+    {
+        connection.Execute("DELETE FROM characterCreation WHERE characterName=?", player.name);
+        // note: .Insert causes a 'Constraint' exception. use Replace.
+        connection.InsertOrReplace(new characterCreation
+        {
+            characterName = player.name,
+            sex = player.playerCharacterCreation.sex,
+            hairType = player.playerCharacterCreation.hairType,
+            beard = player.playerCharacterCreation.beard,
+            hairColor = player.playerCharacterCreation.hairColor,
+            underwearColor = player.playerCharacterCreation.underwearColor,
+            eyesColor = player.playerCharacterCreation.eyesColor,
+            skinColor = player.playerCharacterCreation.skinColor,
+            fat = player.playerCharacterCreation.fat,
+            thin = player.playerCharacterCreation.thin,
+            height = player.playerCharacterCreation.height,
+            breast = player.playerCharacterCreation.breast,
+            bag = player.playerCharacterCreation.bag
+        });
+    }
+
+    public void LoadCharacterCreation(Player player)
+    {
+        foreach (characterCreation row in connection.Query<characterCreation>("SELECT * FROM characterCreation WHERE characterName=?", player.name))
+        {
+            player.playerCharacterCreation.sex = row.sex;
+            player.playerCharacterCreation.hairType = row.hairType;
+            player.playerCharacterCreation.beard = row.beard;
+            player.playerCharacterCreation.hairColor = row.hairColor;
+            player.playerCharacterCreation.underwearColor = row.underwearColor;
+            player.playerCharacterCreation.eyesColor = row.eyesColor;
+            player.playerCharacterCreation.skinColor = row.skinColor;
+            player.playerCharacterCreation.fat = row.fat;
+            player.playerCharacterCreation.thin = row.thin;
+            player.playerCharacterCreation.muscle = row.muscle;
+            player.playerCharacterCreation.height = row.height;
+            player.playerCharacterCreation.breast = row.breast;
+            player.playerCharacterCreation.bag = row.bag;
+        }
+    }
+
+}
+
+public class PlayerCharacterCreation : NetworkBehaviour
+{
+    private Player player;
+
+    [SyncVar]
+    public int sex;
+    [SyncVar(hook = nameof(ChangeWeigth))]
+    public float fat;
+    [SyncVar(hook = nameof(ChangeThin))]
+    public float thin;
+    [SyncVar(hook = nameof(ChangeMuscle))]
+    public float muscle;
+    [SyncVar(hook = nameof(ChangeHeight))]
+    public float height;
+    [SyncVar(hook = nameof(ChangeBreastSize))]
+    public float breast;
+
+    [SyncVar(hook = nameof(ChangeHairType))]
+    public int hairType;
+    [SyncVar(hook = nameof(ChangeBeardType))]
+    public int beard;
+    [SyncVar(hook = nameof(ChangeHairColor))]
+    public string hairColor;
+    [SyncVar(hook = nameof(ChangeUnderpantsColor))]
+    public string underwearColor;
+    [SyncVar(hook = nameof(ChangeEyesColor))]
+    public string eyesColor;
+    [SyncVar(hook = nameof(ChangeSkinColor))]
+    public string skinColor;
+
+
+    [SyncVar(hook = nameof(ChangeHats))]
+    public int hats;
+    [SyncVar(hook = nameof(ChangeAccessory))]
+    public int accessory;
+    [SyncVar(hook = nameof(ChangeUpper))]
+    public int upper;
+    [SyncVar(hook = nameof(ChangeDown))]
+    public int down;
+    [SyncVar(hook = nameof(ChangeShoes))]
+    public int shoes;
+    [SyncVar(hook = nameof(ChangeBag))]
+    public int bag;
+
+    public GameObject dummyPresentation;
+
+    public float percSlider;
+
+    public ItemSlot accessorySlot;
+    public ItemSlot hatsSlot;
+
+    //public CharacterCustomization characterCustomization;
+
+    Color newCol;
+
+    bool isThisIsLocalPlayer = false;
+
+    void Awake()
+    {
+        player = GetComponent<Player>();
+        player.playerCharacterCreation = this;
+    }
+
+
+
+    void Start()
+    {
+
+        if (!GetComponent<SelectableCharacter>() && !isServer && !isClient)
+        {
+            player.nameOverlay.gameObject.SetActive(false);
+        }
+        else
+        {
+            player.nameOverlay.gameObject.SetActive(true);
+        }
+
+        NewSetup();
+    }
+
+    public void ChangeHairType(int oldHair, int newHair)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    characterCustomization.SetElementByIndex(CharacterElementType.Hair, newHair);
+        //}
+    }
+
+    public void ChangeHairColor(string oldHairColor, string newHairColor)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    if (ColorUtility.TryParseHtmlString(newHairColor, out newCol))
+        //        characterCustomization.SetBodyColor(BodyColorPart.Hair, newCol);
+        //}
+    }
+
+    public void ChangeUnderpantsColor(string oldUnderpantsColor, string newUnderpantsColor)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    if (ColorUtility.TryParseHtmlString(newUnderpantsColor, out newCol))
+        //        characterCustomization.SetBodyColor(BodyColorPart.Underpants, newCol);
+        //}
+    }
+
+    public void ChangeEyesColor(string oldEyesColor, string newEyesColor)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    if (ColorUtility.TryParseHtmlString(newEyesColor, out newCol))
+        //        characterCustomization.SetBodyColor(BodyColorPart.Eye, newCol);
+        //}
+    }
+
+    public void ChangeSkinColor(string oldSkinColor, string newSkinColor)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    if (ColorUtility.TryParseHtmlString(newSkinColor, out newCol))
+        //        characterCustomization.SetBodyColor(BodyColorPart.Skin, newCol);
+        //}
+    }
+
+    public void ChangeBeardType(int oldHair, int newHair)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    characterCustomization.SetElementByIndex(CharacterElementType.Beard, newHair);
+        //}
+    }
+
+    public void ChangeWeigth(float oldWeigth, float newWeigth)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    characterCustomization.SetBlendshapeValue(CharacterBlendShapeType.Fat, newWeigth);
+        //}
+    }
+
+    public void ChangeThin(float oldThin, float newThin)
+    {
+        //if (sex == 0)
+        //{
+        //    if (player.prefabPreview)
+        //    {
+        //        characterCustomization.SetBlendshapeValue(CharacterBlendShapeType.Thin, newThin);
+        //    }
+        //}
+    }
+
+    public void ChangeMuscle(float oldMuscle, float newMuscle)
+    {
+        //if (sex == 0)
+        //{
+
+        //    if (player.prefabPreview)
+        //    {
+        //        characterCustomization.SetBlendshapeValue(CharacterBlendShapeType.Muscles, newMuscle);
+        //    }
+        //}
+    }
+
+    public void ChangeHeight(float oldHeight, float newHeight)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    characterCustomization.SetHeight(newHeight);
+        //}
+    }
+
+    public void ChangeBreastSize(float oldBrestSize, float newBrestSize)
+    {
+        //if (sex == 1)
+        //{
+        //    if (player.prefabPreview)
+        //    {
+        //        characterCustomization.SetBlendshapeValue(CharacterBlendShapeType.BreastSize, newBrestSize);
+        //    }
+        //}
+    }
+
+    public void ChangeHats(int oldHats, int newHats)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    if (newHats != -1)
+        //    {
+        //        characterCustomization.SetElementByIndex(CharacterElementType.Hat, newHats);
+        //    }
+        //    else
+        //    {
+        //        characterCustomization.SetElementByIndex(CharacterElementType.Hat, -1);
+        //    }
+        //}
+    }
+
+    public void ChangeAccessory(int oldAccessory, int newAccessory)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    if (newAccessory != -1)
+        //    {
+        //        characterCustomization.SetElementByIndex(CharacterElementType.Accessory, newAccessory);
+        //    }
+        //    else
+        //    {
+        //        characterCustomization.SetElementByIndex(CharacterElementType.Accessory, -1);
+        //    }
+        //}
+    }
+
+    public void ChangeUpper(int oldUpper, int newUpper)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    if (newUpper != -1)
+        //    {
+        //        characterCustomization.SetElementByIndex(CharacterElementType.Shirt, newUpper);
+        //    }
+        //    else
+        //    {
+        //        characterCustomization.SetElementByIndex(CharacterElementType.Shirt, -1);
+        //    }
+        //}
+    }
+
+    public void ChangeDown(int oldDown, int newDown)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    if (newDown != -1)
+        //    {
+        //        characterCustomization.SetElementByIndex(CharacterElementType.Pants, newDown);
+        //    }
+        //    else
+        //    {
+        //        characterCustomization.SetElementByIndex(CharacterElementType.Pants, -1);
+        //    }
+        //}
+    }
+
+    public void ChangeShoes(int oldShoes, int newShoes)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    if (newShoes != -1)
+        //    {
+        //        characterCustomization.SetElementByIndex(CharacterElementType.Shoes, newShoes);
+        //    }
+        //    else
+        //    {
+        //        characterCustomization.SetElementByIndex(CharacterElementType.Shoes, -1);
+        //    }
+        //}
+    }
+
+    public void ChangeBag(int oldBag, int newBag)
+    {
+        //if (player.prefabPreview)
+        //{
+        //    if (newBag != -1)
+        //    {
+        //        characterCustomization.SetElementByIndex(CharacterElementType.Item1, newBag);
+        //    }
+        //    else
+        //    {
+        //        characterCustomization.SetElementByIndex(CharacterElementType.Item1, -1);
+        //    }
+        //}
+    }
+
+    public void NewSetup()
+    {
+        ChangeHairColor(hairColor, hairColor);
+        ChangeHairType(hairType, hairType);
+        ChangeUnderpantsColor(underwearColor, underwearColor);
+        ChangeEyesColor(eyesColor, eyesColor);
+        ChangeSkinColor(skinColor, skinColor);
+        ChangeBeardType(beard, beard);
+        ChangeWeigth(fat, fat);
+        ChangeThin(thin, thin);
+        ChangeMuscle(muscle, muscle);
+        ChangeHeight(height, height);
+        ChangeBreastSize(breast, breast);
+        ChangeHats(hats, hats);
+        ChangeAccessory(accessory, accessory);
+        ChangeUpper(upper, upper);
+        ChangeDown(down, down);
+        ChangeShoes(shoes, shoes);
+        ChangeBag(bag, bag);
+    }
+
+    //void Update()
+    //{
+    //    NewSetup();
+    //}
+
+    public void CheckAccessory()
+    {
+        if (isServer)
+        {
+            if (player.equipment.slots.FindIndex(slot => slot.amount > 0 && ((EquipmentItem)slot.item.data).category.StartsWith("Accessory")) != -1)
+            {
+                accessorySlot = player.equipment.slots[player.equipment.slots.FindIndex(slot => slot.amount > 0 && ((EquipmentItem)slot.item.data).category.StartsWith("Accessory"))];
+            }
+            else
+            {
+                accessorySlot.amount = 0;
+                accessory = -1;
+            }
+        }
+    }
+
+    public void CheckHat()
+    {
+        if (isServer)
+        {
+            if (player.equipment.slots.FindIndex(slot => slot.amount > 0 && ((EquipmentItem)slot.item.data).category.StartsWith("Head")) != -1)
+            {
+                hatsSlot = player.equipment.slots[player.equipment.slots.FindIndex(slot => slot.amount > 0 && ((EquipmentItem)slot.item.data).category.StartsWith("Head"))];
+            }
+            else
+            {
+                hatsSlot.amount = 0;
+                hats = -1;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 65
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 65.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 66
+  rewardGold: 148
+  rewardCoins: 74
+  rewardExperience: 420
+  rewards:
+  - item: Red tissue
+    amount: 4
+  - item: Grey Male Pants
+    amount: 4
+  - item: Firefighter Shoes
+    amount: 4
+  kills:
+  - name: Zombie_Infected
+    amountRequest: 50
+    actual: 0
+  players: []
+  craft:
+  - item: SMG .45 ACP
+    amountRequest: 8
+    actual: 0
+  - item: Medium torch
+    amountRequest: 2
+    actual: 0
+  - item: Little bottle
+    amountRequest: 2
+    actual: 0
+  pick:
+  - item: Skyblossom
+    amountRequest: 31
+    actual: 0
+  - item: Nitrate Potassium
+    amountRequest: 39
+    actual: 0
+  - item: Gold
+    amountRequest: 68
+    actual: 0
+  building:
+  - item: Rug 6
+    amountRequest: 1
+    actual: 0
+  - item: Kitchen Sink
+    amountRequest: 3
+    actual: 0

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: First Encounter - Phase 78
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for First Encounter - Phase 78.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: First Encounter - Phase 79
+  rewardGold: 174
+  rewardCoins: 87
+  rewardExperience: 485
+  rewards:
+  - item: Lamp 1
+    amount: 4
+  kills:
+  - name: Animals_Goat
+    amountRequest: 38
+    actual: 0
+  players: []
+  craft:
+  - item: Sniper magazine large
+    amountRequest: 3
+    actual: 0
+  pick:
+  - item: White meat
+    amountRequest: 57
+    actual: 0
+  - item: Zombie blood
+    amountRequest: 55
+    actual: 0
+  - item: Enchantberry
+    amountRequest: 59
+    actual: 0
+  building:
+  - item: Lamp 2
+    amountRequest: 1
+    actual: 0

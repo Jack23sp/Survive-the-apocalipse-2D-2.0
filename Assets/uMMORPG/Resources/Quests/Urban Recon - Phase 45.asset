@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Urban Recon - Phase 45
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Urban Recon - Phase 45.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Urban Recon - Phase 46
+  rewardGold: 108
+  rewardCoins: 54
+  rewardExperience: 320
+  rewards:
+  - item: Tomato
+    amount: 3
+  - item: Lumiflora
+    amount: 3
+  kills:
+  - name: Animals_Viper
+    amountRequest: 40
+    actual: 0
+  - name: Animals_Cattle
+    amountRequest: 20
+    actual: 0
+  - name: Animals_Goat
+    amountRequest: 1
+    actual: 0
+  players: []
+  craft:
+  - item: Copper threads
+    amountRequest: 5
+    actual: 0
+  pick:
+  - item: Copper
+    amountRequest: 49
+    actual: 0
+  - item: Lumiflora
+    amountRequest: 41
+    actual: 0
+  - item: Wood
+    amountRequest: 18
+    actual: 0
+  building:
+  - item: Basement blueprint
+    amountRequest: 4
+    actual: 0

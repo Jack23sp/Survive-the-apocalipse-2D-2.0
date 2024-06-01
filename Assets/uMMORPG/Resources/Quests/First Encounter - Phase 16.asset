@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: First Encounter - Phase 16
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for First Encounter - Phase 16.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: First Encounter - Phase 17
+  rewardGold: 50
+  rewardCoins: 25
+  rewardExperience: 175
+  rewards:
+  - item: Copper
+    amount: 1
+  - item: Zombie blood
+    amount: 1
+  - item: Sulfur
+    amount: 1
+  kills:
+  - name: Animals_Wolf
+    amountRequest: 5
+    actual: 0
+  players: []
+  craft:
+  - item: Rifle
+    amountRequest: 3
+    actual: 0
+  - item: Bow
+    amountRequest: 3
+    actual: 0
+  - item: Pistol magazine
+    amountRequest: 3
+    actual: 0
+  pick:
+  - item: Lumiflora
+    amountRequest: 12
+    actual: 0
+  - item: Zombie blood
+    amountRequest: 15
+    actual: 0
+  - item: Celestialstem
+    amountRequest: 16
+    actual: 0
+  building:
+  - item: Wood Gate
+    amountRequest: 1
+    actual: 0
+  - item: Lamp 2
+    amountRequest: 1
+    actual: 0

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Nightfall Defense - Phase 33
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Nightfall Defense - Phase 33.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Nightfall Defense - Phase 34
+  rewardGold: 84
+  rewardCoins: 42
+  rewardExperience: 260
+  rewards:
+  - item: Library
+    amount: 2
+  - item: Cottom
+    amount: 2
+  - item: Male Yellow Boots
+    amount: 2
+  kills:
+  - name: Animals_Viper
+    amountRequest: 28
+    actual: 0
+  players: []
+  craft:
+  - item: Meat potato soup
+    amountRequest: 2
+    actual: 0
+  - item: Stock wooden
+    amountRequest: 3
+    actual: 0
+  pick:
+  - item: Silver
+    amountRequest: 3
+    actual: 0
+  - item: Celestialstem
+    amountRequest: 31
+    actual: 0
+  - item: Zombie blood
+    amountRequest: 20
+    actual: 0
+  building:
+  - item: Rug 3
+    amountRequest: 1
+    actual: 0
+  - item: Armory Workbench
+    amountRequest: 3
+    actual: 0
+  - item: Lamp 3
+    amountRequest: 3
+    actual: 0

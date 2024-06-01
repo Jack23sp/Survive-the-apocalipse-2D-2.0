@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 6
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 6.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 7
+  rewardGold: 30
+  rewardCoins: 15
+  rewardExperience: 125
+  rewards:
+  - item: Blue Female Sportive Shoes
+    amount: 1
+  - item: Dark Female Shorts
+    amount: 1
+  - item: Black Female Pants
+    amount: 1
+  kills:
+  - name: Zombie_Mechanic
+    amountRequest: 1
+    actual: 0
+  players: []
+  craft:
+  - item: Sniper body
+    amountRequest: 2
+    actual: 0
+  - item: Sniper ammo 7.62 mm
+    amountRequest: 1
+    actual: 0
+  - item: Acog scope
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Silver
+    amountRequest: 7
+    actual: 0
+  - item: Mysticwillow
+    amountRequest: 3
+    actual: 0
+  building:
+  - item: Billboard
+    amountRequest: 1
+    actual: 0
+  - item: Furnace
+    amountRequest: 2
+    actual: 0

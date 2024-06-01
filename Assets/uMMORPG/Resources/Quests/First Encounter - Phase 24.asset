@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: First Encounter - Phase 24
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for First Encounter - Phase 24.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: First Encounter - Phase 25
+  rewardGold: 66
+  rewardCoins: 33
+  rewardExperience: 215
+  rewards:
+  - item: Sniper body
+    amount: 2
+  kills:
+  - name: Zombie_Policeman
+    amountRequest: 17
+    actual: 0
+  players: []
+  craft:
+  - item: High medical cure
+    amountRequest: 3
+    actual: 0
+  pick:
+  - item: Nitrate Potassium
+    amountRequest: 22
+    actual: 0
+  - item: Cottom
+    amountRequest: 27
+    actual: 0
+  building:
+  - item: Weapon storage
+    amountRequest: 1
+    actual: 0
+  - item: Cabinet
+    amountRequest: 3
+    actual: 0
+  - item: Chemistry lab
+    amountRequest: 1
+    actual: 0

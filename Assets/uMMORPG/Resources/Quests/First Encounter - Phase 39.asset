@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: First Encounter - Phase 39
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for First Encounter - Phase 39.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: First Encounter - Phase 40
+  rewardGold: 96
+  rewardCoins: 48
+  rewardExperience: 290
+  rewards:
+  - item: Trash can
+    amount: 2
+  - item: Bow
+    amount: 2
+  - item: Orange tissue
+    amount: 2
+  kills:
+  - name: Animals_Wild_rabbit 1
+    amountRequest: 31
+    actual: 0
+  - name: Zombie_Infected
+    amountRequest: 29
+    actual: 0
+  players: []
+  craft:
+  - item: Acog scope
+    amountRequest: 2
+    actual: 0
+  - item: High medical cure
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Mushroom
+    amountRequest: 5
+    actual: 0
+  - item: Sulfur
+    amountRequest: 30
+    actual: 0
+  - item: Lumiflora
+    amountRequest: 10
+    actual: 0
+  building:
+  - item: Cabinet
+    amountRequest: 1
+    actual: 0
+  - item: Black sofa
+    amountRequest: 2
+    actual: 0

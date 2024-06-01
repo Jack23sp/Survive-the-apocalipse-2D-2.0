@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 63
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 63.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 64
+  rewardGold: 144
+  rewardCoins: 72
+  rewardExperience: 410
+  rewards:
+  - item: Unbreakable Spirit Harnessing the Power of Resilience
+    amount: 4
+  - item: Rug 5
+    amount: 4
+  - item: Meat potato soup
+    amount: 4
+  kills:
+  - name: Animals_Chicken 1
+    amountRequest: 19
+    actual: 0
+  players: []
+  craft:
+  - item: Sniper magazine medium
+    amountRequest: 5
+    actual: 0
+  - item: Pistol magazine
+    amountRequest: 7
+    actual: 0
+  - item: Katana
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Gold
+    amountRequest: 8
+    actual: 0
+  - item: Thunderbloom
+    amountRequest: 41
+    actual: 0
+  building:
+  - item: Billboard
+    amountRequest: 3
+    actual: 0
+  - item: Rug 8
+    amountRequest: 3
+    actual: 0
+  - item: Kitchen Sink
+    amountRequest: 5
+    actual: 0

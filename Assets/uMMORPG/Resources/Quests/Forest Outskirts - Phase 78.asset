@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 78
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 78.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 79
+  rewardGold: 174
+  rewardCoins: 87
+  rewardExperience: 485
+  rewards:
+  - item: SMG Body
+    amount: 4
+  - item: Brown Tissue
+    amount: 4
+  - item: Pet Health Potion
+    amount: 4
+  kills:
+  - name: Animals_Wolf
+    amountRequest: 58
+    actual: 0
+  players: []
+  craft:
+  - item: Baseball bat
+    amountRequest: 8
+    actual: 0
+  pick:
+  - item: Silver
+    amountRequest: 82
+    actual: 0
+  - item: Meat
+    amountRequest: 1
+    actual: 0
+  - item: Copper
+    amountRequest: 80
+    actual: 0
+  building:
+  - item: Wood Table
+    amountRequest: 3
+    actual: 0

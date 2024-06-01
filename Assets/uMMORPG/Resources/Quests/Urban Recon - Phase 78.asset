@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Urban Recon - Phase 78
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Urban Recon - Phase 78.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Urban Recon - Phase 79
+  rewardGold: 174
+  rewardCoins: 87
+  rewardExperience: 485
+  rewards:
+  - item: AR1 bottom
+    amount: 4
+  kills:
+  - name: Animals_Wolf
+    amountRequest: 80
+    actual: 0
+  - name: Animals_Cattle
+    amountRequest: 40
+    actual: 0
+  players: []
+  craft:
+  - item: Sniper body
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Enchantberry
+    amountRequest: 73
+    actual: 0
+  building:
+  - item: Weapon storage
+    amountRequest: 2
+    actual: 0

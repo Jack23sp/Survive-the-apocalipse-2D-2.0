@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: First Encounter - Phase 8
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for First Encounter - Phase 8.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: First Encounter - Phase 9
+  rewardGold: 34
+  rewardCoins: 17
+  rewardExperience: 135
+  rewards:
+  - item: Trash can
+    amount: 1
+  kills:
+  - name: Zombie_Prisoner
+    amountRequest: 6
+    actual: 0
+  players: []
+  craft:
+  - item: Gun powder
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Stone
+    amountRequest: 3
+    actual: 0
+  - item: Cottom
+    amountRequest: 2
+    actual: 0
+  - item: Mushroom
+    amountRequest: 11
+    actual: 0
+  building:
+  - item: Rug 5
+    amountRequest: 2
+    actual: 0
+  - item: Bathroom Sink
+    amountRequest: 2
+    actual: 0

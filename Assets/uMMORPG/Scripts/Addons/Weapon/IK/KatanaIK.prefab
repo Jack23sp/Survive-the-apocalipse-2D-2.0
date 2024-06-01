@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6254071705680577940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6424505524844794601}
+  - component: {fileID: 21231077699001653}
+  m_Layer: 14
+  m_Name: KatanaIK
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6424505524844794601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254071705680577940}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5765418113484808798}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &21231077699001653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254071705680577940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479aadb4eededfb4da869157ef7d4da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponObject: {fileID: 6577843254579771620}
+  idle:
+    pos: {x: -0.046316694, y: 0.11070032, z: -0.07999515}
+    rot: {x: 301.81735, y: 46.57257, z: 345.46564}
+  run:
+    pos: {x: -0.041, y: 0.041, z: -0.098}
+    rot: {x: 278.28366, y: 258.18716, z: 110.348625}
+  sneak:
+    pos: {x: -0.058, y: 0.102, z: -0.057}
+    rot: {x: 319.69772, y: 96.07951, z: 306.02997}
+  walk:
+    pos: {x: -0.094, y: 0.078, z: -0.134}
+    rot: {x: 294.43433, y: 81.31038, z: 313.93988}
+  aim:
+    pos: {x: -0.048, y: 0.041, z: -0.117}
+    rot: {x: 10.930311, y: 280.98013, z: 86.67304}
+  shoot:
+    pos: {x: -0.048, y: 0.041, z: -0.117}
+    rot: {x: 10.930311, y: 280.98013, z: 86.67304}
+--- !u!1001 &1332081294062212903
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 6424505524844794601}
+    m_Modifications:
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275317666581082051, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_Name
+      value: Katana
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275317666581082051, guid: b2abaed7fa920a2409e510823acced71,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: b2abaed7fa920a2409e510823acced71, type: 3}
+--- !u!4 &5765418113484808798 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4791374648192808313, guid: b2abaed7fa920a2409e510823acced71,
+    type: 3}
+  m_PrefabInstance: {fileID: 1332081294062212903}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6577843254579771620 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5275317666581082051, guid: b2abaed7fa920a2409e510823acced71,
+    type: 3}
+  m_PrefabInstance: {fileID: 1332081294062212903}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7346435184056255712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577843254579771620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1ec5e442e5433489f41ce3f5d1b9f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPieces: []

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 11
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 11.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 12
+  rewardGold: 40
+  rewardCoins: 20
+  rewardExperience: 150
+  rewards:
+  - item: Potato
+    amount: 1
+  - item: Celestialstem
+    amount: 1
+  kills:
+  - name: Animals_Chicken 1
+    amountRequest: 1
+    actual: 0
+  players: []
+  craft:
+  - item: AR1
+    amountRequest: 1
+    actual: 0
+  - item: Gun powder
+    amountRequest: 3
+    actual: 0
+  - item: Sniper
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Zombie blood
+    amountRequest: 2
+    actual: 0
+  - item: Cottom
+    amountRequest: 8
+    actual: 0
+  - item: Nitrate Potassium
+    amountRequest: 8
+    actual: 0
+  building:
+  - item: Cabinet
+    amountRequest: 2
+    actual: 0

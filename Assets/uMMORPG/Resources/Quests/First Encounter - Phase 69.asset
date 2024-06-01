@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: First Encounter - Phase 69
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for First Encounter - Phase 69.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: First Encounter - Phase 70
+  rewardGold: 156
+  rewardCoins: 78
+  rewardExperience: 440
+  rewards:
+  - item: Sportive Male Upper
+    amount: 4
+  - item: Milk
+    amount: 4
+  kills:
+  - name: Animals_yellow_fattail_scorpion
+    amountRequest: 23
+    actual: 0
+  - name: Animals_Deer
+    amountRequest: 57
+    actual: 0
+  players: []
+  craft:
+  - item: Lattuce salade
+    amountRequest: 6
+    actual: 0
+  pick:
+  - item: Radiantflame
+    amountRequest: 49
+    actual: 0
+  - item: Skyblossom
+    amountRequest: 13
+    actual: 0
+  - item: Wood
+    amountRequest: 5
+    actual: 0
+  building:
+  - item: Library
+    amountRequest: 2
+    actual: 0
+  - item: Black and red sofa
+    amountRequest: 5
+    actual: 0
+  - item: Warehouse
+    amountRequest: 4
+    actual: 0

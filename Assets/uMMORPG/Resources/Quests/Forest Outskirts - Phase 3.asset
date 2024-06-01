@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 3
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 3.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 4
+  rewardGold: 24
+  rewardCoins: 12
+  rewardExperience: 110
+  rewards:
+  - item: Blue sofa
+    amount: 1
+  - item: Armory Workbench
+    amount: 1
+  - item: Door blueprint
+    amount: 1
+  kills:
+  - name: Animals_Brown bear
+    amountRequest: 3
+    actual: 0
+  - name: Animals_Chicken 3
+    amountRequest: 2
+    actual: 0
+  - name: Zombie_Prisoner
+    amountRequest: 3
+    actual: 0
+  players: []
+  craft:
+  - item: AR1 body
+    amountRequest: 2
+    actual: 0
+  pick:
+  - item: Cottom
+    amountRequest: 2
+    actual: 0
+  - item: Zombie blood
+    amountRequest: 7
+    actual: 0
+  building:
+  - item: Blue sofa
+    amountRequest: 1
+    actual: 0
+  - item: Wood Gate
+    amountRequest: 1
+    actual: 0
+  - item: Rug
+    amountRequest: 2
+    actual: 0

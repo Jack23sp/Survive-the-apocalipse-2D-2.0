@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Nightfall Defense - Phase 74
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Nightfall Defense - Phase 74.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Nightfall Defense - Phase 75
+  rewardGold: 166
+  rewardCoins: 83
+  rewardExperience: 465
+  rewards:
+  - item: White Upper Female
+    amount: 4
+  - item: Armory Workbench
+    amount: 4
+  - item: Summit Pack
+    amount: 4
+  kills:
+  - name: Animals_Wild_rabbit 1
+    amountRequest: 48
+    actual: 0
+  players: []
+  craft:
+  - item: AR1 magazine large
+    amountRequest: 8
+    actual: 0
+  - item: Silver threads
+    amountRequest: 3
+    actual: 0
+  - item: Tomato asparagus
+    amountRequest: 6
+    actual: 0
+  pick:
+  - item: Enchantberry
+    amountRequest: 15
+    actual: 0
+  - item: White meat
+    amountRequest: 22
+    actual: 0
+  - item: Crystalbloom
+    amountRequest: 46
+    actual: 0
+  building:
+  - item: Wood Gate
+    amountRequest: 5
+    actual: 0

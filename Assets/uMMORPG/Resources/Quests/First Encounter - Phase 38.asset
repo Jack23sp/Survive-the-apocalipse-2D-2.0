@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: First Encounter - Phase 38
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for First Encounter - Phase 38.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: First Encounter - Phase 39
+  rewardGold: 94
+  rewardCoins: 47
+  rewardExperience: 285
+  rewards:
+  - item: Mysticwillow
+    amount: 2
+  - item: Crystalbloom
+    amount: 2
+  - item: Black Male Sportive Shoes
+    amount: 2
+  kills:
+  - name: Animals_yellow_fattail_scorpion
+    amountRequest: 23
+    actual: 0
+  players: []
+  craft:
+  - item: Pistol magazine
+    amountRequest: 3
+    actual: 0
+  - item: Hip Hop Hat
+    amountRequest: 3
+    actual: 0
+  - item: Copper threads
+    amountRequest: 5
+    actual: 0
+  pick:
+  - item: Skyblossom
+    amountRequest: 30
+    actual: 0
+  - item: Nitrate Potassium
+    amountRequest: 30
+    actual: 0
+  - item: Silver
+    amountRequest: 36
+    actual: 0
+  building:
+  - item: Rug
+    amountRequest: 1
+    actual: 0
+  - item: Old chair
+    amountRequest: 3
+    actual: 0

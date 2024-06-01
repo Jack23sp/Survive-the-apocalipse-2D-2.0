@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Nightfall Defense - Phase 94
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Nightfall Defense - Phase 94.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Nightfall Defense - Phase 95
+  rewardGold: 206
+  rewardCoins: 103
+  rewardExperience: 565
+  rewards:
+  - item: Winter Hat
+    amount: 5
+  - item: Dark Sportive Male Pants
+    amount: 5
+  kills:
+  - name: Animals_Iron_age_pig_v2
+    amountRequest: 1
+    actual: 0
+  players: []
+  craft:
+  - item: Pickaxe
+    amountRequest: 3
+    actual: 0
+  pick:
+  - item: Crystalbloom
+    amountRequest: 32
+    actual: 0
+  - item: Stone
+    amountRequest: 91
+    actual: 0
+  - item: White meat
+    amountRequest: 49
+    actual: 0
+  building:
+  - item: Sewing table
+    amountRequest: 6
+    actual: 0

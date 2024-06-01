@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Nightfall Defense - Phase 43
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Nightfall Defense - Phase 43.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Nightfall Defense - Phase 44
+  rewardGold: 104
+  rewardCoins: 52
+  rewardExperience: 310
+  rewards:
+  - item: Sweetpeppers eggs
+    amount: 3
+  kills:
+  - name: Animals_Crocodile
+    amountRequest: 19
+    actual: 0
+  - name: Animals_Wild_rabbit 2
+    amountRequest: 11
+    actual: 0
+  - name: Animals_Brown bear
+    amountRequest: 21
+    actual: 0
+  players: []
+  craft:
+  - item: Sniper bottom
+    amountRequest: 4
+    actual: 0
+  - item: Pistol magazine extended
+    amountRequest: 1
+    actual: 0
+  - item: Gold threads
+    amountRequest: 4
+    actual: 0
+  pick:
+  - item: Crystalbloom
+    amountRequest: 47
+    actual: 0
+  - item: White meat
+    amountRequest: 14
+    actual: 0
+  - item: Celestialstem
+    amountRequest: 12
+    actual: 0
+  building:
+  - item: Black and red sofa
+    amountRequest: 2
+    actual: 0

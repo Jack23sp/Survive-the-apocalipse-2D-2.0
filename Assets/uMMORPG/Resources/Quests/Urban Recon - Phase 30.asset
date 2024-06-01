@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Urban Recon - Phase 30
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Urban Recon - Phase 30.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Urban Recon - Phase 31
+  rewardGold: 78
+  rewardCoins: 39
+  rewardExperience: 245
+  rewards:
+  - item: Yellow tissue
+    amount: 2
+  - item: Rug 1
+    amount: 2
+  - item: Armory Workbench
+    amount: 2
+  kills:
+  - name: Animals_Brown bear
+    amountRequest: 27
+    actual: 0
+  - name: Zombie_BioHazard
+    amountRequest: 17
+    actual: 0
+  - name: Animals_Cattle
+    amountRequest: 27
+    actual: 0
+  players: []
+  craft:
+  - item: Crossbow
+    amountRequest: 4
+    actual: 0
+  pick:
+  - item: Stone
+    amountRequest: 7
+    actual: 0
+  - item: Nitrate Potassium
+    amountRequest: 8
+    actual: 0
+  - item: White meat
+    amountRequest: 32
+    actual: 0
+  building:
+  - item: Rug 9
+    amountRequest: 1
+    actual: 0

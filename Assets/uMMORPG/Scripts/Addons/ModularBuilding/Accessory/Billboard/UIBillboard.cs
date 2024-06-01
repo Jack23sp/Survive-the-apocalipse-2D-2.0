@@ -1,0 +1,68 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class UIBillboard : MonoBehaviour
+{
+    public static UIBillboard singleton;
+    public GameObject panel;
+
+    public Button setButton;
+    public TMP_InputField inputField;
+    public Button closeButton;
+    public Button manageButton;
+
+    public Billboard billboard;
+
+    public void Start()
+    {
+        if (!singleton) singleton = this;
+    }
+
+    public void ValueChangeCheck()
+    {
+        setButton.GetComponentInChildren<TextMeshProUGUI>().text = "Set!";
+    }
+
+    public void Open(Billboard Billboard)
+    {
+        panel.SetActive(true);
+        billboard = Billboard;
+
+        manageButton.gameObject.SetActive(ModularBuildingManager.singleton.CanDoOtherActionForniture(billboard, Player.localPlayer));
+        manageButton.onClick.RemoveAllListeners();
+        manageButton.onClick.AddListener(() =>
+        {
+            GameObject g = Instantiate(GameObjectSpawnManager.singleton.confirmManagerAccessory, GameObjectSpawnManager.singleton.canvas);
+            g.GetComponent<UIBuildingAccessoryManager>().Init(billboard.netIdentity, billboard.craftingAccessoryItem, closeButton);
+        });
+
+        inputField.onValueChanged.RemoveAllListeners();
+        inputField.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
+        inputField.text = billboard.message;
+
+
+        closeButton.image.raycastTarget = true;
+        closeButton.image.enabled = true;
+
+        closeButton.onClick.RemoveAllListeners();
+        closeButton.onClick.AddListener(() =>
+        {
+            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+            panel.SetActive(false);
+            inputField.text = string.Empty;
+            closeButton.image.raycastTarget = false;
+            closeButton.image.enabled = false;
+            BlurManager.singleton.Show();
+        });
+
+        setButton.onClick.RemoveAllListeners();
+        setButton.onClick.AddListener(() =>
+        {
+            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
+            Player.localPlayer.CmdSetMessage(inputField.text, Player.localPlayer.netIdentity, billboard.netIdentity);
+        });
+    }
+}

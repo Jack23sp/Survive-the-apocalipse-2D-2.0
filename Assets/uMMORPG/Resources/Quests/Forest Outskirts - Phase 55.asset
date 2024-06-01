@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 55
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 55.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 56
+  rewardGold: 128
+  rewardCoins: 64
+  rewardExperience: 370
+  rewards:
+  - item: Black Female Sportive Shoes
+    amount: 3
+  - item: Ranger Rucksack
+    amount: 3
+  kills:
+  - name: Animals_Ibex
+    amountRequest: 40
+    actual: 0
+  - name: Animals_Deer
+    amountRequest: 33
+    actual: 0
+  - name: Animals_Wild_rabbit 2
+    amountRequest: 34
+    actual: 0
+  players: []
+  craft:
+  - item: Sniper magazine medium
+    amountRequest: 3
+    actual: 0
+  - item: Meat
+    amountRequest: 2
+    actual: 0
+  - item: Cooked meat
+    amountRequest: 5
+    actual: 0
+  pick:
+  - item: Silver
+    amountRequest: 29
+    actual: 0
+  building:
+  - item: Bed
+    amountRequest: 2
+    actual: 0
+  - item: Weapon storage
+    amountRequest: 2
+    actual: 0
+  - item: Armchair
+    amountRequest: 3
+    actual: 0

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 55
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 55.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 56
+  rewardGold: 128
+  rewardCoins: 64
+  rewardExperience: 370
+  rewards:
+  - item: Shotgun body
+    amount: 3
+  - item: Black Headphones
+    amount: 3
+  - item: Police Hat
+    amount: 3
+  kills:
+  - name: Animals_Cattle male
+    amountRequest: 20
+    actual: 0
+  players: []
+  craft:
+  - item: Little bottle
+    amountRequest: 6
+    actual: 0
+  - item: Mushroom salade
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Sulfur
+    amountRequest: 46
+    actual: 0
+  - item: Zombie blood
+    amountRequest: 19
+    actual: 0
+  building:
+  - item: Wood
+    amountRequest: 4
+    actual: 0
+  - item: Rug 5
+    amountRequest: 1
+    actual: 0
+  - item: Rug 1
+    amountRequest: 2
+    actual: 0

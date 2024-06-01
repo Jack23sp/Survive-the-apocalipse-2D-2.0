@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 67
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 67.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 68
+  rewardGold: 152
+  rewardCoins: 76
+  rewardExperience: 430
+  rewards:
+  - item: Sniper scope
+    amount: 4
+  - item: Crossbow
+    amount: 4
+  - item: Soldier Shoes
+    amount: 4
+  kills:
+  - name: Animals_Cattle
+    amountRequest: 67
+    actual: 0
+  - name: Animals_Chicken 1
+    amountRequest: 12
+    actual: 0
+  - name: Zombie_Prisoner
+    amountRequest: 11
+    actual: 0
+  players: []
+  craft:
+  - item: Cooked meat
+    amountRequest: 3
+    actual: 0
+  - item: Copper threads
+    amountRequest: 7
+    actual: 0
+  pick:
+  - item: White meat
+    amountRequest: 26
+    actual: 0
+  building:
+  - item: Lamp 2
+    amountRequest: 5
+    actual: 0
+  - item: Rug 9
+    amountRequest: 4
+    actual: 0
+  - item: Modern chair
+    amountRequest: 3
+    actual: 0

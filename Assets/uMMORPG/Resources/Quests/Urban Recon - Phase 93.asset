@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Urban Recon - Phase 93
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Urban Recon - Phase 93.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Urban Recon - Phase 94
+  rewardGold: 204
+  rewardCoins: 102
+  rewardExperience: 560
+  rewards:
+  - item: Sniper magazine medium
+    amount: 5
+  kills:
+  - name: Zombie_Infected
+    amountRequest: 74
+    actual: 0
+  players: []
+  craft:
+  - item: Hip Hop Hat
+    amountRequest: 8
+    actual: 0
+  - item: Tomato asparagus
+    amountRequest: 6
+    actual: 0
+  - item: Machete
+    amountRequest: 4
+    actual: 0
+  pick:
+  - item: Sulfur
+    amountRequest: 83
+    actual: 0
+  - item: Stone
+    amountRequest: 9
+    actual: 0
+  building:
+  - item: Armory Workbench
+    amountRequest: 1
+    actual: 0
+  - item: Bathroom Sink
+    amountRequest: 3
+    actual: 0
+  - item: Water container
+    amountRequest: 4
+    actual: 0

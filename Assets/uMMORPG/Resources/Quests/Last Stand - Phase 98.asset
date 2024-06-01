@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 98
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 98.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 99
+  rewardGold: 214
+  rewardCoins: 107
+  rewardExperience: 585
+  rewards:
+  - item: Meat potato soup
+    amount: 5
+  - item: Coal
+    amount: 5
+  kills:
+  - name: Animals_Goat
+    amountRequest: 72
+    actual: 0
+  - name: Zombie_BioHazard
+    amountRequest: 88
+    actual: 0
+  - name: Animals_Wild_rabbit 2
+    amountRequest: 100
+    actual: 0
+  players: []
+  craft:
+  - item: Sniper bottom
+    amountRequest: 10
+    actual: 0
+  - item: Cooked white meat
+    amountRequest: 1
+    actual: 0
+  - item: Arrow
+    amountRequest: 7
+    actual: 0
+  pick:
+  - item: Mysticwillow
+    amountRequest: 92
+    actual: 0
+  - item: Enchantberry
+    amountRequest: 43
+    actual: 0
+  - item: Stone
+    amountRequest: 59
+    actual: 0
+  building:
+  - item: Wood
+    amountRequest: 1
+    actual: 0
+  - item: Rug 3
+    amountRequest: 5
+    actual: 0

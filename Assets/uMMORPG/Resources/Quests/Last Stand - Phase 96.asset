@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 96
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 96.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 97
+  rewardGold: 210
+  rewardCoins: 105
+  rewardExperience: 575
+  rewards:
+  - item: Blue Female Shorts
+    amount: 5
+  - item: Worker Helmet
+    amount: 5
+  - item: Police Shirt
+    amount: 5
+  kills:
+  - name: Animals_Goat
+    amountRequest: 17
+    actual: 0
+  - name: Animals_Iron_age_pig
+    amountRequest: 2
+    actual: 0
+  players: []
+  craft:
+  - item: SMG Barrell
+    amountRequest: 11
+    actual: 0
+  - item: Sniper magazine medium
+    amountRequest: 7
+    actual: 0
+  - item: Copper threads
+    amountRequest: 10
+    actual: 0
+  pick:
+  - item: White meat
+    amountRequest: 81
+    actual: 0
+  - item: Zombie blood
+    amountRequest: 2
+    actual: 0
+  - item: Wood
+    amountRequest: 39
+    actual: 0
+  building:
+  - item: Rug 4
+    amountRequest: 1
+    actual: 0

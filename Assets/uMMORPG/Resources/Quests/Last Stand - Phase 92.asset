@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 92
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 92.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 93
+  rewardGold: 202
+  rewardCoins: 101
+  rewardExperience: 555
+  rewards:
+  - item: Red dot
+    amount: 5
+  - item: Yellow tissue
+    amount: 5
+  kills:
+  - name: Zombie_Policeman
+    amountRequest: 1
+    actual: 0
+  - name: Zombie_Infected
+    amountRequest: 13
+    actual: 0
+  players: []
+  craft:
+  - item: Arrow
+    amountRequest: 1
+    actual: 0
+  - item: SMG small magazine
+    amountRequest: 3
+    actual: 0
+  pick:
+  - item: Lumiflora
+    amountRequest: 25
+    actual: 0
+  building:
+  - item: Furnace
+    amountRequest: 5
+    actual: 0

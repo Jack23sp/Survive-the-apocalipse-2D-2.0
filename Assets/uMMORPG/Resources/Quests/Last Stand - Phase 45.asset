@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 45
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 45.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 46
+  rewardGold: 108
+  rewardCoins: 54
+  rewardExperience: 320
+  rewards:
+  - item: Water container
+    amount: 3
+  - item: Milk
+    amount: 3
+  kills:
+  - name: Animals_Iron_age_pig
+    amountRequest: 10
+    actual: 0
+  - name: Zombie_BioHazard
+    amountRequest: 8
+    actual: 0
+  players: []
+  craft:
+  - item: Mushroom salade
+    amountRequest: 4
+    actual: 0
+  - item: Medium bottle
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Silver
+    amountRequest: 25
+    actual: 0
+  - item: Copper
+    amountRequest: 16
+    actual: 0
+  - item: Gold
+    amountRequest: 30
+    actual: 0
+  building:
+  - item: Wall blueprint
+    amountRequest: 4
+    actual: 0
+  - item: Library
+    amountRequest: 2
+    actual: 0
+  - item: Blue sofa
+    amountRequest: 4
+    actual: 0

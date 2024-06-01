@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a6eefe0d12b6e544a5b9222d8ee97f8, type: 3}
+  m_Name: AR1
+  m_EditorClassIdentifier: 
+  followupDefaultAttack: 0
+  toolTip: 
+  image: {fileID: 0}
+  learnDefault: 1
+  showCastBar: 0
+  cancelCastIfTargetDied: 0
+  allowMovement: 0
+  predecessor: {fileID: 0}
+  predecessorLevel: 1
+  requiredWeaponCategory: 
+  requiredLevel:
+    baseValue: 0
+    bonusPerLevel: 0
+  requiredSkillExperience:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxLevel: 1
+  manaCosts:
+    baseValue: 0
+    bonusPerLevel: 0
+  castTime:
+    baseValue: 0.25
+    bonusPerLevel: 0
+  cooldown:
+    baseValue: 0
+    bonusPerLevel: 0
+  castRange:
+    baseValue: 0
+    bonusPerLevel: 0
+  lineCast: 20
+  castSound: {fileID: 0}
+  damage:
+    baseValue: 25
+    bonusPerLevel: 0
+  damageToRock:
+    baseValue: 0
+    bonusPerLevel: 0
+  damageToTree:
+    baseValue: 0
+    bonusPerLevel: 0
+  damageToWall:
+    baseValue: 1
+    bonusPerLevel: 0
+  damageToForniture:
+    baseValue: 10
+    bonusPerLevel: 0
+  stunChance:
+    baseValue: 0
+    bonusPerLevel: 0
+  stunTime:
+    baseValue: 0
+    bonusPerLevel: 0
+  projectile: {fileID: 114941114663955406, guid: ac2ce2c3a0a3e9d41b9d0ba1a7b1f718,
+    type: 3}
+  equip:
+    item:
+      accessories: []
+      currentDurability: 0
+      durabilityLevel: 0
+      bagLevel: 0
+      skin: 0
+      bulletsRemaining: 0
+      alreadyAddedAccessory: 0
+      accuracyLevel: 0
+      currentArmor: 0
+      armorLevel: 0
+      currentBlood: 0
+      currentUnsanity: 0
+      radioCurrentBattery: 0
+      coverTemperature: 0
+      waterContainer: 0
+      gasContainer: 0
+      honeyContainer: 0
+      torchCurrentBattery: 0
+      batteryLevel: 0
+      weight: 0
+      wet: 0
+      hash: 0
+      summoned: {fileID: 0}
+      summonedHealth: 0
+      summonedLevel: 0
+      summonedExperience: 0
+    amount: 0

@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46f6838bba5434a879e877bdf822fad5, type: 3}
+  m_Name: Trailblazer Backpack
+  m_EditorClassIdentifier: 
+  coinToCraft: 0
+  goldToCraft: 0
+  repairItems: []
+  upgradeItems: []
+  armor:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxArmorLevel: 0
+  productAfterCooking: {fileID: 0}
+  coverTemperature: 0
+  additionalSlot:
+    baseValue: 25
+    bonusPerLevel: 0
+  protectedSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxBagLevel: 0
+  maxWeight:
+    baseValue: 800
+    bonusPerLevel: 0
+  possibleBagWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxWeightLevel: 0
+  skinImages: []
+  weaponToSpawn: {fileID: 0}
+  munitionImage: {fileID: 0}
+  maxMunition: 0
+  attackRange: 1
+  needMunitionInMagazine: 0
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  requiredSkill: {fileID: 0}
+  maxUnsanity: 0
+  maxDurability:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxDurabilityLevel: 0
+  canUseFurnace: 0
+  canUseWarehouse: 1
+  canUseCabinet: 1
+  canUseWeaponStorage: 0
+  canUseUpgrade: 0
+  canUseCook: 0
+  canUseFridge: 0
+  canUseLibrary: 0
+  itemtoCraftBuilding: []
+  itemtoCraft: []
+  itemtoCraftFemale: []
+  continuePlacing: 0
+  canAddSkin: 0
+  accessoriesType: 0
+  accessoryToAdd: []
+  weaponType: -1
+  weight: 1.5
+  maxStack: 100
+  buyPrice: 0
+  sellPrice: 0
+  itemMallPrice: 0
+  sellable: 0
+  tradable: 0
+  destroyable: 0
+  toolTip: With this backpack you can have {ADDITIONALSLOT} additional slot to your
+    inventory and carry a maximum of {CARRYWEIGHT} weight
+  image: {fileID: 21300000, guid: 34b328092432e5e4db7e0150b531e51b, type: 3}
+  minLevel: 0
+  cooldown: 0
+  _cooldownCategory: 
+  accuracy:
+    baseValue: 0
+    bonusPerLevel: 0
+  animatorToSet: {fileID: 0}
+  indexHat: -1
+  indexAccessory: -1
+  indexShirt: -1
+  indexPants: -1
+  indexShoes: -1
+  indexBag: 0
+  sex: -1
+  battery:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxWet: 0
+  category: Bag
+  healthBonus: 0
+  manaBonus: 0
+  damageBonus: 0
+  defenseBonus: 0
+  blockChanceBonus: 0
+  criticalChanceBonus: 0
+  sprites: []

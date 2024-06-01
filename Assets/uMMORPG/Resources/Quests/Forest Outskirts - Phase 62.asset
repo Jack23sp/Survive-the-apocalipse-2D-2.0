@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 62
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 62.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 63
+  rewardGold: 142
+  rewardCoins: 71
+  rewardExperience: 405
+  rewards:
+  - item: Mastery Unleashed The Art of Skill Development
+    amount: 4
+  kills:
+  - name: Animals_Wolf
+    amountRequest: 11
+    actual: 0
+  players: []
+  craft:
+  - item: Caliber 5.56 mm
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Crystalbloom
+    amountRequest: 22
+    actual: 0
+  - item: Cottom
+    amountRequest: 10
+    actual: 0
+  building:
+  - item: Rug 9
+    amountRequest: 5
+    actual: 0

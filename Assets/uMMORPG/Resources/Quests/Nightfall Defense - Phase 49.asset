@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Nightfall Defense - Phase 49
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Nightfall Defense - Phase 49.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Nightfall Defense - Phase 50
+  rewardGold: 116
+  rewardCoins: 58
+  rewardExperience: 340
+  rewards:
+  - item: Sniper barrell
+    amount: 3
+  - item: Cottom
+    amount: 3
+  - item: Green Sportive Male Pants
+    amount: 3
+  kills:
+  - name: Animals_Iron_age_pig_v2
+    amountRequest: 33
+    actual: 0
+  - name: Animals_Chicken 1
+    amountRequest: 14
+    actual: 0
+  players: []
+  craft:
+  - item: Caliber 9 mm
+    amountRequest: 6
+    actual: 0
+  - item: Foregrip
+    amountRequest: 4
+    actual: 0
+  - item: Medium torch
+    amountRequest: 3
+    actual: 0
+  pick:
+  - item: Nitrate Potassium
+    amountRequest: 35
+    actual: 0
+  building:
+  - item: Armory Workbench
+    amountRequest: 4
+    actual: 0
+  - item: Stove
+    amountRequest: 1
+    actual: 0
+  - item: Black and white sofa
+    amountRequest: 3
+    actual: 0

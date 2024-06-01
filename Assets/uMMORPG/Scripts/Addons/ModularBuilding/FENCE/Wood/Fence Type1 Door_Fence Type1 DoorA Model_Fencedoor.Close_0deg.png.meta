@@ -1,0 +1,501 @@
+fileFormatVersion: 2
+guid: acacbba33e5b1e1408c1d4069c60ed20
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: 13
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 206
+        width: 38
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab31ebb121b9e8e409388c60981591e9
+      internalID: 1461065017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_1
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 377
+        width: 167
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 764550b09309e6a40ac5fe169badc1c1
+      internalID: 1990950731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_2
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 377
+        width: 29
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f56aed6ff43055b43bc1bd8ad7be4c86
+      internalID: 1170388398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_3
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 320
+        width: 198
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1130055e9f8d6554bbfa4b94ecf2ca20
+      internalID: -9059987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_4
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 206
+        width: 29
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c45d701c7b175f47b4e8fc071d71309
+      internalID: 242940608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_5
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 200
+        width: 129
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b72773c0c7148dd4da104145231b8d15
+      internalID: 1380909680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_6
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 200
+        width: 29
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d1f4dbede9cbad45b484cee780751d1
+      internalID: 214774823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_7
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 214
+        width: 198
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dc05366af66bee4692c77ddfd27e7c2
+      internalID: -1418325487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_8
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 29
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b80bcc64294544c45920e813069a0fd1
+      internalID: 1020165404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_9
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 2
+        width: 78
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ca0b535a639484448c735816b2d9686
+      internalID: -561511706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_10
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 108
+        width: 198
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f0792afb06221d43a24cb60721011b5
+      internalID: -1256648051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_11
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 2
+        width: 29
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 717c0b75942f38b489e31f5fac75d178
+      internalID: 1748223408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_12
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 2
+        width: 29
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2713d83aba0f5548b28924394fa5645
+      internalID: 778267612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_13
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 2
+        width: 198
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b612c9b0b7f665a40ae8af34132e5480
+      internalID: -1702361627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_14
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 2
+        width: 198
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 456c23a7893510f4ab0b41319151e83d
+      internalID: 1626902919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_1: 1990950731
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_12: 778267612
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_4: 242940608
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_13: -1702361627
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_6: 214774823
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_9: -561511706
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_14: 1626902919
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_3: -9059987
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_5: 1380909680
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_8: 1020165404
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_7: -1418325487
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_10: -1256648051
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_2: 1170388398
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_0: 1461065017
+      Fence Type1 Door_Fence Type1 DoorA Model_Fencedoor.Close_0deg_11: 1748223408
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

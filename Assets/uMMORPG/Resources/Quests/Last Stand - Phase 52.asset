@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 52
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 52.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 53
+  rewardGold: 122
+  rewardCoins: 61
+  rewardExperience: 355
+  rewards:
+  - item: Soldier's Journey From Training to Battlefield
+    amount: 3
+  - item: Coal
+    amount: 3
+  - item: Sniper bottom
+    amount: 3
+  kills:
+  - name: Animals_Deer male
+    amountRequest: 43
+    actual: 0
+  players: []
+  craft:
+  - item: Hip Hop Male Hat
+    amountRequest: 2
+    actual: 0
+  - item: Crossbow
+    amountRequest: 7
+    actual: 0
+  - item: Bean soup
+    amountRequest: 5
+    actual: 0
+  pick:
+  - item: Lumiflora
+    amountRequest: 22
+    actual: 0
+  - item: Meat
+    amountRequest: 46
+    actual: 0
+  - item: Gold
+    amountRequest: 5
+    actual: 0
+  building:
+  - item: Furnace
+    amountRequest: 1
+    actual: 0
+  - item: Modern chair
+    amountRequest: 3
+    actual: 0

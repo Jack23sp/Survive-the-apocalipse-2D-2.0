@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 63
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 63.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 64
+  rewardGold: 144
+  rewardCoins: 72
+  rewardExperience: 410
+  rewards:
+  - item: Light Grey Sportive Male Pants
+    amount: 4
+  - item: Shotgun barrell
+    amount: 4
+  kills:
+  - name: Animals_Viper
+    amountRequest: 4
+    actual: 0
+  - name: Zombie_BioHazard
+    amountRequest: 55
+    actual: 0
+  players: []
+  craft:
+  - item: Arrow
+    amountRequest: 7
+    actual: 0
+  pick:
+  - item: Silver
+    amountRequest: 55
+    actual: 0
+  - item: Thunderbloom
+    amountRequest: 25
+    actual: 0
+  - item: Gold
+    amountRequest: 20
+    actual: 0
+  building:
+  - item: Weapon storage
+    amountRequest: 5
+    actual: 0
+  - item: Rug 2
+    amountRequest: 3
+    actual: 0
+  - item: Kitchen Sink
+    amountRequest: 2
+    actual: 0

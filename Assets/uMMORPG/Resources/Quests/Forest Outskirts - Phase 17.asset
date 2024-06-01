@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 17
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 17.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 18
+  rewardGold: 52
+  rewardCoins: 26
+  rewardExperience: 180
+  rewards:
+  - item: Stock light
+    amount: 1
+  - item: Green Tissue
+    amount: 1
+  kills:
+  - name: Animals_Chicken 3
+    amountRequest: 8
+    actual: 0
+  - name: Animals_Iron_age_pig_v2
+    amountRequest: 15
+    actual: 0
+  players: []
+  craft:
+  - item: Hip Hop Male Hat
+    amountRequest: 1
+    actual: 0
+  - item: Stock minimal
+    amountRequest: 3
+    actual: 0
+  - item: Arrow
+    amountRequest: 2
+    actual: 0
+  pick:
+  - item: Stone
+    amountRequest: 7
+    actual: 0
+  - item: Silver
+    amountRequest: 18
+    actual: 0
+  - item: Meat
+    amountRequest: 2
+    actual: 0
+  building:
+  - item: Wood Fence
+    amountRequest: 1
+    actual: 0
+  - item: Weapon storage
+    amountRequest: 2
+    actual: 0

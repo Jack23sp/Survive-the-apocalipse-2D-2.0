@@ -1,0 +1,1534 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ece4e8034fb4f84389338eafd28c598, type: 3}
+  m_Name: Sewing table
+  m_EditorClassIdentifier: 
+  coinToCraft: 0
+  goldToCraft: 0
+  repairItems: []
+  upgradeItems: []
+  armor:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxArmorLevel: 0
+  productAfterCooking: {fileID: 0}
+  coverTemperature: 0
+  additionalSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  protectedSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxBagLevel: 0
+  maxWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  possibleBagWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxWeightLevel: 0
+  skinImages: []
+  weaponToSpawn: {fileID: 0}
+  munitionImage: {fileID: 0}
+  maxMunition: 0
+  attackRange: 1
+  needMunitionInMagazine: 0
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  requiredSkill: {fileID: 0}
+  maxUnsanity: 0
+  maxDurability:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxDurabilityLevel: 0
+  canUseFurnace: 0
+  canUseWarehouse: 1
+  canUseCabinet: 0
+  canUseWeaponStorage: 0
+  canUseUpgrade: 0
+  canUseCook: 0
+  canUseFridge: 0
+  canUseLibrary: 0
+  itemtoCraftBuilding:
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c99498768077daa4aa521b54f63f8e51, type: 2}
+      amount: 25
+    ingredients: []
+    timeToCraft: 0
+    gold: 0
+    coin: 0
+  itemtoCraft:
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 8682da4ff0686d647aebf55fd4e1fbff, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 9751175544ef52a468f3f35ae420fbdf, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: deec3c2e0688adb488d852f122c55c99, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: cce171b8073f03f4697c63eab94f0593, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: a46b85efa9b33ca43a4a4c52b14a7779, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 9bead8977a4d1c04e866fe6aafadc1ed, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: f53189338113d114787fdf90e5ef92c1, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: a46b85efa9b33ca43a4a4c52b14a7779, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 9bead8977a4d1c04e866fe6aafadc1ed, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 08d4e1bda64d2f2448e810c7650ead16, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 3
+    timeToCraft: 180
+    gold: 100
+    coin: 2
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: a9e34dd496b14b240b8cddc449169fc3, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    - item: {fileID: 11400000, guid: 2b2da54d2251b79428b3bdc1fd51cacc, type: 2}
+      amount: 3
+    timeToCraft: 180
+    gold: 100
+    coin: 2
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: e717bebfb8bae8b4c9502781175fe679, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 4
+    timeToCraft: 180
+    gold: 100
+    coin: 2
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c1f7c70a43b11724e874dc404517e385, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 3
+    timeToCraft: 60
+    gold: 100
+    coin: 2
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 66918eb6c501f314696164c03a00c271, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: b689bc21d837fdd419b425f271e452b0, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: b9a16e92d3c65bc4fa94fb0044cd8f12, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c5881daf95f41c148818037283c2b958, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 914c75784c4d62f489e91913c15bbcb1, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 0aeecfb04340e444197c17bf89920dd9, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f174f7857a265d4499ec47757d02ec03, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: e8ad23ef1ed941c428a8735ffb2080f3, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f7e4155e20199534282be43d822a1d1a, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 1
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: acdd7b75ad33a8f48963069092076c7b, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 2
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: b50b13635f1446047bf3630a59c0791f, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 8024fa98b4f39944a9c568fa491794e8, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 7
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    - item: {fileID: 11400000, guid: 402b0067f88f5da40ac76d802cd558df, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: ae82a5d8876454c4eb5ad779c708a3e6, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    - item: {fileID: 11400000, guid: 402b0067f88f5da40ac76d802cd558df, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 9432204b676dfa84e98e1f599caf7f45, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 6
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 84c4404f92f182343a062d0d1f32c8ad, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c4216691db6be4348874cf311774b778, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: e5f9697131e881241900c90329d917e6, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 30394524f655f3f40b4239c888284ebb, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c4a294eaa46376341821ca63e84b7ec1, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 610616ac24ad12d4190cb077a08d173c, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 7
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 1
+    - item: {fileID: 11400000, guid: 402b0067f88f5da40ac76d802cd558df, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 4c16e0a4a5f92eb46bbe92956eb9f073, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f174f7857a265d4499ec47757d02ec03, type: 2}
+      amount: 10
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: d7ccc996649f52c4abf3220d494f30a2, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 8
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 34b8e21ec25c69343ae3016df1fe7abb, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 7
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 38bd7037985e0b0468ca14e6c75dee44, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 5
+    timeToCraft: 360
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 3c3768e3664326f40bbaa442ab0b7d6a, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 2b5aeeea7bfc5ae4daa604536ac4d129, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: dde0f5df0bf571b42a8ad3397734aa46, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 8
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 20091901f9add444884f759fc88dce62, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 8
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: cffbb9e97903be44c8a2d8f8f935de46, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 10
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: a06505ac7b7825e449e88d95c4d0bd3a, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 7
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: be5af59b16c154b478eb8f22376ea8d2, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 8
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: d8d86805d849a3546a05223f3d1c8088, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f7e4155e20199534282be43d822a1d1a, type: 2}
+      amount: 7
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: bd757723d1995614190818b1505be862, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 8
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: a7dabfb40cd7ec84eab9d66abe0c3bbb, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 8
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 733e10ce3f8018d458db574ba9f09199, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 8
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 3fbc10e70a4e0ed48b6bea525fddf76c, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 8
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 8aa688e634e1de14b914bd17f14d0141, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f174f7857a265d4499ec47757d02ec03, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c5ea6efdaf2d0ed4d862d6735a9adc7b, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 8
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 3d3b502f2d61eaf439f56cbc1463e5a5, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 6
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: b2929552ad94a8c40aff5590be1273f5, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 4
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 560ebab8c39d1a2489007a08433c3462, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 2b5aeeea7bfc5ae4daa604536ac4d129, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 73d61edcf7fc24a46bd85779131eecac, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 1
+    timeToCraft: 360
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 9c8f5b772e38caf4dbd61db7d35a437c, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 6
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 29cd92b6779da3941ac16cfd85677e35, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 9
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 7f32242a1447bb64685da3b5c73c82d4, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 6
+    - item: {fileID: 11400000, guid: f7e4155e20199534282be43d822a1d1a, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 4
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 5901940be20e4bb4e805763b6ae8bdbc, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 10
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 7bc95d781fdf4634a86bec18bf1d6f29, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f7e4155e20199534282be43d822a1d1a, type: 2}
+      amount: 7
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 0ee9654fcad675f44b58cd6abaf8bbaf, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 7
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 4
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 324dca9a4258fac46b089f85525dbc03, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 06d953dd496149a418f210c930ecb9ae, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 8
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 5bf2ce1e019b1f14fad77c50aa430452, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 8
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 4
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: dfb8c6e8aedd7c44c9b3f5fe153615f7, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 6
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 1aacf695897322741aa53ddac378cf40, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 7
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 4
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c2e9828ec4415a14f96f297164cb060c, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 7
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: bd72868cfe086894bbfa9b2d3a9685aa, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: badc06d033037614591dd008e2f4bcb5, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 10
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: de9613c87cd979e4987a7ecf573241df, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 50b15e97a89def74aa90299d928bd6b4, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 6cf42aef026edc242b27001462ce61ea, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: d19956d89ebacee49956de9c7691a8e9, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: bf482b96b8248b547844fa6b1e123b63, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: b5e5393917839b640982eef1899f6eaa, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f7e4155e20199534282be43d822a1d1a, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: bf707b263bb2a22459f08b160ac4ca38, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 4da69d7c071bd2c4baed2e3f87abc1fe, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  itemtoCraftFemale:
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: ef0f3af24c58e9f4bbb5e6c695aaa3fb, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 0b6b12cc00ba3874f860eb10b198994f, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 3d84aad094208af4cb496e47d7d97a0b, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: cce171b8073f03f4697c63eab94f0593, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: a46b85efa9b33ca43a4a4c52b14a7779, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 9bead8977a4d1c04e866fe6aafadc1ed, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: f53189338113d114787fdf90e5ef92c1, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: a46b85efa9b33ca43a4a4c52b14a7779, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 9bead8977a4d1c04e866fe6aafadc1ed, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 08d4e1bda64d2f2448e810c7650ead16, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 3
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 1
+    timeToCraft: 180
+    gold: 0
+    coin: 0
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: a9e34dd496b14b240b8cddc449169fc3, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    - item: {fileID: 11400000, guid: 2b2da54d2251b79428b3bdc1fd51cacc, type: 2}
+      amount: 3
+    timeToCraft: 180
+    gold: 0
+    coin: 0
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: e717bebfb8bae8b4c9502781175fe679, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 4
+    timeToCraft: 180
+    gold: 0
+    coin: 0
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c1f7c70a43b11724e874dc404517e385, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 1
+    timeToCraft: 60
+    gold: 100
+    coin: 2
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c5881daf95f41c148818037283c2b958, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 914c75784c4d62f489e91913c15bbcb1, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 0aeecfb04340e444197c17bf89920dd9, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f174f7857a265d4499ec47757d02ec03, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: e8ad23ef1ed941c428a8735ffb2080f3, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f7e4155e20199534282be43d822a1d1a, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 1
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: acdd7b75ad33a8f48963069092076c7b, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 2
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: b50b13635f1446047bf3630a59c0791f, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 8024fa98b4f39944a9c568fa491794e8, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 7
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    - item: {fileID: 11400000, guid: 402b0067f88f5da40ac76d802cd558df, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: ae82a5d8876454c4eb5ad779c708a3e6, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    - item: {fileID: 11400000, guid: 402b0067f88f5da40ac76d802cd558df, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 9432204b676dfa84e98e1f599caf7f45, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 6
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 84c4404f92f182343a062d0d1f32c8ad, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 0401b5ea0a29cda46b17a41d895d00e8, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 8ca1a473f4c590447b47fe0ea52f8bb7, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 091e2b2577115bd45be1ed13ea132228, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 4
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 30394524f655f3f40b4239c888284ebb, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c4a294eaa46376341821ca63e84b7ec1, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 610616ac24ad12d4190cb077a08d173c, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 7
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 1
+    - item: {fileID: 11400000, guid: 402b0067f88f5da40ac76d802cd558df, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 100
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 4c16e0a4a5f92eb46bbe92956eb9f073, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f174f7857a265d4499ec47757d02ec03, type: 2}
+      amount: 10
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: d7ccc996649f52c4abf3220d494f30a2, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 8
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 50e0dc7da0f814f4795785ae9cb982b1, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 7
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: d939a0c6e4284bf4da35acdd1671cf8f, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 5
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 6d70eafb97880ee4eb1605aba7c6485e, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 3
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 5eec2d305c863fd4a87fc0cda2ab1b15, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 7
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: bf29565e1377590408a8ac7f721d2d27, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 3
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 1
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 9fb28d5adc545a642a444d723d04959c, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 7
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: f8b9ec83018cfe14ba32de11991e5de1, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 7
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 0853c62fb07e29144ad351d5417967ca, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 4
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 112cb9a8474417549b4ff946e5d37b55, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 6
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: a7dabfb40cd7ec84eab9d66abe0c3bbb, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 8
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 733e10ce3f8018d458db574ba9f09199, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 8
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 3fbc10e70a4e0ed48b6bea525fddf76c, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 8
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 8aa688e634e1de14b914bd17f14d0141, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f174f7857a265d4499ec47757d02ec03, type: 2}
+      amount: 10
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c5ea6efdaf2d0ed4d862d6735a9adc7b, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 8
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 7b9d1511f9556eb4fb722d88e9bc7b90, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 29cc3e8328caa704e9e3a2dd5c932836, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 6
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 6
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: cecd3c002368261439ee0191762aadb6, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 7
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: acae0f59ef7b8e6408a0e31997fa91e1, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 89af71057ac92d44dac32c3061c2bb29, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f7e4155e20199534282be43d822a1d1a, type: 2}
+      amount: 4
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: eae0d193c10ebe84badaa909b00c3c08, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 4
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 6792c95b895a2d347ba88b592f872b0b, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 8
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: d8c9b5274ce08864b885ad4a3511ffb6, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 8
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: d4f9e9730023b4346803fc71ad0f016d, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 6
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 97c24e2e7fdb43d40a4e80e883c72bbe, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 324dca9a4258fac46b089f85525dbc03, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 06d953dd496149a418f210c930ecb9ae, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 8
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 5bf2ce1e019b1f14fad77c50aa430452, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 8
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 4
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: dfb8c6e8aedd7c44c9b3f5fe153615f7, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 6
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 3
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 1aacf695897322741aa53ddac378cf40, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 11a469543c633cb4da4c01c843d22afa, type: 2}
+      amount: 7
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 4
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: d2adfd44afbfe2d42a72d201f6f12f61, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 2b76fb7c797a9804296f3a3464234ed7, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 577021b9758c14e458e258dfb8cdd825, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: f26429c8b3e731b42861fcfbce2896e9, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 620e5e8a35c828148a33d9e4db3a704f, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0559ccf6c568da148a96b393639dbf79, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 755b78934aa7d1043a17ec93153108a6, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: cd6e3aee4fbdf2f40b23838e2fbde297, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 7329765ac2cbd6644991f79d3649e2e3, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 8e292b5a3b1fdfb4daea0481c1c36473, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 1
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 28518e3ec9d9c65479cf153e0b1d1318, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 19f2e415f01db8942b63d7bbef306cec, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: f7e4155e20199534282be43d822a1d1a, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 2da247dd6b0dfec41abe87b808658502, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 3834d7486e48ef54c9bf6d8e3b547735, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 23f399b5a924bca448edb28e64c62bde, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 2b5aeeea7bfc5ae4daa604536ac4d129, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: 9bd6431f94aaaa341a85143bc591b1b3, type: 2}
+      amount: 2
+    timeToCraft: 780
+    gold: 500
+    coin: 10
+  continuePlacing: 0
+  canAddSkin: 0
+  accessoriesType: 0
+  accessoryToAdd: []
+  weaponType: -1
+  weight: 0.1
+  maxStack: 100
+  buyPrice: 0
+  sellPrice: 0
+  itemMallPrice: 0
+  sellable: 1
+  tradable: 1
+  destroyable: 0
+  toolTip: 
+  image: {fileID: -1561055337, guid: 5a2fe8c6509ecdc4a9f5277a29b62c6c, type: 3}
+  minLevel: 0
+  cooldown: 0
+  _cooldownCategory: 
+  necessaryTagObject: 
+  buildingList:
+  - buildingName: 
+    buildingObject: {fileID: 6816874964235752371, guid: 2669168462467ee4daeaefd0883d3047,
+      type: 3}
+  - buildingName: 
+    buildingObject: {fileID: 9068317129651482629, guid: 4c2618b0580e92b4ba5a1fd71024966f,
+      type: 3}
+  - buildingName: 
+    buildingObject: {fileID: 9068317129651482629, guid: 0067ffe064fac7249b47cbe08c16807d,
+      type: 3}
+  - buildingName: 
+    buildingObject: {fileID: 5647960006870899982, guid: b995e09503b8c934787a6b42aae8ef01,
+      type: 3}
+  isMetal: 0
+  isWood: 1
+  isStone: 0
+  isConcrete: 0

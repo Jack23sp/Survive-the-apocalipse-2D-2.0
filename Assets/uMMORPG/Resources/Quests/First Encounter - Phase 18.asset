@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: First Encounter - Phase 18
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for First Encounter - Phase 18.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: First Encounter - Phase 19
+  rewardGold: 54
+  rewardCoins: 27
+  rewardExperience: 185
+  rewards:
+  - item: Red Heeled Shoes
+    amount: 1
+  kills:
+  - name: Animals_Boar
+    amountRequest: 9
+    actual: 0
+  - name: Animals_Goat
+    amountRequest: 12
+    actual: 0
+  players: []
+  craft:
+  - item: High bottle
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Mushroom
+    amountRequest: 11
+    actual: 0
+  - item: Lumiflora
+    amountRequest: 11
+    actual: 0
+  building:
+  - item: Rug 7
+    amountRequest: 2
+    actual: 0

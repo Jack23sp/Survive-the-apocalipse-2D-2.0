@@ -1,0 +1,105 @@
+// Navigation2D Script (c) noobtuts.com
+using UnityEngine;
+using UnityEngine.AI;
+
+public class NavMeshObstacle2DCustom : MonoBehaviour
+{
+    // NavMeshObstacle properties
+    public NavMeshObstacleShape shape = NavMeshObstacleShape.Box;
+    public Vector2 center;
+    public Vector2 size = Vector2.one;
+    public bool carve = false; // experimental and hard to debug in 2D
+
+    // the projection
+    NavMeshObstacle obstacle;
+
+    public GameObject go;
+
+    // monobehaviour ///////////////////////////////////////////////////////////
+    public void OnEnable()
+    {
+        if (!go)
+        {
+            // create projection
+            go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            go.name = "NAVIGATION2D_OBSTACLE";
+            // project object to 3D (at y=0.5 so feet are at y=0 on navmesh)
+            go.transform.position = NavMeshUtils2D.ProjectObjectTo3D(transform.position);
+            go.transform.rotation = Quaternion.Euler(NavMeshUtils2D.RotationTo3D(transform.eulerAngles));
+            obstacle = go.AddComponent<NavMeshObstacle>();
+
+            // disable mesh and collider (no collider for now)
+            Destroy(obstacle.GetComponent<Collider>());
+            Destroy(obstacle.GetComponent<MeshRenderer>());
+            obstacle.carving = carve;
+            // project object to 3D (at y=0.5 so feet are at y=0 on navmesh)
+            obstacle.center = NavMeshUtils2D.ProjectObjectTo3D(center);
+            obstacle.size = new Vector3(size.x, 1, size.y);
+
+            // scale and rotate to match scaled/rotated sprites center properly
+            obstacle.transform.localScale = new Vector3(transform.localScale.x, 1, transform.localScale.y);
+            obstacle.transform.rotation = Quaternion.Euler(NavMeshUtils2D.RotationTo3D(transform.eulerAngles));
+
+            // project object to 3D (at y=0.5 so feet are at y=0 on navmesh)
+            obstacle.transform.position = NavMeshUtils2D.ProjectObjectTo3D(transform.position);
+
+        }
+    }
+
+    //void Update()
+    //{
+    //    // copy properties to projection all the time
+    //    // (in case they are modified after creating it)
+    //    obstacle.carving = carve;
+    //    // project object to 3D (at y=0.5 so feet are at y=0 on navmesh)
+    //    obstacle.center = NavMeshUtils2D.ProjectObjectTo3D(center);
+    //    obstacle.size = new Vector3(size.x, 1, size.y);
+
+    //    // scale and rotate to match scaled/rotated sprites center properly
+    //    obstacle.transform.localScale = new Vector3(transform.localScale.x, 1, transform.localScale.y);
+    //    obstacle.transform.rotation = Quaternion.Euler(NavMeshUtils2D.RotationTo3D(transform.eulerAngles));
+
+    //    // project object to 3D (at y=0.5 so feet are at y=0 on navmesh)
+    //    obstacle.transform.position = NavMeshUtils2D.ProjectObjectTo3D(transform.position);
+
+    //}
+
+    void OnDestroy()
+    {
+        // destroy projection if not destroyed yet
+        Destroy(go.gameObject);
+    }
+
+    //void OnEnable()
+    //{
+    //    if (obstacle) obstacle.enabled = true;
+    //}
+
+    public void OnDisable()
+    {
+        Destroy(go.gameObject);
+    }
+
+    // radius gizmo (gizmos.matrix for correct rotation)
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.localScale);
+        Gizmos.DrawWireCube(center, size);
+    }
+
+    // validation
+    void OnValidate()
+    {
+        // force shape to box for now because we would need a separate Editor
+        // GUI script to switch between size and radius otherwise
+        shape = NavMeshObstacleShape.Box;
+    }
+
+    // NavMeshAgent proxies ////////////////////////////////////////////////////
+    public Vector2 velocity
+    {
+        get { return NavMeshUtils2D.ProjectTo2D(obstacle.velocity); }
+        // set: is a bad idea
+    }
+}

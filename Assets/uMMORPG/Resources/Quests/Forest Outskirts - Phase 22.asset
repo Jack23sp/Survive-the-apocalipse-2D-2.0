@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 22
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 22.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 23
+  rewardGold: 62
+  rewardCoins: 31
+  rewardExperience: 205
+  rewards:
+  - item: Sunglasses 3
+    amount: 2
+  - item: Firefighter shirt
+    amount: 2
+  kills:
+  - name: Zombie_Prisoner
+    amountRequest: 24
+    actual: 0
+  players: []
+  craft:
+  - item: SMG Bottom
+    amountRequest: 4
+    actual: 0
+  - item: Katana
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Skyblossom
+    amountRequest: 1
+    actual: 0
+  - item: Radiantflame
+    amountRequest: 4
+    actual: 0
+  building:
+  - item: Billboard
+    amountRequest: 3
+    actual: 0
+  - item: Chemistry lab
+    amountRequest: 2
+    actual: 0
+  - item: Furnace
+    amountRequest: 1
+    actual: 0

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 76
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 76.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 77
+  rewardGold: 170
+  rewardCoins: 85
+  rewardExperience: 475
+  rewards:
+  - item: Black and white sofa
+    amount: 4
+  - item: Doctor Pants
+    amount: 4
+  kills:
+  - name: Animals_Goat
+    amountRequest: 33
+    actual: 0
+  - name: Animals_Deer
+    amountRequest: 35
+    actual: 0
+  - name: Zombie_Infected
+    amountRequest: 38
+    actual: 0
+  players: []
+  craft:
+  - item: Rifle
+    amountRequest: 3
+    actual: 0
+  - item: Stock wooden
+    amountRequest: 9
+    actual: 0
+  - item: Sniper bottom
+    amountRequest: 4
+    actual: 0
+  pick:
+  - item: Celestialstem
+    amountRequest: 53
+    actual: 0
+  building:
+  - item: Wood Gate
+    amountRequest: 3
+    actual: 0
+  - item: Rug
+    amountRequest: 3
+    actual: 0

@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 98
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 98.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 99
+  rewardGold: 214
+  rewardCoins: 107
+  rewardExperience: 585
+  rewards:
+  - item: Billboard
+    amount: 5
+  kills:
+  - name: Animals_Goat
+    amountRequest: 80
+    actual: 0
+  - name: Animals_Iron_age_pig
+    amountRequest: 21
+    actual: 0
+  - name: Animals_Crocodile
+    amountRequest: 16
+    actual: 0
+  players: []
+  craft:
+  - item: High medical cure
+    amountRequest: 4
+    actual: 0
+  pick:
+  - item: Lumiflora
+    amountRequest: 45
+    actual: 0
+  building:
+  - item: Basement blueprint
+    amountRequest: 2
+    actual: 0
+  - item: Blue sofa
+    amountRequest: 4
+    actual: 0
+  - item: Rug 2
+    amountRequest: 1
+    actual: 0

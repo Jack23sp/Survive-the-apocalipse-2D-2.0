@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Last Stand - Phase 71
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Last Stand - Phase 71.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Last Stand - Phase 72
+  rewardGold: 160
+  rewardCoins: 80
+  rewardExperience: 450
+  rewards:
+  - item: Sniper body
+    amount: 4
+  kills:
+  - name: Animals_Viper
+    amountRequest: 18
+    actual: 0
+  players: []
+  craft:
+  - item: Stock straight
+    amountRequest: 4
+    actual: 0
+  - item: Red dot
+    amountRequest: 5
+    actual: 0
+  - item: Gun powder
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Crystalbloom
+    amountRequest: 24
+    actual: 0
+  - item: Zombie blood
+    amountRequest: 67
+    actual: 0
+  - item: Nitrate Potassium
+    amountRequest: 51
+    actual: 0
+  building:
+  - item: Stove
+    amountRequest: 1
+    actual: 0
+  - item: Basement blueprint
+    amountRequest: 1
+    actual: 0

@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Urban Recon - Phase 25
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Urban Recon - Phase 25.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Urban Recon - Phase 26
+  rewardGold: 68
+  rewardCoins: 34
+  rewardExperience: 220
+  rewards:
+  - item: Gold threads
+    amount: 2
+  - item: Fitness Female Upper
+    amount: 2
+  - item: AR1 barrell
+    amount: 2
+  kills:
+  - name: Animals_Brown bear
+    amountRequest: 15
+    actual: 0
+  - name: Animals_Cattle male
+    amountRequest: 27
+    actual: 0
+  players: []
+  craft:
+  - item: Sniper scope
+    amountRequest: 4
+    actual: 0
+  - item: AR1 bottom
+    amountRequest: 1
+    actual: 0
+  - item: Pistol magazine
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Silver
+    amountRequest: 1
+    actual: 0
+  - item: Crystalbloom
+    amountRequest: 26
+    actual: 0
+  building:
+  - item: Lamp 3
+    amountRequest: 3
+    actual: 0
+  - item: Armory Workbench
+    amountRequest: 3
+    actual: 0
+  - item: Bed
+    amountRequest: 3
+    actual: 0

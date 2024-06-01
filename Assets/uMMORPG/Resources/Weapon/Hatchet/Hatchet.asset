@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18be07406029d49d1b7f4bde9b48d5d0, type: 3}
+  m_Name: Hatchet
+  m_EditorClassIdentifier: 
+  coinToCraft: 0
+  goldToCraft: 0
+  repairItems:
+  - items: {fileID: 11400000, guid: c99498768077daa4aa521b54f63f8e51, type: 2}
+    amount: 10
+  - items: {fileID: 11400000, guid: 402b0067f88f5da40ac76d802cd558df, type: 2}
+    amount: 3
+  upgradeItems: []
+  armor:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxArmorLevel: 0
+  productAfterCooking: {fileID: 0}
+  coverTemperature: 0
+  additionalSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  protectedSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxBagLevel: 0
+  maxWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  possibleBagWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxWeightLevel: 0
+  skinImages: []
+  weaponToSpawn: {fileID: 100000, guid: b92e432993e63b740a483cc7a150f000, type: 3}
+  munitionImage: {fileID: 0}
+  maxMunition: 0
+  attackRange: 15
+  needMunitionInMagazine: 0
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  requiredSkill: {fileID: 11400000, guid: 867eae5d2f1f70e47891af9aaa52e5e5, type: 2}
+  maxUnsanity: 0
+  maxDurability:
+    baseValue: 400
+    bonusPerLevel: 200
+  maxDurabilityLevel: 3
+  canUseFurnace: 0
+  canUseWarehouse: 0
+  canUseCabinet: 0
+  canUseWeaponStorage: 1
+  canUseUpgrade: 0
+  canUseCook: 0
+  canUseFridge: 0
+  canUseLibrary: 0
+  itemtoCraftBuilding: []
+  itemtoCraft: []
+  itemtoCraftFemale: []
+  continuePlacing: 0
+  canAddSkin: 0
+  accessoriesType: -1
+  accessoryToAdd: []
+  weaponType: 0
+  weight: 1
+  maxStack: 1
+  buyPrice: 0
+  sellPrice: 0
+  itemMallPrice: 0
+  sellable: 0
+  tradable: 0
+  destroyable: 1
+  toolTip: 'Useful to take wood from trees...but also the break everything and everyone
+
+
+    Weapon
+    durability : {CURRENTDURABILITY} / {MAXDURABILITY}'
+  image: {fileID: 21300000, guid: c6e6589245b7b8247af59e39940f6715, type: 3}
+  minLevel: 0
+  cooldown: 0
+  _cooldownCategory: 
+  accuracy:
+    baseValue: 0
+    bonusPerLevel: 0
+  animatorToSet: {fileID: 9100000, guid: 4308b6d3362c77449aaba9ca766c220d, type: 2}
+  indexHat: -1
+  indexAccessory: -1
+  indexShirt: -1
+  indexPants: -1
+  indexShoes: -1
+  indexBag: -1
+  sex: -1
+  battery:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxWet: 0
+  category: WeaponHatchet
+  healthBonus: 0
+  manaBonus: 0
+  damageBonus: 0
+  defenseBonus: 0
+  blockChanceBonus: 0
+  criticalChanceBonus: 0
+  sprites: []
+  weaponAbility: {fileID: 11400000, guid: 783580efc2176674eacbffd2888752ef, type: 2}
+  isMetal: 0
+  isWood: 1
+  weaponPrecision: 0
+  distanceToGrab: 0
+  requiredAmmo: {fileID: 0}

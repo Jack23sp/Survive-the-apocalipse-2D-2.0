@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Nightfall Defense - Phase 40
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Nightfall Defense - Phase 40.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Nightfall Defense - Phase 41
+  rewardGold: 98
+  rewardCoins: 49
+  rewardExperience: 295
+  rewards:
+  - item: White Headphones
+    amount: 2
+  kills:
+  - name: Animals_Cattle
+    amountRequest: 9
+    actual: 0
+  - name: Animals_Viper
+    amountRequest: 15
+    actual: 0
+  - name: Animals_Chicken 3
+    amountRequest: 7
+    actual: 0
+  players: []
+  craft:
+  - item: SMG
+    amountRequest: 4
+    actual: 0
+  pick:
+  - item: Sulfur
+    amountRequest: 29
+    actual: 0
+  - item: Thunderbloom
+    amountRequest: 25
+    actual: 0
+  - item: Nitrate Potassium
+    amountRequest: 19
+    actual: 0
+  building:
+  - item: Rug 9
+    amountRequest: 3
+    actual: 0
+  - item: Rug 7
+    amountRequest: 1
+    actual: 0
+  - item: Blue sofa
+    amountRequest: 2
+    actual: 0

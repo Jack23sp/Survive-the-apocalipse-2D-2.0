@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 39
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 39.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 40
+  rewardGold: 96
+  rewardCoins: 48
+  rewardExperience: 290
+  rewards:
+  - item: The Miners' Code Honoring the Legacy of Mining
+    amount: 2
+  - item: Fridge
+    amount: 2
+  kills:
+  - name: Animals_Chicken 3
+    amountRequest: 36
+    actual: 0
+  players: []
+  craft:
+  - item: Stock straight
+    amountRequest: 4
+    actual: 0
+  - item: AR1 bottom
+    amountRequest: 3
+    actual: 0
+  pick:
+  - item: Zombie blood
+    amountRequest: 42
+    actual: 0
+  - item: Lumiflora
+    amountRequest: 39
+    actual: 0
+  - item: Crystalbloom
+    amountRequest: 40
+    actual: 0
+  building:
+  - item: Wood Gate
+    amountRequest: 1
+    actual: 0
+  - item: Armchair
+    amountRequest: 1
+    actual: 0

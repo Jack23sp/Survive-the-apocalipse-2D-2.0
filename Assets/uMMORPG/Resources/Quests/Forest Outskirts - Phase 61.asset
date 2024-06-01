@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 61
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 61.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 62
+  rewardGold: 140
+  rewardCoins: 70
+  rewardExperience: 400
+  rewards:
+  - item: Survivor's Saga Stories of Triumph Against All Odds
+    amount: 4
+  - item: The Leader's Journey Inspiring and Influencing Others
+    amount: 4
+  kills:
+  - name: Animals_Wild_rabbit 1
+    amountRequest: 44
+    actual: 0
+  - name: Animals_Chicken 2
+    amountRequest: 29
+    actual: 0
+  - name: Animals_Scorpion
+    amountRequest: 22
+    actual: 0
+  players: []
+  craft:
+  - item: AR1 body
+    amountRequest: 8
+    actual: 0
+  pick:
+  - item: Mysticwillow
+    amountRequest: 2
+    actual: 0
+  - item: Gold
+    amountRequest: 41
+    actual: 0
+  building:
+  - item: Bathroom Sink
+    amountRequest: 1
+    actual: 0

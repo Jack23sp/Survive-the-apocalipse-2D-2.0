@@ -1,0 +1,218 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ece4e8034fb4f84389338eafd28c598, type: 3}
+  m_Name: Stove
+  m_EditorClassIdentifier: 
+  coinToCraft: 0
+  goldToCraft: 0
+  repairItems: []
+  upgradeItems: []
+  armor:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxArmorLevel: 0
+  productAfterCooking: {fileID: 0}
+  coverTemperature: 0
+  additionalSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  protectedSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxBagLevel: 0
+  maxWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  possibleBagWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxWeightLevel: 0
+  skinImages: []
+  weaponToSpawn: {fileID: 0}
+  munitionImage: {fileID: 0}
+  maxMunition: 0
+  attackRange: 1
+  needMunitionInMagazine: 0
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  requiredSkill: {fileID: 0}
+  maxUnsanity: 0
+  maxDurability:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxDurabilityLevel: 0
+  canUseFurnace: 0
+  canUseWarehouse: 1
+  canUseCabinet: 0
+  canUseWeaponStorage: 0
+  canUseUpgrade: 0
+  canUseCook: 0
+  canUseFridge: 0
+  canUseLibrary: 0
+  itemtoCraftBuilding:
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 402b0067f88f5da40ac76d802cd558df, type: 2}
+      amount: 60
+    ingredients: []
+    timeToCraft: 0
+    gold: 0
+    coin: 0
+  itemtoCraft:
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: a39513da0557ced45b30aabc6b97eeb6, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 86fc6423bfe3e4844b8c1e3b9643e9b6, type: 2}
+      amount: 6
+    timeToCraft: 60
+    gold: 350
+    coin: 5
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: e9bc915abea94194b8eadd633cfeb403, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 234e2c4e2ac99184d9d546f67347af11, type: 2}
+      amount: 2
+    timeToCraft: 60
+    gold: 350
+    coin: 5
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 595fa761f08edea4b97e09ab41a7a98c, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 234e2c4e2ac99184d9d546f67347af11, type: 2}
+      amount: 2
+    timeToCraft: 60
+    gold: 350
+    coin: 5
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 57e755811e83bb24c8b8976f43f1638f, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: d47da029adaa9c94cbf799422e6386bd, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: b223fcdc5cbdde74483bb06d63f3b47d, type: 2}
+      amount: 2
+    timeToCraft: 60
+    gold: 350
+    coin: 5
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 5801e379ea6398941a18865080f12ebe, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: ff1487a1ab3accd4f9577113f21ba8cb, type: 2}
+      amount: 1
+    - item: {fileID: 11400000, guid: d6bf1769e548e1843805690441780e9a, type: 2}
+      amount: 2
+    timeToCraft: 60
+    gold: 350
+    coin: 5
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 5449fdca27df55d44b941c063e650ab4, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: ff1487a1ab3accd4f9577113f21ba8cb, type: 2}
+      amount: 1
+    - item: {fileID: 11400000, guid: c6321f838ab86a040a1a4b4c7157d2c8, type: 2}
+      amount: 4
+    timeToCraft: 60
+    gold: 350
+    coin: 5
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: b48cf44f9f145204798d43fbe5f86d7d, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 83ef7e8d879113d4aa4ac4ec4bba7150, type: 2}
+      amount: 4
+    - item: {fileID: 11400000, guid: c6321f838ab86a040a1a4b4c7157d2c8, type: 2}
+      amount: 1
+    timeToCraft: 60
+    gold: 350
+    coin: 5
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 044fa6d9485de8943986d258a8770d9e, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 67f76b017b962874d943aa2e3720e783, type: 2}
+      amount: 5
+    - item: {fileID: 11400000, guid: 234e2c4e2ac99184d9d546f67347af11, type: 2}
+      amount: 1
+    timeToCraft: 60
+    gold: 350
+    coin: 5
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 555d8ce88a5dd8545bae4a5b61e8db62, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: b223fcdc5cbdde74483bb06d63f3b47d, type: 2}
+      amount: 2
+    - item: {fileID: 11400000, guid: d6bf1769e548e1843805690441780e9a, type: 2}
+      amount: 3
+    timeToCraft: 60
+    gold: 350
+    coin: 5
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: 3c7ae4e662be17c4d9fcd63ec4a039aa, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: ff1487a1ab3accd4f9577113f21ba8cb, type: 2}
+      amount: 1
+    timeToCraft: 60
+    gold: 350
+    coin: 5
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: c2e3264c97307ee4f934205997af2f33, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: ccc13782c4864e64e981846cdef593d4, type: 2}
+      amount: 1
+    timeToCraft: 60
+    gold: 350
+    coin: 5
+  itemtoCraftFemale: []
+  continuePlacing: 0
+  canAddSkin: 0
+  accessoriesType: 0
+  accessoryToAdd: []
+  weaponType: -1
+  weight: 0.1
+  maxStack: 100
+  buyPrice: 0
+  sellPrice: 0
+  itemMallPrice: 0
+  sellable: 1
+  tradable: 1
+  destroyable: 0
+  toolTip: Cook here your food
+  image: {fileID: 2042929016, guid: a4ddb3883bf48154fae37a9263d7ef0c, type: 3}
+  minLevel: 0
+  cooldown: 0
+  _cooldownCategory: 
+  necessaryTagObject: 
+  buildingList:
+  - buildingName: 
+    buildingObject: {fileID: 6816874964235752371, guid: 7e81637ab2cf4d947b72432cd3172ef5,
+      type: 3}
+  - buildingName: 
+    buildingObject: {fileID: 725824731160318321, guid: 5968ea4d5ea321f4cae305a918931560,
+      type: 3}
+  - buildingName: 
+    buildingObject: {fileID: 9068317129651482629, guid: d6c43eae4422a134ab72716a7b2efae7,
+      type: 3}
+  - buildingName: 
+    buildingObject: {fileID: 5647960006870899982, guid: dba551d1ca61a074c83add0722b974a2,
+      type: 3}
+  isMetal: 1
+  isWood: 0
+  isStone: 0
+  isConcrete: 0

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: First Encounter - Phase 83
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for First Encounter - Phase 83.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: First Encounter - Phase 84
+  rewardGold: 184
+  rewardCoins: 92
+  rewardExperience: 510
+  rewards:
+  - item: Blue Male Sportive Shoes
+    amount: 5
+  - item: SMG Body
+    amount: 5
+  - item: Doctor Shirt
+    amount: 5
+  kills:
+  - name: Zombie_Prisoner
+    amountRequest: 73
+    actual: 0
+  - name: Animals_Iron_age_pig_v2
+    amountRequest: 61
+    actual: 0
+  players: []
+  craft:
+  - item: Eggs creme
+    amountRequest: 10
+    actual: 0
+  - item: AR1 magazine small
+    amountRequest: 1
+    actual: 0
+  - item: SMG .45 ACP
+    amountRequest: 7
+    actual: 0
+  pick:
+  - item: Celestialstem
+    amountRequest: 50
+    actual: 0
+  building:
+  - item: Bed
+    amountRequest: 5
+    actual: 0
+  - item: Rug 9
+    amountRequest: 6
+    actual: 0
+  - item: Armory Workbench
+    amountRequest: 3
+    actual: 0

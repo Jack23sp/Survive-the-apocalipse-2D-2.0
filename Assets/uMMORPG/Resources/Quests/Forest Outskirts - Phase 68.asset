@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 68
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 68.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 69
+  rewardGold: 154
+  rewardCoins: 77
+  rewardExperience: 435
+  rewards:
+  - item: Black Female Sportive Shoes
+    amount: 4
+  - item: Plastic
+    amount: 4
+  - item: Milk
+    amount: 4
+  kills:
+  - name: Zombie_Mechanic
+    amountRequest: 41
+    actual: 0
+  - name: Animals_Deer
+    amountRequest: 62
+    actual: 0
+  - name: Animals_Cattle
+    amountRequest: 50
+    actual: 0
+  players: []
+  craft:
+  - item: Sniper bottom
+    amountRequest: 4
+    actual: 0
+  - item: Hatchet
+    amountRequest: 6
+    actual: 0
+  - item: Pistol Bottom
+    amountRequest: 3
+    actual: 0
+  pick:
+  - item: Radiantflame
+    amountRequest: 59
+    actual: 0
+  - item: Sulfur
+    amountRequest: 36
+    actual: 0
+  building:
+  - item: Cabinet
+    amountRequest: 4
+    actual: 0

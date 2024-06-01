@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Forest Outskirts - Phase 82
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Forest Outskirts - Phase 82.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Forest Outskirts - Phase 83
+  rewardGold: 182
+  rewardCoins: 91
+  rewardExperience: 505
+  rewards:
+  - item: Medical cure
+    amount: 5
+  kills:
+  - name: Zombie_Infected
+    amountRequest: 42
+    actual: 0
+  - name: Animals_Goat
+    amountRequest: 62
+    actual: 0
+  - name: Animals_Iron_age_pig_v2
+    amountRequest: 16
+    actual: 0
+  players: []
+  craft:
+  - item: Eggs creme
+    amountRequest: 2
+    actual: 0
+  - item: Tomato asparagus
+    amountRequest: 4
+    actual: 0
+  pick:
+  - item: Zombie blood
+    amountRequest: 57
+    actual: 0
+  - item: Copper
+    amountRequest: 76
+    actual: 0
+  building:
+  - item: Wall blueprint
+    amountRequest: 6
+    actual: 0

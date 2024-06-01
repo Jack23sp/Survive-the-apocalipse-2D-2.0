@@ -1,0 +1,227 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a6eefe0d12b6e544a5b9222d8ee97f8, type: 3}
+  m_Name: Bow
+  m_EditorClassIdentifier: 
+  followupDefaultAttack: 0
+  toolTip: 
+  image: {fileID: 0}
+  learnDefault: 1
+  showCastBar: 0
+  cancelCastIfTargetDied: 0
+  allowMovement: 0
+  predecessor: {fileID: 0}
+  predecessorLevel: 1
+  requiredWeaponCategory: 
+  requiredLevel:
+    baseValue: 0
+    bonusPerLevel: 0
+  requiredSkillExperience:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxLevel: 1
+  manaCosts:
+    baseValue: 0
+    bonusPerLevel: 0
+  castTime:
+    baseValue: 2.3
+    bonusPerLevel: 0
+  cooldown:
+    baseValue: 0
+    bonusPerLevel: 0
+  castRange:
+    baseValue: 40.66
+    bonusPerLevel: 0
+  lineCast: 20
+  castSound: {fileID: 0}
+  damage:
+    baseValue: 12
+    bonusPerLevel: 0
+  damageToRock:
+    baseValue: 0
+    bonusPerLevel: 0
+  damageToTree:
+    baseValue: 0
+    bonusPerLevel: 0
+  damageToWall:
+    baseValue: 1
+    bonusPerLevel: 0
+  damageToForniture:
+    baseValue: 5
+    bonusPerLevel: 0
+  stunChance:
+    baseValue: 0
+    bonusPerLevel: 0
+  stunTime:
+    baseValue: 0
+    bonusPerLevel: 0
+  projectile: {fileID: 114941114663955406, guid: 68868bbf0e4446641afe2922f268dc85,
+    type: 3}
+  equip:
+    item:
+      accessories:
+      - accessories: []
+        currentDurability: 0
+        durabilityLevel: 1
+        bagLevel: 1
+        skin: 0
+        bulletsRemaining: 0
+        alreadyAddedAccessory: 0
+        accuracyLevel: 1
+        currentArmor: 0
+        armorLevel: 1
+        currentBlood: 0
+        currentUnsanity: 0
+        radioCurrentBattery: 0
+        coverTemperature: 0
+        waterContainer: 0
+        gasContainer: 0
+        honeyContainer: 0
+        torchCurrentBattery: 0
+        batteryLevel: 0
+        weight: 0
+        wet: 0
+        hash: 1704197964
+        summoned: {fileID: 0}
+        summonedHealth: 0
+        summonedLevel: 0
+        summonedExperience: 0
+      - accessories: []
+        currentDurability: 0
+        durabilityLevel: 1
+        bagLevel: 1
+        skin: 0
+        bulletsRemaining: 0
+        alreadyAddedAccessory: 0
+        accuracyLevel: 1
+        currentArmor: 0
+        armorLevel: 1
+        currentBlood: 0
+        currentUnsanity: 0
+        radioCurrentBattery: 0
+        coverTemperature: 0
+        waterContainer: 0
+        gasContainer: 0
+        honeyContainer: 0
+        torchCurrentBattery: 0
+        batteryLevel: 0
+        weight: 0
+        wet: 0
+        hash: -728853092
+        summoned: {fileID: 0}
+        summonedHealth: 0
+        summonedLevel: 0
+        summonedExperience: 0
+      - accessories: []
+        currentDurability: 0
+        durabilityLevel: 1
+        bagLevel: 1
+        skin: 0
+        bulletsRemaining: 0
+        alreadyAddedAccessory: 0
+        accuracyLevel: 1
+        currentArmor: 0
+        armorLevel: 1
+        currentBlood: 0
+        currentUnsanity: 0
+        radioCurrentBattery: 0
+        coverTemperature: 0
+        waterContainer: 0
+        gasContainer: 0
+        honeyContainer: 0
+        torchCurrentBattery: 0
+        batteryLevel: 0
+        weight: 0
+        wet: 0
+        hash: -347676763
+        summoned: {fileID: 0}
+        summonedHealth: 0
+        summonedLevel: 0
+        summonedExperience: 0
+      - accessories: []
+        currentDurability: 0
+        durabilityLevel: 1
+        bagLevel: 1
+        skin: 0
+        bulletsRemaining: 0
+        alreadyAddedAccessory: 0
+        accuracyLevel: 1
+        currentArmor: 0
+        armorLevel: 1
+        currentBlood: 0
+        currentUnsanity: 0
+        radioCurrentBattery: 0
+        coverTemperature: 0
+        waterContainer: 0
+        gasContainer: 0
+        honeyContainer: 0
+        torchCurrentBattery: 0
+        batteryLevel: 0
+        weight: 0
+        wet: 0
+        hash: 1998363381
+        summoned: {fileID: 0}
+        summonedHealth: 0
+        summonedLevel: 0
+        summonedExperience: 0
+      - accessories: []
+        currentDurability: 0
+        durabilityLevel: 1
+        bagLevel: 1
+        skin: 0
+        bulletsRemaining: 0
+        alreadyAddedAccessory: 0
+        accuracyLevel: 1
+        currentArmor: 0
+        armorLevel: 1
+        currentBlood: 0
+        currentUnsanity: 0
+        radioCurrentBattery: 0
+        coverTemperature: 0
+        waterContainer: 0
+        gasContainer: 0
+        honeyContainer: 0
+        torchCurrentBattery: 0
+        batteryLevel: 0
+        weight: 0
+        wet: 0
+        hash: -553800334
+        summoned: {fileID: 0}
+        summonedHealth: 0
+        summonedLevel: 0
+        summonedExperience: 0
+      currentDurability: 10
+      durabilityLevel: 1
+      bagLevel: 1
+      skin: 0
+      bulletsRemaining: 0
+      alreadyAddedAccessory: 1
+      accuracyLevel: 1
+      currentArmor: 0
+      armorLevel: 1
+      currentBlood: 0
+      currentUnsanity: 0
+      radioCurrentBattery: 0
+      coverTemperature: 0
+      waterContainer: 0
+      gasContainer: 0
+      honeyContainer: 0
+      torchCurrentBattery: 0
+      batteryLevel: 0
+      weight: 0
+      wet: 0
+      hash: 1418793958
+      summoned: {fileID: 0}
+      summonedHealth: 0
+      summonedLevel: 0
+      summonedExperience: 0
+    amount: 1

@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18be07406029d49d1b7f4bde9b48d5d0, type: 3}
+  m_Name: Shotgun body
+  m_EditorClassIdentifier: 
+  coinToCraft: 0
+  goldToCraft: 0
+  repairItems: []
+  upgradeItems: []
+  armor:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxArmorLevel: 0
+  productAfterCooking: {fileID: 0}
+  coverTemperature: 0
+  additionalSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  protectedSlot:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxBagLevel: 0
+  maxWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  possibleBagWeight:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxWeightLevel: 0
+  skinImages:
+  - {fileID: 21300000, guid: 4dc0092482349324e8e56e1833119d5d, type: 3}
+  - {fileID: 21300000, guid: c688a1c3c15de5c43b9d3c1196f10d58, type: 3}
+  - {fileID: 21300000, guid: 7e91f8142df0a8b4a9e6d00a7c248cc9, type: 3}
+  - {fileID: 21300000, guid: dd0d8572aca88764899f8e79f6e1f143, type: 3}
+  - {fileID: 21300000, guid: e8a7febb842125146b7c184ac224c3a7, type: 3}
+  - {fileID: 21300000, guid: 2fd8d48edfac80f488c4ce681237ed75, type: 3}
+  - {fileID: 21300000, guid: 778de9b62619fc948bbcacc122ed650f, type: 3}
+  weaponToSpawn: {fileID: 0}
+  munitionImage: {fileID: 0}
+  maxMunition: 0
+  attackRange: 1
+  needMunitionInMagazine: 0
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  requiredSkill: {fileID: 0}
+  maxUnsanity: 0
+  maxDurability:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxDurabilityLevel: 0
+  canUseFurnace: 0
+  canUseWarehouse: 0
+  canUseCabinet: 0
+  canUseWeaponStorage: 0
+  canUseUpgrade: 0
+  canUseCook: 0
+  canUseFridge: 0
+  canUseLibrary: 0
+  itemtoCraftBuilding: []
+  itemtoCraft: []
+  itemtoCraftFemale: []
+  continuePlacing: 0
+  canAddSkin: 1
+  accessoriesType: 5
+  accessoryToAdd: []
+  weaponType: 2
+  weight: 0.1
+  maxStack: 1
+  buyPrice: 0
+  sellPrice: 0
+  itemMallPrice: 0
+  sellable: 0
+  tradable: 0
+  destroyable: 1
+  toolTip: 
+  image: {fileID: 21300000, guid: 4dc0092482349324e8e56e1833119d5d, type: 3}
+  minLevel: 0
+  cooldown: 0
+  _cooldownCategory: 
+  accuracy:
+    baseValue: 0
+    bonusPerLevel: 0
+  animatorToSet: {fileID: 0}
+  indexHat: -1
+  indexAccessory: -1
+  indexShirt: -1
+  indexPants: -1
+  indexShoes: -1
+  indexBag: -1
+  sex: -1
+  battery:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxWet: 0
+  category: 
+  healthBonus: 0
+  manaBonus: 0
+  damageBonus: 0
+  defenseBonus: 0
+  blockChanceBonus: 0
+  criticalChanceBonus: 0
+  sprites: []
+  weaponAbility: {fileID: 0}
+  isMetal: 0
+  isWood: 0
+  weaponPrecision: 0
+  distanceToGrab: 0
+  requiredAmmo: {fileID: 0}

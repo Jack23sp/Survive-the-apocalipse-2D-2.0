@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Nightfall Defense - Phase 57
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Nightfall Defense - Phase 57.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Nightfall Defense - Phase 58
+  rewardGold: 132
+  rewardCoins: 66
+  rewardExperience: 380
+  rewards:
+  - item: SMG
+    amount: 3
+  - item: Machete
+    amount: 3
+  - item: Tomato
+    amount: 3
+  kills:
+  - name: Zombie_Infected
+    amountRequest: 25
+    actual: 0
+  - name: Animals_Viper
+    amountRequest: 28
+    actual: 0
+  - name: Zombie_Prisoner
+    amountRequest: 16
+    actual: 0
+  players: []
+  craft:
+  - item: High bottle
+    amountRequest: 3
+    actual: 0
+  - item: Lattuce salade
+    amountRequest: 1
+    actual: 0
+  pick:
+  - item: Thunderbloom
+    amountRequest: 2
+    actual: 0
+  - item: Nitrate Potassium
+    amountRequest: 31
+    actual: 0
+  - item: Stone
+    amountRequest: 43
+    actual: 0
+  building:
+  - item: Black sofa
+    amountRequest: 3
+    actual: 0
+  - item: Rug 7
+    amountRequest: 1
+    actual: 0
+  - item: Chemistry lab
+    amountRequest: 1
+    actual: 0

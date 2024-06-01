@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Nightfall Defense - Phase 97
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Nightfall Defense - Phase 97.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Nightfall Defense - Phase 98
+  rewardGold: 212
+  rewardCoins: 106
+  rewardExperience: 580
+  rewards:
+  - item: Blue sunglasses
+    amount: 5
+  - item: Thunderbloom
+    amount: 5
+  kills:
+  - name: Animals_yellow_fattail_scorpion
+    amountRequest: 65
+    actual: 0
+  - name: Animals_Deer
+    amountRequest: 29
+    actual: 0
+  - name: Animals_Scorpion
+    amountRequest: 14
+    actual: 0
+  players: []
+  craft:
+  - item: Crossbow
+    amountRequest: 7
+    actual: 0
+  - item: Medium medical cure
+    amountRequest: 7
+    actual: 0
+  - item: AR1
+    amountRequest: 10
+    actual: 0
+  pick:
+  - item: Silver
+    amountRequest: 82
+    actual: 0
+  - item: Nitrate Potassium
+    amountRequest: 25
+    actual: 0
+  building:
+  - item: Fridge
+    amountRequest: 1
+    actual: 0
+  - item: Water container
+    amountRequest: 1
+    actual: 0

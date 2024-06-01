@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3271fd6e007204c9e113d9d5a18cd0, type: 3}
+  m_Name: Urban Recon - Phase 49
+  m_EditorClassIdentifier: 
+  toolTip: Complete tasks for Urban Recon - Phase 49.
+  requiredLevel: 0
+  predecessor: {fileID: 0}
+  successive: Urban Recon - Phase 50
+  rewardGold: 116
+  rewardCoins: 58
+  rewardExperience: 340
+  rewards:
+  - item: Dark Red Female Pants
+    amount: 3
+  - item: Sniper barrell
+    amount: 3
+  - item: Acog scope
+    amount: 3
+  kills:
+  - name: Animals_Cattle male
+    amountRequest: 30
+    actual: 0
+  - name: Animals_Wolf
+    amountRequest: 9
+    actual: 0
+  - name: Animals_Scorpion
+    amountRequest: 46
+    actual: 0
+  players: []
+  craft:
+  - item: SMG Bottom
+    amountRequest: 2
+    actual: 0
+  - item: AR1 body
+    amountRequest: 2
+    actual: 0
+  - item: Medium bottle
+    amountRequest: 3
+    actual: 0
+  pick:
+  - item: Crystalbloom
+    amountRequest: 24
+    actual: 0
+  building:
+  - item: Bathroom Sink
+    amountRequest: 4
+    actual: 0
