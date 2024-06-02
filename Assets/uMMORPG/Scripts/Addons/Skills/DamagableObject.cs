@@ -339,7 +339,7 @@ public class DamagableObject : MonoBehaviour
         {
             if ((DamagableByRange && !melee) || (DamagableByMelee && melee) || (DamagableByExplosion && explosion))
             {
-                float damageB = damage + (damage + (int)((damage / 100) * weaponBonus)) + player.playerBoost.FindBoostPercent("Destroyer");
+                float damageB = damage + (damage + (int)((damage / 100) * weaponBonus)) + caster.playerBoost.FindBoostPercent("Destroyer");
                 if (wall.up)
                 {
                     if (wall.wall)

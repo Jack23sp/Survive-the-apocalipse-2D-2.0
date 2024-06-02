@@ -303,24 +303,16 @@ public partial class PlayerNavMeshMovement2D
                     if (itm && prevMunitionCountForSound != temp)
                     {
                         player.playerWeapon.CmdChargeMunition(player.playerEquipment.slots[0].item.name);
-                        prevMunitionCountForSound = temp;
                     }
                     else
                     {
                         if (temp == 0 && prevMunitionCountForSound != 0)
                         {
                             player.playerSounds.PlaySounds(((MunitionSkill)player.playerEquipment.slots[0].item.data.requiredSkill).projectile.type, "3");
-                            prevMunitionCountForSound = temp;
                         }
                     }
                 }
-                else
-                {
-                    if (temp >= 0) 
-                        prevMunitionCountForSound = temp;
-                    else
-                        prevMunitionCountForSound = 0;
-                }
+                prevMunitionCountForSound = temp;
 
                 if (direction != prevJoystick && moveJoystick.input == Vector2.zero)
                 {

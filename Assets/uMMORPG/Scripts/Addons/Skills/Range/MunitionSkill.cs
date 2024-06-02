@@ -88,8 +88,8 @@ public class MunitionSkill : DamageSkill
                         player.equipment.slots[0].item.accessories[i] = item;
                         player.playerWeapon.shooted++;
                         //player.playerEquipment.Reassign();
-                        if (player.equipment.slots[0].item.bulletsRemaining == 0)
-                            player.playerWeapon.ChargeMunition(player.equipment.slots[0].item.data.name);
+                        //if (player.equipment.slots[0].item.bulletsRemaining == 0)
+                        //    player.playerWeapon.ChargeMunition(player.equipment.slots[0].item.data.name);
                     }
                 }
             }

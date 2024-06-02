@@ -117,6 +117,7 @@ public class PlayerWeapon : NetworkBehaviour
         return -1;
     }
 
+
     public bool CheckMagazine(string weaponName)
     {
         ScriptableItem inv = null;
@@ -197,7 +198,7 @@ public class PlayerWeapon : NetworkBehaviour
     {
         if (player.equipment.slots[0].amount > 0)
         {
-            ItemSlot equip = player.equipment.slots[0];
+            ItemSlot currentWeapon = player.equipment.slots[0];
             ScriptableItem inv = null;
             bool belt = false;
             int inventoryIndex = -1;
@@ -282,76 +283,48 @@ public class PlayerWeapon : NetworkBehaviour
 
     public void EffectiveCharge(ScriptableItem Sitem, int bullets, bool isBelt, int index)
     {
-        ItemSlot equip = player.equipment.slots[0];
+        ItemSlot currentWeapon = player.equipment.slots[0];
+        ItemSlot itemSlot = isBelt ? player.playerBelt.belt[index] : player.inventory.slots[index];
+        if (itemSlot.amount == 0) return;
+        bool stopAnimation = false;
+
+        for (int i = 0; i < currentWeapon.item.accessories.Length; i++)
+        {
+            int index_i = i;
+            if (currentWeapon.item.accessories[index_i].data.accessoriesType == AccessoriesType.magazine)
+            {
+                Item item = currentWeapon.item.accessories[index_i];
+                Item item2 = currentWeapon.item.accessories[index_i];
+                item = itemSlot.item;
+                player.playerWeapon.chargedMunition = item.bulletsRemaining;
+                player.playerWeapon.shooted = 0;
+                currentWeapon.item.accessories[index_i] = item;
+                player.playerEquipment.slots[0] = currentWeapon;
+                stopAnimation = true;
+                if(isBelt)
+                    player.playerBelt.belt[index] = new ItemSlot(item2, 1);
+                else
+                    player.inventory.slots[index] = new ItemSlot(item2, 1);
+                return;
+            }
+        }
+
+        List<Item> acc = currentWeapon.item.accessories.ToList();
+        //Item itm2 = new Item(Sitem);
+        //itm2.bulletsRemaining = bullets;
+        acc.Add(itemSlot.item);
+        currentWeapon.item.accessories = acc.ToArray();
+        player.playerWeapon.chargedMunition = itemSlot.item.bulletsRemaining;
+        player.playerWeapon.shooted = 0;
+        player.playerEquipment.slots[0] = currentWeapon;
+        stopAnimation = true;
 
         if (isBelt)
-        {
-            for (int i = 0; i < player.equipment.slots[0].item.accessories.Length; i++)
-            {
-                int index_i = i;
-                if (player.equipment.slots[0].item.accessories[index_i].data.accessoriesType == AccessoriesType.magazine)
-                {
-                    Item item = player.equipment.slots[0].item.accessories[index_i];
-                    Item itm = new Item(Sitem);
-                    itm.bulletsRemaining = bullets;
-                    player.playerWeapon.chargedMunition = bullets;
-                    player.playerWeapon.shooted = 0;
-                    equip.item.accessories[index_i] = itm;
-                    player.playerEquipment.slots[0] = new ItemSlot();
-                    player.playerEquipment.slots[0] = equip;
-                    player.playerBelt.belt[index] = new ItemSlot(item, 1);
-                    return;
-                }
-            }
-
-            List<Item> acc = equip.item.accessories.ToList();
-            Item itm2 = new Item(Sitem);
-            itm2.bulletsRemaining = bullets;
-            acc.Add(itm2);
-            equip.item.accessories = acc.ToArray();
-            player.playerWeapon.chargedMunition = bullets;
-            player.playerWeapon.shooted = 0;
-
-            player.playerEquipment.slots[0] = new ItemSlot();
-            player.playerEquipment.slots[0] = equip;
             player.playerBelt.belt[index] = new ItemSlot();
-
-            if (bullets > 0 || !player.playerEquipment.slots[0].item.data.needMunitionInMagazine) TargetStopMunitionAnimation();
-        }
         else
-        {
-            for (int i = 0; i < player.equipment.slots[0].item.accessories.Length; i++)
-            {
-                int index_i = i;
-                if (player.equipment.slots[0].item.accessories[index_i].data.accessoriesType == AccessoriesType.magazine)
-                {
-                    Item item = player.equipment.slots[0].item.accessories[index_i];
-                    Item itm = new Item(Sitem);
-                    itm.bulletsRemaining = bullets;
-                    player.playerWeapon.chargedMunition = bullets;
-                    player.playerWeapon.shooted = 0;
-                    equip.item.accessories[index_i] = itm;
-                    player.playerEquipment.slots[0] = new ItemSlot();
-                    player.playerEquipment.slots[0] = equip;
-                    player.inventory.slots[index] = new ItemSlot(item, 1);
-                    return;
-                }
-            }
-
-            List<Item> acc = equip.item.accessories.ToList();
-            Item itm2 = new Item(Sitem);
-            itm2.bulletsRemaining = bullets;
-            acc.Add(itm2);
-            equip.item.accessories = acc.ToArray();
-            player.playerWeapon.chargedMunition = bullets;
-            player.playerWeapon.shooted = 0;
-
-            player.playerEquipment.slots[0] = new ItemSlot();
-            player.playerEquipment.slots[0] = equip;
             player.inventory.slots[index] = new ItemSlot();
 
-            if (bullets > 0 || !player.playerEquipment.slots[0].item.data.needMunitionInMagazine) TargetStopMunitionAnimation();
-        }
+        if (stopAnimation || !currentWeapon.item.data.needMunitionInMagazine) TargetStopMunitionAnimation();
     }
 
     [Command]

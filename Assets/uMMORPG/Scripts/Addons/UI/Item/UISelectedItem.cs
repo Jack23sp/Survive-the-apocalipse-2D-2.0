@@ -66,6 +66,19 @@ public partial class Player
                         playerBelt.belt[index] = slot;
                     }
                 }
+                else
+                {
+                    inventory.AddItem(new Item(itemData), slot.item.bulletsRemaining);
+                    slot.item.bulletsRemaining = 0;
+                    if (isInventory)
+                    {
+                        inventory.slots[index] = slot;
+                    }
+                    else
+                    {
+                        playerBelt.belt[index] = slot;
+                    }
+                }
             }
         }
     }
@@ -91,6 +104,40 @@ public partial class Player
                         playerBelt.belt[index] = slot;
                     }
                 }
+                else
+                {
+                    int remaining = ((WeaponItem)slot.item.data).maxMunition - slot.item.bulletsRemaining;
+                    if(remaining == 0) return;
+
+                    inventory.RemoveItem(new Item(itemData), remaining);
+                    slot.item.bulletsRemaining += remaining;
+                    if (isInventory)
+                    {
+                        inventory.slots[index] = slot;
+                    }
+                    else
+                    {
+                        playerBelt.belt[index] = slot;
+                    }
+                }
+            }
+            else
+            {
+                int count = inventory.CountItem(new Item(itemData));
+                ItemSlot slot = isInventory ? inventory.slots[index] : playerBelt.belt[index];
+                if (slot.item.bulletsRemaining + count <= ((WeaponItem)slot.item.data).maxMunition)
+                {
+                    slot.item.bulletsRemaining += count;
+                    inventory.RemoveItem(new Item(itemData), count);
+                    if (isInventory)
+                    {
+                        inventory.slots[index] = slot;
+                    }
+                    else
+                    {
+                        playerBelt.belt[index] = slot;
+                    }
+                }               
             }
         }
     }
