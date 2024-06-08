@@ -44,4 +44,14 @@ public class PlayerNotification : NetworkBehaviour
             SpawnNotification(itemData.image, message);           
         }
     }
+
+    [TargetRpc]
+    public void TargetSpawnDumbbellNotification(string dumbbell, string message)
+    {
+        if (!player.isLocalPlayer) return;
+        if (ScriptableDumbbell.dict.TryGetValue(dumbbell.GetStableHashCode(), out ScriptableDumbbell itemData))
+        {
+            SpawnNotification(itemData.image, message);
+        }
+    }
 }

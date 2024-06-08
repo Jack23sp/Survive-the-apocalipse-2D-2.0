@@ -21,7 +21,7 @@ public partial class ScriptableBook : ScriptableItem
 
     public void Use(Player player, int inventoryIndex)
     {
-        player.playerReading.SetState(true,amountToIncreaseAbilityFromBook,timerIncreasePerPointAbility,abilityType);
+        player.playerAdditionalState.SetState("READING",true,amountToIncreaseAbilityFromBook,timerIncreasePerPointAbility,abilityType);
     }
 
 

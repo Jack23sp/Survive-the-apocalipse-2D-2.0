@@ -98,7 +98,7 @@ public class PlayerSkills : Skills
         // only if not casting already
         // (might need to ignore that when coming from pending skill where
         //  CASTING is still true)
-        if (player.playerNavMeshMovement2D.moveJoystick.input != Vector2.zero || player.playerReading.additionalState == "READING") return;
+        if (player.playerNavMeshMovement2D.moveJoystick.input != Vector2.zero || player.playerAdditionalState.additionalState == "READING") return;
 
         if (entity.state != "CASTING" || ignoreState)
         {

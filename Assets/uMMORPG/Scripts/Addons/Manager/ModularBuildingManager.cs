@@ -621,6 +621,11 @@ public class ModularBuildingManager : MonoBehaviour
                             buildingAccessory = forniture;
                             UILibrary.singleton.Open(forniture.GetComponent<Library>());
                             break;
+                        case 13:
+                            BlurManager.singleton.Hide();
+                            buildingAccessory = forniture;
+                            UIInteractableItemPanel.singleton.Open(forniture.GetComponent<BuildingAccessory>().craftingAccessoryItem, hit[index].collider.gameObject.GetComponentInParent<NetworkIdentity>());
+                            break;
                     }
                     return;
                 }

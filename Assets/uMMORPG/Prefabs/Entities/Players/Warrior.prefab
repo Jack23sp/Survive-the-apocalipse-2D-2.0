@@ -1018,6 +1018,7 @@ MonoBehaviour:
   playerOverlays: {fileID: 0}
   playerPartner: {fileID: 0}
   playerTutorial: {fileID: 0}
+  playerAdditionalState: {fileID: 0}
   playerBelt: {fileID: 0}
   playerCallback: {fileID: 0}
   friendResurrect: {fileID: 0}
@@ -1025,7 +1026,6 @@ MonoBehaviour:
   playerMove: {fileID: 0}
   playerNavMeshMovement2D: {fileID: 0}
   playerPick: {fileID: 0}
-  playerReading: {fileID: 0}
   playerScreenNotification: {fileID: 0}
   playerShootPrecision: {fileID: 0}
   playerSounds: {fileID: 0}
@@ -1044,6 +1044,7 @@ MonoBehaviour:
   playerWeaponIK: {fileID: 0}
   playerWeight: {fileID: 0}
   playerWet: {fileID: 0}
+  mallItems: []
   experience: {fileID: 464575906772447637}
   strength: {fileID: 0}
   intelligence: {fileID: 0}
@@ -1392,6 +1393,8 @@ MonoBehaviour:
     amount: 100
   - item: {fileID: 11400000, guid: 1ceb5791010f8194aab97cba59732c56, type: 2}
     amount: 100
+  - item: {fileID: 11400000, guid: 5953abd1d7b8d934bb0266bdf76e8cd5, type: 2}
+    amount: 1
   splitKeys: 300100002f010000
   trash:
     item:
@@ -2871,6 +2874,14 @@ MonoBehaviour:
     parent: {fileID: 0}
   - boneName: Hand.R
     weaponHolder: {fileID: 21231077699001653, guid: 11f258fc1b6994f40a3d136079e9cfce,
+      type: 3}
+    parent: {fileID: 0}
+  - boneName: Hand.L
+    weaponHolder: {fileID: 21231077699001653, guid: 7a8b4c01599b37142ae727a51375b0b6,
+      type: 3}
+    parent: {fileID: 0}
+  - boneName: Hand.R
+    weaponHolder: {fileID: 21231077699001653, guid: b9218bb9590ca70429a972c53c4ac945,
       type: 3}
     parent: {fileID: 0}
   feetPlacer:

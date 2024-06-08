@@ -330,7 +330,7 @@ public partial class Player : Entity
         if (EventDied())
         {
             // we died.
-            playerReading.SetState(false, 0, 0, null);
+            playerAdditionalState.SetState("READING",false, 0, 0, null);
             return "DEAD";
         }
         if (EventStunned())

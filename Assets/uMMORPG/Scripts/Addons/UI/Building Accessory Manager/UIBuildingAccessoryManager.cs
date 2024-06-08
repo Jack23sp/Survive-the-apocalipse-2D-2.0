@@ -60,7 +60,7 @@ public class UIBuildingAccessoryManager : MonoBehaviour
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            CloseButton(false);
+            CloseButton(UIParentButton != null);
         });
 
         deleteButton.onClick.RemoveAllListeners();
@@ -126,6 +126,9 @@ public class UIBuildingAccessoryManager : MonoBehaviour
         switch (buildingAccessory.craftingAccessoryItem.GetType().ToString())
         {
             case "ScriptableBuildingAccessory":
+                ModularBuildingManager.singleton.scriptableBuildingAccessory = buildingAccessory.craftingAccessoryItem;
+                break;
+            case "ScriptableDumbbell":
                 ModularBuildingManager.singleton.scriptableBuildingAccessory = buildingAccessory.craftingAccessoryItem;
                 break;
             case "ScriptableFence":
@@ -213,8 +216,11 @@ public class UIBuildingAccessoryManager : MonoBehaviour
     {
         if (close)
         {
-            if (parentButton) 
+            if (parentButton)
+            {
                 parentButton.onClick.Invoke();
+                BlurManager.singleton.Show();
+            }
         }
         Destroy(singleton);
         Destroy(this.gameObject);

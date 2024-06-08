@@ -335,8 +335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd308fda320142f4a9fe254461aff2c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixedScale: {x: 3.5, y: 3.5}
-  targetScale: {x: 3.4, y: 3.4}
+  fixedScale: {x: 3.4, y: 4.4}
+  targetScale: {x: 3.4, y: 4.4}
   duration: 0.2
   isAnimating: 0
 --- !u!1 &4501927877626697466

@@ -324,7 +324,7 @@ public partial class PlayerNavMeshMovement2D
                     prevJoystick = direction;
                 }
 
-                if (player.playerMove.canAttack && Player.localPlayer.playerReading.additionalState != "READING")
+                if (player.playerMove.canAttack && Player.localPlayer.playerAdditionalState.additionalState != "READING")
                 {
                     if (player.playerMove.states.Contains("AIM")) player.playerMove.CmdSetState("SHOOT", new string[1] { "AIM" });
                     if (!player.playerMove.states.Contains("SHOOT")) player.playerMove.CmdSetState("SHOOT", new string[0] { });

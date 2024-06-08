@@ -70,6 +70,11 @@ public class PlayerEquipment : Equipment
 
     }
 
+    public void Assign()
+    {
+        player.playerEquipment = this;
+    }
+
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();

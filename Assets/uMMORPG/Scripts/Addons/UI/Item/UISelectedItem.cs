@@ -823,8 +823,12 @@ public class UISelectedItem : MonoBehaviour
                     }
                     else if (Player.localPlayer.inventory.slots[index].item.data is ScriptableBook)
                     {
-                        if (Player.localPlayer.playerReading.additionalState == "" && Player.localPlayer.inventory.InventoryOperationsAllowed())
-                            Player.localPlayer.playerReading.CmdUseBook(Player.localPlayer, index, true);
+                        if (Player.localPlayer.playerAdditionalState.additionalState == "" && Player.localPlayer.inventory.InventoryOperationsAllowed())
+                            Player.localPlayer.playerAdditionalState.CmdUseBook(Player.localPlayer, index, true);
+                    }
+                    else if (Player.localPlayer.inventory.slots[index].item.data is ScriptableDumbbell)
+                    {
+                        ((ScriptableDumbbell)Player.localPlayer.inventory.slots[index].item.data).Spawn(Player.localPlayer, ModularBuildingManager.singleton.isInventory, index, 0, Player.localPlayer.transform.position);
                     }
                     else
                     {
@@ -886,8 +890,12 @@ public class UISelectedItem : MonoBehaviour
                     }
                     else if (Player.localPlayer.playerBelt.belt[index].item.data is ScriptableBook)
                     {
-                        if (Player.localPlayer.playerReading.additionalState == "" && Player.localPlayer.playerBelt.InventoryOperationsAllowed())
-                            Player.localPlayer.playerReading.CmdUseBook(Player.localPlayer, index, false);
+                        if (Player.localPlayer.playerAdditionalState.additionalState == "" && Player.localPlayer.playerBelt.InventoryOperationsAllowed())
+                            Player.localPlayer.playerAdditionalState.CmdUseBook(Player.localPlayer, index, false);
+                    }
+                    else if (Player.localPlayer.playerBelt.belt[index].item.data is ScriptableDumbbell)
+                    {
+                        ((ScriptableDumbbell)Player.localPlayer.playerBelt.belt[index].item.data).Spawn(Player.localPlayer, ModularBuildingManager.singleton.isInventory, index, 0, Player.localPlayer.transform.position);
                     }
                     else
                     {
