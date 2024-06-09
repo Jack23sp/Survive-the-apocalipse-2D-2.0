@@ -73,9 +73,19 @@ public class PlayerAdditionalState : NetworkBehaviour
         SetState("EXERCISE", true, dumbbell.amountToIncreaseAbility, dumbbell.timerIncreasePerPointAbility, dumbbell.abilityType);
     }
 
+    [Command]
+    public void CmdSetAnimation(string animationName,string abilityName)
+    {
+        SetState(animationName, true, 0.1f, 30, AbilityManager.singleton.FindAbility(abilityName));
+    }
+
     public void SetState(string state,bool condition, float amount, float timer, ScriptableAbility scriptableAbility)
     {
-        additionalState = ((condition && state == "READING") || (condition && state == "EXERCISE") ) ? state : "";
+        additionalState = ((condition && state == "READING") || 
+                           (condition && state == "EXERCISE") ||
+                           (condition && state == "ABS") ||
+                           (condition && state == "JUMPINGJACK") ||
+                           (condition && state == "PUSHUPS")) ? state : "";
         
         CancelInvoke(nameof(IncreaseAbility));
         ability = scriptableAbility;
@@ -89,7 +99,11 @@ public class PlayerAdditionalState : NetworkBehaviour
 
     public void ManageadditionState(string oldValue, string newValue)
     {
-        if(oldValue != "READING" && oldValue != "EXERCISE")
+        if(oldValue != "READING" && 
+           oldValue != "EXERCISE" &&
+           oldValue != "ABS" &&
+           oldValue != "JUMPINGJACK" &&
+           oldValue != "PUSHUPS")
         {
             previousAnimatorController = animator.runtimeAnimatorController;
         }
@@ -107,17 +121,22 @@ public class PlayerAdditionalState : NetworkBehaviour
 
         if(newValue != string.Empty)
         {
+            for (int i = 0; i < player.playerWeaponIK.weaponsHolder.Count; i++)
+            {
+                int index_i = i;
+                if (player.playerWeaponIK.weaponsHolder[index_i].parent.activeInHierarchy)
+                {
+                    previousWeapon = player.playerWeaponIK.weaponsHolder[index_i].parent;
+                    player.playerWeaponIK.weaponsHolder[index_i].parent.SetActive(false);
+                }
+            }
+
             if (newValue == "READING")
             {
                 for (int i = 0; i < player.playerWeaponIK.weaponsHolder.Count; i++)
                 {
                     int index_i = i;
-                    if (player.playerWeaponIK.weaponsHolder[index_i].parent.activeInHierarchy)
-                    {
-                        previousWeapon = player.playerWeaponIK.weaponsHolder[index_i].parent;
-                        player.playerWeaponIK.weaponsHolder[index_i].parent.SetActive(false);
-                    }
-                    else if (player.playerWeaponIK.weaponsHolder[index_i].parent.name.Contains("Book"))
+                    if (player.playerWeaponIK.weaponsHolder[index_i].parent.name.Contains("Book"))
                     {
                         book = player.playerWeaponIK.weaponsHolder[index_i].parent;
                         book.SetActive(true);
@@ -131,12 +150,7 @@ public class PlayerAdditionalState : NetworkBehaviour
                 for (int i = 0; i < player.playerWeaponIK.weaponsHolder.Count; i++)
                 {
                     int index_i = i;
-                    if (player.playerWeaponIK.weaponsHolder[index_i].parent.activeInHierarchy)
-                    {
-                        previousWeapon = player.playerWeaponIK.weaponsHolder[index_i].parent;
-                        player.playerWeaponIK.weaponsHolder[index_i].parent.SetActive(false);
-                    }
-                    else if (player.playerWeaponIK.weaponsHolder[index_i].parent.name.Contains("Dumb"))
+                    if (player.playerWeaponIK.weaponsHolder[index_i].parent.name.Contains("Dumb"))
                     {
                         if (dumbbell1 == null)
                         {
@@ -152,6 +166,10 @@ public class PlayerAdditionalState : NetworkBehaviour
                 }
                 animator.runtimeAnimatorController = ExerciseManager.singleton.dumbbellAnimator;
             }
+
+            if(newValue == "PUSHUPS") animator.runtimeAnimatorController = ExerciseManager.singleton.pushUpAnimator;
+            if(newValue == "JUMPINGJACK") animator.runtimeAnimatorController = ExerciseManager.singleton.jumpinJackAnimator;
+            if(newValue == "ABS") animator.runtimeAnimatorController = ExerciseManager.singleton.sitUpAnimator;
 
             if (!player.playerWeaponIK) player.GetComponent<PlayerWeaponIK>().Assign();
             player.playerWeaponIK.Spawn();
@@ -200,7 +218,8 @@ public class PlayerAdditionalState : NetworkBehaviour
             ab.level += amountToAdd;
             player.playerAbility.networkAbilities[AbilityManager.singleton.FindNetworkAbility(ability.name, player.name)] = ab;
             if(additionalState == "READING") player.playerNotification.TargetSpawnBookNotification(bookTitle, "Ability " + ab.name + " level increased of " + amountToAdd);
-            if(additionalState == "EXERCISE") player.playerNotification.TargetSpawnDumbbellNotification("Dumbbell", "Ability " + ab.name + " level increased of " + amountToAdd);
+            else if(additionalState == "EXERCISE") player.playerNotification.TargetSpawnDumbbellNotification("Dumbbell", "Ability " + ab.name + " level increased of " + amountToAdd);
+            else player.playerNotification.TargetSpawnNotificationFullBodyExercise("Ability " + ab.name + " level increased of " + amountToAdd);
         }
     }
 

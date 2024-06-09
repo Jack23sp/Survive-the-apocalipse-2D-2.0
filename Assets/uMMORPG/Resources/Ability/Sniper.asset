@@ -17,5 +17,9 @@ MonoBehaviour:
   maxLevel: 50
   baseValue: 10
   bonus: 0.1
-  Description: Allow you to increase youe fire weapon precision of {BONUS} each level.
+  Description: 'Allow you to increase youe fire weapon precision of {BONUS} each
+    level.
+
+
+    Added aim presion with range weapon + {}'
   DescriptionIta: 

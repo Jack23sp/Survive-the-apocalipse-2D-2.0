@@ -16,6 +16,10 @@ MonoBehaviour:
   level: 
   maxLevel: 50
   baseValue: 10
-  bonus: 0
-  Description: Allow you a possibilities of override the dexterity of the player.
+  bonus: 0.77
+  Description: 'Allow you a possibilities of override the dexterity of the player.
+
+
+    Melee
+    precision attack + {}'
   DescriptionIta: 

@@ -17,5 +17,8 @@ MonoBehaviour:
   maxLevel: 50
   baseValue: 10
   bonus: 0
-  Description: Allow you to resist an attack from player.
+  Description: 'Allow you to resist part of a melee damage attack from player.
+
+
+'
   DescriptionIta: 

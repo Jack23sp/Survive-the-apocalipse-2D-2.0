@@ -7,6 +7,9 @@ public class ExerciseManager : MonoBehaviour
     public static ExerciseManager singleton;
     public RuntimeAnimatorController dumbbellAnimator;
     public RuntimeAnimatorController treadmillAnimator;
+    public RuntimeAnimatorController pushUpAnimator;
+    public RuntimeAnimatorController jumpinJackAnimator;
+    public RuntimeAnimatorController sitUpAnimator;
 
     void Awake()
     {

@@ -231,7 +231,7 @@ Material:
     - _FrozenHighlightDensity: 0.753
     - _FrozenSnowContrast: 1
     - _FrozenSnowDensity: 0.709
-    - _FullAlphaDissolveFade: 0.39928988
+    - _FullAlphaDissolveFade: 0.25906605
     - _FullAlphaDissolveWidth: 0.5
     - _FullDistortionFade: 1
     - _FullFade: 1

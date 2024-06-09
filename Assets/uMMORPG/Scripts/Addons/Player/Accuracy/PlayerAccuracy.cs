@@ -37,7 +37,7 @@ public class PlayerAccuracy : NetworkBehaviour
 
             foreach (Ability slot in player.playerAbility.networkAbilities)
                 if (slot.name == "Precision")
-                    equipmentBonus += slot.level;
+                    equipmentBonus += slot.level * AbilityManager.singleton.FindAbility("Precision").bonus;
 
             currentAccuracy = level != null ? linearAccuracy.Get(level.current) + equipmentBonus : 0 + equipmentBonus;
             return currentAccuracy;

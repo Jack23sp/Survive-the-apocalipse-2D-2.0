@@ -259,14 +259,7 @@ public class PlayerMove : NetworkBehaviour
         tempVector = rot;
         if (manageReading)
         {
-            if (player.playerAdditionalState.additionalState == "READING")
-            {
-                player.playerAdditionalState.SetState("READING",false, 0, 0, null);
-            }
-            if (player.playerAdditionalState.additionalState == "EXERCISE")
-            {
-                player.playerAdditionalState.SetState("EXERCISE", false, 0, 0, null);
-            }
+           player.playerAdditionalState.SetState("",false, 0, 0, null);
         }
     }
     

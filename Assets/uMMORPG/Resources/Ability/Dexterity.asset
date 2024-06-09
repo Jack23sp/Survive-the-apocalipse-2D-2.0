@@ -16,6 +16,10 @@ MonoBehaviour:
   level: 
   maxLevel: 50
   baseValue: 10
-  bonus: 0
-  Description: Increase your possibility of avoid melee attack.
+  bonus: 0.85
+  Description: 'Increase your possibility of avoid melee attack.
+
+
+    Actual percentual
+    = {}'
   DescriptionIta: 

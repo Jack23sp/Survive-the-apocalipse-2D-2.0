@@ -91,6 +91,7 @@ public class ModularBuildingManager : MonoBehaviour
     private GameObject objectToMove;
 
     public PlayerTargetInvite playerTargetInvite;
+    public PlayerPersonalOptions playerPersonalCanvas;
 
     public BuildingAccessory buildingAccessory;
 
@@ -655,12 +656,17 @@ public class ModularBuildingManager : MonoBehaviour
                 }
                 if (hit[index].collider.CompareTag("PlayerSelector"))
                 {
-                    if (Player.localPlayer &&   hit[index].collider.gameObject.transform.root.gameObject.name.Replace("(Clone)", "") != Player.localPlayer.name)
+                    if (Player.localPlayer && hit[index].collider.gameObject.transform.root.gameObject.name.Replace("(Clone)", "") != Player.localPlayer.name)
                     {
                         playerTargetInvite.gameObject.SetActive(true);
                         playerTargetInvite.target = hit[index].collider.GetComponentInParent<Player>();
                         playerTargetInvite.sender = Player.localPlayer;
                         playerCanvas.GetComponent<PlayerTargetInvite>().Open();
+                    }
+                    if (Player.localPlayer && hit[index].collider.gameObject.transform.root.gameObject.name.Replace("(Clone)", "") == Player.localPlayer.name)
+                    {
+                        playerPersonalCanvas.gameObject.SetActive(true);
+                        playerPersonalCanvas.GetComponent<PlayerPersonalOptions>().Open();
                     }
                     return;
                 }

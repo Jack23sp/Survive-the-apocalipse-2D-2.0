@@ -28,7 +28,7 @@ public class PlayerMiss : MonoBehaviour
 
             foreach (Ability slot in player.playerAbility.networkAbilities)
                 if (slot.name == "Dexterity")
-                    equipmentBonus += slot.level;
+                    equipmentBonus += slot.level * AbilityManager.singleton.FindAbility("Dexterity").bonus;
 
             currentMiss = level != null ? missPerLevel.Get(level.current) + equipmentBonus : 0 + equipmentBonus;
 

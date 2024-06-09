@@ -54,4 +54,11 @@ public class PlayerNotification : NetworkBehaviour
             SpawnNotification(itemData.image, message);
         }
     }
+
+    [TargetRpc]
+    public void TargetSpawnNotificationFullBodyExercise(string message)
+    {
+        if (!player.isLocalPlayer) return;
+        SpawnNotification(ImageManager.singleton.upgrade, message);
+    }
 }
