@@ -176,6 +176,7 @@ public class PlayerUpgrade : NetworkBehaviour
                 break;
         }
 
+        int presentItem = -1;
 
         if (weaponItem.amount > 0 &&
             accessoryItem.amount > 0 &&
@@ -184,7 +185,6 @@ public class PlayerUpgrade : NetworkBehaviour
         {
 
             //Check if present
-            int presentItem = -1;
             for (int i = 0; i < weaponItem.item.accessories.Length; i++)
             {
                 int index_i = i;
@@ -194,8 +194,8 @@ public class PlayerUpgrade : NetworkBehaviour
                 }
             }
 
-            ManageAccesssory(inventoryIndex, accessoryIndex, presentItem, type);
-        }
+        }           
+        ManageAccesssory(inventoryIndex, accessoryIndex, presentItem, type);
     }
 
     [Server]
@@ -228,21 +228,21 @@ public class PlayerUpgrade : NetworkBehaviour
             switch (type)
             {
                 case 0:
-                    player.inventory.slots[inventoryIndex] = new ItemSlot();
-                    player.inventory.slots[inventoryIndex] = slot;
+                    //player.inventory.slots[inventoryIndex] = new ItemSlot();
                     player.inventory.slots[accessoryIndex] = new ItemSlot();
+                    player.inventory.slots[inventoryIndex] = slot;
                     player.inventory.AddItem(oldAccessory, 1);
                     break;
                 case 1:
-                    player.equipment.slots[inventoryIndex] = new ItemSlot();
-                    player.equipment.slots[inventoryIndex] = slot;
+                    //player.equipment.slots[inventoryIndex] = new ItemSlot();
                     player.inventory.slots[accessoryIndex] = new ItemSlot();
+                    player.equipment.slots[inventoryIndex] = slot;
                     player.inventory.AddItem(oldAccessory, 1);
                     break;
                 case 2:
-                    player.playerBelt.belt[inventoryIndex] = new ItemSlot();
-                    player.playerBelt.belt[inventoryIndex] = slot;
+                    //player.playerBelt.belt[inventoryIndex] = new ItemSlot();
                     player.inventory.slots[accessoryIndex] = new ItemSlot();
+                    player.playerBelt.belt[inventoryIndex] = slot;
                     player.inventory.AddItem(oldAccessory, 1);
                     break;
             }
@@ -255,25 +255,25 @@ public class PlayerUpgrade : NetworkBehaviour
                     List<Item> item = slot.item.accessories.ToList();
                     item.Add(newAccessory.item);
                     slot.item.accessories = item.ToArray();
-                    player.inventory.slots[inventoryIndex] = new ItemSlot();
-                    player.inventory.slots[inventoryIndex] = slot;
+                    //player.inventory.slots[inventoryIndex] = new ItemSlot();
                     player.inventory.slots[accessoryIndex] = new ItemSlot();
+                    player.inventory.slots[inventoryIndex] = slot;
                     break;
                 case 1:
                     List<Item> item1 = slot.item.accessories.ToList();
                     item1.Add(newAccessory.item);
                     slot.item.accessories = item1.ToArray();
-                    player.equipment.slots[inventoryIndex] = new ItemSlot();
-                    player.equipment.slots[inventoryIndex] = slot;
+                    //player.equipment.slots[inventoryIndex] = new ItemSlot();
                     player.inventory.slots[accessoryIndex] = new ItemSlot();
+                    player.equipment.slots[inventoryIndex] = slot;
                     break;
                 case 2:
                     List<Item> item2 = slot.item.accessories.ToList();
                     item2.Add(newAccessory.item);
                     slot.item.accessories = item2.ToArray();
-                    player.playerBelt.belt[inventoryIndex] = new ItemSlot();
-                    player.playerBelt.belt[inventoryIndex] = slot;
+                    //player.playerBelt.belt[inventoryIndex] = new ItemSlot();
                     player.inventory.slots[accessoryIndex] = new ItemSlot();
+                    player.playerBelt.belt[inventoryIndex] = slot;
                     break;
             }
         }

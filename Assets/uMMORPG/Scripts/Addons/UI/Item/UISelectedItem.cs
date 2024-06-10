@@ -551,8 +551,8 @@ public class UISelectedItem : MonoBehaviour
                                             {
                                                 if (upgrade.weaponSkins[e].buyedSkin.ToList().Contains(index_i))
                                                 {
-                                                    //slot.button.interactable = true;
-                                                    //slot.buttonName.text = "Paint";
+                                                    slot.button.interactable = true;
+                                                    slot.buttonName.text = "Paint";
                                                     slot.currencyContainer.SetActive(false);
 
                                                     slot.button.onClick.RemoveAllListeners();
@@ -561,6 +561,12 @@ public class UISelectedItem : MonoBehaviour
                                                         Player.localPlayer.playerUpgrade.CmdSelectSkin(index, index_i, itemSlot.item.data.name, inventorySlot == true ? 0 : equipmentSlot == true ? 1 : 2);
                                                         return;
                                                     });
+                                                }
+                                                else
+                                                {
+                                                    slot.button.interactable = true;
+                                                    slot.buttonName.text = "";
+                                                    slot.currencyContainer.SetActive(true);
                                                 }
                                             }
                                         }

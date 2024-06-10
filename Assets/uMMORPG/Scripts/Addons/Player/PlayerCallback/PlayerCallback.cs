@@ -382,7 +382,8 @@ public class PlayerCallback : NetworkBehaviour
 
         if (UISelectedItem.singleton && UISelectedItem.singleton.panel.gameObject.activeInHierarchy)
         {
-            if(UISelectedItem.singleton.ItemSlot.amount > 0) UISelectedItem.singleton.Setup(UISelectedItem.singleton.ItemSlot, UISelectedItem.singleton.delete, UISelectedItem.singleton.use, UISelectedItem.singleton.equip);
+            if(UISelectedItem.singleton.ItemSlot.amount > 0) 
+                UISelectedItem.singleton.Setup(UISelectedItem.singleton.ItemSlot, UISelectedItem.singleton.delete, UISelectedItem.singleton.use, UISelectedItem.singleton.equip);
         }
 
         if (UIWaterContainer.singleton && UIWaterContainer.singleton.panel.gameObject.activeInHierarchy)
