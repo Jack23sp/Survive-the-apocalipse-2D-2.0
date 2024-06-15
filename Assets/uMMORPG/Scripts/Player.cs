@@ -175,6 +175,9 @@ public partial class Player : Entity
 
         RenderTextureManager.singleton.creationPlayer.gameObject.SetActive(false);
         SetGoldAndCoin(gold,itemMall.coins);
+
+        if (Application.isMobilePlatform) Application.targetFrameRate = 30;
+
         //SpawnManager.singleton.SpawnGrass(GetComponentInChildren<PlayerGrassDetector>().thisCollider);
     }
 

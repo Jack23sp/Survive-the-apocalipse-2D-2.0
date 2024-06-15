@@ -44,17 +44,17 @@ public partial class PlayerNavMeshMovement2D : NavMeshMovement2D
         agent.Warp(destination);
     }
 
-    public void Sync()
-    {
-        if(isServer) rubberbanding.agent.sync = player.state == "MOVING";
-    }
+    //public void Sync()
+    //{
+    //    if(isServer) rubberbanding.agent.sync = player.state == "MOVING";
+    //}
 
     void Update()
     {
         // only for local player
         if (!isLocalPlayer) return;
 
-        Sync();
+        //Sync();
 
         // wasd movement allowed?
         if (player.IsMovementAllowed())

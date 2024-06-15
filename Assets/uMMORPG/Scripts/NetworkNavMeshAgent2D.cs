@@ -48,7 +48,7 @@ public class NetworkNavMeshAgent2D : NetworkBehaviour
 
     void Update()
     {
-        if (isServerObject && agent.sync)
+        if (isServerObject)
         {
             // detect move mode
             if (agent.enabled)

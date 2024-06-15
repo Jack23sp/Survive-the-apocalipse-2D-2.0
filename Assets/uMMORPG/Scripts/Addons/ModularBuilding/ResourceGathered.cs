@@ -87,12 +87,12 @@ public class ResourceGathered : NetworkBehaviour
     {
         spriteRenderer.material = slots.Count > 0 ? ModularBuildingManager.singleton.objectPresent : ModularBuildingManager.singleton.objectNotPresent;
         if (UIResourceGathered.singleton && UIResourceGathered.singleton.panel.activeInHierarchy && UIResourceGathered.singleton.resource.netId == netIdentity.netId)
+        {          
+            UIResourceGathered.singleton.Open(this);
+        }
+        else
         {
-            if (slots.Count == 0) UIResourceGathered.singleton.closeButton.onClick.Invoke();
-            else
-            {
-                UIResourceGathered.singleton.Open(this);
-            }
+            UIResourceGathered.singleton.closeButton.onClick.Invoke();
         }
     }
 

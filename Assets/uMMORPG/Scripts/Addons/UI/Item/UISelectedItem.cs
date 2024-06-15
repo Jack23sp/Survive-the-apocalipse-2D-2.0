@@ -537,7 +537,7 @@ public class UISelectedItem : MonoBehaviour
                                 if (index_i != 0)
                                 {
                                     slot.button.interactable = true;
-                                    slot.buttonName.text = "Paint";
+                                    slot.buttonName.text = "";
                                     slot.currencyContainer.SetActive(true);
                                     slot.currencyImage.sprite = SkinManager.singleton.gold ? ImageManager.singleton.gold : ImageManager.singleton.coin;
                                     slot.currencyImage.preserveAspect = true;
@@ -571,6 +571,7 @@ public class UISelectedItem : MonoBehaviour
                                             }
                                         }
                                     }
+
                                     slot.button.onClick.RemoveAllListeners();
                                     slot.button.onClick.AddListener(() =>
                                     {

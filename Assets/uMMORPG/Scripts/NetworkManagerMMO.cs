@@ -99,9 +99,16 @@ public partial class NetworkManagerMMO : NetworkManager
     {
         // not too long?
         // only contains letters, number and underscore and not empty (+)?
+        // only contains letters, number and underscore and not empty (+)?
         // (important for database safety etc.)
         return characterName.Length <= characterNameMaxLength &&
                Regex.IsMatch(characterName, @"^[a-zA-Z0-9_]+$");
+    }
+
+    public override void OnApplicationQuit()
+    {
+        base.OnApplicationQuit();
+        NetworkClient.connection.Disconnect();
     }
 
     public void SpawnManager()

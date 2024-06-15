@@ -4,8 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
+//using GooglePlayGames;
+//using GooglePlayGames.BasicApi;
 using Unity.Services.Core;
 using Unity.Services.Authentication;
 using System.Threading.Tasks;
@@ -66,34 +66,34 @@ public partial class UILogin : MonoBehaviour
         if(!Application.isMobilePlatform)
             accountInput.gameObject.SetActive(true);
 
-        SignIn();
+        //SignIn();
     }
 
 
-    public void SignIn()
-    {
-        PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
-    }
-    internal void ProcessAuthentication(SignInStatus status)
-    {
-        if (status == SignInStatus.Success)
-        {
-            // Continue with Play Games Services
+    //public void SignIn()
+    //{
+    //    PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
+    //}
+    //internal void ProcessAuthentication(SignInStatus status)
+    //{
+    //    if (status == SignInStatus.Success)
+    //    {
+    //        // Continue with Play Games Services
 
-            string name = PlayGamesPlatform.Instance.GetUserDisplayName();
-            string id = PlayGamesPlatform.Instance.GetUserId();
-            string ImgUrl = PlayGamesPlatform.Instance.GetUserImageUrl();
+    //        string name = PlayGamesPlatform.Instance.GetUserDisplayName();
+    //        string id = PlayGamesPlatform.Instance.GetUserId();
+    //        string ImgUrl = PlayGamesPlatform.Instance.GetUserImageUrl();
 
-            auth.loginAccount = id;
-            accountInput.gameObject.SetActive(false);
+    //        auth.loginAccount = id;
+    //        accountInput.gameObject.SetActive(false);
 
-        }
-        else
-        {
+    //    }
+    //    else
+    //    {
 
-            // Disable your integration with Play Games Services or show a login button
-            // to ask users to sign-in. Clicking it should call
-            // PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication).
-        }
-    }
+    //        // Disable your integration with Play Games Services or show a login button
+    //        // to ask users to sign-in. Clicking it should call
+    //        // PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication).
+    //    }
+    //}
 }

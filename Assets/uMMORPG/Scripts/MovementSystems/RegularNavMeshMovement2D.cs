@@ -15,15 +15,15 @@ public class RegularNavMeshMovement2D : NavMeshMovement2D
         agent.ResetMovement();
     }
 
-    public void Sync()
-    {
-        networkNavMeshAgent.agent.sync = entity.state == "MOVING";
-    }
+    //public void Sync()
+    //{
+    //    networkNavMeshAgent.agent.sync = entity.state == "MOVING";
+    //}
 
-    public void Update()
-    {
-        if(isServer) Sync();
-    }
+    //public void Update()
+    //{
+    //    if(isServer) Sync();
+    //}
 
     // for 4 years since uMMORPG release we tried to detect warps in
     // NetworkNavMeshAgent/Rubberbanding. it never worked 100% of the time:

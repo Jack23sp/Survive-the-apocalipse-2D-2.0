@@ -694,7 +694,7 @@ public class PlayerModularBuilding : NetworkBehaviour
         {
             if (id != null)
             {
-                GameObject ins = Instantiate(id.GetComponent<BuildingAccessory>().craftingAccessoryItem.buildingList[0].buildingObject, position, Quaternion.identity);
+                GameObject ins = Instantiate(id.GetComponent<BuildingAccessory>().craftingAccessoryItem.buildingList[buildingIndex].buildingObject, position, Quaternion.identity);
                 if (player.playerModularBuilding.CheckDistanceFromSpawn(ins.transform))
                 {
                     Destroy(ins);
@@ -744,7 +744,7 @@ public class PlayerModularBuilding : NetworkBehaviour
         {
             if (id != null)
             {
-                GameObject ins = Instantiate(id.GetComponent<BuildingAccessory>().craftingAccessoryItem.buildingList[0].buildingObject, position, Quaternion.identity);
+                GameObject ins = Instantiate(id.GetComponent<BuildingAccessory>().craftingAccessoryItem.buildingList[buildingIndex].buildingObject, position, Quaternion.identity);
                 if (player.playerModularBuilding.CheckDistanceFromSpawn(ins.transform))
                 {
                     Destroy(ins);
@@ -900,7 +900,7 @@ public class PlayerModularBuilding : NetworkBehaviour
         {
             if (id != null)
             {
-                GameObject ins = Instantiate(id.GetComponent<BuildingAccessory>().craftingAccessoryItem.buildingList[0].buildingObject, position, Quaternion.identity);
+                GameObject ins = Instantiate(id.GetComponent<BuildingAccessory>().craftingAccessoryItem.buildingList[buildingIndex].buildingObject, position, Quaternion.identity);
                 if (player.playerModularBuilding.CheckDistanceFromSpawn(ins.transform))
                 {
                     Destroy(ins);
@@ -951,7 +951,7 @@ public class PlayerModularBuilding : NetworkBehaviour
         {
             if (id != null)
             {
-                GameObject ins = Instantiate(id.GetComponent<BuildingAccessory>().craftingAccessoryItem.buildingList[0].buildingObject, position, Quaternion.identity);
+                GameObject ins = Instantiate(id.GetComponent<BuildingAccessory>().craftingAccessoryItem.buildingList[buildingIndex].buildingObject, position, Quaternion.identity);
                 if (player.playerModularBuilding.CheckDistanceFromSpawn(ins.transform))
                 {
                     Destroy(ins);

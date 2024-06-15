@@ -37,7 +37,7 @@ public class NavMeshAgent2D : MonoBehaviour
     new Rigidbody2D rigidbody2D;
     new Collider2D collider2D;
 
-    public bool sync = true;
+    //public bool sync = true;
     public bool rigidbodyPresent = true;
     public bool rigidbodyKinematic = true;
 
@@ -103,7 +103,7 @@ public class NavMeshAgent2D : MonoBehaviour
     void Update()
     {
         // copy position: transform in Update, rigidbody in FixedUpdate
-        if ((rigidbodyPresent || rigidbodyKinematic) && sync)
+        if ((rigidbodyPresent || rigidbodyKinematic))
         {
             transform.position = NavMeshUtils2D.ProjectTo2D(agent.transform.position);
 
@@ -124,14 +124,14 @@ public class NavMeshAgent2D : MonoBehaviour
     void LateUpdate()
     {
         // copy position again, maybe NavMeshAgent did something new
-        if ((rigidbodyPresent || rigidbodyKinematic) && sync)
+        if ((rigidbodyPresent || rigidbodyKinematic))
             transform.position = NavMeshUtils2D.ProjectTo2D(agent.transform.position);
     }
 
     void FixedUpdate()
     {
         // copy position: transform in Update, rigidbody in FixedUpdate
-        if (rigidbodyPresent && !rigidbodyKinematic && sync)
+        if (rigidbodyPresent && !rigidbodyKinematic)
         {
             rigidbody2D.MovePosition(NavMeshUtils2D.ProjectTo2D(agent.transform.position));
         }

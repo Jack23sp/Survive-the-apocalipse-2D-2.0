@@ -112,6 +112,7 @@ public abstract partial class Entity : NetworkBehaviour
                 if (pl.playerMove.states.Contains("RUN") && pl.state == "MOVING")
                 {
                     pl.animator.SetFloat("Multiplier", 1.0f + (StateSpeedManager.singleton.runSpeedAmount / 100));
+                    pl.animator.SetBool("MOVING", pl.state == "MOVING");
                     for (int i = 0; i < pl.playerWeaponIK.weaponsHolder.Count; i++)
                     {
                         if (pl.playerWeaponIK.weaponsHolder[i].parent.name.Replace("(Clone)", "") == pl.playerEquipment.weaponIK.weaponObject.name)
@@ -124,6 +125,7 @@ public abstract partial class Entity : NetworkBehaviour
                 if (pl.playerMove.states.Contains("SNEAK") && pl.state == "MOVING")
                 {
                     pl.animator.SetFloat("Multiplier", 1.0f - (StateSpeedManager.singleton.sneakSpeedAmount / 100));
+                    pl.animator.SetBool("MOVING", pl.state == "MOVING");
                     for (int i = 0; i < pl.playerWeaponIK.weaponsHolder.Count; i++)
                     {
                         if (pl.playerWeaponIK.weaponsHolder[i].parent.name.Replace("(Clone)", "") == pl.playerEquipment.weaponIK.weaponObject.name)
@@ -136,6 +138,7 @@ public abstract partial class Entity : NetworkBehaviour
                 if (newState == "MOVING" && !pl.playerMove.states.Contains("RUN") && !pl.playerMove.states.Contains("SNEAK"))
                 {
                     pl.animator.SetFloat("Multiplier", 1.0f);
+                    pl.animator.SetBool("MOVING", pl.state == "MOVING");
                     for (int i = 0; i < pl.playerWeaponIK.weaponsHolder.Count; i++)
                     {
                         if (pl.playerWeaponIK.weaponsHolder[i].parent.name.Replace("(Clone)", "") == pl.playerEquipment.weaponIK.weaponObject.name)

@@ -107,6 +107,7 @@ public class ModularBuildingManager : MonoBehaviour
     public string buildingAreaRestrainSpawnArea = "You are too close a player spawn area to build";
     public string buildingConstruction = "You cannot build because of some obstacles or out of perimeter of construction";
 
+    private bool roof, doorOptions, wallOptions;
     void Awake()
     {
         if (!singleton) singleton = this;
@@ -305,6 +306,10 @@ public class ModularBuildingManager : MonoBehaviour
                 }
             }
         }
+
+        roof = false;
+        doorOptions = false;
+        wallOptions = false;
 
         if (Input.GetMouseButtonDown(0) && !Utils.IsCursorOverUserInterface() && Input.touchCount <= 1)
         {
@@ -518,6 +523,25 @@ public class ModularBuildingManager : MonoBehaviour
                 }
             }
 
+            for (int e = 0; e < hit.Length; e++)
+            {
+                int index = e;
+
+                if (hit[index].collider.CompareTag("Roof"))
+                {
+                    roof = true;
+                }
+                if (hit[index].collider.CompareTag("DoorOptions"))
+                {
+                    doorOptions = true;
+                }
+                if (hit[index].collider.CompareTag("WallOptions"))
+                {
+                    wallOptions = true;
+                }
+            }
+
+
             for (int i = 0; i < hit.Length; i++)
             {
                 int index = i;
@@ -526,7 +550,8 @@ public class ModularBuildingManager : MonoBehaviour
                 {
                     return;
                 }
-                if (hit[index].collider.CompareTag("DoorOptions"))
+
+                if (doorOptions)
                 {
 
                     //if (CanEnterHome(hit[index].collider.GetComponentInParent<WallManager>().modularBuilding, Player.localPlayer))
@@ -536,6 +561,16 @@ public class ModularBuildingManager : MonoBehaviour
                     //    BlurManager.singleton.Hide();
                     //    UIPin.singleton.Open(Player.localPlayer, hit[index].collider.GetComponentInParent<WallManager>().modularBuilding.central.GetComponent<CentralManager>(), hit[index].collider.transform);
                     //}
+                    return;
+                }
+                if (wallOptions)
+                {
+                    BlurManager.singleton.Hide();
+                    GameObject opt = Instantiate(GameObjectSpawnManager.singleton.confirmDeleteWall, GameObjectSpawnManager.singleton.canvas);
+                    ConfirmDeleteWall deleteWall = opt.GetComponent<ConfirmDeleteWall>();
+                    WallOptions wallOptions = hit[index].collider.GetComponent<WallOptions>();
+                    deleteWall.wallManager = wallOptions.wallManager;
+                    deleteWall.positioning = wallOptions.positioning;
                     return;
                 }
                 if (hit[index].collider.CompareTag("Selector"))
@@ -628,16 +663,6 @@ public class ModularBuildingManager : MonoBehaviour
                             UIInteractableItemPanel.singleton.Open(forniture.GetComponent<BuildingAccessory>().craftingAccessoryItem, hit[index].collider.gameObject.GetComponentInParent<NetworkIdentity>());
                             break;
                     }
-                    return;
-                }
-                if (hit[index].collider.CompareTag("WallOptions"))
-                {
-                    BlurManager.singleton.Hide();
-                    GameObject opt = Instantiate(GameObjectSpawnManager.singleton.confirmDeleteWall, GameObjectSpawnManager.singleton.canvas);
-                    ConfirmDeleteWall deleteWall = opt.GetComponent<ConfirmDeleteWall>();
-                    WallOptions wallOptions = hit[index].collider.GetComponent<WallOptions>();
-                    deleteWall.wallManager = wallOptions.wallManager;
-                    deleteWall.positioning = wallOptions.positioning;
                     return;
                 }
                 if (hit[index].collider.CompareTag("Central"))
