@@ -68,6 +68,11 @@ public class UIFlag : MonoBehaviour
         panel.SetActive(true);
         closeButton.image.enabled = true;
         setButtonText.text = "Set!";
+        Spawn();
+    }
+
+    public void Spawn()
+    {
         UIUtils.BalancePrefabs(objectToInstantiate, FlagManager.singleton.flags.Count, content);
         for (int i = 0; i < FlagManager.singleton.flags.Count; i++)
         {

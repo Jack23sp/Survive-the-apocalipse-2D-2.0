@@ -5,38 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-//public partial class Experience
-//{
-//    public void ManageExperience(long oldValue, long newValue)
-//    {
-//        if (UIKitchenSink.singleton)
-//        {
-//            UIKitchenSink.singleton.SetExperienceValue();
-//        }
-//        if (UIBathroomSink.singleton)
-//        {
-//            UIBathroomSink.singleton.SetExperienceValue();
-//        }
-//    }
-//}
-
-//public partial class Energy
-//{
-//    public void ManageEnergy(int oldValue, int newValue)
-//    {
-//        if (UIKitchenSink.singleton)
-//        {
-//            UIKitchenSink.singleton.SetManaValue();
-//            UIKitchenSink.singleton.SetHealthValue();
-//        }
-//        if (UIBathroomSink.singleton)
-//        {
-//            UIBathroomSink.singleton.SetManaValue();
-//            UIBathroomSink.singleton.SetHealthValue();
-//        }
-//    }
-//}
-
 public class UIBathroomSink : MonoBehaviour
 {
     public static UIBathroomSink singleton;
@@ -316,7 +284,7 @@ public class UIBathroomSink : MonoBehaviour
         if (Player.localPlayer)
         {
 
-            mana.title.text = "Mana";
+            mana.title.text = "Stamina";
             mana.min.text = Player.localPlayer.mana.current.ToString();
             mana.max.text = Player.localPlayer.mana.max.ToString();
             mana.slider.fillAmount = (Player.localPlayer.mana.current != 0 && Player.localPlayer.mana.max != 0) ? (float)Player.localPlayer.mana.current / (float)Player.localPlayer.mana.max : 0;

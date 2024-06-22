@@ -122,7 +122,7 @@ public class UICraft : MonoBehaviour
             craftButtonGold.interactable = true;
             craftButtonCoin.interactable = true;
             craftPanel.SetActive(false);
-            UIUtils.BalancePrefabs(craftSlotChild, 0, ingredientCraftContent);
+            //UIUtils.BalancePrefabs(craftSlotChild, 0, ingredientCraftContent);
             goldText.text = string.Empty;
             coinText.text = string.Empty;
             closeButton.image.enabled = false;
@@ -168,7 +168,7 @@ public class UICraft : MonoBehaviour
 
     public void SpawnCraftAtBegins(bool close, bool ignore)
     {
-        crafts.Clear();
+        crafts = new List<ItemCrafting>();
         crafts = player.playerCharacterCreation.sex == 1 && craftAccessory.craftingAccessoryItem.itemtoCraftFemale.Count > 0 ? craftAccessory.craftingAccessoryItem.itemtoCraftFemale : craftAccessory.craftingAccessoryItem.itemtoCraft;
         UIUtils.BalancePrefabs(newSlot, crafts.Count, content);
         for (int i = 0; i < crafts.Count; i++)

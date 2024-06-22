@@ -37,15 +37,9 @@ public class NavMeshAgent2D : MonoBehaviour
     new Rigidbody2D rigidbody2D;
     new Collider2D collider2D;
 
-    //public bool sync = true;
-    public bool rigidbodyPresent = true;
-    public bool rigidbodyKinematic = true;
-
-
     // monobehaviour ///////////////////////////////////////////////////////////
     void Awake()
     {
-        name = name + UnityEngine.Random.Range(1, 999999999);
         // create projection
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         go.name = "NAVIGATION2D_AGENT";
@@ -68,16 +62,6 @@ public class NavMeshAgent2D : MonoBehaviour
         agent.obstacleAvoidanceType = _quality;
         agent.avoidancePriority = _priority;
         agent.autoRepath = _autoRepath;
-
-        if (!rigidbody2D)
-            rigidbody2D = GetComponent<Rigidbody2D>();
-        
-        rigidbodyPresent = rigidbody2D != null;
-        
-        if (rigidbody2D)
-        {
-            rigidbodyKinematic = rigidbody2D.isKinematic;
-        }
     }
 
     public void SetSpeed(float speed)
@@ -103,39 +87,34 @@ public class NavMeshAgent2D : MonoBehaviour
     void Update()
     {
         // copy position: transform in Update, rigidbody in FixedUpdate
-        if ((rigidbodyPresent || rigidbodyKinematic))
-        {
+        if (rigidbody2D == null || rigidbody2D.isKinematic)
             transform.position = NavMeshUtils2D.ProjectTo2D(agent.transform.position);
 
-            if (agent) agent.speed = _speed;
+        if (agent) agent.speed = _speed;
 
-            // stuck detection
-            if (IsStuck())
-            {
-                // stop agent movement, reset it to current position
-                agent.ResetPath();
-                // project object to 3D (at y=0.5 so feet are at y=0 on navmesh)
-                agent.transform.position = NavMeshUtils2D.ProjectObjectTo3D(transform.position);
-                Debug.Log("stopped agent because of collision in 2D plane");
-            }
+        // stuck detection
+        if (IsStuck())
+        {
+            // stop agent movement, reset it to current position
+            agent.ResetPath();
+            // project object to 3D (at y=0.5 so feet are at y=0 on navmesh)
+            agent.transform.position = NavMeshUtils2D.ProjectObjectTo3D(transform.position);
+            Debug.Log("stopped agent because of collision in 2D plane");
         }
     }
 
     void LateUpdate()
     {
         // copy position again, maybe NavMeshAgent did something new
-        if ((rigidbodyPresent || rigidbodyKinematic))
+        if (rigidbody2D == null || rigidbody2D.isKinematic)
             transform.position = NavMeshUtils2D.ProjectTo2D(agent.transform.position);
     }
 
     void FixedUpdate()
     {
         // copy position: transform in Update, rigidbody in FixedUpdate
-        if (rigidbodyPresent && !rigidbodyKinematic)
-        {
+        if (rigidbody2D != null && !rigidbody2D.isKinematic)
             rigidbody2D.MovePosition(NavMeshUtils2D.ProjectTo2D(agent.transform.position));
-        }
-
     }
 
     void OnDestroy()
@@ -211,7 +190,7 @@ public class NavMeshAgent2D : MonoBehaviour
         set { agent.destination = NavMeshUtils2D.ProjectPointTo3D(value); }
     }
 
-    public bool hasPath => agent.hasPath;
+    public bool hasPath=> agent.hasPath;
 
     public bool isOnNavMesh => agent.isOnNavMesh;
 

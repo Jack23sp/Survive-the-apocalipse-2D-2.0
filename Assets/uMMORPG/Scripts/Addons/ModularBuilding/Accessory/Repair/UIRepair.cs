@@ -22,6 +22,7 @@ public class UIRepair : MonoBehaviour
     public TextMeshProUGUI maxDurability;
     public TextMeshProUGUI currentDurability;
     public TextMeshProUGUI repairButtonText;
+    public TextMeshProUGUI repairButtonPlaceHolder;
     public Image slider;
     public Transform ingredientContent;
     public GameObject ingredientSlot;
@@ -43,7 +44,7 @@ public class UIRepair : MonoBehaviour
         if (player)
         {
             repair = upgradeBuilding;
-
+            repairButtonPlaceHolder.gameObject.SetActive(true);
             closeButton.onClick.RemoveAllListeners();
             closeButton.onClick.AddListener(() =>
             {
@@ -94,13 +95,14 @@ public class UIRepair : MonoBehaviour
                             selectedItem = index;
                             itemName = itemSlot.item.data.name;
 
+                            repairButtonPlaceHolder.gameObject.SetActive(false);
                             durabilityContainer.SetActive(true);
                             description.text = itemSlot.ToolTip();
                             imageObjectToRepair.sprite = itemSlot.item.data.image;
                             imageObjectToRepair.preserveAspect = true;
                             minDurability.text = "0";
                             maxDurability.text = itemSlot.item.data.maxDurability.Get(itemSlot.item.durabilityLevel).ToString();
-                            currentDurability.text = itemSlot.item.currentDurability.ToString() + "%";
+                            currentDurability.text = itemSlot.item.currentDurability.ToString() + " (" + ((float)itemSlot.item.currentDurability / (float)itemSlot.item.data.maxDurability.Get(itemSlot.item.durabilityLevel)).ToString("F2") + "%)";
                             slider.fillAmount = (float)itemSlot.item.currentDurability / itemSlot.item.data.maxDurability.Get(itemSlot.item.durabilityLevel);
 
                             UIUtils.BalancePrefabs(ingredientSlot, itemSlot.item.data.repairItems.Count, ingredientContent);

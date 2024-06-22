@@ -490,9 +490,9 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
-        slot.DecreaseAmount(1);
         player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
         player.playerPoints.accessoriesPlacement++;
+        slot.DecreaseAmount(1);
         if (isInventory)
         {
             player.inventory.slots[inventoryIndex] = slot;
@@ -543,8 +543,6 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (slot.item.data is ScriptableBuilding)
         {
             ((ScriptableBuilding)slot.item.data).Spawn(player, inventoryIndex, isInventory, position, buildingIndex, group, playerName, main, modularIndex);
-            player.quests.basements.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
-            player.playerPoints.basementPlacement++;
         }
         else
         {
@@ -556,7 +554,10 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
+        player.quests.basements.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.playerPoints.basementPlacement++;
         slot.DecreaseAmount(1);
+
         if (isInventory)
         {
             player.inventory.slots[inventoryIndex] = slot;
@@ -595,8 +596,6 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (slot.item.data is ScriptableFence)
         {
             ((ScriptableFence)slot.item.data).Spawn(player, inventoryIndex, isInventory, position, buildingIndex, group, playerName);
-            player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
-            player.playerPoints.accessoriesPlacement++;
         }
         else
         {
@@ -608,7 +607,10 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
+        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
+
         if (isInventory)
         {
             player.inventory.slots[inventoryIndex] = slot;
@@ -668,15 +670,16 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (slot.item.data is ScriptableConcrete)
         {
             ((ScriptableConcrete)slot.item.data).Spawn(player, inventoryIndex, isInventory, position, buildingIndex, group, playerName);
-            player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
-            player.playerPoints.accessoriesPlacement++;
         }
         else
         {
             return;
         }
 
+        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
+
         if (isInventory)
         {
             player.inventory.slots[inventoryIndex] = slot;
@@ -713,8 +716,6 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (slot.item.data is ScriptableBillboard)
         {
             ((ScriptableBillboard)slot.item.data).Spawn(player, inventoryIndex, isInventory, position, buildingIndex, group, playerName);
-            player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
-            player.playerPoints.accessoriesPlacement++;
         }
         else
         {
@@ -726,7 +727,10 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
+        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
+
         if (isInventory)
         {
             player.inventory.slots[inventoryIndex] = slot;
@@ -765,8 +769,6 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (slot.item.data is ScriptableFlag)
         {
             ((ScriptableFlag)slot.item.data).Spawn(player, inventoryIndex, isInventory, position, buildingIndex, group, playerName);
-            player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
-            player.playerPoints.accessoriesPlacement++;
         }
         else
         {
@@ -778,8 +780,10 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
-
+        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
+
         if (isInventory)
         {
             player.inventory.slots[inventoryIndex] = slot;
@@ -817,8 +821,6 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (slot.item.data is ScriptableFurnace)
         {
             ((ScriptableFurnace)slot.item.data).Spawn(player, inventoryIndex, isInventory, position, buildingIndex, group, playerName);
-            player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
-            player.playerPoints.accessoriesPlacement++;
         }
         else
         {
@@ -830,7 +832,10 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
+        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
+
         if (isInventory)
         {
             player.inventory.slots[inventoryIndex] = slot;
@@ -868,8 +873,6 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (slot.item.data is ScriptableWaterContainer)
         {
             ((ScriptableWaterContainer)slot.item.data).Spawn(player, inventoryIndex, isInventory, position, buildingIndex, group, playerName);
-            player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
-            player.playerPoints.accessoriesPlacement++;
         }
         else
         {
@@ -881,7 +884,10 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
+        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
+
         if (isInventory)
         {
             player.inventory.slots[inventoryIndex] = slot;
@@ -920,8 +926,6 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (slot.item.data is ScriptableGate)
         {
             ((ScriptableGate)slot.item.data).Spawn(player, inventoryIndex, isInventory, position, buildingIndex, group, playerName);
-            player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
-            player.playerPoints.accessoriesPlacement++;
         }
         else
         {
@@ -933,7 +937,10 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
+        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
+
         if (isInventory)
         {
             player.inventory.slots[inventoryIndex] = slot;
@@ -971,8 +978,6 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (slot.item.data is ScriptableLight)
         {
             ((ScriptableLight)slot.item.data).Spawn(player, inventoryIndex, isInventory, position, buildingIndex, group, playerName);
-            player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
-            player.playerPoints.accessoriesPlacement++;
         }
         else
         {
@@ -984,7 +989,10 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
+        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
+
         if (isInventory)
         {
             player.inventory.slots[inventoryIndex] = slot;

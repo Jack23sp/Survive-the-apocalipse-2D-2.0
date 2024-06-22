@@ -20,6 +20,7 @@ public class BugSent : MonoBehaviour
     public void Start()
     {
         if(!singleton) singleton = this;
+        sendButtonText.text = "Send!";
 
         sendButton.onClick.RemoveAllListeners();
         sendButton.onClick.AddListener(() =>
@@ -50,6 +51,7 @@ public class BugSent : MonoBehaviour
         if (!player) return;
         closeButton.image.enabled = true;
         closeButton.image.raycastTarget = true;
+        sendButtonText.text = "Send!";
         panel.SetActive(true);
         sendImage.color = Color.yellow;
     }

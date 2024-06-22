@@ -59584,6 +59584,7 @@ MonoBehaviour:
   maxDurability: {fileID: 1016199462}
   currentDurability: {fileID: 1717857544}
   repairButtonText: {fileID: 1117410270}
+  repairButtonPlaceHolder: {fileID: 0}
   slider: {fileID: 617683454}
   ingredientContent: {fileID: 56817359}
   ingredientSlot: {fileID: 2955804699540085165, guid: edc8a9b742384244284cc00c2aeaa5d0,

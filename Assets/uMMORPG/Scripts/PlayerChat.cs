@@ -145,6 +145,7 @@ public class PlayerChat : NetworkBehaviour
         {
             localToSee++;
             UIChat.singleton.bubbleMessages[1].thisGameObject.SetActive(true);
+            UIChat.singleton.bubbleMessages[1].thisGameObject.GetComponent<ScaleAnimation>().StartAnimation();
             UIChat.singleton.bubbleMessages[1].amount.text = localToSee.ToString();
         }
     }
@@ -159,6 +160,7 @@ public class PlayerChat : NetworkBehaviour
         {
             whisperToSee++;
             UIChat.singleton.bubbleMessages[2].thisGameObject.SetActive(true);
+            UIChat.singleton.bubbleMessages[2].thisGameObject.GetComponent<ScaleAnimation>().StartAnimation();
             UIChat.singleton.bubbleMessages[2].amount.text = whisperToSee.ToString();
         }
     }
@@ -173,6 +175,7 @@ public class PlayerChat : NetworkBehaviour
         {
             partyToSee++;
             UIChat.singleton.bubbleMessages[3].thisGameObject.SetActive(true);
+            UIChat.singleton.bubbleMessages[3].thisGameObject.GetComponent<ScaleAnimation>().StartAnimation();
             UIChat.singleton.bubbleMessages[3].amount.text = partyToSee.ToString();
         }
     }
@@ -187,6 +190,7 @@ public class PlayerChat : NetworkBehaviour
         {
             guildToSee++;
             UIChat.singleton.bubbleMessages[4].thisGameObject.SetActive(true);
+            UIChat.singleton.bubbleMessages[4].thisGameObject.GetComponent<ScaleAnimation>().StartAnimation();
             UIChat.singleton.bubbleMessages[4].amount.text = guildToSee.ToString();
         }
     }
@@ -201,6 +205,7 @@ public class PlayerChat : NetworkBehaviour
         {
             allyToSee++;
             UIChat.singleton.bubbleMessages[5].thisGameObject.SetActive(true);
+            UIChat.singleton.bubbleMessages[5].thisGameObject.GetComponent<ScaleAnimation>().StartAnimation();
             UIChat.singleton.bubbleMessages[5].amount.text = allyToSee.ToString();
         }
     }

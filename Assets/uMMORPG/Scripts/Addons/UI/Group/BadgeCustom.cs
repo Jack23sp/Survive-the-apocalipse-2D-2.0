@@ -59,6 +59,27 @@ public class BadgeCustom : MonoBehaviour
         background = -1;
         foreground = -1;
 
+        Spawn();
+
+        okButton.onClick.RemoveAllListeners();
+        okButton.onClick.AddListener(() =>
+        {
+            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
+            Player.localPlayer.guild.CmdSetBadge(Player.localPlayer.name, Player.localPlayer.guild.guild.name, background, foreground);
+        });
+
+        closeButton.onClick.RemoveAllListeners();
+        closeButton.onClick.AddListener(() =>
+        {
+            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+            closeButton.image.raycastTarget = false;
+            closeButton.gameObject.SetActive(false);
+            Reset();
+        });
+    }
+
+    public void Spawn()
+    {
         UIUtils.BalancePrefabs(badgeSlot, BadgeManager.singleton.background.Count, backgroundContent);
         for (int i = 0; i < BadgeManager.singleton.background.Count; i++)
         {
@@ -93,22 +114,6 @@ public class BadgeCustom : MonoBehaviour
                 if (background > -1 && foreground > -1) okButton.interactable = true;
             });
         }
-
-        okButton.onClick.RemoveAllListeners();
-        okButton.onClick.AddListener(() =>
-        {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
-            Player.localPlayer.guild.CmdSetBadge(Player.localPlayer.name, Player.localPlayer.guild.guild.name, background, foreground);
-        });
-
-        closeButton.onClick.RemoveAllListeners();
-        closeButton.onClick.AddListener(() =>
-        {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            closeButton.image.raycastTarget = false;
-            closeButton.gameObject.SetActive(false);
-            Reset();
-        });
     }
 
     public void Reset()

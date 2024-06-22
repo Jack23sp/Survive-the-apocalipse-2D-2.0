@@ -278,7 +278,7 @@ public partial class UIInventoryCustom : MonoBehaviour
             if (operationType > -1)
             {
                 int opType = operationType;
-                SearchItemToManage(opType,false);
+                SearchItemToManage(opType,true);
                 //SearchItemToManage(opType,false);
             }
         }

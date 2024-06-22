@@ -5501,7 +5501,7 @@ Transform:
   - {fileID: 4869531599927770044}
   - {fileID: 8383943000771110107}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6592127779867591583
 BoxCollider2D:
@@ -5513,7 +5513,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5639,7 +5639,6 @@ MonoBehaviour:
   - {fileID: 4258561658775910961}
   - {fileID: 2093158532494637762}
   thisCollider: {fileID: 6592127779867591583}
-  roof: {fileID: 4362628831243151275}
   basementTrigger: {fileID: 506214412898152553}
   central: {fileID: 7371328947615259905}
   buildingMarker: {fileID: 6412032430448394363}
@@ -5695,6 +5694,7 @@ MonoBehaviour:
   collider: {fileID: 6592127779867591583}
   modularBuildings: []
   obstacles: []
+  playerInside: []
   colliders: []
   obstacleChecker:
     serializedVersion: 2

@@ -270,13 +270,18 @@ public class UIShop : MonoBehaviour
         panel.SetActive(true);
         closeButton.image.raycastTarget = true;
         closeButton.image.enabled = true;
+        Spawn();
+    }
+
+    public void Spawn()
+    {
         currentCategory = 0;
         categoryText.text = ItemMallManager.singleton.shopObject[0].category.ToString();
         for (int e = 0; e < normalContent.Count; e++)
         {
             int index_e = e;
             UIUtils.BalancePrefabs(normalObjectToSpawn.gameObject, ItemMallManager.singleton.shopObject[index_e].items.Count, normalContent[e]);
-            for(int a = 0; a < ItemMallManager.singleton.shopObject[index_e].items.Count; a++)
+            for (int a = 0; a < ItemMallManager.singleton.shopObject[index_e].items.Count; a++)
             {
                 int index_a = a;
                 ShopItem slot = normalContent[index_e].GetChild(index_a).GetComponent<ShopItem>();
@@ -304,5 +309,6 @@ public class UIShop : MonoBehaviour
                 }
             }
         }
+
     }
 }

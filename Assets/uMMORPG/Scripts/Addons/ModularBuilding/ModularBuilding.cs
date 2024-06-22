@@ -207,7 +207,7 @@ public class ModularBuilding : NetworkBehaviour
     [SyncVar(hook = nameof(ManagePin))]
     private string pin = "0000";
 
-    public float maxWallHealth => defaultValue + ModularBuildingManager.singleton.healthToAddToWalls * level;
+    public float maxWallHealth => defaultValue + ModularBuildingManager.singleton.healthToAddToWalls * (level -1);
 
     public Collider2D[] grassUnder;
 
@@ -234,7 +234,6 @@ public class ModularBuilding : NetworkBehaviour
 
     public Collider2D thisCollider;
 
-    public GameObject roof;
     public BasementTrigger basementTrigger;
 
     private List<NavMeshObstacle2DCustom> riep = new List<NavMeshObstacle2DCustom>();
@@ -346,6 +345,8 @@ public class ModularBuilding : NetworkBehaviour
         ManageDoorSx(doorHealthSx, doorHealthSx);
         ManageDoorUp(doorHealthUp, doorHealthUp);
         ManageDoorDown(doorHealthDown, doorHealthDown);
+
+        CheckRoof();
     }
 
     public void ManageCracks()

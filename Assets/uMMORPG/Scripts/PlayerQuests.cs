@@ -374,7 +374,7 @@ public class PlayerQuests : NetworkBehaviour
 
     void OnAccessoriesCraftOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
     {
-        Craft(newQuestObject);
+        Build(newQuestObject);
     }
 
     void OnBarrellSearchOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)

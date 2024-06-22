@@ -610,7 +610,7 @@ public class UISelectedItem : MonoBehaviour
             equipButton.GetComponentInChildren<TextMeshProUGUI>().text = "To Belt!";
         }
 
-        itemDetails.interactable = UIUtils.FindWhereTheItemIsCrafted(itemSlot.item.data) != null;
+        itemDetails.interactable = UIUtils.FindWhereTheItemIsCrafted(itemSlot.item.data) == null ? false : true;
         itemDetails.onClick.RemoveAllListeners();
         itemDetails.onClick.AddListener(() =>
         {

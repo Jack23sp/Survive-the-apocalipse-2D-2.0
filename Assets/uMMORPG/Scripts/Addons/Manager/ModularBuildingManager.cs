@@ -107,7 +107,7 @@ public class ModularBuildingManager : MonoBehaviour
     public string buildingAreaRestrainSpawnArea = "You are too close a player spawn area to build";
     public string buildingConstruction = "You cannot build because of some obstacles or out of perimeter of construction";
 
-    private bool roof, doorOptions, wallOptions;
+    private Transform roof, doorOptions, wallOptions;
     void Awake()
     {
         if (!singleton) singleton = this;
@@ -215,6 +215,10 @@ public class ModularBuildingManager : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                Player.localPlayer.playerNotification.SpawnNotification(ImageManager.singleton.refuse, "You are to far away to interact with this door!");
+            }
         }
 
         if (door && pin != string.Empty && pin == door.modularBuilding.GetPin())
@@ -307,9 +311,9 @@ public class ModularBuildingManager : MonoBehaviour
             }
         }
 
-        roof = false;
-        doorOptions = false;
-        wallOptions = false;
+        roof = null;
+        doorOptions = null;
+        wallOptions = null;
 
         if (Input.GetMouseButtonDown(0) && !Utils.IsCursorOverUserInterface() && Input.touchCount <= 1)
         {
@@ -529,15 +533,15 @@ public class ModularBuildingManager : MonoBehaviour
 
                 if (hit[index].collider.CompareTag("Roof"))
                 {
-                    roof = true;
+                    roof = hit[index].collider.transform;
                 }
                 if (hit[index].collider.CompareTag("DoorOptions"))
                 {
-                    doorOptions = true;
+                    doorOptions = hit[index].collider.transform;
                 }
                 if (hit[index].collider.CompareTag("WallOptions"))
                 {
-                    wallOptions = true;
+                    wallOptions = hit[index].collider.transform;
                 }
             }
 
@@ -555,7 +559,7 @@ public class ModularBuildingManager : MonoBehaviour
                 {
 
                     //if (CanEnterHome(hit[index].collider.GetComponentInParent<WallManager>().modularBuilding, Player.localPlayer))
-                    DoorManager(hit[index].collider.transform, "");
+                    DoorManager(doorOptions, "");
                     //else
                     //{
                     //    BlurManager.singleton.Hide();
