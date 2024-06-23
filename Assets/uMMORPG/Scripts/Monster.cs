@@ -680,8 +680,6 @@ public partial class Monster : Entity
             }
             else
             {
-                RaycastHit2D[] colliders = Physics2D.LinecastAll(entity.transform.position, (((Vector2)transform.position) + lookDirection) * Vector2.Distance(entity.transform.position, transform.position),ModularBuildingManager.singleton.skillBuildingRaycastCheckLayerMask);
-                if(colliders.Length > 0) return false;
                 return base.CanAttack(entity);
             }
         }

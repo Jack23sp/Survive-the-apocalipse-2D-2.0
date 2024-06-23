@@ -110,24 +110,11 @@ public class NetworkAuthenticatorMMO : NetworkAuthenticator
                     else
                     {
                         //print("account already logged in: " + message.account); <- don't show on live server
-                        //manager.ServerSendError(conn, "already logged in", true);
+                       manager.ServerSendError(conn, "already logged in", true);
 
                         // note: we should disconnect the client here, but we can't as
                         // long as unity has no "SendAllAndThenDisconnect" function,
                         // because then the error message would never be sent.
-                        conn.Disconnect();
-                        manager.lobby[conn] = message.account;
-
-                        // login successful
-                        Debug.Log("login successful: " + message.account);
-
-                        // notify client about successful login. otherwise it
-                        // won't accept any further messages.
-                        conn.Send(new LoginSuccessMsg());
-
-                        // authenticate on server
-                        OnServerAuthenticated.Invoke(conn);
-
                     }
                 }
                 else
