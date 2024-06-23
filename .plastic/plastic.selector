@@ -1,4 +1,4 @@
 repository "Survive the apocalipse 2D 2.0@Michealunity@cloud"
   path "/"
-    br "/main"
-    co "/main"
+    smartbranch "/main" changeset "124"    
+     

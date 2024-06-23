@@ -77,6 +77,11 @@ public class ResourceGathered : NetworkBehaviour
         base.OnStartServer();
     }
 
+    public void InvokeDestroy()
+    {
+        NetworkServer.Destroy(this.gameObject);
+    }
+
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -86,7 +91,7 @@ public class ResourceGathered : NetworkBehaviour
     void OnChangeCurrentSlot(SyncList<ItemSlot>.Operation op, int index, ItemSlot oldSlot, ItemSlot newSlot)
     {
         spriteRenderer.material = slots.Count > 0 ? ModularBuildingManager.singleton.objectPresent : ModularBuildingManager.singleton.objectNotPresent;
-        if (UIResourceGathered.singleton && UIResourceGathered.singleton.panel.activeInHierarchy && UIResourceGathered.singleton.resource.netId == netIdentity.netId)
+        if (UIResourceGathered.singleton && UIResourceGathered.singleton.panel.activeInHierarchy && UIResourceGathered.singleton.resource && UIResourceGathered.singleton.resource.netId == netIdentity.netId)
         {          
             UIResourceGathered.singleton.Open(this);
         }
@@ -102,7 +107,7 @@ public class ResourceGathered : NetworkBehaviour
         {
             if(slots.Count == 0)
             {
-                NetworkServer.Destroy(this.gameObject);
+                Invoke(nameof(InvokeDestroy), 3.0f);
             }
         }
     }

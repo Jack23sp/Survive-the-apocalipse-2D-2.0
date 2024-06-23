@@ -66,6 +66,7 @@ public class ModularBuildingManager : MonoBehaviour
     public LayerMask spawnpointLayerMask;
     public LayerMask accessoryLayerToDestroyWithFloor;
     public LayerMask buildingPlacementLayerMask;
+    public LayerMask skillBuildingRaycastCheckLayerMask;
 
     public bool isSpawnBuilding;
 
@@ -550,7 +551,7 @@ public class ModularBuildingManager : MonoBehaviour
             {
                 int index = i;
 
-                if (hit[index].collider.CompareTag("Roof"))
+                if (roof)
                 {
                     return;
                 }
@@ -569,13 +570,16 @@ public class ModularBuildingManager : MonoBehaviour
                 }
                 if (wallOptions)
                 {
-                    BlurManager.singleton.Hide();
-                    GameObject opt = Instantiate(GameObjectSpawnManager.singleton.confirmDeleteWall, GameObjectSpawnManager.singleton.canvas);
-                    ConfirmDeleteWall deleteWall = opt.GetComponent<ConfirmDeleteWall>();
-                    WallOptions wallOptions = hit[index].collider.GetComponent<WallOptions>();
-                    deleteWall.wallManager = wallOptions.wallManager;
-                    deleteWall.positioning = wallOptions.positioning;
-                    return;
+                    WallOptions wallOption = wallOptions.GetComponent<WallOptions>();
+                    if (wallOption)
+                    {
+                        BlurManager.singleton.Hide();
+                        GameObject opt = Instantiate(GameObjectSpawnManager.singleton.confirmDeleteWall, GameObjectSpawnManager.singleton.canvas);
+                        ConfirmDeleteWall deleteWall = opt.GetComponent<ConfirmDeleteWall>();
+                        deleteWall.wallManager = wallOption.wallManager;
+                        deleteWall.positioning = wallOption.positioning;
+                        return;
+                    }
                 }
                 if (hit[index].collider.CompareTag("Selector"))
                 {

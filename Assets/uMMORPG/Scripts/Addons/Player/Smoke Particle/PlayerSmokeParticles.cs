@@ -53,7 +53,7 @@ public class PlayerSmokeParticles : MonoBehaviour
                 instantiateObject = Instantiate(effectToSpawn);
                 instantiateObject.transform.position = leftFoodSmokePlacer.transform.position;
             }
-            if(!Player.localPlayer.playerOptions.blockFootstep) player.audioSource.Play();
+            if(!Player.localPlayer.playerOptions.blockFootstep && !Player.localPlayer.playerOptions.blockSound) player.audioSource.Play();
         }
         else
         {
@@ -62,7 +62,7 @@ public class PlayerSmokeParticles : MonoBehaviour
                 instantiateObject = Instantiate(effectToSpawn);
                 instantiateObject.transform.position = rightFoodSmokePlacer.transform.position;
             }
-            if (!Player.localPlayer.playerOptions.blockFootstep) player.audioSource.Play();
+            if (!Player.localPlayer.playerOptions.blockFootstep && !Player.localPlayer.playerOptions.blockSound) player.audioSource.Play();
         }
         if(instantiateObject) instantiateObject.gameObject.layer = player.isLocalPlayer ? LayerMask.NameToLayer("PersonalPlayer") : LayerMask.NameToLayer("NotPersonalPlayer");
     }

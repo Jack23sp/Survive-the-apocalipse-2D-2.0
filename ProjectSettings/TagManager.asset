@@ -53,6 +53,8 @@ TagManager:
   - Tree
   - Selector
   - Rock
+  - Spawn
+  - PlayerSelector
   layers:
   - Default
   - TransparentFX
@@ -98,6 +100,9 @@ TagManager:
     locked: 0
   - name: BehindEntities
     uniqueID: 3850324229
+    locked: 0
+  - name: BetweenEntityAndGround
+    uniqueID: 289330397
     locked: 0
   - name: Entities
     uniqueID: 850132101

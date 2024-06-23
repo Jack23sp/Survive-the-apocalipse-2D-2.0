@@ -245,7 +245,7 @@ public class UICharacterCreationCustom : MonoBehaviour
 
     public void ClearSlotColor()
     {
-        for (int i = 0; i < content.childCount -1; i++)
+        for (int i = 0; i < content.childCount; i++)
         {
             int index = i;
             content.GetChild(index).gameObject.GetComponent<CharacterCreationSlot>().GetComponentInChildren<Image>().color = Color.white;

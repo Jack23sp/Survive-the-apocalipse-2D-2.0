@@ -28,7 +28,7 @@ public class CharacterCreationSlot : MonoBehaviour
                 {
                     UICharacterCreationCustom.singleton.characterCustomization.SetElementByIndex(CharacterElementType.Beard, index);
                     UICharacterCreationCustom.singleton.maleBeardtype = index;
-                    UICharacterCreationCustom.singleton.HairBeardColorManagement();
+                    //UICharacterCreationCustom.singleton.HairBeardColorManagement();
                 }
             }
             else

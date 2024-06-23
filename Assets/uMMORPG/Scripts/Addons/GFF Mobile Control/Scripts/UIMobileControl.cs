@@ -290,7 +290,7 @@ public partial class PlayerNavMeshMovement2D
                 prevMunitionCountForSound = 1;
             }
             
-            if (horizontal != 0 || vertical != 0)
+            if (horizontal != 0 || vertical != 0 && moveJoystick.input != Vector2.zero)
             {
                 // create direction, normalize in case of diagonal movement
                 Vector2 direction = new Vector2(horizontal, vertical);
