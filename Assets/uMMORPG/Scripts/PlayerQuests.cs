@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Mirror;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class Database
 {
@@ -26,70 +27,70 @@ public partial class Database
         connection.Execute("DELETE FROM quests WHERE characterName=?", player.name);
         // note: .Insert causes a 'Constraint' exception. use Replace.
 
-        for (int i = 0; i < quests.quests.Count; i++)
+        for (int i = 0; i < quests.MissionToAccomplish.Count; i++)
         {
-            for (int e = 0; e < quests.quests[i].kills.Count; e++)
+            for (int e = 0; e < quests.MissionToAccomplish[i].kills.Count; e++)
             {
                 connection.InsertOrReplace(new quests
                 {
                     characterName = player.name,
-                    questName = quests.quests[i].data.name,
+                    questName = quests.MissionToAccomplish[i].data.name,
                     type = "Kills",
-                    objectName = quests.quests[i].kills[e].name,
-                    request = quests.quests[i].kills[e].amountRequest,
-                    amount = quests.quests[i].kills[e].actual
+                    objectName = quests.MissionToAccomplish[i].kills[e].name,
+                    request = quests.MissionToAccomplish[i].kills[e].amountRequest,
+                    amount = quests.MissionToAccomplish[i].kills[e].actual
                 });
             }
 
-            for (int a = 0; a < quests.quests[i].pick.Count; a++)
+            for (int a = 0; a < quests.MissionToAccomplish[i].pick.Count; a++)
             {
                 connection.InsertOrReplace(new quests
                 {
                     characterName = player.name,
-                    questName = quests.quests[i].data.name,
+                    questName = quests.MissionToAccomplish[i].data.name,
                     type = "Pick",
-                    objectName = quests.quests[i].pick[a].item,
-                    request = quests.quests[i].pick[a].amountRequest,
-                    amount = quests.quests[i].pick[a].actual
+                    objectName = quests.MissionToAccomplish[i].pick[a].item,
+                    request = quests.MissionToAccomplish[i].pick[a].amountRequest,
+                    amount = quests.MissionToAccomplish[i].pick[a].actual
                 });
             }
 
-            for (int u = 0; u < quests.quests[i].building.Count; u++)
+            for (int u = 0; u < quests.MissionToAccomplish[i].building.Count; u++)
             {
                 connection.InsertOrReplace(new quests
                 {
                     characterName = player.name,
-                    questName = quests.quests[i].data.name,
+                    questName = quests.MissionToAccomplish[i].data.name,
                     type = "Building",
-                    objectName = quests.quests[i].building[u].item,
-                    request = quests.quests[i].building[u].amountRequest,
-                    amount = quests.quests[i].building[u].actual
+                    objectName = quests.MissionToAccomplish[i].building[u].item,
+                    request = quests.MissionToAccomplish[i].building[u].amountRequest,
+                    amount = quests.MissionToAccomplish[i].building[u].actual
                 });
             }
 
-            for (int o = 0; o < quests.quests[i].craft.Count; o++)
+            for (int o = 0; o < quests.MissionToAccomplish[i].craft.Count; o++)
             {
                 connection.InsertOrReplace(new quests
                 {
                     characterName = player.name,
-                    questName = quests.quests[i].data.name,
+                    questName = quests.MissionToAccomplish[i].data.name,
                     type = "Crafting",
-                    objectName = quests.quests[i].craft[o].item,
-                    request = quests.quests[i].craft[o].amountRequest,
-                    amount = quests.quests[i].craft[o].actual
+                    objectName = quests.MissionToAccomplish[i].craft[o].item,
+                    request = quests.MissionToAccomplish[i].craft[o].amountRequest,
+                    amount = quests.MissionToAccomplish[i].craft[o].actual
                 });
             }
 
-            for (int x = 0; x < quests.quests[i].players.Count; x++)
+            for (int x = 0; x < quests.MissionToAccomplish[i].players.Count; x++)
             {
                 connection.InsertOrReplace(new quests
                 {
                     characterName = player.name,
-                    questName = quests.quests[i].data.name,
+                    questName = quests.MissionToAccomplish[i].data.name,
                     type = "Players",
-                    objectName = quests.quests[i].players[x].name,
-                    request = quests.quests[i].players[x].amountRequest,
-                    amount = quests.quests[i].players[x].actual
+                    objectName = quests.MissionToAccomplish[i].players[x].name,
+                    request = quests.MissionToAccomplish[i].players[x].amountRequest,
+                    amount = quests.MissionToAccomplish[i].players[x].actual
                 });
             }
         }
@@ -98,12 +99,12 @@ public partial class Database
     public void LoadQuests(Player player)
     {
         PlayerQuests quests = player.GetComponent<PlayerQuests>();
-        Quest q;
+        Missions q;
         foreach (quests rowM in connection.Query<quests>("SELECT DISTINCT questName FROM quests WHERE characterName=?", player.name))
         {
             if (GeneralQuest.dict.TryGetValue(rowM.questName.GetStableHashCode(), out GeneralQuest itemData))
             {
-                q = new Quest(itemData);
+                q = new Missions(itemData);
 
                 foreach (quests row in connection.Query<quests>("SELECT * FROM quests WHERE characterName=? AND questName=?", player.name, rowM.questName))
                 {
@@ -150,20 +151,24 @@ public partial class Database
                         q.players[0] = pl;
                     }
                 }
-                quests.quests.Add(q);
+                quests.MissionToAccomplish.Add(q);
             }
         }
-
+        for (int s = 0; s < quests.MissionToAccomplish.Count; s++)
+        {
+            quests.TargerRpcSyncQuest(s, quests.MissionToAccomplish[s]);
+        }
+        quests.TargetRpcSyncUI();
     }
 }
 
 [System.Serializable]
-public partial struct QuestObject
+public partial struct DetailOfQuest
 {
     public string objectName;
     public int amount;
 
-    public QuestObject(string objectname, int amountToAdd)
+    public DetailOfQuest(string objectname, int amountToAdd)
     {
         objectName = objectname;
         amount = amountToAdd;
@@ -186,39 +191,34 @@ public class PlayerQuests : NetworkBehaviour
     [Header("Quests")] // contains active and completed quests (=all)
     public int activeQuestLimit = 10;
     public List<GeneralQuest> firstQuest = new List<GeneralQuest>();
-    public readonly SyncList<Quest> quests = new SyncList<Quest>();
-
-    public readonly SyncList<QuestObject> animals = new SyncList<QuestObject>();
-    public readonly SyncList<QuestObject> players = new SyncList<QuestObject>();
-    public readonly SyncList<QuestObject> zombies = new SyncList<QuestObject>();
-    public readonly SyncList<QuestObject> crafts = new SyncList<QuestObject>();
-    public readonly SyncList<QuestObject> flowers = new SyncList<QuestObject>();
-    public readonly SyncList<QuestObject> basements = new SyncList<QuestObject>();
-    public readonly SyncList<QuestObject> walls = new SyncList<QuestObject>();
-    public readonly SyncList<QuestObject> wood = new SyncList<QuestObject>();
-    public readonly SyncList<QuestObject> stone = new SyncList<QuestObject>();
-    public readonly SyncList<QuestObject> accessories = new SyncList<QuestObject>();
-    public readonly SyncList<QuestObject> barrels = new SyncList<QuestObject>();
-    public readonly SyncList<QuestObject> boxes = new SyncList<QuestObject>();
+    public List<Missions> MissionToAccomplish = new List<Missions>();
+    public List<int> toSync = new List<int>();
 
 
     [Command]
     public void CmdClaimQuest(int index)
     {
-        quests[index].OnCompleted(player, index);
+        MissionToAccomplish[index].OnCompleted(player, index);
     }
 
-    void OnQuestChanged(SyncList<Quest>.Operation op, int index, Quest oldQuest, Quest newQuest)
+    [TargetRpc]
+    public void TargetRpcSyncUI()
     {
-        UIQuests.singleton.Open();
+        if (UIQuests.singleton)
+        {
+            if (UIQuests.singleton.questIndex > -1)
+                UIQuests.singleton.SpawnQuestDetail(UIQuests.singleton.questIndex);
+            else
+                UIQuests.singleton.Open();
+        }
     }
 
-    public void Kill(QuestObject newQuestObject)
+    public void Kill(DetailOfQuest newQuestObject)
     {
-        for (int i = 0; i < player.quests.quests.Count; i++)
+        for (int i = 0; i < MissionToAccomplish.Count; i++)
         {
             int index = i;
-            Quest quest = player.quests.quests[index];
+            Missions quest = MissionToAccomplish[index];
             for (int e = 0; e < quest.data.kills.Count; e++)
             {
                 bool present = false;
@@ -228,25 +228,36 @@ public class PlayerQuests : NetworkBehaviour
                     {
                         if (quest.kills[y].name.Contains(newQuestObject.objectName))
                         {
-                            Kill kill = quest.kills[y];
-                            kill.actual += newQuestObject.amount;
-                            quest.kills[y] = kill;
+                            quest.kills[y] = new Kill(newQuestObject.objectName, quest.kills[y].amountRequest, (quest.kills[y].actual + newQuestObject.amount));
+                            MissionToAccomplish[index] = new Missions(quest);
+                            if (!toSync.Contains(index)) toSync.Add(index);
                             present = true;
                         }
                     }
-                    if (!present) quest.kills.Add(new Kill(quest.data.kills[e].name, quest.data.kills[e].amountRequest, newQuestObject.amount));
+                    if (!present)
+                    {
+                        quest.kills.Add(new Kill(quest.data.kills[e].name, quest.data.kills[e].amountRequest, newQuestObject.amount));
+                        MissionToAccomplish[index] = new Missions(quest);
+                        if (!toSync.Contains(index)) toSync.Add(index);
+                    }
                 }
             }
-            player.quests.quests[index] = quest;
+            //MissionToAccomplish[index] = quest;
         }
+
+        for(int s = 0; s < toSync.Count(); s++)
+        {
+            TargerRpcSyncQuest(toSync[s], MissionToAccomplish[toSync[s]]);
+        }
+        toSync.Clear();
     }
 
-    public void Build(QuestObject newQuestObject)
+    public void Build(DetailOfQuest newQuestObject)
     {
-        for (int i = 0; i < player.quests.quests.Count; i++)
+        for (int i = 0; i < MissionToAccomplish.Count; i++)
         {
             int index = i;
-            Quest quest = player.quests.quests[index];
+            Missions quest = MissionToAccomplish[index];
             for (int e = 0; e < quest.data.building.Count; e++)
             {
                 bool present = false;
@@ -256,25 +267,36 @@ public class PlayerQuests : NetworkBehaviour
                     {
                         if (quest.building[y].item.Contains(newQuestObject.objectName))
                         {
-                            BuildCreate build = quest.building[y];
-                            build.actual += newQuestObject.amount;
-                            quest.building[y] = build;
+                            quest.building[y] = new BuildCreate(newQuestObject.objectName, quest.building[y].amountRequest, (quest.building[y].actual + newQuestObject.amount));
+                            MissionToAccomplish[index] = new Missions(quest);
+                            if (!toSync.Contains(index)) toSync.Add(index);
                             present = true;
                         }
                     }
-                    if (!present) quest.building.Add(new BuildCreate(quest.data.building[e].item, quest.data.building[e].amountRequest, newQuestObject.amount));
+                    if (!present)
+                    {
+                        quest.building.Add(new BuildCreate(quest.data.building[e].item, quest.data.building[e].amountRequest, newQuestObject.amount));
+                        MissionToAccomplish[index] = new Missions(quest);
+                        if (!toSync.Contains(index)) toSync.Add(index);
+                    }
                 }
             }
-            player.quests.quests[index] = quest;
+            //MissionToAccomplish[index] = quest;
         }
+        for (int s = 0; s < toSync.Count(); s++)
+        {
+            TargerRpcSyncQuest(toSync[s], MissionToAccomplish[toSync[s]]);
+        }
+        TargetRpcSyncUI();
+        toSync.Clear();
     }
 
-    public void Craft(QuestObject newQuestObject)
+    public void Craft(DetailOfQuest newQuestObject)
     {
-        for (int i = 0; i < player.quests.quests.Count; i++)
+        for (int i = 0; i < MissionToAccomplish.Count; i++)
         {
             int index = i;
-            Quest quest = player.quests.quests[index];
+            Missions quest = MissionToAccomplish[index];
             for (int e = 0; e < quest.data.craft.Count; e++)
             {
                 bool present = false;
@@ -284,25 +306,36 @@ public class PlayerQuests : NetworkBehaviour
                     {
                         if (quest.craft[y].item.Contains(newQuestObject.objectName))
                         {
-                            Craft kill = quest.craft[y];
-                            kill.actual += newQuestObject.amount;
-                            quest.craft[y] = kill;
+                            quest.craft[y] = new Craft(newQuestObject.objectName, quest.craft[y].amountRequest, (quest.craft[y].actual + newQuestObject.amount));
+                            MissionToAccomplish[index] = new Missions(quest);
+                            if (!toSync.Contains(index)) toSync.Add(index);
                             present = true;
                         }
                     }
-                    if (!present) quest.craft.Add(new Craft(quest.data.craft[e].item, quest.data.craft[e].amountRequest, newQuestObject.amount));
+                    if (!present)
+                    {
+                        quest.craft.Add(new Craft(quest.data.craft[e].item, quest.data.craft[e].amountRequest, newQuestObject.amount));
+                        MissionToAccomplish[index] = new Missions(quest);
+                        if (!toSync.Contains(index)) toSync.Add(index);
+                    }
                 }
             }
-            player.quests.quests[index] = quest;
+            //MissionToAccomplish[index] = quest;
         }
+        for (int s = 0; s < toSync.Count(); s++)
+        {
+            TargerRpcSyncQuest(toSync[s], MissionToAccomplish[toSync[s]]);
+        }
+        TargetRpcSyncUI();
+        toSync.Clear();
     }
 
-    public void Pick(QuestObject newQuestObject)
+    public void Pick(DetailOfQuest newQuestObject)
     {
-        for (int i = 0; i < player.quests.quests.Count; i++)
+        for (int i = 0; i < MissionToAccomplish.Count; i++)
         {
             int index = i;
-            Quest quest = player.quests.quests[index];
+            Missions quest = MissionToAccomplish[index];
             for (int e = 0; e < quest.data.pick.Count; e++)
             {
                 bool present = false;
@@ -312,118 +345,100 @@ public class PlayerQuests : NetworkBehaviour
                     {
                         if (quest.pick[y].item.Contains(newQuestObject.objectName))
                         {
-                            Pick kill = quest.pick[y];
-                            kill.actual += newQuestObject.amount;
-                            quest.pick[y] = kill;
+                            quest.pick[y] = new Pick(newQuestObject.objectName, quest.pick[y].amountRequest, (quest.pick[y].actual + newQuestObject.amount));
+                            MissionToAccomplish[index] = new Missions(quest);
+                            if (!toSync.Contains(index)) toSync.Add(index);
                             present = true;
                         }
                     }
-                    if (!present) quest.pick.Add(new Pick(quest.data.pick[e].item, quest.data.pick[e].amountRequest, newQuestObject.amount));
+                    if (!present)
+                    {
+                        quest.pick.Add(new Pick(quest.data.pick[e].item, quest.data.pick[e].amountRequest, newQuestObject.amount));
+                        MissionToAccomplish[index] = new Missions(quest);
+                        if (!toSync.Contains(index)) toSync.Add(index);
+                    }
                 }
             }
-            player.quests.quests[index] = quest;
+            //MissionToAccomplish[index] = quest;
         }
+        for (int s = 0; s < toSync.Count(); s++)
+        {
+            TargerRpcSyncQuest(toSync[s], MissionToAccomplish[toSync[s]]);
+        }
+        TargetRpcSyncUI();
+        toSync.Clear();
 
     }
 
-    void OnAnimalKilledOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
+    public void SyncKillOnServer(DetailOfQuest newQuestObject)
     {
         Kill(newQuestObject);
     }
 
-    void OnPlayerKilledOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
-    {
-        Kill(newQuestObject);
-    }
-
-    void OnZombiesKilledOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
-    {
-        Kill(newQuestObject);
-    }
-
-    void OnCraftOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
+    public void SyncCraftOnServer(DetailOfQuest newQuestObject)
     {
         Craft(newQuestObject);
     }
 
-    void OnFlowerPickOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
-    {
-        Pick(newQuestObject);
-    }
-
-    void OnBasementOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
+    public void SyncBuildOnServer(DetailOfQuest newQuestObject)
     {
         Build(newQuestObject);
     }
 
-    void OnWallsOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
-    {
-        Build(newQuestObject);
-    }
-
-    void OnWoodPickOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
+    public void SyncPickOnServer(DetailOfQuest newQuestObject)
     {
         Pick(newQuestObject);
     }
 
-    void OnStonePickOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
-    {
-        Pick(newQuestObject);
-
-    }
-
-    void OnAccessoriesCraftOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
-    {
-        Build(newQuestObject);
-    }
-
-    void OnBarrellSearchOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
-    {
-        Pick(newQuestObject);
-    }
-
-    void OnBoxesSearchOnServer(SyncList<QuestObject>.Operation op, int index, QuestObject oldQuestObject, QuestObject newQuestObject)
-    {
-        Pick(newQuestObject);
-    }
 
     public override void OnStartServer()
     {
         base.OnStartServer();
-        if (quests.Count == 0)
+        if (MissionToAccomplish.Count == 0)
         {
             for (int i = 0; i < firstQuest.Count; i++)
             {
                 int index = i;
-                quests.Add(new Quest(firstQuest[index]));
+                MissionToAccomplish.Add(new Missions(firstQuest[index]));
+                if (!toSync.Contains(index)) toSync.Add(index);
             }
+            for (int s = 0; s < toSync.Count(); s++)
+            {
+                TargerRpcSyncQuest(toSync[s], MissionToAccomplish[toSync[s]]);
+            }
+            TargetRpcSyncUI();
+            toSync.Clear();
         }
-        animals.Callback += OnAnimalKilledOnServer;
-        players.Callback += OnPlayerKilledOnServer;
-        zombies.Callback += OnZombiesKilledOnServer;
-        crafts.Callback += OnCraftOnServer;
-        flowers.Callback += OnFlowerPickOnServer;
-        basements.Callback += OnBasementOnServer;
-        walls.Callback += OnWallsOnServer;
-        wood.Callback += OnWoodPickOnServer;
-        stone.Callback += OnStonePickOnServer;
-        accessories.Callback += OnAccessoriesCraftOnServer;
-        barrels.Callback += OnBarrellSearchOnServer;
-        boxes.Callback += OnBoxesSearchOnServer;
+        else
+        {
+            for (int s = 0; s < MissionToAccomplish.Count(); s++)
+            {
+                TargerRpcSyncQuest(toSync[s], MissionToAccomplish[toSync[s]]);
+            }
+            TargetRpcSyncUI();
+            toSync.Clear();
+        }
     }
 
-    public override void OnStartLocalPlayer()
+    [TargetRpc]
+    public void TargerRpcSyncQuest(int missionIndex, Missions mission)
     {
-        base.OnStartLocalPlayer();
-        quests.Callback += OnQuestChanged;
+        if (missionIndex <= player.quests.MissionToAccomplish.Count - 1) player.quests.MissionToAccomplish[missionIndex] = mission;
+        else
+            player.quests.MissionToAccomplish.Add(mission);
     }
+
+    //public override void OnStartLocalPlayer()
+    //{
+    //    base.OnStartLocalPlayer();
+    //}
 
     // quests //////////////////////////////////////////////////////////////////
     public int GetIndexByName(string questName)
     {
         // (avoid Linq because it is HEAVY(!) on GC and performance)
-        for (int i = 0; i < quests.Count; ++i)
-            if (quests[i].name == questName)
+        for (int i = 0; i < MissionToAccomplish.Count; ++i)
+            if (MissionToAccomplish[i].name == questName)
                 return i;
         return -1;
     }
@@ -432,7 +447,7 @@ public class PlayerQuests : NetworkBehaviour
     public bool HasCompleted(string questName)
     {
         // (avoid Linq because it is HEAVY(!) on GC and performance)
-        foreach (Quest quest in quests)
+        foreach (Missions quest in MissionToAccomplish)
             if (quest.name == questName && quest.completed)
                 return true;
         return false;
@@ -442,7 +457,7 @@ public class PlayerQuests : NetworkBehaviour
     public int CountIncomplete()
     {
         int count = 0;
-        foreach (Quest quest in quests)
+        foreach (Missions quest in MissionToAccomplish)
             if (!quest.completed)
                 ++count;
         return count;
@@ -452,7 +467,7 @@ public class PlayerQuests : NetworkBehaviour
     public bool HasActive(string questName)
     {
         // (avoid Linq because it is HEAVY(!) on GC and performance)
-        foreach (Quest quest in quests)
+        foreach (Missions quest in MissionToAccomplish)
             if (quest.name == questName && !quest.completed)
                 return true;
         return false;
@@ -496,10 +511,10 @@ public class PlayerQuests : NetworkBehaviour
     {
         // has the quest and not completed yet?
         int index = GetIndexByName(questName);
-        if (index != -1 && !quests[index].completed)
+        if (index != -1 && !MissionToAccomplish[index].completed)
         {
             // fulfilled?
-            Quest quest = quests[index];
+            Missions quest = MissionToAccomplish[index];
             if (quest.IsFulfilled(player, index))
             {
                 quest.OnCompleted(player, index);
@@ -517,7 +532,7 @@ public class PlayerQuests : NetworkBehaviour
             player.target.health.current > 0)
         {
             // can complete it? (also checks inventory space for reward, if any)
-            Quest quest = quests[index];
+            Missions quest = MissionToAccomplish[index];
             CanComplete(quest.name);
         }
     }
@@ -527,9 +542,9 @@ public class PlayerQuests : NetworkBehaviour
     public void OnKilledEnemy(Entity victim)
     {
         // call OnKilled in all active (not completed) quests
-        for (int i = 0; i < quests.Count; ++i)
-            if (!quests[i].completed)
-                quests[i].OnKilled(player, i, victim);
+        for (int i = 0; i < MissionToAccomplish.Count; ++i)
+            if (!MissionToAccomplish[i].completed)
+                MissionToAccomplish[i].OnKilled(player, i, victim);
     }
 
     // ontrigger ///////////////////////////////////////////////////////////////
@@ -540,9 +555,9 @@ public class PlayerQuests : NetworkBehaviour
         // (we use .CompareTag to avoid .tag allocations)
         if (col.CompareTag("QuestLocation"))
         {
-            for (int i = 0; i < quests.Count; ++i)
-                if (!quests[i].completed)
-                    quests[i].OnLocation(player, i, col);
+            for (int i = 0; i < MissionToAccomplish.Count; ++i)
+                if (!MissionToAccomplish[i].completed)
+                    MissionToAccomplish[i].OnLocation(player, i, col);
         }
     }
 }

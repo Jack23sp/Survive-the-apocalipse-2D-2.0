@@ -23,16 +23,16 @@ public class LocationQuest : ScriptableQuest
         // simple and stupid.
         if (location.name == name)
         {
-            Quest quest = player.quests.quests[questIndex];
+            Missions quest = player.quests.MissionToAccomplish[questIndex];
             quest.progress = 1;
-            player.quests.quests[questIndex] = quest;
+            player.quests.MissionToAccomplish[questIndex] = quest;
         }
     }
 
     // fulfillment /////////////////////////////////////////////////////////////
     public override bool IsFulfilled(Player player, int index)
     {
-        Quest quest = player.quests.quests[index];
+        Missions quest = player.quests.MissionToAccomplish[index];
 
         return quest.progress == 1;
     }

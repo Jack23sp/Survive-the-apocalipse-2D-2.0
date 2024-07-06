@@ -276,7 +276,7 @@ public class DamagableObject : MonoBehaviour
             if (player.health.health.current <= 0 && !player.playerNames.Contains(caster.name))
             {
                 player.playerNames.Add(caster.name);
-                caster.quests.players.Add(new QuestObject("Player", 1));
+                caster.quests.SyncKillOnServer(new DetailOfQuest(zombie.name.Replace("Player", ""), 1));
                 caster.playerPoints.playerKill++;
             }
         }
@@ -287,12 +287,12 @@ public class DamagableObject : MonoBehaviour
                 zombie.playerNames.Add(caster.name);
                 if (zombie.isMonster)
                 {
-                    caster.quests.zombies.Add(new QuestObject("Zombie", 1));
+                    caster.quests.SyncKillOnServer(new DetailOfQuest(zombie.name.Replace("Zombie_",""), 1));
                     caster.playerPoints.monsterKill++;
                 }
                 else
                 {
-                    caster.quests.zombies.Add(new QuestObject("Animal", 1));
+                    caster.quests.SyncKillOnServer(new DetailOfQuest(zombie.name.Replace("Animal_", ""), 1));
                     caster.playerPoints.animalKill++;
                 }
             }

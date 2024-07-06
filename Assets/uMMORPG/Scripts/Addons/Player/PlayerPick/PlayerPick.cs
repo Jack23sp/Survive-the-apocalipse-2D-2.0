@@ -50,7 +50,7 @@ public class PlayerPick : NetworkBehaviour
 
                     player.playerAbility.networkAbilities[abIndex] = ab;
                     TargetRpcShowNotification(flower.itemToAdd.name, -1, "Added " + rand + " " + flower.itemToAdd.name + " to inventory");
-                    player.quests.flowers.Add( new QuestObject(flower.itemToAdd.name.Replace("(Clone)",""), 1));
+                    player.quests.SyncPickOnServer(new DetailOfQuest(flower.itemToAdd.name.Replace("(Clone)", ""), rand));
                     player.playerPoints.flowerPick++;
                     NetworkServer.Destroy(flower.gameObject);
                 }

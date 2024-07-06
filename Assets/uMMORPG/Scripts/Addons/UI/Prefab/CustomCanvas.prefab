@@ -49663,6 +49663,7 @@ MonoBehaviour:
   experienceText: {fileID: 0}
   goldText: {fileID: 0}
   coinText: {fileID: 0}
+  questIndex: -1
 --- !u!224 &4000768162366199452 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1149438776, guid: 4551cd183a9e58c45a036b7c5d18be02,

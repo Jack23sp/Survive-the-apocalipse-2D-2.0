@@ -21,6 +21,7 @@ public partial class Player
                 if (curv.gold > 0)
                 {
                     gold += curv.gold;
+                    quests.SyncPickOnServer(new DetailOfQuest("Wood", curv.amountItem));
                     NetworkServer.Destroy(curv.gameObject);
                 }
                 else
@@ -30,12 +31,12 @@ public partial class Player
                         inventory.AddItem(curv.itemToDrop, curv.amountItem);
                         if(curv.itemToDrop.name == "Wood")
                         {
-                            quests.wood.Add(new QuestObject("Wood",1));
+                            quests.SyncPickOnServer(new DetailOfQuest("Wood", curv.amountItem));
                             playerPoints.woodPick++;
                         }
                         if (curv.itemToDrop.name == "Stone")
                         {
-                            quests.stone.Add(new QuestObject("Stone", 1));
+                            quests.SyncPickOnServer(new DetailOfQuest("Stone", curv.amountItem));
                             playerPoints.stonePick++;
                         }
                         NetworkServer.Destroy(curv.gameObject);

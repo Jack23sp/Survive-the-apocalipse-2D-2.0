@@ -296,7 +296,7 @@ public class PlayerModularBuilding : NetworkBehaviour
 
         if (spawned)
         {
-            player.quests.walls.Add(new QuestObject(slot.item.name.Replace("(Clone)", ""), 1));
+            player.quests.SyncBuildOnServer(new DetailOfQuest(slot.item.name.Replace("(Clone)", ""), 1));
             player.playerPoints.wallsPlacement++;
             slot.DecreaseAmount(1);
             if (isInventory)
@@ -490,7 +490,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
-        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.quests.SyncBuildOnServer(new DetailOfQuest(slot.item.data.name.Replace("(Clone)", ""), 1));
         player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
         if (isInventory)
@@ -554,7 +554,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
-        player.quests.basements.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.quests.SyncBuildOnServer(new DetailOfQuest(slot.item.data.name.Replace("(Clone)", ""), 1));
         player.playerPoints.basementPlacement++;
         slot.DecreaseAmount(1);
 
@@ -607,7 +607,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
-        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.quests.SyncBuildOnServer(new DetailOfQuest(slot.item.data.name.Replace("(Clone)", ""), 1));
         player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
 
@@ -676,7 +676,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             return;
         }
 
-        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.quests.SyncBuildOnServer(new DetailOfQuest(slot.item.data.name.Replace("(Clone)", ""), 1));
         player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
 
@@ -727,7 +727,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
-        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.quests.SyncBuildOnServer(new DetailOfQuest(slot.item.data.name.Replace("(Clone)", ""), 1));
         player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
 
@@ -780,7 +780,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
-        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.quests.SyncBuildOnServer(new DetailOfQuest(slot.item.data.name.Replace("(Clone)", ""), 1));
         player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
 
@@ -832,7 +832,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
-        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.quests.SyncBuildOnServer(new DetailOfQuest(slot.item.data.name.Replace("(Clone)", ""), 1));
         player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
 
@@ -884,7 +884,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
-        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.quests.SyncBuildOnServer(new DetailOfQuest(slot.item.data.name.Replace("(Clone)", ""), 1));
         player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
 
@@ -937,7 +937,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
-        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.quests.SyncCraftOnServer(new DetailOfQuest(slot.item.data.name.Replace("(Clone)", ""), 1));
         player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
 
@@ -989,7 +989,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             TargetContinuosPlacing(player.netIdentity, isInventory, slot.item.data.name);
         }
 
-        player.quests.accessories.Add(new QuestObject(slot.item.data.name.Replace("(Clone)", ""), 1));
+        player.quests.SyncCraftOnServer(new DetailOfQuest(slot.item.data.name.Replace("(Clone)", ""), 1));
         player.playerPoints.accessoriesPlacement++;
         slot.DecreaseAmount(1);
 
@@ -1143,7 +1143,7 @@ public class PlayerModularBuilding : NetworkBehaviour
                 buildingAccessory.craftingItem.Add(craftSlot);
                 player.gold -= (craft[craftSlot.index].gold * sliderValue);
 
-                player.quests.crafts.Add(new QuestObject(craftSlot.item.Replace("(Clone)", ""), craftSlot.amount));
+                player.quests.SyncCraftOnServer(new DetailOfQuest(craftSlot.item.Replace("(Clone)", ""), craftSlot.amount));
                 player.playerPoints.craftPoint++;
             }
         }
@@ -1160,7 +1160,7 @@ public class PlayerModularBuilding : NetworkBehaviour
                 buildingAccessory.craftingItem.Add(craftSlot);
                 player.itemMall.coins -= (craft[craftSlot.index].coin * sliderValue);
 
-                player.quests.crafts.Add(new QuestObject(craftSlot.item.Replace("(Clone)", ""), craftSlot.amount));
+                player.quests.SyncCraftOnServer(new DetailOfQuest(craftSlot.item.Replace("(Clone)", ""), craftSlot.amount));
                 player.playerPoints.craftPoint++;
             }
         }

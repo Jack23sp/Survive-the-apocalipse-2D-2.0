@@ -25,7 +25,7 @@ public partial class UIQuests : MonoBehaviour
     public TextMeshProUGUI coinText;
 
 
-    private int questIndex = -1;
+    [HideInInspector] public int questIndex = -1;
 
     private Player player;
 
@@ -47,38 +47,34 @@ public partial class UIQuests : MonoBehaviour
 
     public void Open()
     {
+        questIndex = 0;
         rewardExperienceObject.SetActive(false);
         player = Player.localPlayer;
         if (player != null)
         {               
-            UIUtils.BalancePrefabs(slotPrefab.gameObject, player.quests.quests.Count, content);
+            UIUtils.BalancePrefabs(slotPrefab.gameObject, player.quests.MissionToAccomplish.Count, content);
            
-            for (int i = 0; i < player.quests.quests.Count; ++i)
+            for (int i = 0; i < player.quests.MissionToAccomplish.Count; ++i)
             {
                 int index = i;
                 QuestSlot slot = content.GetChild(index).GetComponent<QuestSlot>();
-                Quest quest = player.quests.quests[index];
+                Missions quest = player.quests.MissionToAccomplish[index];
 
                 // name button
                 slot.title.text = quest.name;
                 slot.button.onClick.RemoveAllListeners();
                 slot.button.onClick.AddListener(() => {
                     questIndex = index;
-                    SpawnQuestDetail(quest);
+                    SpawnQuestDetail(index);
                 });
             }
-            if (player.quests.quests.Count > 0)
-            {
-                if (questIndex != -1)
-                    content.GetChild(questIndex).GetComponent<QuestSlot>().button.onClick.Invoke();
-                else
-                    content.GetChild(0).GetComponent<QuestSlot>().button.onClick.Invoke();
-            }
+            if (player.quests.MissionToAccomplish.Count > 0) content.GetChild(0).GetComponent<QuestSlot>().button.onClick.Invoke();
         }
     }
 
-    public void SpawnQuestDetail(Quest quest)
+    public void SpawnQuestDetail(int questIndex)
     {
+        Missions quest = player.quests.MissionToAccomplish[questIndex];
         rewardExperienceObject.SetActive(true);
         experienceText.text = "Experience : \n" + quest.rewardExperience.ToString();
         goldText.text = quest.rewardGold.ToString();
@@ -165,15 +161,15 @@ public partial class UIQuests : MonoBehaviour
             nextIndex++;
         }
 
-        UIUtils.BalancePrefabs(rewardSlot.gameObject, player.quests.quests[questIndex].data.rewards.Count, rewardContent);
-        for (int i = 0; i < player.quests.quests[questIndex].data.rewards.Count; i++)
+        UIUtils.BalancePrefabs(rewardSlot.gameObject, player.quests.MissionToAccomplish[questIndex].data.rewards.Count, rewardContent);
+        for (int i = 0; i < player.quests.MissionToAccomplish[questIndex].data.rewards.Count; i++)
         {
             int index = i;
             BuyBoostSlot slot = rewardContent.GetChild(index).GetComponent<BuyBoostSlot>();
             slot.boostButton.enabled = false;
             //slot.boostButton.gameObject.SetActive(false);
             slot.boostButton.onClick.RemoveAllListeners();
-            if (ScriptableItem.All.TryGetValue(player.quests.quests[questIndex].data.rewards[index].item.GetStableHashCode(), out ScriptableItem itemData))
+            if (ScriptableItem.All.TryGetValue(player.quests.MissionToAccomplish[questIndex].data.rewards[index].item.GetStableHashCode(), out ScriptableItem itemData))
             {
                 slot.boostImage.sprite = itemData.image;
                 if (UIUtils.FindWhereTheItemIsCrafted(itemData) != null)
@@ -186,7 +182,7 @@ public partial class UIQuests : MonoBehaviour
                     });
                 }
             }          
-            slot.title.text = player.quests.quests[questIndex].data.rewards[index].item + " (" + player.quests.quests[questIndex].data.rewards[index].amount + ")";
+            slot.title.text = player.quests.MissionToAccomplish[questIndex].data.rewards[index].item + " (" + player.quests.MissionToAccomplish[questIndex].data.rewards[index].amount + ")";
             //slot.boostImage.sprite = player.quests.quests[questIndex].data.rewards[index].item.image;
             slot.coinImage.gameObject.SetActive(false);
             slot.coins.gameObject.SetActive(false);

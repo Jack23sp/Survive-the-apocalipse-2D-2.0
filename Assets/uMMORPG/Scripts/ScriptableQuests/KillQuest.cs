@@ -15,12 +15,12 @@ public class KillQuest : ScriptableQuest
     public override void OnKilled(Player player, int questIndex, string victim)
     {
         // not done yet, and same name as prefab? (hence same monster?)
-        Quest quest = player.quests.quests[questIndex];
+        Missions quest = player.quests.MissionToAccomplish[questIndex];
         if (quest.progress < killAmount && victim == killTarget.name)
         {
             // increase int field in quest (up to 'amount')
             ++quest.progress;
-            player.quests.quests[questIndex] = quest;
+            player.quests.MissionToAccomplish[questIndex] = quest;
         }
     }
 
@@ -31,7 +31,7 @@ public class KillQuest : ScriptableQuest
     }
 
     // tooltip /////////////////////////////////////////////////////////////////
-    public override string ToolTip(Player player, Quest quest)
+    public override string ToolTip(Player player, Missions quest)
     {
         // we use a StringBuilder so that addons can modify tooltips later too
         // ('string' itself can't be passed as a mutable object)

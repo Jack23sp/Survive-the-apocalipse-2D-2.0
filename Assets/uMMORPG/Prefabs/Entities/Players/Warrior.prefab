@@ -1086,6 +1086,13 @@ MonoBehaviour:
   pendingSkill: -1
   pendingDestination: {x: 0, y: 0}
   pendingDestinationValid: 0
+  activeQuestLimit: 10
+  firstQuest:
+  - {fileID: 11400000, guid: b9a84339738b4c84b871d838e7c8ba22, type: 2}
+  - {fileID: 11400000, guid: 1e4fc50a431915641ace66641f9081e1, type: 2}
+  - {fileID: 11400000, guid: 40ae102952bf6654a9725e1c44571142, type: 2}
+  - {fileID: 11400000, guid: 07e1997c62ba12a43ab8a8df2c65c971, type: 2}
+  - {fileID: 11400000, guid: db0ffaeafb597c54a9e032d8797933a4, type: 2}
   playerEquipment: {fileID: 0}
   playerNames: []
 --- !u!114 &114438020945256178
@@ -1523,7 +1530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0
-  syncMode: 1
+  syncMode: 0
   syncInterval: 0.1
   player: {fileID: 114064821627912484}
   inventory: {fileID: 6480985071160133470}
@@ -1689,9 +1696,6 @@ MonoBehaviour:
   _quality: 0
   _priority: 50
   _autoRepath: 1
-  sync: 1
-  rigidbodyPresent: 1
-  rigidbodyKinematic: 1
 --- !u!114 &114392801299842010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4400,7 +4404,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -444643067
-  m_SortingLayer: -6
+  m_SortingLayer: -7
   m_SortingOrder: 32767
   m_Positions:
   - {x: 3.06, y: 0.38, z: 0}

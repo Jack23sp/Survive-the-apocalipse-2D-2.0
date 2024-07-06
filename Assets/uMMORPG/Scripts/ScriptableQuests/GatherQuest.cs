@@ -24,7 +24,7 @@ public class GatherQuest : ScriptableQuest
     }
 
     // tooltip /////////////////////////////////////////////////////////////////
-    public override string ToolTip(Player player, Quest quest)
+    public override string ToolTip(Player player, Missions quest)
     {
         // we use a StringBuilder so that addons can modify tooltips later too
         // ('string' itself can't be passed as a mutable object)

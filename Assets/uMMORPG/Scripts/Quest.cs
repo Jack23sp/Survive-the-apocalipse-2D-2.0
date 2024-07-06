@@ -10,7 +10,7 @@ using System.Text;
 using UnityEngine;
 
 [Serializable]
-public struct Quest
+public struct Missions
 {
     // hashcode used to reference the real ScriptableQuest (can't link to data
     // directly because synclist only supports simple types). and syncing a
@@ -36,7 +36,7 @@ public struct Quest
     public bool completed;
 
     // constructors
-    public Quest(GeneralQuest data)
+    public Missions(GeneralQuest data)
     {
         hash = data.name.GetStableHashCode();
         progress = 0;
@@ -46,6 +46,18 @@ public struct Quest
         craft = new List<Craft>(data.craft);
         pick = new List<Pick>(data.pick);
         building = new List<BuildCreate>(data.building);
+    }
+
+    public Missions(Missions quest)
+    {
+        hash = quest.data.name.GetStableHashCode();
+        progress = 0;
+        completed = false;
+        kills = quest.kills;
+        players = quest.players;
+        craft = quest.craft;
+        pick = quest.pick;
+        building = quest.building;
     }
 
     // wrappers for easier access

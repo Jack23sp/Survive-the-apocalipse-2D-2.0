@@ -16,15 +16,15 @@ public partial class Player
             switch (resource.buildingType)
             {
                 case "Scrap":
-                    quests.barrels.Add(new QuestObject(resource.slots[index].item.name, resource.slots[index].amount));
+                    quests.SyncPickOnServer(new DetailOfQuest(resource.slots[index].item.name, resource.slots[index].amount));
                     playerPoints.barrellsPick++;
                     break;
                 case "Clothes":
-                    quests.boxes.Add(new QuestObject(resource.slots[index].item.name, resource.slots[index].amount));
+                    quests.SyncPickOnServer(new DetailOfQuest(resource.slots[index].item.name, resource.slots[index].amount));
                     playerPoints.boxesPick++;
                     break;
                 case "Food":
-                    quests.boxes.Add(new QuestObject(resource.slots[index].item.name, resource.slots[index].amount));
+                    quests.SyncPickOnServer(new DetailOfQuest(resource.slots[index].item.name, resource.slots[index].amount)); 
                     playerPoints.boxesPick++;
                     break;
             }

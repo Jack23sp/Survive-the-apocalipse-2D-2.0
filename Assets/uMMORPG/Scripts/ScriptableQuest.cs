@@ -75,7 +75,7 @@ public abstract class ScriptableQuest : ScriptableObject
 
     {STATUS}
     */
-    public virtual string ToolTip(Player player, Quest quest)
+    public virtual string ToolTip(Player player, Missions quest)
     {
         StringBuilder tip = new StringBuilder(toolTip);
         tip.Replace("{NAME}", name);

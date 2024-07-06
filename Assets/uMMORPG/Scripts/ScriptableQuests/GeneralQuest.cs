@@ -92,7 +92,7 @@ public class GeneralQuest : ScriptableQuest
     // fulfillment /////////////////////////////////////////////////////////////
     public override bool IsFulfilled(Player player, int index)
     {
-        Quest quest = player.quests.quests[index];
+        Missions quest = player.quests.MissionToAccomplish[index];
         for (int i = 0; i < quest.kills.Count; i++)
         {
             if (quest.kills[i].actual < quest.kills[i].amountRequest) return false;
@@ -124,7 +124,7 @@ public class GeneralQuest : ScriptableQuest
 
     public override void OnCompleted(Player player, int index)
     {
-        Quest quest = player.quests.quests[index];
+        Missions quest = player.quests.MissionToAccomplish[index];
 
 
         if (!IsFulfilled(player, index)) return;
@@ -161,22 +161,22 @@ public class GeneralQuest : ScriptableQuest
         {
             if (GeneralQuest.dict.TryGetValue(quest.data.successive.GetStableHashCode(), out GeneralQuest itemData))
             {
-                Quest q = new Quest(itemData);
-                player.quests.quests.Add(q);
-                player.quests.quests.Remove(quest);
+                Missions q = new Missions(itemData);
+                player.quests.MissionToAccomplish.Add(q);
+                player.quests.MissionToAccomplish.Remove(quest);
             }
             
         }
         else
         {
-            player.quests.quests.Remove(quest);
+            player.quests.MissionToAccomplish.Remove(quest);
         }
     }
 
     public override void OnKilled(Player player, int questIndex, string victim)
     {
         // not done yet, and same name as prefab? (hence same monster?)
-        Quest quest = player.quests.quests[questIndex];
+        Missions quest = player.quests.MissionToAccomplish[questIndex];
 
         for (int i = 0; i < quest.kills.Count; i++)
         {
@@ -191,7 +191,7 @@ public class GeneralQuest : ScriptableQuest
 
     public override void OnCraft(Player player, int questIndex, string objectName, int amount)
     {
-        Quest quest = player.quests.quests[questIndex];
+        Missions quest = player.quests.MissionToAccomplish[questIndex];
 
         for (int i = 0; i < quest.craft.Count; i++)
         {
@@ -206,7 +206,7 @@ public class GeneralQuest : ScriptableQuest
 
     public override void OnBuild(Player player, int questIndex, string objectName, int amount)
     {
-        Quest quest = player.quests.quests[questIndex];
+        Missions quest = player.quests.MissionToAccomplish[questIndex];
 
         for (int i = 0; i < quest.building.Count; i++)
         {
@@ -221,7 +221,7 @@ public class GeneralQuest : ScriptableQuest
 
     public override void OnPick(Player player, int questIndex, string objectName, int amount)
     {
-        Quest quest = player.quests.quests[questIndex];
+        Missions quest = player.quests.MissionToAccomplish[questIndex];
 
         for (int i = 0; i < quest.pick.Count; i++)
         {
@@ -241,15 +241,15 @@ public class GeneralQuest : ScriptableQuest
         // simple and stupid.
         if (location.name == name)
         {
-            Quest quest = player.quests.quests[questIndex];
+            Missions quest = player.quests.MissionToAccomplish[questIndex];
             quest.progress = 1;
-            player.quests.quests[questIndex] = quest;
+            player.quests.MissionToAccomplish[questIndex] = quest;
         }
     }
 
 
     // tooltip /////////////////////////////////////////////////////////////////
-    public override string ToolTip(Player player, Quest quest)
+    public override string ToolTip(Player player, Missions quest)
     {
         // we use a StringBuilder so that addons can modify tooltips later too
         // ('string' itself can't be passed as a mutable object)
