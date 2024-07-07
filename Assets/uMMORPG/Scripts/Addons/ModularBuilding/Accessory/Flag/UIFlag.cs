@@ -49,7 +49,10 @@ public class UIFlag : MonoBehaviour
         {
             if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
             if (flagName.text != string.Empty)
+            {
                 Player.localPlayer.CmdSetFlag(FindFlagIndex(flagName.text), flag.netIdentity);
+                closeButton.onClick.Invoke();
+            }
         });
 
         manageButton.gameObject.SetActive(ModularBuildingManager.singleton.CanDoOtherActionForniture(flag, Player.localPlayer));

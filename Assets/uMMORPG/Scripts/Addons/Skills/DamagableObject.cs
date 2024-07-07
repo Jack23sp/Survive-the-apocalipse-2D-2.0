@@ -282,21 +282,27 @@ public class DamagableObject : MonoBehaviour
         }
         else if (zombie != null)
         {
-            if (zombie.health.health.current <= 0 && !zombie.playerNames.Contains(caster.name))
+            if (zombie.health.health.current <= 0)
             {
-                zombie.playerNames.Add(caster.name);
+                caster.quests.SyncKillOnServer(new DetailOfQuest(zombie.name.Replace("(Clone)",""), 1));
+                
+                
                 if (zombie.isMonster)
                 {
-                    caster.quests.SyncKillOnServer(new DetailOfQuest(zombie.name.Replace("Zombie_",""), 1));
                     caster.playerPoints.monsterKill++;
                 }
                 else
                 {
-                    caster.quests.SyncKillOnServer(new DetailOfQuest(zombie.name.Replace("Animal_", ""), 1));
                     caster.playerPoints.animalKill++;
                 }
+
+                if (!zombie.playerNames.Contains(caster.name))
+                {
+                    zombie.playerNames.Add(caster.name);
+                }
             }
-            
+
+
             if (zombie.health.health.current == 0) return;
 
             if (!zombie.target && !zombie.isNeutral)

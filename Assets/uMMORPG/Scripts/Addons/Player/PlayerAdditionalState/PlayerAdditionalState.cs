@@ -99,7 +99,11 @@ public class PlayerAdditionalState : NetworkBehaviour
 
     public void ManageadditionState(string oldValue, string newValue)
     {
-        if(oldValue != "READING" && 
+        if (!player.playerWeaponIK) player.GetComponent<PlayerWeaponIK>().Assign();
+        player.playerWeaponIK.Spawn();
+        if (!player.playerEquipment) player.GetComponent<PlayerEquipment>().Assign();
+
+        if (oldValue != "READING" && 
            oldValue != "EXERCISE" &&
            oldValue != "ABS" &&
            oldValue != "JUMPINGJACK" &&
@@ -171,9 +175,7 @@ public class PlayerAdditionalState : NetworkBehaviour
             if(newValue == "JUMPINGJACK") animator.runtimeAnimatorController = ExerciseManager.singleton.jumpinJackAnimator;
             if(newValue == "ABS") animator.runtimeAnimatorController = ExerciseManager.singleton.sitUpAnimator;
 
-            if (!player.playerWeaponIK) player.GetComponent<PlayerWeaponIK>().Assign();
-            player.playerWeaponIK.Spawn();
-            if (!player.playerEquipment) player.GetComponent<PlayerEquipment>().Assign();
+
 
             for (int i = 0; i < player.playerWeaponIK.weaponsHolder.Count; i++)
             {

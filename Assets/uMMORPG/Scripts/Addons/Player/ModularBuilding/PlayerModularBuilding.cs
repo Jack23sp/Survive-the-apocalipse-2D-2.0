@@ -1202,6 +1202,7 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (player.inventory.CanAddItem(new Item(craft[buildingAccessory.craftingItem[index].index].itemAndAmount.item), craft[buildingAccessory.craftingItem[index].index].itemAndAmount.amount))
         {
             player.inventory.AddItem(new Item(craft[buildingAccessory.craftingItem[index].index].itemAndAmount.item), craft[buildingAccessory.craftingItem[index].index].itemAndAmount.amount);
+            player.quests.SyncCraftOnServer(new DetailOfQuest(craft[buildingAccessory.craftingItem[index].index].itemAndAmount.item.name, craft[buildingAccessory.craftingItem[index].index].itemAndAmount.amount));
             buildingAccessory.craftingItem.Remove(buildingAccessory.craftingItem[index]);
             //TargetManagerUIUpgrade();
         }

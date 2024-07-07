@@ -297,7 +297,7 @@ public partial class PlayerNavMeshMovement2D
                 if (direction.magnitude > 1) direction = direction.normalized;
                 int temp = player.playerWeapon.CheckMunitionInMagazine();
 
-                if (temp == 0)
+                if (temp < 0 && temp > -2)
                 {
                     bool itm = player.playerWeapon.CheckMagazine(player.playerEquipment.slots[0].item.data.name);
                     if (itm && prevMunitionCountForSound != temp)

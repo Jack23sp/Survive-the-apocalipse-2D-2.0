@@ -114,6 +114,7 @@ public partial class Database
                         {
                             Kill k = q.kills[i];
                             k.actual = row.amount;
+                            k.amountRequest = row.request;
                             q.kills[i] = k;
                         }
                     }
@@ -123,6 +124,7 @@ public partial class Database
                         {
                             Pick p = q.pick[i];
                             p.actual = row.amount;
+                            p.amountRequest = row.request;
                             q.pick[i] = p;
                         }
                     }
@@ -132,6 +134,7 @@ public partial class Database
                         {
                             BuildCreate c = q.building[i];
                             c.actual = row.amount;
+                            c.amountRequest = row.request;
                             q.building[i] = c;
                         }
                     }
@@ -141,6 +144,7 @@ public partial class Database
                         {
                             Craft cr = q.craft[i];
                             cr.actual = row.amount;
+                            cr.amountRequest = row.request;
                             q.craft[i] = cr;
                         }
                     }
@@ -148,6 +152,7 @@ public partial class Database
                     {
                         Kill pl = q.players[0];
                         pl.actual = row.amount;
+                        pl.amountRequest = row.request;
                         q.players[0] = pl;
                     }
                 }
@@ -222,11 +227,11 @@ public class PlayerQuests : NetworkBehaviour
             for (int e = 0; e < quest.data.kills.Count; e++)
             {
                 bool present = false;
-                if (quest.data.kills[e].name.Contains(newQuestObject.objectName))
+                if (quest.data.kills[e].name.ToLower().Contains(newQuestObject.objectName.ToLower()))
                 {
                     for (int y = 0; y < quest.kills.Count; y++)
                     {
-                        if (quest.kills[y].name.Contains(newQuestObject.objectName))
+                        if (quest.kills[y].name.ToLower().Contains(newQuestObject.objectName.ToLower()))
                         {
                             quest.kills[y] = new Kill(newQuestObject.objectName, quest.kills[y].amountRequest, (quest.kills[y].actual + newQuestObject.amount));
                             MissionToAccomplish[index] = new Missions(quest);
@@ -261,11 +266,11 @@ public class PlayerQuests : NetworkBehaviour
             for (int e = 0; e < quest.data.building.Count; e++)
             {
                 bool present = false;
-                if (quest.data.building[e].item.Contains(newQuestObject.objectName))
+                if (quest.data.building[e].item.ToLower().Contains(newQuestObject.objectName.ToLower()))
                 {
                     for (int y = 0; y < quest.building.Count; y++)
                     {
-                        if (quest.building[y].item.Contains(newQuestObject.objectName))
+                        if (quest.building[y].item.ToLower().Contains(newQuestObject.objectName.ToLower()))
                         {
                             quest.building[y] = new BuildCreate(newQuestObject.objectName, quest.building[y].amountRequest, (quest.building[y].actual + newQuestObject.amount));
                             MissionToAccomplish[index] = new Missions(quest);
@@ -300,11 +305,11 @@ public class PlayerQuests : NetworkBehaviour
             for (int e = 0; e < quest.data.craft.Count; e++)
             {
                 bool present = false;
-                if (quest.data.craft[e].item.Contains(newQuestObject.objectName))
+                if (quest.data.craft[e].item.ToLower().Contains(newQuestObject.objectName.ToLower()))
                 {
                     for (int y = 0; y < quest.craft.Count; y++)
                     {
-                        if (quest.craft[y].item.Contains(newQuestObject.objectName))
+                        if (quest.craft[y].item.ToLower().Contains(newQuestObject.objectName.ToLower()))
                         {
                             quest.craft[y] = new Craft(newQuestObject.objectName, quest.craft[y].amountRequest, (quest.craft[y].actual + newQuestObject.amount));
                             MissionToAccomplish[index] = new Missions(quest);
@@ -339,11 +344,11 @@ public class PlayerQuests : NetworkBehaviour
             for (int e = 0; e < quest.data.pick.Count; e++)
             {
                 bool present = false;
-                if (quest.data.pick[e].item.Contains(newQuestObject.objectName))
+                if (quest.data.pick[e].item.ToLower().Contains(newQuestObject.objectName.ToLower()))
                 {
                     for (int y = 0; y < quest.pick.Count; y++)
                     {
-                        if (quest.pick[y].item.Contains(newQuestObject.objectName))
+                        if (quest.pick[y].item.ToLower().Contains(newQuestObject.objectName.ToLower()))
                         {
                             quest.pick[y] = new Pick(newQuestObject.objectName, quest.pick[y].amountRequest, (quest.pick[y].actual + newQuestObject.amount));
                             MissionToAccomplish[index] = new Missions(quest);
@@ -413,7 +418,7 @@ public class PlayerQuests : NetworkBehaviour
         {
             for (int s = 0; s < MissionToAccomplish.Count(); s++)
             {
-                TargerRpcSyncQuest(toSync[s], MissionToAccomplish[toSync[s]]);
+                TargerRpcSyncQuest(s, MissionToAccomplish[s]);
             }
             TargetRpcSyncUI();
             toSync.Clear();

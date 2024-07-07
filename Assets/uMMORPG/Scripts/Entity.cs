@@ -80,7 +80,8 @@ public abstract partial class Entity : NetworkBehaviour
                 pl.playerWeaponIK.Assign();
             }
 
-
+            pl.animator.SetBool("AIM", pl.playerMove.states.Contains("AIM"));
+            pl.animator.SetBool("SHOOT", pl.playerMove.states.Contains("SHOOT"));
 
             if (pl.playerEquipment.weaponIK != null)
             {

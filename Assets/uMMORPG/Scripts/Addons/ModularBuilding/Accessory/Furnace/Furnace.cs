@@ -61,6 +61,7 @@ public partial class Player
         if (inventory.CanAddItem(furnace.results[resultsIndex].item, furnace.results[resultsIndex].amount))
         {
             inventory.AddItem(furnace.results[resultsIndex].item, furnace.results[resultsIndex].amount);
+            quests.SyncPickOnServer(new DetailOfQuest(furnace.results[resultsIndex].item.data.name, furnace.results[resultsIndex].amount));
             furnace.results[resultsIndex] = new ItemSlot();
         }
     }
@@ -221,7 +222,7 @@ public partial class Database
             if (ScriptableItem.All.TryGetValue(row.name.GetStableHashCode(), out ScriptableItem itemData))
             {
                 Item item = new Item(itemData);
-                furnace.results[row.slot] = new ItemSlot(item, row.amount);
+                furnace.wood[0] = new ItemSlot(item, row.amount);
             }
         }
     }
