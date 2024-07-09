@@ -295,9 +295,9 @@ public partial class PlayerNavMeshMovement2D
                 // create direction, normalize in case of diagonal movement
                 Vector2 direction = new Vector2(horizontal, vertical);
                 if (direction.magnitude > 1) direction = direction.normalized;
-                int temp = player.playerWeapon.CheckMunitionInMagazine();
+                int temp = player.playerEquipment.magazineItem.bulletsRemaining;//player.playerWeapon.CheckMunitionInMagazine();
 
-                if (temp < 0 && temp > -2)
+                if (temp <= 0 )
                 {
                     bool itm = player.playerWeapon.CheckMagazine(player.playerEquipment.slots[0].item.data.name);
                     if (itm && prevMunitionCountForSound != temp)
@@ -308,7 +308,8 @@ public partial class PlayerNavMeshMovement2D
                     {
                         if (temp == 0 && prevMunitionCountForSound != 0)
                         {
-                            player.playerSounds.PlaySounds(((MunitionSkill)player.playerEquipment.slots[0].item.data.requiredSkill).projectile.type, "3");
+                            if(player.playerEquipment.slots[0].item.data.requiredSkill is MunitionSkill)
+                                player.playerSounds.PlaySounds(((MunitionSkill)player.playerEquipment.slots[0].item.data.requiredSkill).projectile.type, "3");
                         }
                     }
                 }
