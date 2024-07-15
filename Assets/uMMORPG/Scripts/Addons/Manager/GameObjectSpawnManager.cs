@@ -7,9 +7,6 @@ public class GameObjectSpawnManager : MonoBehaviour
     public static GameObjectSpawnManager singleton;
     [Header("Canvas")]
     public Transform canvas;
-    public GameObject makeMarriage;
-    public GameObject breakMarriage;
-    public GameObject emojiToSpawn;
     public GameObject male;
     public GameObject female;
     [Header("Teleport")]
@@ -17,17 +14,15 @@ public class GameObjectSpawnManager : MonoBehaviour
     public GameObject teleportInviter;
     public GameObject spawnedTeleport;
     public GameObject teleportInviteSlot;
-    public GameObject rockObjectText;
-    public GameObject treeObjectText;
     [Header("Selected Item")]
     public GameObject selectedItem;
     public GameObject spawnedSelectedItem;
     [Header("Confirm delete wall")]
     public GameObject confirmDeleteWall;
-    [Header("Central manager")]
-    public GameObject centralManager;
     [Header("Manager building accessory")]
     public GameObject confirmManagerAccessory;
+    [Header("Death Marker")]
+    public GameObject deathMarker;
 
     public void Start()
     {

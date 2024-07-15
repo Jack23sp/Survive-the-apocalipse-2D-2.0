@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using System;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Linq;
+
 
 public partial class Player
 {
@@ -107,6 +108,7 @@ public class PlayerItemDrop : NetworkBehaviour
     public void SpawnItemDrop(NetworkIdentity identity,int amountItem)
     {
         Player player = identity.GetComponent<Player>();
+        List<NetworkIdentity> ids = new List<NetworkIdentity>();
 
         for (int i = 0; i < amountItem; i++)
         {
@@ -116,7 +118,16 @@ public class PlayerItemDrop : NetworkBehaviour
             GameObject g = Instantiate(ResourceManager.singleton.objectDrop.gameObject, player.transform.position, Quaternion.identity);
             g.GetComponent<CurvedMovement>().startEntity = player.transform;
             g.GetComponent<CurvedMovement>().SpawnAtPosition(player.inventory.slots[itmIndex].item, amount, itmIndex, amount);
+            ids.Add(g.GetComponent<NetworkIdentity>());
         }
+        TargetSpawnDeathMarker(ids.ToArray(), player.transform.position);
+    }
+
+    [TargetRpc]
+    public void TargetSpawnDeathMarker(NetworkIdentity [] ids, Vector3 playerPos)
+    {
+        GameObject g = Instantiate(GameObjectSpawnManager.singleton.deathMarker, playerPos, Quaternion.identity);
+        g.GetComponent<DeathSymbol>().symbols = ids.ToList();
     }
 
     [Command]

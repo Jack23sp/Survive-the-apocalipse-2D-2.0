@@ -398,6 +398,7 @@ public class PlayerSpawnpoint : NetworkBehaviour
     {
         if (player.health.current == 0)
         {
+            player.playerItemDrop.CalculateItemToDrop();
             player.movement.Warp(new Vector2(x, y));
             player.Revive(1.0f);
             SetState("IDLE");
