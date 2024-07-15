@@ -136,6 +136,10 @@ public class DamagableObject : MonoBehaviour
 
                 if (tree.health <= 0)
                 {
+                    // get x % of experience
+                    float exp = ResourceManager.singleton.AddExperienceAmount(caster,1);
+                    caster.experience.current += (long)exp;
+                    caster.playerNotification.TargetSpawnNotificationExperince(1);
                     NetworkServer.Destroy(tree.gameObject);
                 }
 
@@ -169,6 +173,10 @@ public class DamagableObject : MonoBehaviour
 
                 if (rock.health <= 0)
                 {
+                    // get x % of experience
+                    float exp = ResourceManager.singleton.AddExperienceAmount(caster,1);
+                    caster.experience.current += (long)exp;
+                    caster.playerNotification.TargetSpawnNotificationExperince(1);
                     NetworkServer.Destroy(rock.gameObject);
                 }
 
@@ -278,6 +286,12 @@ public class DamagableObject : MonoBehaviour
                 player.playerNames.Add(caster.name);
                 caster.quests.SyncKillOnServer(new DetailOfQuest(zombie.name.Replace("Player", ""), 1));
                 caster.playerPoints.playerKill++;
+
+                // get x % of experience
+                float exp = ResourceManager.singleton.AddExperienceAmount(caster, 2);
+                caster.experience.current += (long)exp;
+                caster.playerNotification.TargetSpawnNotificationExperince(2);
+
             }
         }
         else if (zombie != null)
@@ -285,8 +299,12 @@ public class DamagableObject : MonoBehaviour
             if (zombie.health.health.current <= 0)
             {
                 caster.quests.SyncKillOnServer(new DetailOfQuest(zombie.name.Replace("(Clone)",""), 1));
-                
-                
+
+                // get x % of experience
+                float exp = ResourceManager.singleton.AddExperienceAmount(caster, 2);
+                caster.experience.current += (long)exp;
+                caster.playerNotification.TargetSpawnNotificationExperince(2);
+
                 if (zombie.isMonster)
                 {
                     caster.playerPoints.monsterKill++;

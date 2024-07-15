@@ -21,7 +21,7 @@ public class PlayerAdditionalState : NetworkBehaviour
     private float amountToAdd;
 
     [SyncVar (hook = nameof(ManageadditionState))] public string additionalState;
-    public string bookTitle = string.Empty;
+    [SyncVar] public string bookTitle = string.Empty;
 
     void Awake()
     {
@@ -50,8 +50,8 @@ public class PlayerAdditionalState : NetworkBehaviour
                 0 <= index && index < player.inventory.slots.Count && player.inventory.slots[index].amount > 0 &&
                 player.inventory.slots[index].item.data is ScriptableBook book)
             {
-                book.Use(player, index);
                 bookTitle = player.inventory.slots[index].item.data.name;
+                book.Use(player, index);
             }
         }
         else
@@ -60,8 +60,8 @@ public class PlayerAdditionalState : NetworkBehaviour
                 0 <= index && index < player.playerBelt.belt.Count && player.playerBelt.belt[index].amount > 0 &&
                 player.playerBelt.belt[index].item.data is ScriptableBook book)
             {
-                book.Use(player, index);
                 bookTitle = player.playerBelt.belt[index].item.data.name;
+                book.Use(player, index);
             }
         }
     }
@@ -209,6 +209,16 @@ public class PlayerAdditionalState : NetworkBehaviour
                     }
                 }
             }
+        }
+
+        if(newValue == "READING")
+        {
+            if(UIBookPanel.singleton.title == string.Empty || (UIBookPanel.singleton.title != string.Empty && UIBookPanel.singleton.title != bookTitle))
+                UIBookPanel.singleton.Monitoring(bookTitle);
+        }
+        else
+        {
+            UIBookPanel.singleton.ClosePanel();
         }
     }
 

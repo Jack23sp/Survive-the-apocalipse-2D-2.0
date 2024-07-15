@@ -515,15 +515,29 @@ public abstract partial class Entity : NetworkBehaviour
     // calling those here via base.OnTriggerEnter/Exit
     protected virtual void OnTriggerEnter2D(Collider2D col)
     {
-        // check if trigger first to avoid GetComponent tests for environment
-        if (col.isTrigger && col.GetComponent<SafeZone>())
-            inSafeZone = true;
+        if(col.GetComponent<BuildingAccessory>() && col.GetComponent<BuildingAccessory>().spritesList.Count > 0)
+        {
+            BuildingAccessory acc = col.GetComponent<BuildingAccessory>();
+            for (int i = 0; i < acc.spritesList.Count; i++)
+            {
+                Color c = acc.spritesList[i].color;
+                c.a = 0.5f;
+                acc.spritesList[i].color = c;
+            }
+        }
     }
 
     protected virtual void OnTriggerExit2D(Collider2D col)
     {
-        // check if trigger first to avoid GetComponent tests for environment
-        if (col.isTrigger && col.GetComponent<SafeZone>())
-            inSafeZone = false;
+        if (col.GetComponent<BuildingAccessory>() && col.GetComponent<BuildingAccessory>().spritesList.Count > 0)
+        {
+            BuildingAccessory acc = col.GetComponent<BuildingAccessory>();
+            for (int i = 0; i < acc.spritesList.Count; i++)
+            {
+                Color c = acc.spritesList[i].color;
+                c.a = 1.0f;
+                acc.spritesList[i].color = c;
+            }
+        }
     }
 }

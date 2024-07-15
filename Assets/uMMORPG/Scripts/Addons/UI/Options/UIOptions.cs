@@ -20,6 +20,12 @@ public class UIOptions : MonoBehaviour
     public Slider sensibilityBuildingPlacement;
 
     public Button openBugSlot;
+    public Button plusZoomButton;
+    public Button minusZoomButton;
+    public Button toggleZoomButton;
+    public Toggle toogleZoom;
+
+    private CameraMMO2D CameraMMO2D;
 
     private Player player;
 
@@ -37,6 +43,8 @@ public class UIOptions : MonoBehaviour
 
     public void Open()
     {
+        CameraMMO2D = CameraMMO2D.singleton;
+        
         player = Player.localPlayer;
         if (!player) return;
 
@@ -51,6 +59,22 @@ public class UIOptions : MonoBehaviour
         player.playerOptions.ManageSound(false, player.playerOptions.blockSound);
         player.playerOptions.ManagePostProcessing(false, player.playerOptions.postProcessing);
         player.playerOptions.ManageBuildingSensibility(player.playerOptions.buildingSensibility, player.playerOptions.buildingSensibility);
+
+        plusZoomButton.onClick.RemoveAllListeners();
+        plusZoomButton.onClick.AddListener(() =>
+        {
+            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
+                CameraMMO2D.singleton.ManageZoom(1);
+                CameraMMO2D.enabled = true;
+        });
+
+        minusZoomButton.onClick.RemoveAllListeners();
+        minusZoomButton.onClick.AddListener(() =>
+        {
+            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
+                CameraMMO2D.singleton.ManageZoom(-1);
+                CameraMMO2D.enabled = true;
+        });
 
         marriageObject.button.onClick.RemoveAllListeners();
         marriageObject.button.onClick.AddListener(() =>
@@ -127,6 +151,14 @@ public class UIOptions : MonoBehaviour
             if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
             BugSent.singleton.Open();
         });
+
+        toggleZoomButton.onClick.RemoveAllListeners();
+        toggleZoomButton.onClick.AddListener(() =>
+        {
+            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
+            player.playerOptions.CmdShowZoomButtonsOnScreen();
+        });
+
     }
 
 }

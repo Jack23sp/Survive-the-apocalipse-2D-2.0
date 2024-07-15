@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using System.Linq;
+using TMPro;
 
 public partial class Player
 {
@@ -198,6 +199,9 @@ public class Warehouse : BuildingAccessory
     public SyncList<ItemSlot> slots = new SyncList<ItemSlot>();
     public int amount;
 
+    public List<GameObject> warehouseNameObjects = new List<GameObject>(); 
+    public TextMeshProUGUI warehouseNameText;
+
     new void Start()
     {
         base.Start();
@@ -228,11 +232,29 @@ public class Warehouse : BuildingAccessory
         }
     }
 
+    public new void ManageName (string oldvalue, string newValue)
+    {     
+        for(int i = 0; i < warehouseNameObjects.Count; i++)
+        {
+            warehouseNameObjects[i].SetActive(newValue != string.Empty);
+        }
+
+        if(newValue != string.Empty)
+        {
+            warehouseNameText.text = newName;
+        }
+        else
+        {
+            warehouseNameText.text = string.Empty;
+        }
+    }
+
     public override void OnStartClient()
     {
         base.OnStartClient();
 
         slots.Callback += OnWarehouseInventoryChanged;
+        ManageName(base.newName, base.newName);
     }
 
     void OnWarehouseInventoryChanged(SyncList<ItemSlot>.Operation op, int index, ItemSlot oldSlot, ItemSlot newSlot)
@@ -269,7 +291,6 @@ public class Warehouse : BuildingAccessory
         }
         Invoke(nameof(CheckUnsanity), CoroutineManager.singleton.unsanityInvoke * 3);
     }
-
 
     public int SlotsFree()
     {

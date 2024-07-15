@@ -64,4 +64,10 @@ public class ResourceManager : MonoBehaviour
             bloodParticles.SpawnAtPosition(UnityEngine.Random.Range(0, bloodSprites.Count));
         }
     }
+
+    public float AddExperienceAmount(Player player, int amount)
+    {
+        return (float)(player.experience.max / 100) * amount;
+    }
+
 }

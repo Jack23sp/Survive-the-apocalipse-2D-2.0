@@ -125,6 +125,29 @@ public static class Utilities
 
     }
 
+    public static string ConvertToTimerMinuteAndSeconds(int totalSecond)
+    {
+        int hour = 3600;
+        int minutes = 60;
+
+        int tHours = 0;
+        int tMinutes = 0;
+
+
+
+        tHours = totalSecond / hour;
+        totalSecond = (totalSecond - (tHours * hour));
+
+        tMinutes = totalSecond / minutes;
+        totalSecond = (totalSecond - (tMinutes * minutes));
+
+        string SMinute = tMinutes < 10 ? "0" + tMinutes : tMinutes.ToString();
+        string SSeconds = totalSecond < 10 ? "0" + totalSecond : totalSecond.ToString();
+
+        return SMinute + " : " + SSeconds;
+
+    }
+
     public static string ConvertToTimerLong(long totalSecond)
     {
         long day = 86400;

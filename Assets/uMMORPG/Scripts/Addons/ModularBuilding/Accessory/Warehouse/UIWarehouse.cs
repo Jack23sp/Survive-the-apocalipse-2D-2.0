@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
+using TMPro;
 
 
 public class UIWarehouse : MonoBehaviour
@@ -18,6 +19,9 @@ public class UIWarehouse : MonoBehaviour
     public Button closeButton;
     public Button manageButton;
 
+    public TMP_InputField renameTextHolder;
+    public Button renameButton;
+
     public Warehouse warehouse;
 
 
@@ -31,6 +35,8 @@ public class UIWarehouse : MonoBehaviour
         if (!player) player = Player.localPlayer;
         if (!player) return;
 
+
+
         warehouse = Warehouse;
 
         closeButton.onClick.RemoveAllListeners();
@@ -41,6 +47,7 @@ public class UIWarehouse : MonoBehaviour
             panel.SetActive(false);
             closeButton.image.enabled = false;
             BlurManager.singleton.Show();
+            renameTextHolder.text = string.Empty;
         });
 
         manageButton.gameObject.SetActive(ModularBuildingManager.singleton.CanDoOtherActionForniture(warehouse, Player.localPlayer));
@@ -49,6 +56,12 @@ public class UIWarehouse : MonoBehaviour
         {
             GameObject g = Instantiate(GameObjectSpawnManager.singleton.confirmManagerAccessory, GameObjectSpawnManager.singleton.canvas);
             g.GetComponent<UIBuildingAccessoryManager>().Init(warehouse.netIdentity, warehouse.craftingAccessoryItem, closeButton);
+        });
+
+        renameButton.onClick.RemoveAllListeners();
+        renameButton.onClick.AddListener(() =>
+        {
+            player.playerModularBuilding.CmdRenameAccessory(warehouse.netIdentity, renameTextHolder.text.ToString());
         });
 
 

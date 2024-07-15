@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CameraMMO2D : MonoBehaviour
 {
+    public static CameraMMO2D singleton;
     [Header("Target Follow")]
     public Transform target;
     // the target position can be adjusted by an offset in order to foucs on a
@@ -18,6 +19,15 @@ public class CameraMMO2D : MonoBehaviour
     public float damp = 2;
     public float dampSelection = 2;
 
+    [Header("Max zoom")]
+    public float originalZoom = -1.0f;
+    public float maxAdd = 6.0f;
+
+    public void Start()
+    {
+        if (!singleton) singleton = this;
+    }
+
     void LateUpdate()
     {
         if (!target) return;
@@ -25,6 +35,7 @@ public class CameraMMO2D : MonoBehaviour
         if (Player.localPlayer)
         {
             Camera.main.orthographicSize = cameraSizePlayer;
+            if (originalZoom == -1.0f) originalZoom = cameraSizePlayer;
             // calculate goal position
             Vector2 goal = (Vector2)target.position + offset;
 
@@ -41,5 +52,25 @@ public class CameraMMO2D : MonoBehaviour
             Vector2 position = Vector2.Lerp(transform.position, goal, Time.deltaTime * dampSelection);
             transform.position = new Vector3(position.x, position.y, transform.position.z);
         }
+    }
+
+    public void ManageZoom(float amount)
+    {
+        if (Camera.main.orthographicSize + amount <= originalZoom)
+        {
+            cameraSizePlayer = originalZoom; Camera.main.orthographicSize = originalZoom;
+        }
+        else if (Camera.main.orthographicSize + amount > originalZoom + maxAdd)
+        {
+            cameraSizePlayer = originalZoom + maxAdd;
+            Camera.main.orthographicSize = originalZoom + maxAdd;
+        }
+        else
+        {
+            cameraSizePlayer = cameraSizePlayer + amount;
+            Camera.main.orthographicSize = cameraSizePlayer + amount;
+        }
+
+        this.enabled = false;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace SpriteShadersUltimate
+namespace InteractiveWind2D
 {
     [CustomEditor(typeof(WindParallax))]
     public class WindParallaxEditor : Editor

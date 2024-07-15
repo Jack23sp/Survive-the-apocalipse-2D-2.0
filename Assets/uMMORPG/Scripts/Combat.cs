@@ -5,7 +5,7 @@ using Mirror;
 using System.Collections.Generic;
 using System.Linq;
 
-public enum DamageType { Normal, Block, Crit, Miss, Resist,Armor }
+public enum DamageType { Normal, Block, Crit, Miss, Resist,Armor,Exp }
 
 // inventory, attributes etc. can influence max health
 public interface ICombatBonus
@@ -226,7 +226,7 @@ public partial class Combat : NetworkBehaviour
     // -> calculating the position on the client saves server computations and
     //    takes less bandwidth (4 instead of 12 byte)
     [Client]
-    void ShowDamagePopup(float amount, DamageType damageType)
+    public void ShowDamagePopup(float amount, DamageType damageType)
     {
         // spawn the damage popup (if any) and set the text
         if (damagePopupPrefab != null)
@@ -267,6 +267,11 @@ public partial class Combat : NetworkBehaviour
             {
                 textMesh.color = Color.yellow;
                 textMesh.text = "Armor - " + amount.ToString();
+            }
+            else if (damageType == DamageType.Exp)
+            {
+                textMesh.color = Color.green;
+                textMesh.text = " + " + amount.ToString("F2") + " Exp!";
             }
         }
     }

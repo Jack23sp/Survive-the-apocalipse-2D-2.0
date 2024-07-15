@@ -216,6 +216,9 @@ MonoBehaviour:
   - {fileID: 9073729367970824554}
   - {fileID: 1460247630782719387}
   damagableObject: {fileID: 1951712547794512326}
+  spritesList:
+  - {fileID: 7915351385939784045}
+  - {fileID: 1460247630782719387}
 --- !u!212 &7915351385939784045
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -341,6 +344,7 @@ MonoBehaviour:
   fixedScale: {x: 1.3, y: 1.7}
   targetScale: {x: 1.3, y: 1.7}
   duration: 0.2
+  isAnimating: 0
 --- !u!61 &7707824006407582621
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -545,7 +549,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -444643067
-  m_SortingLayer: -6
+  m_SortingLayer: -7
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: 6aae37076951c31479b9a86c0c8c9e2b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

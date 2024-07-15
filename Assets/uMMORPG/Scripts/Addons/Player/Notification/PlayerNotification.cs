@@ -61,4 +61,12 @@ public class PlayerNotification : NetworkBehaviour
         if (!player.isLocalPlayer) return;
         SpawnNotification(ImageManager.singleton.upgrade, message);
     }
+
+    [TargetRpc]
+    public void TargetSpawnNotificationExperince(int amount)
+    {
+        if (!player.isLocalPlayer) return;
+        float expereience = ResourceManager.singleton.AddExperienceAmount(player, amount);
+        player.combat.ShowDamagePopup(expereience, DamageType.Exp);
+    }
 }

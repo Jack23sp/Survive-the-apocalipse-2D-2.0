@@ -16,6 +16,7 @@ public partial class Database
         public int positioning { get; set; }
         public float posX { get; set; }
         public float posY { get; set; }
+        public string nameRename { get; set; }
     }
 
 
@@ -60,7 +61,8 @@ public partial class Database
                 health = ModularBuildingManager.singleton.buildingAccessories[index].health,
                 positioning = ModularBuildingManager.singleton.buildingAccessories[index].oldPositioning,
                 posX = ModularBuildingManager.singleton.buildingAccessories[index].transform.position.x,
-                posY = ModularBuildingManager.singleton.buildingAccessories[index].transform.position.y
+                posY = ModularBuildingManager.singleton.buildingAccessories[index].transform.position.y,
+                nameRename = ModularBuildingManager.singleton.buildingAccessories[index].newName
             });
 
             if (ModularBuildingManager.singleton.buildingAccessories[index] is Billboard)
@@ -134,6 +136,7 @@ public partial class Database
                 acc.group = row.group;
                 acc.health = row.health;
                 acc.oldPositioning = row.positioning;
+                acc.newName = row.nameRename;
             }
 
             if (acc is Billboard)
@@ -193,6 +196,8 @@ public partial class Database
 
 public class BuildingAccessory : NetworkBehaviour
 {
+    [SyncVar(hook = nameof(ManageName))]
+    public string newName;
     [SyncVar]
     public string group;
     [SyncVar]
@@ -225,6 +230,9 @@ public class BuildingAccessory : NetworkBehaviour
     public GameObject oldBuilding;
     [HideInInspector] public Collider2D zoneCollider;
     public Collider2D[] grassUnder;
+
+    public List<SpriteRenderer> spritesList;
+
     public void Start()
     {
         if (isServer || isClient)
@@ -234,6 +242,14 @@ public class BuildingAccessory : NetworkBehaviour
             if (!ModularBuildingManager.singleton.buildingAccessories.Contains(this) && craftingAccessoryItem) ModularBuildingManager.singleton.buildingAccessories.Add(this);
         }
         GetComponent<DamagableObject>().buildingAccessory = this;
+    }
+
+    public void ManageName(string oldValue, string newValue)
+    { 
+        if(this is Warehouse)
+        {
+            GetComponent<Warehouse>().ManageName(oldValue, newValue);
+        }
     }
 
     public void OnDestroy()
@@ -267,7 +283,7 @@ public class BuildingAccessory : NetworkBehaviour
             sortByDepths[i].enabled = true;
             sortByDepths[i].SetOrder();
         }
-        //ModularBuildingManager.singleton.ClearGrass(this.gameObject);
+        ModularBuildingManager.singleton.ClearGrass(this.gameObject);
     }
 
     public void ManageHealth(float oldHealth, float newHealth)

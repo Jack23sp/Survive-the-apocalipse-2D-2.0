@@ -1086,13 +1086,6 @@ MonoBehaviour:
   pendingSkill: -1
   pendingDestination: {x: 0, y: 0}
   pendingDestinationValid: 0
-  activeQuestLimit: 10
-  firstQuest:
-  - {fileID: 11400000, guid: b9a84339738b4c84b871d838e7c8ba22, type: 2}
-  - {fileID: 11400000, guid: 1e4fc50a431915641ace66641f9081e1, type: 2}
-  - {fileID: 11400000, guid: 40ae102952bf6654a9725e1c44571142, type: 2}
-  - {fileID: 11400000, guid: 07e1997c62ba12a43ab8a8df2c65c971, type: 2}
-  - {fileID: 11400000, guid: db0ffaeafb597c54a9e032d8797933a4, type: 2}
   playerEquipment: {fileID: 0}
   playerNames: []
 --- !u!114 &114438020945256178
@@ -1541,6 +1534,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 40ae102952bf6654a9725e1c44571142, type: 2}
   - {fileID: 11400000, guid: 07e1997c62ba12a43ab8a8df2c65c971, type: 2}
   - {fileID: 11400000, guid: db0ffaeafb597c54a9e032d8797933a4, type: 2}
+  MissionToAccomplish: []
+  toSync: 
 --- !u!114 &1217336421360846278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2270,6 +2265,7 @@ MonoBehaviour:
   blockButtonSounds: 0
   postProcessing: 0
   buildingSensibility: 0
+  showZoomButtonOnScreen: 0
   nextRiskyActionTime: 0
   uiRestoreCredential: {fileID: 0}
   audioSource: []
@@ -4249,7 +4245,7 @@ GameObject:
   - component: {fileID: 3761396367102470631}
   - component: {fileID: 7993373759846835855}
   m_Layer: 26
-  m_Name: GrassDetector
+  m_Name: GeneralDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

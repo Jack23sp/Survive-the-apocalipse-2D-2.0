@@ -28,6 +28,7 @@ public partial class Database
         public int blockButtonSound { get; set; }
         public int postProcessing { get; set; }
         public float buildingSensibility { get; set; }
+        public int showZoomButtonsOnScreen { get; set; }
     }
 
     class issue
@@ -72,7 +73,8 @@ public partial class Database
             blockSound = Convert.ToInt32(options.blockSound),
             blockButtonSound = Convert.ToInt32(options.blockButtonSounds),
             postProcessing = Convert.ToInt32(options.postProcessing),
-            buildingSensibility = options.buildingSensibility
+            buildingSensibility = options.buildingSensibility,
+            showZoomButtonsOnScreen = Convert.ToInt32(options.showZoomButtonOnScreen)
         });
 
     }
@@ -93,6 +95,7 @@ public partial class Database
             options.blockButtonSounds = Convert.ToBoolean(row.blockButtonSound);
             options.postProcessing = Convert.ToBoolean(row.postProcessing);
             options.buildingSensibility = row.buildingSensibility;
+            options.showZoomButtonOnScreen = Convert.ToBoolean(row.showZoomButtonsOnScreen);
         }
 
     }
@@ -140,6 +143,8 @@ public class PlayerOptions : NetworkBehaviour
     public bool postProcessing;
     [SyncVar(hook = nameof(ManageBuildingSensibility))]
     public float buildingSensibility;
+    [SyncVar(hook = nameof(ShowZoomButtonOnScreen))]
+    public bool showZoomButtonOnScreen;
 
     [SyncVar]
     public double nextRiskyActionTime;
@@ -178,6 +183,7 @@ public class PlayerOptions : NetworkBehaviour
         ManageButtonSounds(blockButtonSounds, blockButtonSounds);
         ManageSound(blockSound, blockSound);
         ManageBuildingSensibility(buildingSensibility, buildingSensibility);
+        ShowZoomButtonOnScreen(showZoomButtonOnScreen, showZoomButtonOnScreen);
     }
 
     public void ManageBuildingSensibility(float oldValue, float newValue)
@@ -323,6 +329,19 @@ public class PlayerOptions : NetworkBehaviour
         }
     }
 
+    public void ShowZoomButtonOnScreen(bool oldBool, bool newBool)
+    {
+        if (!player) Assign();
+        if (player.isLocalPlayer)
+        {
+            if (UICameraZoom.singleton) UICameraZoom.singleton.panel.gameObject.SetActive(newBool);
+            if (UIOptions.singleton)
+            {
+                UIOptions.singleton.toogleZoom.isOn = newBool;
+            }
+        }
+    }
+
     [Command]
     public void CmdSaveIssue(string playerName, string Type, string description)
     {
@@ -337,7 +356,7 @@ public class PlayerOptions : NetworkBehaviour
     public void CmdBlockAlly()
     {
         if (NetworkTime.time < nextRiskyActionTime) return;
-        player.playerOptions.blockAlly = !player.playerOptions.blockAlly;
+        blockAlly = !blockAlly;
         nextRiskyActionTime = NetworkTime.time + 1;
     }
 
@@ -345,7 +364,7 @@ public class PlayerOptions : NetworkBehaviour
     public void CmdBlockFootstep()
     {
         if (NetworkTime.time < nextRiskyActionTime) return;
-        player.playerOptions.blockFootstep = !player.playerOptions.blockFootstep;
+        blockFootstep = !blockFootstep;
         nextRiskyActionTime = NetworkTime.time + 1;
     }
 
@@ -353,7 +372,7 @@ public class PlayerOptions : NetworkBehaviour
     public void CmdBlockFriends()
     {
         if (NetworkTime.time < nextRiskyActionTime) return;
-        player.playerOptions.blockFriend = !player.playerOptions.blockFriend;
+        blockFriend = !blockFriend;
         nextRiskyActionTime = NetworkTime.time + 1;
     }
 
@@ -361,7 +380,7 @@ public class PlayerOptions : NetworkBehaviour
     public void CmdBlockGroup()
     {
         if (NetworkTime.time < nextRiskyActionTime) return;
-        player.playerOptions.blockGroup = !player.playerOptions.blockGroup;
+        blockGroup = !blockGroup;
         nextRiskyActionTime = NetworkTime.time + 1;
     }
 
@@ -369,7 +388,7 @@ public class PlayerOptions : NetworkBehaviour
     public void CmdBlockMarriage()
     {
         if (NetworkTime.time < nextRiskyActionTime) return;
-        player.playerOptions.blockMarriage = !player.playerOptions.blockMarriage;
+        blockMarriage = !blockMarriage;
         nextRiskyActionTime = NetworkTime.time + 1;
     }
 
@@ -377,7 +396,7 @@ public class PlayerOptions : NetworkBehaviour
     public void CmdBlockParty()
     {
         if (NetworkTime.time < nextRiskyActionTime) return;
-        player.playerOptions.blockParty = !player.playerOptions.blockParty;
+        blockParty = !blockParty;
         nextRiskyActionTime = NetworkTime.time + 1;
     }
 
@@ -385,7 +404,7 @@ public class PlayerOptions : NetworkBehaviour
     public void CmdBlockSound()
     {
         if (NetworkTime.time < nextRiskyActionTime) return;
-        player.playerOptions.blockSound = !player.playerOptions.blockSound;
+        blockSound = !blockSound;
         nextRiskyActionTime = NetworkTime.time + 1;
     }
 
@@ -393,7 +412,7 @@ public class PlayerOptions : NetworkBehaviour
     public void CmdBlockButtonSound()
     {
         if (NetworkTime.time < nextRiskyActionTime) return;
-        player.playerOptions.blockButtonSounds = !player.playerOptions.blockButtonSounds;
+        blockButtonSounds = !blockButtonSounds;
         nextRiskyActionTime = NetworkTime.time + 1;
     }
 
@@ -401,7 +420,7 @@ public class PlayerOptions : NetworkBehaviour
     public void CmdBlockTrade()
     {
         if (NetworkTime.time < nextRiskyActionTime) return;
-        player.playerOptions.blockTrade = !player.playerOptions.blockTrade;
+        blockTrade = !blockTrade;
         nextRiskyActionTime = NetworkTime.time + 1;
     }
 
@@ -409,13 +428,21 @@ public class PlayerOptions : NetworkBehaviour
     public void CmdManagePostProcessing()
     {
         if (NetworkTime.time < nextRiskyActionTime) return;
-        player.playerOptions.postProcessing = !player.playerOptions.postProcessing;
+        postProcessing = !postProcessing;
         nextRiskyActionTime = NetworkTime.time + 1;
     }
 
     [Command]
     public void CmdChangeSensibility(float sensibility)
     {
-        player.playerOptions.buildingSensibility = sensibility;
+        buildingSensibility = sensibility;
+    }
+
+    [Command]
+    public void CmdShowZoomButtonsOnScreen()
+    {
+        if (NetworkTime.time < nextRiskyActionTime) return;
+        showZoomButtonOnScreen = !showZoomButtonOnScreen;
+        nextRiskyActionTime = NetworkTime.time + 1;
     }
 }

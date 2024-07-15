@@ -104,6 +104,9 @@ MonoBehaviour:
   oldBuilding: {fileID: 0}
   zoneCollider: {fileID: 0}
   grassUnder: []
+  spritesList:
+  - {fileID: 7915351385939784045}
+  - {fileID: 756506006891410033}
   dropChance:
     item: {fileID: 0}
     probability: 0
@@ -239,6 +242,7 @@ MonoBehaviour:
   fixedScale: {x: 1.3, y: 1.7}
   targetScale: {x: 1.3, y: 1.7}
   duration: 0.2
+  isAnimating: 0
 --- !u!61 &7707824006407582621
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -545,7 +549,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -444643067
-  m_SortingLayer: -6
+  m_SortingLayer: -7
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: 4fd6881ee124bb44d8eeaaf53a5c3603, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

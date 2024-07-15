@@ -49,13 +49,13 @@ public class PlayerGrassDetector : MonoBehaviour
             }
         }
 
-        //if (LayerMask.LayerToName(collision.gameObject.layer) == "Grass" && player.isLocalPlayer)
-        //{
-        //    if (!collision.GetComponent<Grass>().isOverlayed)
-        //    {
-        //        collision.GetComponent<Grass>().Manage(true);
-        //    }
-        //}
+        if (LayerMask.LayerToName(collision.gameObject.layer) == "Grass" && player.isLocalPlayer)
+        {
+            if (!collision.GetComponent<Grass>().isOverlayed)
+            {
+                collision.GetComponent<Grass>().Manage(true);
+            }
+        }
 
         if (player.netIdentity.isLocalPlayer)
         {
@@ -115,13 +115,13 @@ public class PlayerGrassDetector : MonoBehaviour
             }
         }
 
-        //if (LayerMask.LayerToName(collision.gameObject.layer) == "Grass" && player.isLocalPlayer)
-        //{
-        //    if (!collision.GetComponent<Grass>().isOverlayed)
-        //    {
-        //        collision.GetComponent<Grass>().Manage(false);
-        //    }
-        //}
+        if (LayerMask.LayerToName(collision.gameObject.layer) == "Grass" && player.isLocalPlayer)
+        {
+            if (!collision.GetComponent<Grass>().isOverlayed)
+            {
+                collision.GetComponent<Grass>().Manage(false);
+            }
+        }
 
         if (player.netIdentity.isLocalPlayer)
         {

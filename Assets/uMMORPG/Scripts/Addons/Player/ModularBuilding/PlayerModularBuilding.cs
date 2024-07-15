@@ -142,6 +142,16 @@ public class PlayerModularBuilding : NetworkBehaviour
         }
     }
 
+    [Command]
+    public void CmdRenameAccessory(NetworkIdentity identity, string nameToRename)
+    {
+        BuildingAccessory acc = identity.gameObject.GetComponent<BuildingAccessory>();
+        if(acc)
+        {
+            acc.newName = nameToRename;
+        }
+    }
+
     [TargetRpc]
     public void TargetContinuosPlacing(NetworkIdentity playerIdentity, bool isInventory, string ItemName)
     {
