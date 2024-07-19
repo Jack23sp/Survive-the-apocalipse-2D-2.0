@@ -341,6 +341,7 @@ public partial class Database : MonoBehaviour
         connection.CreateTable<library_item>();
         connection.CreateTable<purchasedSkin>();
         connection.CreateTable<Ads>();
+        connection.CreateTable<Pin>();
         // addon system hooks
         onConnected.Invoke();
 
@@ -746,6 +747,7 @@ public partial class Database : MonoBehaviour
                 LoadOptions(player);
                 LoadPartner(player);
                 LoadSpawnpoint(player);
+                LoadPin(player);
                 LoadThirsty(player);
                 LoadSkin(player);
                 LoadAds(player);
@@ -1025,6 +1027,7 @@ public partial class Database : MonoBehaviour
         SaveOptions(player);
         SavePartner(player);
         SaveSpawnpoint(player);
+        SavePin(player);
         SaveThirsty(player);
         SaveBoost(player);
         SaveSkin(player);

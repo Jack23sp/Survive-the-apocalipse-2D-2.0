@@ -13,6 +13,7 @@ public class ClickOnRenderTexture : MonoBehaviour
     public Transform anchor;
     public Vector3 size = new Vector3(2937.828f,1351.968f);
     public List<GameObject> pin = new List<GameObject>();
+    public List<Vector3> pinPlaces = new List<Vector3>();
     public int maxPin = 5;
     public Button addButton;
     public Image addImage;
@@ -28,9 +29,31 @@ public class ClickOnRenderTexture : MonoBehaviour
 
 
 
-    public void Start()
+    public void OnEnable()
     {
         if (!singleton) singleton = this;
+
+        if (pin.Count == 0)
+        {
+            if (!Player.localPlayer.playerSpawnpoint)
+            {
+                Player.localPlayer.playerSpawnpoint = Player.localPlayer.GetComponent<PlayerSpawnpoint>();
+                Player.localPlayer.playerSpawnpoint.Assign();
+            }
+            else
+            {
+                pinPlaces = Player.localPlayer.playerSpawnpoint.pins;
+                for (int i = 0; i < pinPlaces.Count; i++)
+                {
+                    int index = i;
+                    GameObject g = Instantiate(prefabToInstantiate, pinPlaces[index], Quaternion.identity);
+                    g.GetComponent<DeathSymbol>().dontDestroyAtBegin = true;
+                    pin.Add(g);
+                    modifyButtons[index].transform.parent.transform.gameObject.SetActive(index < pin.Count);
+                    pinButtons[index].gameObject.SetActive(index < pin.Count);
+                }
+            }
+        }
 
         addButton.onClick.RemoveAllListeners();
         addButton.onClick.AddListener(() =>
@@ -53,6 +76,7 @@ public class ClickOnRenderTexture : MonoBehaviour
                 move = false;
                 GameObject g = Instantiate(prefabToInstantiateLocaion, pin[index].transform.position, Quaternion.identity);
                 g.transform.SetParent(pin[index].transform);
+
             });
 
             modifyButtons[index].transform.parent.transform.gameObject.SetActive(index < pin.Count);
@@ -77,6 +101,13 @@ public class ClickOnRenderTexture : MonoBehaviour
                 Destroy(pin[index].gameObject);
                 pin.RemoveAt(index);
                 Refresh();
+
+                pinPlaces.Clear();
+                for (int i = 0; i < pin.Count; i++)
+                {
+                    pinPlaces.Add(new Vector3(pin[i].transform.position.x, pin[i].transform.position.y, 0.0f));
+                }
+                Player.localPlayer.playerSpawnpoint.CmdSyncToServerPin(pinPlaces.ToArray());
             });
         }
 
@@ -115,6 +146,9 @@ public class ClickOnRenderTexture : MonoBehaviour
                     g.GetComponent<DeathSymbol>().dontDestroyAtBegin = true;
                     pin.Add(g);
 
+                    pinPlaces.Add(new Vector3(g.transform.position.x, g.transform.position.y, 0.0f));
+                    Player.localPlayer.playerSpawnpoint.CmdSyncToServerPin(pinPlaces.ToArray());
+                    
                     addButton.gameObject.SetActive(pin.Count < maxPin);
 
 

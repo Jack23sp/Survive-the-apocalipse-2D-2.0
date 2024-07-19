@@ -10,6 +10,7 @@ public partial class Player
     [HideInInspector] public PlayerSpawnpoint playerSpawnpoint;
 }
 
+
 [Serializable]
 public partial struct Spawnpoint
 {
@@ -42,6 +43,15 @@ public partial class Database
         public int prefered { get; set; }
     }
 
+    class Pin
+    {
+        //[PrimaryKey] // important for performance: O(log n) instead of O(n)
+        //[Collation("NOCASE")] // [COLLATE NOCASE for case insensitive compare. this way we can't both create 'Archer' and 'archer' as characters]
+        public string characterName { get; set; }
+        public float posX { get; set; }
+        public float posY { get; set; }
+    }
+
     public void Connect_Spawnpoint()
     {
         connection.CreateTable<spawnpoint>();
@@ -69,6 +79,28 @@ public partial class Database
         }
 
     }
+
+    public void SavePin(Player player)
+    {
+        PlayerSpawnpoint spawnpoint = player.GetComponent<PlayerSpawnpoint>();
+
+        // inventory: remove old entries first, then add all new ones
+        // (we could use UPDATE where slot=... but deleting everything makes
+        //  sure that there are never any ghosts)
+        connection.Execute("DELETE FROM Pin WHERE characterName=?", player.name);
+        // note: .Insert causes a 'Constraint' exception. use Replace.
+        for (int i = 0; i < spawnpoint.pins.Count; i++)
+        {
+            connection.InsertOrReplace(new Pin
+            {
+                characterName = player.name,
+                posX = spawnpoint.pins[i].x,
+                posY = spawnpoint.pins[i].y
+            });
+        }
+
+    }
+
     public void LoadSpawnpoint(Player player)
     {
         PlayerSpawnpoint spawnpoint = player.GetComponent<PlayerSpawnpoint>();
@@ -80,7 +112,20 @@ public partial class Database
         }
     }
 
+    public void LoadPin(Player player)
+    {
+        PlayerSpawnpoint spawnpoint = player.GetComponent<PlayerSpawnpoint>();
 
+        foreach (Pin row in connection.Query<Pin>("SELECT * FROM Pin WHERE characterName=?", player.name))
+        {
+            float x = row.posX;
+            float y = row.posY;
+            float z = 0.0f;
+
+            Vector3 newObject = new Vector3(x, y, z);
+            spawnpoint.pins.Add(newObject);
+        }
+    }
 }
 
 
@@ -90,9 +135,10 @@ public class PlayerSpawnpoint : NetworkBehaviour
     public SyncListSpawnPoint spawnpoint = new SyncListSpawnPoint();
     [HideInInspector] public ScriptableAbility ability;
     [SerializeField] private GameObject controlSpawnpointPrefab;
-    [SerializeField] private GameObject cachedSpawnpointObject;
+    private GameObject cachedSpawnpointObject;
     List<string> spawnPointToRemove = new List<string>();
     Transform[] orderedTransform = new Transform[0];
+    public List<Vector3> pins = new List<Vector3>();
 
     public void Assign()
     {
@@ -119,6 +165,7 @@ public class PlayerSpawnpoint : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
+        TargetPin(pins.ToArray());
     }
 
     public void OrderSpawnpoint()
@@ -405,5 +452,21 @@ public class PlayerSpawnpoint : NetworkBehaviour
             AdditionRevive();
             player.playerNames.Clear();
         }
+    }
+
+    [Command]
+    public void CmdSyncToServerPin(Vector3[] pinsSync)
+    {
+        if (pinsSync.Length > 5) return;
+        pins.Clear();
+        pins = pinsSync.ToList();
+    }
+
+    [TargetRpc]
+    public void TargetPin(Vector3[] pinsSync)
+    {
+        if (pinsSync.Length > 5) return;
+        pins.Clear();
+        pins = pinsSync.ToList();
     }
 }
