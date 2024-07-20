@@ -85,6 +85,7 @@ public class PlayerAdditionalState : NetworkBehaviour
                            (condition && state == "EXERCISE") ||
                            (condition && state == "ABS") ||
                            (condition && state == "JUMPINGJACK") ||
+                           (condition && state == "SLEEP") ||
                            (condition && state == "PUSHUPS")) ? state : "";
         
         CancelInvoke(nameof(IncreaseAbility));
@@ -107,7 +108,8 @@ public class PlayerAdditionalState : NetworkBehaviour
            oldValue != "EXERCISE" &&
            oldValue != "ABS" &&
            oldValue != "JUMPINGJACK" &&
-           oldValue != "PUSHUPS")
+           oldValue != "PUSHUPS" && 
+           oldValue != "SLEEP")
         {
             previousAnimatorController = animator.runtimeAnimatorController;
         }
@@ -174,6 +176,7 @@ public class PlayerAdditionalState : NetworkBehaviour
             if(newValue == "PUSHUPS") animator.runtimeAnimatorController = ExerciseManager.singleton.pushUpAnimator;
             if(newValue == "JUMPINGJACK") animator.runtimeAnimatorController = ExerciseManager.singleton.jumpinJackAnimator;
             if(newValue == "ABS") animator.runtimeAnimatorController = ExerciseManager.singleton.sitUpAnimator;
+            if(newValue == "SLEEP") animator.runtimeAnimatorController = AnimatorManager.singleton.sleepRuntimeController;
 
 
 

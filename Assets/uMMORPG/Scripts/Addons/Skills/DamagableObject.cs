@@ -230,14 +230,48 @@ public class DamagableObject : MonoBehaviour
                     if (damage > 0)
                     {
                         rand = UnityEngine.Random.Range(1, 101);
-                        if (rand <= caster.playerShootPrecision.Calculate())
+
+                        if (caster.playerMove.tired > 0 && caster.playerMove.tired <= caster.playerMove.tiredLimitForAim)
                         {
-                            caster.combat.DealDamage(player, damage, DamageType.Normal);
-                            player.playerBlood.Spawn(2.0f);
+                            if (Vector2.Distance(caster.transform.position, player.transform.position) > ((WeaponItem)weapon.item.data).tiredDistance)
+                            {
+                                caster.combat.DealDamage(player, 0, DamageType.Miss);
+                            }
+                            else
+                            {
+                                if (rand <= caster.playerShootPrecision.Calculate())
+                                {
+                                    player.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("BLOOD"));
+                                    caster.combat.DealDamage(player, damage, DamageType.Normal);
+                                    player.playerBlood.Spawn(2.0f);
+                                }
+                                else
+                                {
+                                    caster.combat.DealDamage(player, 0, DamageType.Miss);
+                                }
+                            }
                         }
-                        else
+                        else if (caster.playerMove.tired > 0)
                         {
-                            caster.combat.DealDamage(player, 0, DamageType.Miss);
+                            if (Vector2.Distance(caster.transform.position, player.transform.position) > ((WeaponItem)weapon.item.data).tiredDistance)
+                            {
+                                if (rand <= caster.playerShootPrecision.Calculate())
+                                {
+                                    player.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("BLOOD"));
+                                    caster.combat.DealDamage(player, damage, DamageType.Normal);
+                                    player.playerBlood.Spawn(2.0f);
+                                }
+                                else
+                                {
+                                    caster.combat.DealDamage(player, 0, DamageType.Miss);
+                                }
+                            }
+                            else
+                            {
+                                player.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("BLOOD"));
+                                caster.combat.DealDamage(player, damage, DamageType.Normal);
+                                player.playerBlood.Spawn(2.0f);
+                            }
                         }
                         caster.petControl.OnDamageDealtTo(player);
                     }
@@ -268,16 +302,17 @@ public class DamagableObject : MonoBehaviour
                     float drill = UnityEngine.Random.Range(0.0f, 100.0f);
                     if (drill <= casterAbilityValue)
                     {
-                        caster.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("SHIELD"));
+                        player.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("SHIELD"));
                         caster.combat.DealDamage(player, damageP / 2, DamageType.Resist);
                     }
                     else
                     {
-                        caster.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("BLOOD"));
+                        player.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("BLOOD"));
                         caster.combat.DealDamage(player, damageP, DamageType.Normal);
                         player.playerBlood.Spawn(2.0f);
                     }
                 }
+
                 caster.petControl.OnDamageDealtTo(player);
             }
 
@@ -296,7 +331,7 @@ public class DamagableObject : MonoBehaviour
         }
         else if (zombie != null)
         {
-            if (zombie.health.health.current <= 0)
+            if (zombie.health.health.current <= 0 && !zombie.playerNames.Contains(caster.name))
             {
                 caster.quests.SyncKillOnServer(new DetailOfQuest(zombie.name.Replace("(Clone)",""), 1));
 
@@ -320,7 +355,6 @@ public class DamagableObject : MonoBehaviour
                 }
             }
 
-
             if (zombie.health.health.current == 0) return;
 
             if (!zombie.target && !zombie.isNeutral)
@@ -336,18 +370,50 @@ public class DamagableObject : MonoBehaviour
 
             if (!melee)
             {
-                rand = UnityEngine.Random.Range(1, 101);
-                if (rand <= caster.playerShootPrecision.Calculate())
+                if (caster.playerMove.tired > 0 && caster.playerMove.tired <= caster.playerMove.tiredLimitForAim)
                 {
-                    zombie.combat.DealDamage(zombie, (damage) + (int)((damage / 100) * weaponBonus), DamageType.Normal);
-                    caster.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("BLOOD"));
-                    ResourceManager.singleton.SpawnDropBlood(UnityEngine.Random.Range(1, 10), zombie.transform, 2.0f);
+                    if (Vector2.Distance(caster.transform.position, zombie.transform.position) > ((WeaponItem)weapon.item.data).tiredDistance)
+                    {
+                        caster.combat.DealDamage(player, 0, DamageType.Miss);
+                    }
+                    else
+                    {
+                        rand = UnityEngine.Random.Range(1, 101);
+                        if (rand <= caster.playerShootPrecision.Calculate())
+                        {
+                            zombie.combat.DealDamage(zombie, (damage) + (int)((damage / 100) * weaponBonus), DamageType.Normal);
+                            caster.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("BLOOD"));
+                            ResourceManager.singleton.SpawnDropBlood(UnityEngine.Random.Range(1, 10), zombie.transform, 2.0f);
+                        }
+                        else
+                        {
+                            zombie.combat.DealDamage(zombie, 0, DamageType.Miss);
+                        }
+                    }
                 }
-                else
+                else if (caster.playerMove.tired > 0)
                 {
-                    zombie.combat.DealDamage(zombie, 0, DamageType.Miss);
-                }
-
+                    if (Vector2.Distance(caster.transform.position, zombie.transform.position) > ((WeaponItem)weapon.item.data).tiredDistance)
+                    {
+                        rand = UnityEngine.Random.Range(1, 101);
+                        if (rand <= caster.playerShootPrecision.Calculate())
+                        {
+                            zombie.combat.DealDamage(zombie, (damage) + (int)((damage / 100) * weaponBonus), DamageType.Normal);
+                            caster.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("BLOOD"));
+                            ResourceManager.singleton.SpawnDropBlood(UnityEngine.Random.Range(1, 10), zombie.transform, 2.0f);
+                        }
+                        else
+                        {
+                            zombie.combat.DealDamage(zombie, 0, DamageType.Miss);
+                        }
+                    }
+                    else
+                    {
+                        zombie.combat.DealDamage(zombie, (damage) + (int)((damage / 100) * weaponBonus), DamageType.Normal);
+                        caster.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("BLOOD"));
+                        ResourceManager.singleton.SpawnDropBlood(UnityEngine.Random.Range(1, 10), zombie.transform, 2.0f);
+                    }
+                }              
             }
             else
             {

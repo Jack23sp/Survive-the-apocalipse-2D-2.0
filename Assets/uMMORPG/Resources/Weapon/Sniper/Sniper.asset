@@ -113,3 +113,4 @@ MonoBehaviour:
   weaponPrecision: 0
   distanceToGrab: 15
   requiredAmmo: {fileID: 11400000, guid: 7c62943f3c1d4ac42b4ff8502bc267a9, type: 2}
+  tiredDistance: 7

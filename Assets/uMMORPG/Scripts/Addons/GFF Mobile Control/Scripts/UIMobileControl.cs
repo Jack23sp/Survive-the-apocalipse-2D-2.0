@@ -222,6 +222,7 @@ public partial class PlayerNavMeshMovement2D
     public void MoveJoystick()
     {
         if (player.health.current <= 0) return;
+        if (player.playerAdditionalState.additionalState == "SLEEP" && player.playerMove.tired <= 20) return;
         if (player.name != Player.localPlayer.name) return;
         // don't move if currently typing in an input
         // we check this after checking h and v to save computations
@@ -274,6 +275,7 @@ public partial class PlayerNavMeshMovement2D
     public void JoystickHandling()
     {
         if (player.health.current <= 0) return;
+        if (player.playerAdditionalState.additionalState == "SLEEP" ) return;
         if (player.name != Player.localPlayer.name) return;
 
         // don't move if currently typing in an input
@@ -288,8 +290,8 @@ public partial class PlayerNavMeshMovement2D
             if (joystick.input == Vector2.zero)
             {
                 prevMunitionCountForSound = 1;
-            }
-            
+            }           
+
             if (horizontal != 0 || vertical != 0 && moveJoystick.input != Vector2.zero)
             {
                 // create direction, normalize in case of diagonal movement
@@ -299,17 +301,20 @@ public partial class PlayerNavMeshMovement2D
 
                 if (temp <= 0 )
                 {
-                    bool itm = player.playerWeapon.CheckMagazine(player.playerEquipment.slots[0].item.data.name);
-                    if (itm && prevMunitionCountForSound != temp)
+                    if (player.playerEquipment.slots[0].amount > 0)
                     {
-                        player.playerWeapon.CmdChargeMunition(player.playerEquipment.slots[0].item.name);
-                    }
-                    else
-                    {
-                        if (temp == 0 && prevMunitionCountForSound != 0)
+                        bool itm = player.playerWeapon.CheckMagazine(player.playerEquipment.slots[0].item.data.name);
+                        if (itm && prevMunitionCountForSound != temp)
                         {
-                            if(player.playerEquipment.slots[0].item.data.requiredSkill is MunitionSkill)
-                                player.playerSounds.PlaySounds(((MunitionSkill)player.playerEquipment.slots[0].item.data.requiredSkill).projectile.type, "3");
+                            player.playerWeapon.CmdChargeMunition(player.playerEquipment.slots[0].item.name);
+                        }
+                        else
+                        {
+                            if (temp == 0 && prevMunitionCountForSound != 0)
+                            {
+                                if (player.playerEquipment.slots[0].item.data.requiredSkill is MunitionSkill)
+                                    player.playerSounds.PlaySounds(((MunitionSkill)player.playerEquipment.slots[0].item.data.requiredSkill).projectile.type, "3");
+                            }
                         }
                     }
                 }
@@ -325,12 +330,52 @@ public partial class PlayerNavMeshMovement2D
                     prevJoystick = direction;
                 }
 
-                if (player.playerMove.canAttack && Player.localPlayer.playerAdditionalState.additionalState != "READING")
+                if (player.playerMove.canAttack && Player.localPlayer.playerAdditionalState.additionalState == "")
                 {
-                    if (player.playerMove.states.Contains("AIM")) player.playerMove.CmdSetState("SHOOT", new string[1] { "AIM" });
-                    if (!player.playerMove.states.Contains("SHOOT")) player.playerMove.CmdSetState("SHOOT", new string[0] { });
-                    //attacking stuff
-                    if (player.playerEquipment.slots[0].amount > 0)
+                    if (player.playerMove.states.Contains("AIM"))
+                    {
+                        if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo == null)
+                        {
+                            if (player.playerMove.tired > 0 && player.playerMove.tired <= player.playerMove.tiredLimitForAim && player.mana.current == 0)
+                            {
+                                player.playerNotification.TargetSpawnNotification("You are too tired to attack!");
+                            }
+                            else if (player.playerMove.tired > 0 && player.mana.current > 0)
+                            {
+                                player.playerMove.CmdSetState("SHOOT", new string[1] { "AIM" });
+                            }
+                        }
+                        else
+                        {
+                            player.playerMove.CmdSetState("SHOOT", new string[1] { "AIM" });
+                        }
+                    }
+                    if (!player.playerMove.states.Contains("SHOOT"))
+                    {
+                        if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo == null)
+                        {
+                            if (player.playerMove.tired > 0 && player.playerMove.tired <= player.playerMove.tiredLimitForAim && player.mana.current == 0)
+                            {
+                                player.playerNotification.TargetSpawnNotification("You are too tired to attack!");
+                            }
+                            else if (player.playerMove.tired > 0 && player.mana.current > 0)
+                            {
+                                player.playerMove.CmdSetState("SHOOT", new string[0] { });
+                            }
+                        }
+                        else
+                        {
+                            player.playerMove.CmdSetState("SHOOT", new string[0] { });
+                        }
+                    }
+                    if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo == null)
+                    {
+                        if (player.playerMove.tired > 0 && player.mana.current > 0) 
+                        { 
+                            ((PlayerSkills)player.skills).TryUse(((PlayerSkills)player.skills).GetSkillIndexByName(player.playerEquipment.slots[0].item.data.requiredSkill.name));
+                        }
+                    }
+                    else if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo != null)
                     {
                         ((PlayerSkills)player.skills).TryUse(((PlayerSkills)player.skills).GetSkillIndexByName(player.playerEquipment.slots[0].item.data.requiredSkill.name));
                     }

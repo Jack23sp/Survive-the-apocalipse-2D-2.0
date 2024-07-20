@@ -17,8 +17,15 @@ public class UIPlayerInformation : MonoBehaviour
     public TextMeshProUGUI playerName;
     public TextMeshProUGUI playerLevel;
     public Image experienceSlider;
+    public Image tiredSlider;
 
     [HideInInspector] public Player player;
+
+    public Color goodColor;
+    public int goodLimit = 70;
+    public Color mediumColor;
+    public int mediumLimit = 30;
+    public Color poorColor;
 
     public void Start()
     {
@@ -33,6 +40,17 @@ public class UIPlayerInformation : MonoBehaviour
             Invoke(nameof(SearchPlayer), 0.1f);
         else
             Open();
+    }
+
+    public void Tired()
+    {
+        tiredSlider.fillAmount = (float)player.playerMove.tired / player.playerMove.maxTiredness;
+        if (player.playerMove.tired >= goodLimit)
+            tiredSlider.color = goodColor;
+        else if (player.playerMove.tired >= mediumLimit)
+            tiredSlider.color = mediumColor;
+        else
+            tiredSlider.color = poorColor;
     }
 
     public void Open()

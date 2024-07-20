@@ -2324,6 +2324,9 @@ MonoBehaviour:
   syncInterval: 0.02
   player: {fileID: 0}
   tempVector: {x: 0, y: 0}
+  tired: 100
+  tiredLimitForAim: 30
+  maxTiredness: 100
   playerObject: {fileID: 5857863884594549373}
   canAttack: 0
   position: 0
@@ -2561,7 +2564,7 @@ MonoBehaviour:
   ability: {fileID: 0}
   controlSpawnpointPrefab: {fileID: 346263961495374538, guid: dec8f6af940fc7a4b9067345a0f707a6,
     type: 3}
-  cachedSpawnpointObject: {fileID: 0}
+  pins: []
 --- !u!114 &4415516676073100228
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -45,6 +45,7 @@ public class PlayerPersonalOptions : MonoBehaviour
 
     void Check()
     {
+        if (!Player.localPlayer || (Player.localPlayer && Player.localPlayer.playerAdditionalState.additionalState == "SLEEP")) return;
         panel.SetActive(true);
         circleAnimation.Play("Open");
 

@@ -41,22 +41,52 @@ public class SlashDamagePlayerSkill : DamageSkill
         // -> we try to spawn it at the weapon's projectile mount
         if (projectile != null)
         {
-            GameObject go = Instantiate(projectile.gameObject, caster.skills.effectMount.position, caster.skills.effectMount.rotation);
-            TargetlessProjectileSkillEffect effect = go.GetComponent<TargetlessProjectileSkillEffect>();
-            effect.target = caster.target;
-            effect.caster = caster;
-            effect.damage = damage.Get(skillLevel);
-            effect.damageToWall = damageToWall.Get(skillLevel);
-            effect.damageToTree = damageToTree.Get(skillLevel);
-            effect.damageToRock = damageToRock.Get(skillLevel);
-            effect.damageToForniture = damageToForniture.Get(skillLevel);
-            effect.stunChance = stunChance.Get(skillLevel);
-            effect.stunTime = stunTime.Get(skillLevel);
-            // always fly into caster's look direction.
-            // IMPORTANT: use the parameter. DON'T use entity.direction.
-            // we want the exact direction that was passed in CmdUse()!
-            effect.direction = direction;
-            NetworkServer.Spawn(go);
+            if (caster is Player)
+            {
+                if (((Player)caster).playerMove.tired > 0)
+                {
+                    if (((Player)caster).playerMove.tired <= ((Player)caster).playerMove.tiredLimitForAim && ((Player)caster).mana.current > 0)
+                    {
+                        ((Player)caster).mana.current--;
+
+                        GameObject go = Instantiate(projectile.gameObject, caster.skills.effectMount.position, caster.skills.effectMount.rotation);
+                        TargetlessProjectileSkillEffect effect = go.GetComponent<TargetlessProjectileSkillEffect>();
+                        effect.target = caster.target;
+                        effect.caster = caster;
+                        effect.damage = damage.Get(skillLevel);
+                        effect.damageToWall = damageToWall.Get(skillLevel);
+                        effect.damageToTree = damageToTree.Get(skillLevel);
+                        effect.damageToRock = damageToRock.Get(skillLevel);
+                        effect.damageToForniture = damageToForniture.Get(skillLevel);
+                        effect.stunChance = stunChance.Get(skillLevel);
+                        effect.stunTime = stunTime.Get(skillLevel);
+                        // always fly into caster's look direction.
+                        // IMPORTANT: use the parameter. DON'T use entity.direction.
+                        // we want the exact direction that was passed in CmdUse()!
+                        effect.direction = direction;
+                        NetworkServer.Spawn(go);
+                    }
+                    else
+                    {
+                        GameObject go = Instantiate(projectile.gameObject, caster.skills.effectMount.position, caster.skills.effectMount.rotation);
+                        TargetlessProjectileSkillEffect effect = go.GetComponent<TargetlessProjectileSkillEffect>();
+                        effect.target = caster.target;
+                        effect.caster = caster;
+                        effect.damage = damage.Get(skillLevel);
+                        effect.damageToWall = damageToWall.Get(skillLevel);
+                        effect.damageToTree = damageToTree.Get(skillLevel);
+                        effect.damageToRock = damageToRock.Get(skillLevel);
+                        effect.damageToForniture = damageToForniture.Get(skillLevel);
+                        effect.stunChance = stunChance.Get(skillLevel);
+                        effect.stunTime = stunTime.Get(skillLevel);
+                        // always fly into caster's look direction.
+                        // IMPORTANT: use the parameter. DON'T use entity.direction.
+                        // we want the exact direction that was passed in CmdUse()!
+                        effect.direction = direction;
+                        NetworkServer.Spawn(go);
+                    }
+                }
+            }
         }
         else Debug.LogWarning(name + ": missing projectile");
     }

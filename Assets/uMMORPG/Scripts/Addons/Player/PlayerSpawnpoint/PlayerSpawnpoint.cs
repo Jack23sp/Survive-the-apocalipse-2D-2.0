@@ -214,6 +214,8 @@ public class PlayerSpawnpoint : NetworkBehaviour
                 player.equipment.slots[index] = slot;
             }
         }
+        player.playerMove.tired = player.playerMove.maxTiredness;
+        player.playerAdditionalState.additionalState = string.Empty;
     }
 
     [Command]

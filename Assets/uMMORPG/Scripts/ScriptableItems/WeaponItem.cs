@@ -6,6 +6,7 @@ public partial class WeaponItem : EquipmentItem
 {
     [Header("Weapon")]
     public AmmoItem requiredAmmo; // null if no ammo is required
+    public float tiredDistance;
 
     // tooltip
     public override string ToolTip()

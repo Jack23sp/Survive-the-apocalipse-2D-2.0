@@ -620,7 +620,7 @@ public class UISelectedItem : MonoBehaviour
         addAccessory.onClick.RemoveAllListeners();
         addAccessory.onClick.AddListener(() =>
         {
-
+            if (Player.localPlayer.playerAdditionalState.additionalState == "SLEEP") return;
             accessoryPanel.gameObject.SetActive(true);
 
             if (itemSlot.item.data is WeaponItem && ((WeaponItem)itemSlot.item.data).accessoryToAdd.Count > 0)
@@ -718,6 +718,7 @@ public class UISelectedItem : MonoBehaviour
         deleteButton.onClick.RemoveAllListeners();
         deleteButton.onClick.AddListener(() =>
         {
+            if (Player.localPlayer.playerAdditionalState.additionalState == "SLEEP") return;
             if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(15);
             if (itemSlot.amount > 0 && index > -1)
             {
@@ -742,6 +743,7 @@ public class UISelectedItem : MonoBehaviour
         equipButton.onClick.RemoveAllListeners();
         equipButton.onClick.AddListener(() =>
         {
+            if (Player.localPlayer.playerAdditionalState.additionalState == "SLEEP") return;
             if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
             if (itemSlot.amount > 0 && index > -1)
             {
@@ -767,6 +769,7 @@ public class UISelectedItem : MonoBehaviour
         useButton.onClick.RemoveAllListeners();
         useButton.onClick.AddListener(() =>
         {
+            if (Player.localPlayer.playerAdditionalState.additionalState == "SLEEP") return;
             if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
             if (itemSlot.amount > 0 && index > -1)
             {

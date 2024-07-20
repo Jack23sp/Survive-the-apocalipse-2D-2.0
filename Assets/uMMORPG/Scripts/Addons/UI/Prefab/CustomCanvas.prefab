@@ -34734,7 +34734,13 @@ MonoBehaviour:
   playerName: {fileID: 714441729}
   playerLevel: {fileID: 2830681414577707205}
   experienceSlider: {fileID: 3490138109889329172}
+  tiredSlider: {fileID: 0}
   player: {fileID: 0}
+  goodColor: {r: 0, g: 0, b: 0, a: 0}
+  goodLimit: 70
+  mediumColor: {r: 0, g: 0, b: 0, a: 0}
+  mediumLimit: 30
+  poorColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1864060636
 GameObject:
   m_ObjectHideFlags: 0

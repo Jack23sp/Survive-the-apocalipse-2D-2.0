@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "uMMORPG Item/Food", order = 999)]
 public partial class FoodItem : UsableItem
 {
+    [Header("Results")]
+    public ScriptableItem results;
+    public int resultsAmount;
     [Header("Equipment")]
     public int foodToAdd;
     public int waterToAdd;
@@ -58,6 +61,24 @@ public partial class FoodItem : UsableItem
             ItemSlot slot = player.inventory.slots[inventoryIndex];
             slot.DecreaseAmount(1);
             player.inventory.slots[inventoryIndex] = slot;
+
+            if(results)
+            {
+                if(player.inventory.CanAddItem(new Item(results), resultsAmount))
+                {
+                    player.inventory.AddItem(new Item(results), resultsAmount);
+                }
+                else if (player.playerBelt.CanAdd(new Item(results), resultsAmount))
+                {
+                    player.playerBelt.Add(new Item(results), resultsAmount);
+                }
+                else
+                {
+                    GameObject g = Instantiate(ResourceManager.singleton.objectDrop.gameObject, player.transform.position, Quaternion.identity);
+                    g.GetComponent<CurvedMovement>().startEntity = player.transform;
+                    g.GetComponent<CurvedMovement>().SpawnAtPosition(new Item(results), resultsAmount, -1, 0);
+                }
+            }
         }
     }
 

@@ -283,6 +283,7 @@ public class ModularBuildingManager : MonoBehaviour
 
     public void Update()
     {
+        if (!Player.localPlayer || (Player.localPlayer && Player.localPlayer.playerAdditionalState.additionalState == "SLEEP")) return;
         if (Input.GetMouseButton(0) && !Utils.IsCursorOverUserInterface() && Input.touchCount <= 1)
         {
             Vector3 screenPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

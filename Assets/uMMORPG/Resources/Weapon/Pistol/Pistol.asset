@@ -23,7 +23,6 @@ MonoBehaviour:
     bonusPerLevel: 0
   maxArmorLevel: 0
   productAfterCooking: {fileID: 0}
-  coverTemperature: 0
   additionalSlot:
     baseValue: 0
     bonusPerLevel: 0
@@ -34,10 +33,6 @@ MonoBehaviour:
   maxWeight:
     baseValue: 0
     bonusPerLevel: 0
-  possibleBagWeight:
-    baseValue: 0
-    bonusPerLevel: 0
-  maxWeightLevel: 0
   skinImages: []
   weaponToSpawn: {fileID: 4801505969307362475, guid: 7ee1acd2ef5ec54409e195ca5d0adb98,
     type: 3}
@@ -94,6 +89,7 @@ MonoBehaviour:
     baseValue: 0
     bonusPerLevel: 0
   animatorToSet: {fileID: 9100000, guid: 73dfba487f63297498cf4b2ae53f6fb5, type: 2}
+  excludePants: 0
   indexHat: -1
   indexAccessory: -1
   indexShirt: -1
@@ -119,3 +115,4 @@ MonoBehaviour:
   weaponPrecision: 0
   distanceToGrab: 5
   requiredAmmo: {fileID: 11400000, guid: 7206d5c4d26efe94bb6d643c30aec56a, type: 2}
+  tiredDistance: 7

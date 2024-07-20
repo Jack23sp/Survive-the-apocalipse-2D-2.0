@@ -15,7 +15,9 @@ public class PlayerMove : NetworkBehaviour
 {
     [HideInInspector] public Player player;
     [SyncVar (hook=(nameof(ChangeRotation)))]public Vector2 tempVector = new Vector2();
-
+    [SyncVar(hook = nameof(ManageUITiredness))] public int tired = 100;
+    public int tiredLimitForAim = 30;
+    public int maxTiredness = 100;
     public readonly SyncList<string> states = new SyncList<string>();
     public GameObject playerObject;
     [SyncVar (hook = (nameof(ChangeAttackMode)))]
@@ -40,6 +42,29 @@ public class PlayerMove : NetworkBehaviour
         InvokeRepeating(nameof(CheckRunConsumeStamina), 1.0f,1.0f);
         InvokeRepeating(nameof(CheckBloodDropOnIdle), 30.0f,30.0f);
         InvokeRepeating(nameof(CheckBloodDropOnMovement), 5.0f,5.0f);
+        InvokeRepeating(nameof(ManageTiredness), 7.0f,7.0f);
+    }
+
+    public void ManageTiredness()
+    {
+        if(tired > 0 && player.playerAdditionalState.additionalState != "SLEEP") tired--;
+        
+        if (tired == 0 && player.playerAdditionalState.additionalState != "SLEEP")
+        {
+            player.playerAdditionalState.additionalState = "SLEEP";
+            return;
+        }
+
+        if (player.playerAdditionalState.additionalState == "SLEEP")
+        {
+            tired++;
+        }
+
+    }
+
+    public void ManageUITiredness(int oldValue, int newValue)
+    {
+        UIPlayerInformation.singleton.Tired();
     }
 
     public override void OnStartLocalPlayer()
@@ -49,6 +74,8 @@ public class PlayerMove : NetworkBehaviour
         {
             UIMobileControl.singleton.enableAttackButton.image.sprite = player.equipment.slots[0].amount > 0 ? player.equipment.slots[0].item.data.image : null;
         }
+
+        ManageUITiredness(tired, tired);
     }
 
     public void ChangeAttackMode(bool oldValue, bool newValue)
