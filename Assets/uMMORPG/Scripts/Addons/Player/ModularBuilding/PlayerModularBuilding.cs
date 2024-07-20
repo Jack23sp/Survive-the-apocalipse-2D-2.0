@@ -469,6 +469,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             if (id != null)
             {
                 GameObject ins = Instantiate(id.gameObject.GetComponent<BuildingAccessory>().craftingAccessoryItem.buildingList[direction].buildingObject, position, Quaternion.identity);
+
                 if (player.playerModularBuilding.CheckDistanceFromSpawn(ins.transform))
                 {
                     Destroy(ins);
@@ -487,6 +488,10 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (slot.item.data.name != itemName) return;
 
         GameObject inst = Instantiate(((ScriptableBuildingAccessory)slot.item.data).buildingList[direction].buildingObject, position, Quaternion.identity);
+        BuildingAccessory acc = inst.GetComponent<BuildingAccessory>();
+        acc.owner = player.name;
+        acc.group = player.guild.guild.name;
+
         if (player.playerModularBuilding.CheckDistanceFromSpawn(inst.transform))
         {
             Destroy(inst);

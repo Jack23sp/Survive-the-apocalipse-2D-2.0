@@ -45,6 +45,7 @@ public class ModularBuildingManager : MonoBehaviour
     public List<WeaponStorage> weaponStorages = new List<WeaponStorage>();
     public List<Fence> fences = new List<Fence>();
     public List<Gate> gates = new List<Gate>();
+    public List<Aquarium> aquarium = new List<Aquarium>();
     public ModularBuilding[] modularBuildings;
 
     public bool activeBuildingModeDoor;
@@ -589,6 +590,15 @@ public class ModularBuildingManager : MonoBehaviour
 
                     switch (forniture.uiToOpen)
                     {
+                        case -2:
+                            if (CanDoOtherActionForniture(forniture, Player.localPlayer))
+                            {
+                                GameObject g = Instantiate(GameObjectSpawnManager.singleton.confirmManagerAccessory, GameObjectSpawnManager.singleton.canvas);
+                                g.GetComponent<UIBuildingAccessoryManager>().cleanButton.gameObject.SetActive(true);
+                                g.GetComponent<UIBuildingAccessoryManager>().Init(forniture.netIdentity, forniture.craftingAccessoryItem);
+
+                            }
+                            break;
                         case -1:
                             if (CanDoOtherActionForniture(forniture, Player.localPlayer))
                             {

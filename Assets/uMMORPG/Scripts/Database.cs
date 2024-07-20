@@ -342,6 +342,7 @@ public partial class Database : MonoBehaviour
         connection.CreateTable<purchasedSkin>();
         connection.CreateTable<Ads>();
         connection.CreateTable<Pin>();
+        connection.CreateTable<aquarium>();
         // addon system hooks
         onConnected.Invoke();
 

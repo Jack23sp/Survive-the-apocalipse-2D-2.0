@@ -108,6 +108,7 @@ public partial class NetworkManagerMMO : NetworkManager
     public override void OnApplicationQuit()
     {
         base.OnApplicationQuit();
+        Database.singleton.SaveBuilding();
         NetworkClient.connection.Disconnect();
     }
 

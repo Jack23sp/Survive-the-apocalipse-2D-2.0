@@ -14,6 +14,7 @@ public class UIBuildingAccessoryManager : MonoBehaviour
     public Button repairButton;
     public Button moveButton;
     public Button deleteButton;
+    public Button cleanButton;
     public Button confirmButton;
     private Button parentButton;
 
@@ -24,6 +25,7 @@ public class UIBuildingAccessoryManager : MonoBehaviour
     public TextMeshProUGUI repairText;
     public TextMeshProUGUI moveText;
     public TextMeshProUGUI deleteText;
+    public TextMeshProUGUI cleanText;
 
     public NetworkIdentity accessoryIdentity;
     public ScriptableBuildingAccessory accessoryToAdd;
@@ -31,13 +33,14 @@ public class UIBuildingAccessoryManager : MonoBehaviour
     private BuildingAccessory buildingAccessory;
     [HideInInspector] public bool repair;
     [HideInInspector] public bool delete;
+    [HideInInspector] public bool clean;
     private int hasAllItemToRepair;
-    public int inventoryIndex;
-
+    [HideInInspector] public int selected;
     public Vector3 position;
 
     public void Init(NetworkIdentity identity, ScriptableBuildingAccessory scriptableBuildingAccessory, Button UIParentButton = null)
     {
+        selected = 3;
         if (!singleton)
         {
             Destroy(singleton);
@@ -66,22 +69,29 @@ public class UIBuildingAccessoryManager : MonoBehaviour
         deleteButton.onClick.RemoveAllListeners();
         deleteButton.onClick.AddListener(() =>
         {
-            delete = true;
-            DeleteButton();
+            selected = 1;
+            ManageUI(selected);
+        });
+
+        cleanButton.onClick.RemoveAllListeners();
+        cleanButton.onClick.AddListener(() =>
+        {
+            selected = 2;
+            ManageUI(selected);
         });
 
         repairButton.onClick.RemoveAllListeners();
         repairButton.onClick.AddListener(() =>
         {
-            delete = false;
-            RepairButton();
+            selected = 3;
+            ManageUI(selected);
         });
 
         moveButton.onClick.RemoveAllListeners();
         moveButton.onClick.AddListener(() =>
         {
-            delete = false;
-            Movebutton();
+            selected = 4;
+            ManageUI(selected);
         });
 
         confirmButton.onClick.RemoveAllListeners();
@@ -90,12 +100,12 @@ public class UIBuildingAccessoryManager : MonoBehaviour
             ConfirmButton();
         });
 
-        RepairButton();
+        ManageUI(selected);
     }
 
     public void ConfirmButton()
     {
-        if (!delete && !repair)
+        if (selected == 4)
         {
             Player.localPlayer.playerModularBuilding.oldBuilding = buildingAccessory;
             Player.localPlayer.playerModularBuilding.fakeBuilding = buildingAccessory.craftingAccessoryItem.GetType();
@@ -103,13 +113,17 @@ public class UIBuildingAccessoryManager : MonoBehaviour
             Player.localPlayer.playerModularBuilding.CmdManageVisibilityOfObject(false);
             UseItem(buildingAccessory, buildingAccessory.gameObject);
         }
-        else if(delete)
+        else if(selected == 1)
         {
             Player.localPlayer.playerModularBuilding.CmdDeleteAccessory(buildingAccessory.netIdentity);
         }
-        else
+        else if (selected == 3)
         {
             Player.localPlayer.playerModularBuilding.CmdRepairAccessory(buildingAccessory.netIdentity);
+        }
+        else if (selected == 2)
+        {
+            Player.localPlayer.CmdCleanAquarium(buildingAccessory.netIdentity);
         }
         CloseButton(true);
     }
@@ -197,21 +211,6 @@ public class UIBuildingAccessoryManager : MonoBehaviour
         ModularBuildingManager.singleton.inventoryIndex = -1;
     }
 
-    public void Movebutton()
-    {
-        ManageUI(false);
-    }
-
-    public void RepairButton()
-    {
-        ManageUI(true);
-    }
-
-    public void DeleteButton()
-    {
-        ManageUI(false);
-    }
-
     public void CloseButton(bool close)
     {
         if (close)
@@ -226,49 +225,38 @@ public class UIBuildingAccessoryManager : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void ManageUI(bool condition)
+    public void ManageUI(int condition)
     {
-        repair = condition;
-        scrollRect.gameObject.SetActive(condition);
-        repairText.gameObject.SetActive(condition);
-        moveText.gameObject.SetActive(!condition);
-        if (delete)
-        {
-            moveText.gameObject.SetActive(false);
-            scrollRect.gameObject.SetActive(false);
-        }
-        deleteText.gameObject.SetActive(delete);
+        repair = condition == 3;
+        scrollRect.gameObject.SetActive(condition == 3);
+        repairText.gameObject.SetActive(condition == 3);
+        moveText.gameObject.SetActive(condition == 4);
+        cleanText.gameObject.SetActive(condition == 2);
+        deleteText.gameObject.SetActive(condition == 1);
 
-        if (!delete)
-        {
-            if (repair)
+            if (condition == 3)
             {
-                if (accessoryToAdd && accessoryIdentity)
-                {
-                    hasAllItemToRepair = 1;
-                    UIUtils.BalancePrefabs(objectToCreate, accessoryToAdd.repairItems.Count, content);
-                    for (int i = 0; i < accessoryToAdd.repairItems.Count; i++)
+                    if (accessoryToAdd && accessoryIdentity)
                     {
-                        int index = i;
-                        UICraftSlotChild slot = content.GetChild(index).gameObject.GetComponent<UICraftSlotChild>();
-                        slot.ingredientImage.sprite = accessoryToAdd.repairItems[index].items.image;
-                        slot.ingredientImage.preserveAspect = true;
-                        int hasItem = Player.localPlayer.inventory.CountItem(new Item(accessoryToAdd.repairItems[index].items));
-                        if (hasAllItemToRepair > 0) hasAllItemToRepair = Player.localPlayer.inventory.CountItem(new Item(accessoryToAdd.repairItems[index].items));
-                        slot.ingredientsAmount.color = hasItem < accessoryToAdd.repairItems[index].amount ? Color.red : Color.white;
-                        slot.ingredientsAmount.text = accessoryToAdd.repairItems[index].amount + "/" + Player.localPlayer.inventory.CountItem(new Item(accessoryToAdd.repairItems[index].items));
+                        hasAllItemToRepair = 1;
+                        UIUtils.BalancePrefabs(objectToCreate, accessoryToAdd.repairItems.Count, content);
+                        for (int i = 0; i < accessoryToAdd.repairItems.Count; i++)
+                        {
+                            int index = i;
+                            UICraftSlotChild slot = content.GetChild(index).gameObject.GetComponent<UICraftSlotChild>();
+                            slot.ingredientImage.sprite = accessoryToAdd.repairItems[index].items.image;
+                            slot.ingredientImage.preserveAspect = true;
+                            int hasItem = Player.localPlayer.inventory.CountItem(new Item(accessoryToAdd.repairItems[index].items));
+                            if (hasAllItemToRepair > 0) hasAllItemToRepair = Player.localPlayer.inventory.CountItem(new Item(accessoryToAdd.repairItems[index].items));
+                            slot.ingredientsAmount.color = hasItem < accessoryToAdd.repairItems[index].amount ? Color.red : Color.white;
+                            slot.ingredientsAmount.text = accessoryToAdd.repairItems[index].amount + "/" + Player.localPlayer.inventory.CountItem(new Item(accessoryToAdd.repairItems[index].items));
+                        }
+                        confirmButton.interactable = hasAllItemToRepair > 0 && Player.localPlayer.inventory.CanAddItem(new Item(accessoryToAdd), 1) && buildingAccessory.health < buildingAccessory.maxHealth;
                     }
-                    confirmButton.interactable = hasAllItemToRepair > 0 && Player.localPlayer.inventory.CanAddItem(new Item(accessoryToAdd), 1) && buildingAccessory.health < buildingAccessory.maxHealth;
-                }
             }
-            else
+            else if (condition == 4 || condition == 1 || condition == 2)
             {
                 confirmButton.interactable = true;
             }
-        }
-        else
-        {
-            confirmButton.interactable = true;
-        }
     }
 }

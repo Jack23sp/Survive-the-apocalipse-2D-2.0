@@ -342,6 +342,10 @@ public static class Utilities
                 ((WeaponStorage)buildingAccessoryNew).weapon.Add(((WeaponStorage)buildingAccessoryOld).weapon[i]);
             }
         }
+        if (oldGameObject.GetComponent<Aquarium>())
+        {
+            ((Aquarium)buildingAccessoryNew).dirt = ((Aquarium)buildingAccessoryOld).dirt;
+        }
     }
     public static List<GameObject> GetNewConnections(List<Collider2D> newColliders, List<Collider2D> oldColliders)
     {

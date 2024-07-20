@@ -46,6 +46,7 @@ public partial class Database
         connection.Execute("DELETE FROM furnace_elements");
         connection.Execute("DELETE FROM furnace_results");
         connection.Execute("DELETE FROM furnace_wood");
+        connection.Execute("DELETE FROM aquarium");
 
         SaveBuildingBasement();
 
@@ -114,6 +115,11 @@ public partial class Database
             if (ModularBuildingManager.singleton.buildingAccessories[index] is Library)
             {
                 SaveLibrary(index);
+            }
+
+            if (ModularBuildingManager.singleton.buildingAccessories[index] is Aquarium)
+            {
+                SaveAquarium(index);
             }
         }
         connection.Commit();
@@ -187,6 +193,11 @@ public partial class Database
             if (acc is Library)
             {
                 LoadLibrary(row.ind, ((Library)acc));
+            }
+
+            if (acc is Aquarium)
+            {
+                LoadAquarium(row.ind, ((Aquarium)acc));
             }
 
             NetworkServer.Spawn(g);
@@ -325,7 +336,7 @@ public class BuildingAccessory : NetworkBehaviour
 
         if (UIBuildingAccessoryManager.singleton)
         {
-            UIBuildingAccessoryManager.singleton.ManageUI(UIBuildingAccessoryManager.singleton.repair);
+            UIBuildingAccessoryManager.singleton.ManageUI(3);
         }
     }
 
