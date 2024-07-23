@@ -15,6 +15,7 @@ public struct EntityInZone
     public List<ZoneEntity> notAggresiveAnimal;
     public List<ZoneEntity> aggresiveAnimal;
     public List<ZoneEntity> flower;
+    public List<ZoneEntity> mushroom;
     public List<ZoneEntity> grass;
     public List<Player> players;
 
@@ -28,6 +29,7 @@ public struct EntityInZone
         notAggresiveAnimal = new List<ZoneEntity>();
         aggresiveAnimal = new List<ZoneEntity>();
         flower = new List<ZoneEntity>();
+        mushroom = new List<ZoneEntity>();
         grass = new List<ZoneEntity>();
         players = new List<Player>();
     }
@@ -67,6 +69,7 @@ public class SpawnManager : NetworkBehaviour
     public int maxNotAggressiveAnimal;
     public int maxAggressiveAnimal;
     public int maxFlower;
+    public int maxMushroom;
     public int maxGrass;
 
     public List<EntityInZone> zones = new List<EntityInZone>();
@@ -77,6 +80,7 @@ public class SpawnManager : NetworkBehaviour
     public List<GameObject> notAggressiveAnimal;
     public List<GameObject> aggressiveAnimal;
     public List<GameObject> flower;
+    public List<GameObject> mushroom;
     public GameObject mainGrass;
     public GameObject childGrass;
 
@@ -417,6 +421,55 @@ public class SpawnManager : NetworkBehaviour
                         inst = Instantiate(flower[UnityEngine.Random.Range(0, flower.Count)], spawnPoint, Quaternion.identity);
                         NetworkServer.Spawn(inst);
                         zones[i].flower.Add(new ZoneEntity()
+                        {
+                            pos = spawnPoint,
+                            typeName = inst.name.Replace("(Clone)", ""),
+                            health = 0,
+                            actual = inst
+                        });
+                    }
+                }
+                #endregion
+
+                #region Mushroom
+                for (int e = 0; e < zones[i].mushroom.Count; e++)
+                {
+                    if (zones[i].playerInside == 0) return;
+                    if (zones[i].mushroom[e].actual == null)
+                    {
+                        Collider2D[] colliders = Physics2D.OverlapCircleAll(zones[i].mushroom[e].pos, 1f, invalidSpawnLayers);
+                        if (colliders.Length == 0)
+                        {
+                            // spawn a random object from the list
+                            for (int j = 0; j < mushroom.Count; j++)
+                            {
+                                if (mushroom[j].name == zones[i].mushroom[e].typeName)
+                                {
+                                    inst = Instantiate(mushroom[j], zones[i].mushroom[e].pos, Quaternion.identity);
+                                    //inst.GetComponent<Rock>().health = zones[i].flower[e].health;
+                                    zoneEntity = zones[i].mushroom[e];
+                                    zoneEntity.actual = inst;
+                                    zones[i].mushroom[e] = zoneEntity;
+                                    NetworkServer.Spawn(inst);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                while (zones[i].mushroom.Count < maxMushroom)
+                {
+                    if (zones[i].playerInside == 0) return;
+                    Vector2 spawnPoint = GetRandomValidSpawnPoint(zoneCollider, invalidSpawnLayers);
+
+                    // check if spawn position is valid
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPoint, 1f, invalidSpawnLayers);
+                    if (colliders.Length == 0)
+                    {
+                        // spawn a random object from the list
+                        inst = Instantiate(mushroom[UnityEngine.Random.Range(0, mushroom.Count)], spawnPoint, Quaternion.identity);
+                        NetworkServer.Spawn(inst);
+                        zones[i].mushroom.Add(new ZoneEntity()
                         {
                             pos = spawnPoint,
                             typeName = inst.name.Replace("(Clone)", ""),

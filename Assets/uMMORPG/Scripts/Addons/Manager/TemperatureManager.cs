@@ -177,7 +177,16 @@ public class TemperatureManager : NetworkBehaviour
     public AudioClip nightClip;
     public AudioClip dayClip;
 
+    [SyncVar(hook = (nameof(RainClouds)))] public float tempLimitRain;
+    [SyncVar(hook = (nameof(SnowClouds)))] public float tempLimitSnow;
+    [SyncVar(hook = (nameof(SunClouds)))] public float tempLimitSunny;
+
+    public float cloudThreshold = 0.05f;
+    public Material cloudShadowMaterial;
+
     public Color colorToActivateLamp;
+
+    public float transp;
 
     void Awake()
     {
@@ -191,6 +200,10 @@ public class TemperatureManager : NetworkBehaviour
         //ManagerAssign.singleton.Assign(this.gameObject);
         CheckRainParticle(isRainy, isRainy);
         CheckSnowParticle(isSnowy, isSnowy);
+        SunClouds(tempLimitSunny, tempLimitSunny);
+        SnowClouds(tempLimitSnow, tempLimitSnow);
+        RainClouds(tempLimitRain, tempLimitRain);
+        cloudShadowMaterial.SetFloat("_TransparencyThreshold", tempLimitSunny);
     }
 
     public void CheckSnow(float oldValue, float newValue)
@@ -224,6 +237,60 @@ public class TemperatureManager : NetworkBehaviour
             snowObject.snowIntensity = 0f;
             rainObject.rainIntensity = Mathf.Lerp(0.0f, 1.0f, 3.0f);
         }
+    }
+
+    public void SunClouds(float oldValue, float newValue)
+    {
+        if (tempLimitSunny == 0) return;
+        transp = cloudShadowMaterial.GetFloat("_TransparencyThreshold");
+
+        if(transp > tempLimitSunny + cloudThreshold)
+            cloudShadowMaterial.SetFloat("_TransparencyThreshold", transp - 0.01f);
+        else if(transp < tempLimitSunny + (-cloudThreshold))
+            cloudShadowMaterial.SetFloat("_TransparencyThreshold", transp + 0.01f);
+
+        Invoke(nameof(CallSunClouds), 0.2f);
+    }
+
+    public void CallSunClouds()
+    {
+        SunClouds(tempLimitSunny, tempLimitSunny);
+    }
+
+    public void RainClouds(float oldValue, float newValue)
+    {
+        if (tempLimitRain == 0) return;
+        transp = cloudShadowMaterial.GetFloat("_TransparencyThreshold");
+
+        if (transp > tempLimitRain + cloudThreshold)
+            cloudShadowMaterial.SetFloat("_TransparencyThreshold", transp - 0.01f);
+        else if (transp < tempLimitRain + (-cloudThreshold))
+            cloudShadowMaterial.SetFloat("_TransparencyThreshold", transp + 0.01f);
+
+        Invoke(nameof(CallRainClouds), 0.2f);
+    }
+
+    public void CallRainClouds()
+    {
+        RainClouds(tempLimitRain, tempLimitRain);
+    }
+
+    public void SnowClouds(float oldValue, float newValue)
+    {
+        if (tempLimitSnow == 0) return;
+        transp = cloudShadowMaterial.GetFloat("_TransparencyThreshold");
+
+        if (transp > tempLimitSnow + cloudThreshold)
+            cloudShadowMaterial.SetFloat("_TransparencyThreshold", transp - 0.01f);
+        else if (transp < tempLimitSnow + (-cloudThreshold))
+            cloudShadowMaterial.SetFloat("_TransparencyThreshold", transp + 0.01f);
+
+        Invoke(nameof(CallSnowClouds), 0.2f);
+    }
+
+    public void CallSnowClouds()
+    {
+        SnowClouds(tempLimitSnow, tempLimitSnow);
     }
 
     public void CheckSunnyParticle(bool oldValue, bool newValue)
@@ -298,7 +365,7 @@ public class TemperatureManager : NetworkBehaviour
         //ManagerAssign.singleton.Assign(this.gameObject);
         SetParameters();
         InvokeRepeating(nameof(TimeManager), 0.01f, 0.01f);
-        InvokeRepeating(nameof(ChangeWeatherConditions), timeBetweenWeatherChange, timeBetweenWeatherChange);
+        InvokeRepeating(nameof(ChangeWeatherConditions), 0.0f, timeBetweenWeatherChange);
         InvokeRepeating(nameof(ChangeWindConditions), 0.0f, 30.0f);
         InvokeRepeating(nameof(ChargeAquifer), 0.0f, 30.0f);
         InvokeRepeating(nameof(ChargeWaterContainer), 0.0f, 20.0f);
@@ -578,27 +645,31 @@ public class TemperatureManager : NetworkBehaviour
     {
         float nextweather = UnityEngine.Random.Range(0.0f, 1.0f);
 
-        Debug.Log("Weather change : " + nextweather);
+        //Debug.Log("Weather change : " + nextweather);
+
+        bool tempRainy = false;
+        bool tempSunny = false;
+        bool tempSnowy = false;
 
         if (season == winter)
         {
             if (nextweather >= winterProbabilityOfRainStart && nextweather <= winterProbabilityOfRainEnd)
             {
-                isRainy = true;
-                isSunny = false;
-                isSnowy = false;
+                tempRainy = true;
+                tempSunny = false;
+                tempSnowy = false;
             }
             if (nextweather >= winterProbabilityOfSunStart && nextweather <= winterProbabilityOfSunEnd)
             {
-                isRainy = false;
-                isSunny = true;
-                isSnowy = false;
+                tempRainy = false;
+                tempSunny = true;
+                tempSnowy = false;
             }
             if (nextweather >= winterProbabilityOfSnowStart && nextweather <= winterProbabilityOfSnowEnd)
             {
-                isRainy = false;
-                isSunny = false;
-                isSnowy = true;
+                tempRainy = false;
+                tempSunny = false;
+                tempSnowy = true;
             }
             changeTime.Add(NetworkTime.time);
         }
@@ -607,21 +678,21 @@ public class TemperatureManager : NetworkBehaviour
         {
             if (nextweather >= springProbabilityOfRainStart && nextweather <= springProbabilityOfRainEnd)
             {
-                isRainy = true;
-                isSunny = false;
-                isSnowy = false;
+                tempRainy = true;
+                tempSunny = false;
+                tempSnowy = false;
             }
             if (nextweather >= springProbabilityOfSunStart && nextweather <= springProbabilityOfSunEnd)
             {
-                isRainy = false;
-                isSunny = true;
-                isSnowy = false;
+                tempRainy = false;
+                tempSunny = true;
+                tempSnowy = false;
             }
             if (nextweather >= springProbabilityOfSnowStart && nextweather <= springProbabilityOfSnowEnd)
             {
-                isRainy = false;
-                isSunny = false;
-                isSnowy = true;
+                tempRainy = false;
+                tempSunny = false;
+                tempSnowy = true;
             }
             changeTime.Add(NetworkTime.time);
         }
@@ -630,21 +701,21 @@ public class TemperatureManager : NetworkBehaviour
         {
             if (nextweather >= summerProbabilityOfRainStart && nextweather <= summerProbabilityOfRainEnd)
             {
-                isRainy = true;
-                isSunny = false;
-                isSnowy = false;
+                tempRainy = true;
+                tempSunny = false;
+                tempSnowy = false;
             }
             if (nextweather >= summerProbabilityOfSunStart && nextweather <= summerProbabilityOfSunEnd)
             {
-                isRainy = false;
-                isSunny = true;
-                isSnowy = false;
+                tempRainy = false;
+                tempSunny = true;
+                tempSnowy = false;
             }
             if (nextweather >= summerProbabilityOfSnowStart && nextweather <= summerProbabilityOfSnowEnd)
             {
-                isRainy = false;
-                isSunny = false;
-                isSnowy = true;
+                tempRainy = false;
+                tempSunny = false;
+                tempSnowy = true;
             }
             changeTime.Add(NetworkTime.time);
         }
@@ -653,24 +724,46 @@ public class TemperatureManager : NetworkBehaviour
         {
             if (nextweather >= autumnProbabilityOfRainStart && nextweather <= autumnProbabilityOfRainEnd)
             {
-                isRainy = true;
-                isSunny = false;
-                isSnowy = false;
+                tempRainy = true;
+                tempSunny = false;
+                tempSnowy = false;
             }
             if (nextweather >= autumnProbabilityOfSunStart && nextweather <= autumnProbabilityOfSunEnd)
             {
-                isRainy = false;
-                isSunny = true;
-                isSnowy = false;
+                tempRainy = false;
+                tempSunny = true;
+                tempSnowy = false;
             }
             if (nextweather >= autumnProbabilityOfSnowStart && nextweather <= autumnProbabilityOfSnowEnd)
             {
-                isRainy = false;
-                isSunny = false;
-                isSnowy = true;
+                tempRainy = false;
+                tempSunny = false;
+                tempSnowy = true;
             }
             changeTime.Add(NetworkTime.time);
         }
+
+        if (tempRainy) 
+        { 
+            tempLimitRain = 0.29f; tempLimitSnow = 0.0f; tempLimitSunny = 0.0f;
+        }
+        if (tempSnowy) 
+        { 
+            tempLimitRain = 0.0f; tempLimitSnow = 0.29f; tempLimitSunny = 0.0f; 
+        }
+        if (tempSunny) 
+        { 
+            tempLimitRain = 0.0f; tempLimitSnow = 0.0f; tempLimitSunny = 0.85f; 
+        }
+
+        Invoke(nameof(ChangeWeather), 10.0f);
+    }
+
+    public void ChangeWeather()
+    {
+        if (tempLimitRain > 0.0f) isRainy = true; else isRainy = false;
+        if (tempLimitSnow > 0.0f) isSnowy = true; else isSnowy = false;
+        if (tempLimitSunny > 0.0f) isSunny = true;else isSunny = false;
     }
 
     public void ChangeWindConditions()

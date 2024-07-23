@@ -109,7 +109,7 @@ public partial class NetworkManagerMMO : NetworkManager
     {
         base.OnApplicationQuit();
         Database.singleton.SaveBuilding();
-        NetworkClient.connection.Disconnect();
+        //NetworkClient.connection.Disconnect();
     }
 
     public void SpawnManager()

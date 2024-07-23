@@ -235,6 +235,7 @@ public class Furnace : BuildingAccessory
     public readonly SyncList<ItemSlot> wood = new SyncList<ItemSlot>();
 
     [SyncVar(hook = (nameof(ManageActivation)))] public bool on;
+    public GameObject fireObject;
 
     public new void Start()
     {
@@ -267,6 +268,11 @@ public class Furnace : BuildingAccessory
         if (isServer || isClient)
         {
             if (!ModularBuildingManager.singleton.furnaces.Contains(this)) ModularBuildingManager.singleton.furnaces.Add(this);
+        }
+
+        if(isClient)
+        {
+            ManageActivation(on, on);
         }
     }
 
@@ -363,6 +369,8 @@ public class Furnace : BuildingAccessory
                 UIFurnace.singleton.Open(UIFurnace.singleton.furnace);
             }
         }
+
+        fireObject.SetActive(newBool);
     }
 
     public void OnResultsChanged(SyncList<ItemSlot>.Operation op, int itemIndex, ItemSlot oldItem, ItemSlot newItem)
