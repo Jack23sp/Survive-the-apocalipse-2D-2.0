@@ -15,7 +15,7 @@ public class PlayerMove : NetworkBehaviour
 {
     [HideInInspector] public Player player;
     [SyncVar (hook=(nameof(ChangeRotation)))]public Vector2 tempVector = new Vector2();
-    [SyncVar(hook = nameof(ManageUITiredness))] public int tired = 100;
+    [SyncVar(hook = nameof(ManageUITiredness))] public int tired = 200;
     public int tiredLimitForAim = 30;
     public int maxTiredness = 100;
     public readonly SyncList<string> states = new SyncList<string>();

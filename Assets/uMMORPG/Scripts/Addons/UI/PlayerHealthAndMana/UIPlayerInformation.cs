@@ -45,10 +45,10 @@ public class UIPlayerInformation : MonoBehaviour
     public void Tired()
     {
         if (!Player.localPlayer.playerMove) Player.localPlayer.GetComponent<PlayerMove>().Assign();
-        tiredSlider.fillAmount = (float)player.playerMove.tired / player.playerMove.maxTiredness;
-        if (player.playerMove.tired >= goodLimit)
+        tiredSlider.fillAmount = (float)Player.localPlayer.playerMove.tired / Player.localPlayer.playerMove.maxTiredness;
+        if (Player.localPlayer.playerMove.tired >= goodLimit)
             tiredSlider.color = goodColor;
-        else if (player.playerMove.tired >= mediumLimit)
+        else if (Player.localPlayer.playerMove.tired >= mediumLimit)
             tiredSlider.color = mediumColor;
         else
             tiredSlider.color = poorColor;
