@@ -55,6 +55,8 @@ TagManager:
   - Rock
   - Spawn
   - PlayerSelector
+  - Wallpaper
+  - VegetationSpawner
   layers:
   - Default
   - TransparentFX
@@ -86,7 +88,7 @@ TagManager:
   - BuildingDetector
   - ControlSpawnpoint
   - ResourceGathered
-  - 
+  - VegetationSpawner
   - 
   m_SortingLayers:
   - name: Terrain

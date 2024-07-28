@@ -1007,6 +1007,7 @@ MonoBehaviour:
   buildingAccessory: {fileID: 2995286686154306461}
   avoidCollidersNotToCache: []
   tagToAvoid: []
+  thisCollider: {fileID: 5325849742429894075}
 --- !u!114 &-4573079516942171549
 MonoBehaviour:
   m_ObjectHideFlags: 0

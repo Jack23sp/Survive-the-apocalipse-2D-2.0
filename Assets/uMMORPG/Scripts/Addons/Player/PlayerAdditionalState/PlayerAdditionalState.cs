@@ -108,6 +108,7 @@ public class PlayerAdditionalState : NetworkBehaviour
            oldValue != "EXERCISE" &&
            oldValue != "ABS" &&
            oldValue != "JUMPINGJACK" &&
+           oldValue != "HARVESTING" &&
            oldValue != "PUSHUPS" && 
            oldValue != "SLEEP")
         {
@@ -192,7 +193,6 @@ public class PlayerAdditionalState : NetworkBehaviour
         }
         else
         {
-
             if (dumbbell1) dumbbell1.SetActive(false);
             if (dumbbell2) dumbbell2.SetActive(false);
 

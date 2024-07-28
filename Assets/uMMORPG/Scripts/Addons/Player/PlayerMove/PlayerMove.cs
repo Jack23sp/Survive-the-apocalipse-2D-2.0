@@ -284,6 +284,7 @@ public class PlayerMove : NetworkBehaviour
     public void CmdSyncRotation(Vector2 rot, bool manageReading)
     {
         tempVector = rot;
+
         if (manageReading)
         {
            player.playerAdditionalState.SetState("",false, 0, 0, null);

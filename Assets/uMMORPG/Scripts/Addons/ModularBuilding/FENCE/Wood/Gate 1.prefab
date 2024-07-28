@@ -1085,6 +1085,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  newName: 
   group: 
   owner: 
   health: 100
@@ -1120,6 +1121,7 @@ MonoBehaviour:
   oldBuilding: {fileID: 0}
   zoneCollider: {fileID: 0}
   grassUnder: []
+  spritesList: []
   spriteRenderers:
   - {fileID: 4124601218598336738}
   - {fileID: 7905263065559068427}
@@ -1212,6 +1214,7 @@ MonoBehaviour:
   - WoodPlacer
   - GatePlacer
   - GateChecker
+  thisCollider: {fileID: 4965063269831762831}
 --- !u!95 &2700091879468658481
 Animator:
   serializedVersion: 4

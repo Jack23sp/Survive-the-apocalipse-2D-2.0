@@ -182,6 +182,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  newName: 
   group: 
   owner: 
   health: 200
@@ -213,6 +214,7 @@ MonoBehaviour:
   oldBuilding: {fileID: 0}
   zoneCollider: {fileID: 0}
   grassUnder: []
+  spritesList: []
   lights:
   - {fileID: 4747255276921387549}
   isActive: 0
@@ -299,6 +301,7 @@ MonoBehaviour:
   - WoodPlacer
   - GatePlacer
   - GateChecker
+  thisCollider: {fileID: 1778643562530404726}
 --- !u!114 &-1656143816508957980
 MonoBehaviour:
   m_ObjectHideFlags: 0

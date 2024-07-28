@@ -7,6 +7,7 @@ public class AnimatorManager : MonoBehaviour
     public static AnimatorManager singleton;
     public RuntimeAnimatorController noWeaponRuntimeController;
     public RuntimeAnimatorController sleepRuntimeController;
+    public RuntimeAnimatorController harvestingRuntimeController;
 
     void Start()
     {

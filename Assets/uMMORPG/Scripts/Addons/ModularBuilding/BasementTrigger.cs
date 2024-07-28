@@ -96,6 +96,47 @@ public class BasementTrigger : MonoBehaviour
                 if (!obstacles.Contains(collision)) obstacles.Add(collision);
             }
         }
+
+        if (modularBuilding.isServer)
+        {
+            IrregularColliderSpawner spawn = null;
+            //if (collision.CompareTag("Spawn"))
+            //{
+            //    spawn = ((BoxCollider2D)collision).gameObject.GetComponent<IrregularColliderSpawner>();
+            //}
+            if (collision.CompareTag("VegetationSpawner"))
+            {
+                PolygonCollider2D polygonCollider = collision.GetComponent<PolygonCollider2D>();
+                spawn = polygonCollider.gameObject.GetComponent<IrregularColliderSpawner>();
+                // Ottieni i bounds del BoxCollider2D
+                Bounds boxBounds = GetComponent<BoxCollider2D>().bounds;
+
+                // Trova i vertici del BoxCollider2D
+                Vector2[] boxVertices = new Vector2[4];
+                boxVertices[0] = new Vector2(boxBounds.min.x, boxBounds.min.y); // Bottom Left
+                boxVertices[1] = new Vector2(boxBounds.max.x, boxBounds.min.y); // Bottom Right
+                boxVertices[2] = new Vector2(boxBounds.max.x, boxBounds.max.y); // Top Right
+                boxVertices[3] = new Vector2(boxBounds.min.x, boxBounds.max.y); // Top Left
+
+                for (int i = 0; i < spawn.spawnedObjects.Count; i++)
+                {
+                    AmbientDecoration dec = spawn.spawnedObjects[i];
+                    // Verifica se l'oggetto non è un trigger o collider
+                    if (dec.obj != null && !dec.overlay)
+                    {
+
+                        // Verifica se la posizione dell'oggetto è all'interno del PolygonCollider2D
+                        if (collider.OverlapPoint(dec.position))
+                        {
+                            dec.overlay = true;
+                            dec.obj.GetComponent<SpawnedObject>().hasOverlay = true;
+                            spawn.spawnedObjects[i] = dec;
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     public void OnTriggerStay2D(Collider2D collision)

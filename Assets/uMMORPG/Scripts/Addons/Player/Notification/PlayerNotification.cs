@@ -36,6 +36,17 @@ public class PlayerNotification : NetworkBehaviour
     }
 
     [TargetRpc]
+    public void TargetSpawnNotificationGeneral(string itemName, string message)
+    {
+        if (!player.isLocalPlayer) return;
+        if (ScriptableItem.All.TryGetValue(itemName.GetStableHashCode(), out ScriptableItem itemData))
+        {
+            SpawnNotification(itemData.image, message);
+        }
+    }
+
+
+    [TargetRpc]
     public void TargetSpawnBookNotification(string bookTitle, string message)
     {
         if (!player.isLocalPlayer) return;

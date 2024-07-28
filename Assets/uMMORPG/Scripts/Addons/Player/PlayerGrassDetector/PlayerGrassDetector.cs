@@ -8,6 +8,7 @@ public class PlayerGrassDetector : MonoBehaviour
     public Collider2D thisCollider;
     public List<Player> nearPlayer = new List<Player>();
     private string returnString;
+    public BoxCollider2D zoneInside = null;
 
     public void Start()
     {
@@ -46,6 +47,7 @@ public class PlayerGrassDetector : MonoBehaviour
             if (LayerMask.LayerToName(collision.gameObject.layer) == "Spawn")
             {
                 SpawnManager.singleton.SpawnObject(collision, player.collider);
+                zoneInside = ((BoxCollider2D)collision);
             }
         }
 

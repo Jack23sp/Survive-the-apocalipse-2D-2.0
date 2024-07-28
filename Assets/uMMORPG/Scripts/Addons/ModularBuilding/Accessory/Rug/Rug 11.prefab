@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -444643067
-  m_SortingLayer: -5
+  m_SortingLayer: -7
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: 3e01aee170e6ada49ae4f38fce995b0e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -135,9 +135,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
+  _assetId: 2645688246
   serverOnly: 0
   visible: 0
-  m_AssetId: e5ce35d410eaf0f47b92d636f3485dbe
   hasSpawned: 0
 --- !u!61 &4965063269831762831
 BoxCollider2D:
@@ -201,6 +201,7 @@ MonoBehaviour:
   buildingAccessory: {fileID: 1501198947606051866}
   avoidCollidersNotToCache: []
   tagToAvoid: []
+  thisCollider: {fileID: 4965063269831762831}
 --- !u!114 &1501198947606051866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,8 +214,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df03cfe526ed12e488d950ee195333a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  newName: 
   group: 
   owner: 
   health: 100
@@ -238,7 +241,13 @@ MonoBehaviour:
   colliderHits: []
   avoidHits: []
   cracksImages: []
+  sortByDepths: []
   uiToOpen: 0
+  craftingAccessoryItem: {fileID: 0}
+  oldBuilding: {fileID: 0}
+  zoneCollider: {fileID: 0}
+  grassUnder: []
+  spritesList: []
 --- !u!114 &2332587103912592362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,3 +271,4 @@ MonoBehaviour:
   zombie: {fileID: 0}
   wall: {fileID: 0}
   caster: {fileID: 0}
+  precisionRand: 0

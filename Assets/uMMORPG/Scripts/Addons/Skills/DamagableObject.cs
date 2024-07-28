@@ -84,6 +84,7 @@ public class DamagableObject : MonoBehaviour
     [HideInInspector] public Player player;
     [HideInInspector] public Monster zombie;
     [HideInInspector] public WallManager wall;
+    [HideInInspector] public SpawnedObject ambient;
 
     [HideInInspector] public Player caster;
     private int rand;
@@ -498,7 +499,44 @@ public class DamagableObject : MonoBehaviour
                 }
             }
         }
+        else if (ambient != null)
+        {
+            if(((WeaponItem)weapon.item.data).name == "Machete")
+            {
+                if (Vector3.Distance(caster.transform.GetChild(0).transform.position, transform.position) > 2.0f) return;
+                List<GameObject> toDelete = new List<GameObject>();
+                Collider2D[] near = Physics2D.OverlapBoxAll(ambient.collider.bounds.center, ambient.collider.bounds.size, 0, ModularBuildingManager.singleton.ambientSlashLayerMask);
+                SpawnedObject spawnedObject = null;
+                toDelete.Add(this.gameObject);
+                for(int i = 0; i < near.Length; i++)
+                {
+                    spawnedObject = near[i].GetComponent<SpawnedObject>();
+                    if(spawnedObject)
+                    {
+                        if(spawnedObject.reward)
+                        {
+                            if(caster.inventory.CanAddItem(new Item(spawnedObject.reward),1))
+                            {
+                                caster.inventory.AddItem(new Item(spawnedObject.reward), 1);
+                                caster.playerNotification.TargetSpawnNotificationGeneral(spawnedObject.reward.name, "Added 1 " + spawnedObject.reward.name + " to inventory!");
+                            }
+                            else
+                            {
+                                GameObject g = Instantiate(ResourceManager.singleton.objectDrop.gameObject, caster.transform.position, Quaternion.identity);
+                                g.GetComponent<CurvedMovement>().startEntity = caster.transform;
+                                g.GetComponent<CurvedMovement>().SpawnAtPosition(new Item(spawnedObject.reward), 1, -1, 0);
+                            }
+                        }
+                    }
+                    if(!toDelete.Contains(near[i].gameObject)) toDelete.Add(near[i].gameObject);
+                }
 
+                for(int d = toDelete.Count - 1; d >= 0; d--)
+                {
+                    NetworkServer.Destroy(toDelete[d]);
+                }
+            }
+        }
         if (weapon.item.data.maxDurability.baseValue > 0)
         {
             if (weapon.item.currentDurability > 0)

@@ -68,6 +68,7 @@ public class ModularBuildingManager : MonoBehaviour
     public LayerMask accessoryLayerToDestroyWithFloor;
     public LayerMask buildingPlacementLayerMask;
     public LayerMask skillBuildingRaycastCheckLayerMask;
+    public LayerMask ambientSlashLayerMask;
 
     public bool isSpawnBuilding;
 
@@ -110,50 +111,11 @@ public class ModularBuildingManager : MonoBehaviour
     public string buildingConstruction = "You cannot build because of some obstacles or out of perimeter of construction";
 
     private Transform roof, doorOptions, wallOptions;
+
+
     void Awake()
     {
         if (!singleton) singleton = this;
-    }
-
-
-
-    public void ClearGrass(GameObject go)
-    {
-        if (!go) return;
-        ModularBuilding modularBuilding = go.GetComponent<ModularBuilding>();
-        BuildingAccessory buildingAccessory = go.GetComponent<BuildingAccessory>();
-        if (modularBuilding)
-        {
-            Collider2D[] prevGrass = modularBuilding.grassUnder;
-            for (int i = 0; i < prevGrass.Length; i++)
-            {
-                prevGrass[i].GetComponent<Grass>().isOverlayed = false;
-                prevGrass[i].GetComponent<Grass>().Manage(true);
-            }
-            modularBuilding.grassUnder = Physics2D.OverlapBoxAll(modularBuilding.thisCollider.bounds.center, modularBuilding.thisCollider.bounds.size, 0, grassLayerMask);
-            for (int i = 0; i < modularBuilding.grassUnder.Length; i++)
-            {
-                modularBuilding.grassUnder[i].GetComponent<Grass>().isOverlayed = true;
-                modularBuilding.grassUnder[i].GetComponent<Grass>().Manage(false);
-            }
-
-        }
-        if (buildingAccessory)
-        {
-            Collider2D[] prevGrass = buildingAccessory.grassUnder;
-            for (int i = 0; i < prevGrass.Length; i++)
-            {
-                prevGrass[i].GetComponent<Grass>().isOverlayed = false;
-                prevGrass[i].GetComponent<Grass>().Manage(true);
-            }
-            buildingAccessory.grassUnder = Physics2D.OverlapBoxAll(buildingAccessory.collider.bounds.center, buildingAccessory.collider.bounds.size, 0, grassLayerMask);
-            for (int i = 0; i < buildingAccessory.grassUnder.Length; i++)
-            {
-                buildingAccessory.grassUnder[i].GetComponent<Grass>().isOverlayed = true;
-                buildingAccessory.grassUnder[i].GetComponent<Grass>().Manage(false);
-            }
-
-        }
     }
 
     public void ClearAllCache()
@@ -281,10 +243,10 @@ public class ModularBuildingManager : MonoBehaviour
         }
     }
 
-
     public void Update()
     {
         if (!Player.localPlayer || (Player.localPlayer && Player.localPlayer.playerAdditionalState.additionalState == "SLEEP")) return;
+
         if (Input.GetMouseButton(0) && !Utils.IsCursorOverUserInterface() && Input.touchCount <= 1)
         {
             Vector3 screenPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -308,7 +270,6 @@ public class ModularBuildingManager : MonoBehaviour
                         if (spawnedBuilding) spawnedBuilding.transform.position = hit[i].point;
                         if (spawnedBuilding && spawnedBuilding.GetComponent<ModularBuilding>()) ResetModularBuilding();
                         CheckSpawn();
-                        ClearGrass(spawnedAccesssory);
                     }
                 }
             }
@@ -1251,7 +1212,6 @@ public class ModularBuildingManager : MonoBehaviour
         objectToMove.transform.position = pos;
         ResetModularBuilding();
         CheckSpawn();
-        ClearGrass(objectToMove);
     }
     public void Left()
     {
@@ -1263,7 +1223,6 @@ public class ModularBuildingManager : MonoBehaviour
         objectToMove.transform.position = pos;
         ResetModularBuilding();
         CheckSpawn();
-        ClearGrass(objectToMove);
     }
     public void Down()
     {
@@ -1275,7 +1234,6 @@ public class ModularBuildingManager : MonoBehaviour
         objectToMove.transform.position = pos;
         ResetModularBuilding();
         CheckSpawn();
-        ClearGrass(objectToMove);
     }
     public void Right()
     {
@@ -1287,7 +1245,6 @@ public class ModularBuildingManager : MonoBehaviour
         objectToMove.transform.position = pos;
         ResetModularBuilding();
         CheckSpawn();
-        ClearGrass(objectToMove);
     }
     public void ChangePerspective()
     {
@@ -1298,7 +1255,6 @@ public class ModularBuildingManager : MonoBehaviour
             GameObject cacheSpawnedBuilding = spawnedBuilding;
             spawnedBuilding = Instantiate(scriptableBuilding.buildingList[objectIndex].buildingObject, cacheSpawnedBuilding.transform.position, Quaternion.identity);
             Destroy(cacheSpawnedBuilding);
-            ClearGrass(objectToMove);
         }
         else if (scriptableBuildingAccessory)
         {
@@ -1308,7 +1264,6 @@ public class ModularBuildingManager : MonoBehaviour
             spawnedAccesssory = Instantiate(scriptableBuildingAccessory.buildingList[objectIndex].buildingObject, cacheSpawnedBuilding.transform.position, Quaternion.identity);
             CheckSpawn();
             Destroy(cacheSpawnedBuilding);
-            ClearGrass(objectToMove);
         }
         else if (scriptableFence)
         {
@@ -1318,7 +1273,6 @@ public class ModularBuildingManager : MonoBehaviour
             spawnedBuilding = Instantiate(scriptableFence.buildingList[objectIndex].buildingObject, cacheSpawnedBuilding.transform.position, Quaternion.identity);
             CheckSpawn();
             Destroy(cacheSpawnedBuilding);
-            ClearGrass(objectToMove);
         }
         else if (scriptableExternal)
         {
@@ -1362,7 +1316,6 @@ public class ModularBuildingManager : MonoBehaviour
 
             CheckSpawn();
             Destroy(cacheSpawnedBuilding);
-            ClearGrass(objectToMove);
         }
     }
 

@@ -564,6 +564,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  newName: 
   group: 
   owner: 
   health: 100
@@ -601,6 +602,7 @@ MonoBehaviour:
   oldBuilding: {fileID: 0}
   zoneCollider: {fileID: 0}
   grassUnder: []
+  spritesList: []
   checkSex: 0
 --- !u!61 &4965063269831762831
 BoxCollider2D:
@@ -698,6 +700,7 @@ MonoBehaviour:
   buildingAccessory: {fileID: 7582651710736323204}
   avoidCollidersNotToCache: []
   tagToAvoid: []
+  thisCollider: {fileID: 4965063269831762831}
 --- !u!114 &-4315380649458631908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,6 +740,7 @@ MonoBehaviour:
   fixedScale: {x: 0.7, y: 0.7}
   targetScale: {x: 0.6, y: 0.6}
   duration: 0.2
+  isAnimating: 0
 --- !u!1 &8312476798642957501
 GameObject:
   m_ObjectHideFlags: 0

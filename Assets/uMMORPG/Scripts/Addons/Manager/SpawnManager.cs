@@ -16,7 +16,8 @@ public struct EntityInZone
     public List<ZoneEntity> aggresiveAnimal;
     public List<ZoneEntity> flower;
     public List<ZoneEntity> mushroom;
-    public List<ZoneEntity> grass;
+    public List<IrregularColliderSpawner> grass;
+    public List<IrregularColliderSpawner> grains;
     public List<Player> players;
 
     public EntityInZone (Collider2D coll)
@@ -30,7 +31,8 @@ public struct EntityInZone
         aggresiveAnimal = new List<ZoneEntity>();
         flower = new List<ZoneEntity>();
         mushroom = new List<ZoneEntity>();
-        grass = new List<ZoneEntity>();
+        grass = new List<IrregularColliderSpawner>();
+        grains = new List<IrregularColliderSpawner>();
         players = new List<Player>();
     }
 }
@@ -71,6 +73,7 @@ public class SpawnManager : NetworkBehaviour
     public int maxFlower;
     public int maxMushroom;
     public int maxGrass;
+    public int maxGrain;
 
     public List<EntityInZone> zones = new List<EntityInZone>();
 
@@ -81,7 +84,8 @@ public class SpawnManager : NetworkBehaviour
     public List<GameObject> aggressiveAnimal;
     public List<GameObject> flower;
     public List<GameObject> mushroom;
-    public GameObject mainGrass;
+    public GameObject grass;
+    public GameObject grain;
     public GameObject childGrass;
 
     public float timeCheck;
@@ -485,26 +489,81 @@ public class SpawnManager : NetworkBehaviour
                 if (zones[i].grass.Count == 0)
                 {
                     if (zones[i].playerInside == 0) return;
-                    inst = Instantiate(mainGrass, zoneCollider.transform.position, Quaternion.identity);
 
                     for (int u = 0; u < maxGrass; u++)
                     {
-                        instChildGrass = Instantiate(childGrass, CalculateGrassPosition(zoneCollider, invalidGrassLayers), Quaternion.identity);
-                        instChildGrass.transform.parent = inst.transform;
+                        inst = Instantiate(grass, Utilities.RandomPointInRectangle(new Vector2(zones[i].collider.bounds.min.x, zones[i].collider.bounds.min.y), ((BoxCollider2D)zones[i].collider).size, 15), Quaternion.identity);
+                        NetworkServer.Spawn(inst);
+                        if (isServer && !isClient) inst.SetActive(false);
+                        zones[i].grass.Add(inst.GetComponent<IrregularColliderSpawner>());
                     }
-                    NetworkServer.Spawn(inst);
-                    if (isServer && !isClient) inst.SetActive(false);
-                    zones[i].grass.Add(new ZoneEntity()
-                    {
-                        pos = zoneCollider.transform.position,
-                        typeName = inst.name.Replace("(Clone)", ""),
-                        health = 0,
-                        actual = inst
-                    });
                 }
                 else
                 {
                     if (zones[i].playerInside == 0) return;
+
+                    for (int u = 0; u < zones[i].grass.Count; u++)
+                    {
+                        NetworkIdentity id = null;
+                        id = zones[i].grass[u].gameObject.GetComponent<NetworkIdentity>();
+                        for (int e = 0; e < zones[i].grass[u].spawnedObjects.Count; e++)
+                        {
+                            if (zones[i].grass[u].spawnedObjects[e].obj == null && !zones[i].grass[u].spawnedObjects[e].overlay)
+                            {
+                                GameObject g = Instantiate(zones[i].grass[u].prefabToSpawn, zones[i].grass[u].spawnedObjects[e].position, Quaternion.identity);
+                                var spawnedObj = g.GetComponent<SpawnedObject>();
+                                spawnedObj.index = zones[i].grass[u].spawnedObjects[e].index;
+                                spawnedObj.parent = id;
+                                NetworkServer.Spawn(g);
+
+                            }
+                        }
+                    }
+
+                    //if (isServer && !isClient)
+                    //{
+                    //    zones[i].grass[0].actual.SetActive(false);
+                    //}
+                    //pl.playerCallback.TargetManageGrass(zones[i].grass[0].actual.GetComponent<NetworkIdentity>(), true);
+                }
+                #endregion
+
+                #region Grain
+
+                if (zones[i].grains.Count == 0)
+                {
+                    if (zones[i].playerInside == 0) return;
+
+                    for (int u = 0; u < maxGrain; u++)
+                    {
+                        inst = Instantiate(grain, Utilities.RandomPointInRectangle(new Vector2(zones[i].collider.bounds.min.x, zones[i].collider.bounds.min.y), ((BoxCollider2D)zones[i].collider).size,15), Quaternion.identity);
+                        NetworkServer.Spawn(inst);
+                        if (isServer && !isClient) inst.SetActive(false);
+                            zones[i].grains.Add(inst.GetComponent<IrregularColliderSpawner>());
+                    }
+                }
+                else
+                {
+                    if (zones[i].playerInside == 0) return;
+
+                    for (int u = 0; u < zones[i].grains.Count; u++)
+                    {
+                        NetworkIdentity id = null;
+                        id = zones[i].grains[u].gameObject.GetComponent<NetworkIdentity>();
+                        for(int e = 0; e < zones[i].grains[u].spawnedObjects.Count; e++)
+                        {
+                            if (zones[i].grains[u].spawnedObjects[e].obj == null && !zones[i].grains[u].spawnedObjects[e].overlay)
+                            {
+                                GameObject g = Instantiate(zones[i].grains[u].prefabToSpawn, zones[i].grains[u].spawnedObjects[e].position, Quaternion.identity);
+                                var spawnedObj = g.GetComponent<SpawnedObject>();
+                                spawnedObj.index = zones[i].grains[u].spawnedObjects[e].index;
+                                spawnedObj.parent = id;
+                                NetworkServer.Spawn(g);
+
+                            }
+                        }
+                    }
+
                     //if (isServer && !isClient)
                     //{
                     //    zones[i].grass[0].actual.SetActive(false);
@@ -647,7 +706,44 @@ public class SpawnManager : NetworkBehaviour
                     }
                 }
 
-                if (zones[i].playerInside > 0) return;
+                for (int e = 0; e < zones[i].grains.Count; e++)
+                {
+                    if (zones[i].playerInside > 0) return;
+                    if (zones[i].grains[e].spawnedObjects.Count > 0)
+                    {
+                        for(int j = 0; j < zones[i].grains[e].spawnedObjects.Count; j++)
+                        {
+                            if (zones[i].grains[e].spawnedObjects[j].obj != null)
+                            {
+                                if (NetworkServer.active)
+                                {
+                                    NetworkServer.Destroy(zones[i].grains[e].spawnedObjects[j].obj);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (int e = 0; e < zones[i].grass.Count; e++)
+                {
+                    if (zones[i].playerInside > 0) return;
+                    if (zones[i].grass[e].spawnedObjects.Count > 0)
+                    {
+                        for (int j = 0; j < zones[i].grass[e].spawnedObjects.Count; j++)
+                        {
+                            if (zones[i].grass[e].spawnedObjects[j].obj != null)
+                            {
+                                if (NetworkServer.active)
+                                {
+                                    NetworkServer.Destroy(zones[i].grass[e].spawnedObjects[j].obj);
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                //if (zones[i].playerInside > 0) return;
                 //if (zones[i].grass.Count > 0)
                 //{
                 //    pl.playerCallback.TargetManageGrass(zones[i].grass[0].actual.GetComponent<NetworkIdentity>(), false);

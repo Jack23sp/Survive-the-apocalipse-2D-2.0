@@ -144,8 +144,14 @@ public class TargetlessProjectileSkillEffect : SkillEffect
                     else if (damagableObject.GetComponent<Tree>()) dam = damageToTree;
                     else if (damagableObject.GetComponent<Rock>()) dam = damageToRock;
                     else if (damagableObject.GetComponent<BuildingAccessory>()) dam = damageToForniture;
+                    else if (damagableObject.GetComponent<SpawnedObject>()) dam = damage;
 
                     damagableObject.TakeDamage(((Player)caster), dam, melee, false);
+                    damage = 0;
+                    damageToWall = 0;
+                    damageToTree = 0;
+                    damageToRock = 0;
+                    damageToForniture = 0;
                     NetworkServer.Destroy(gameObject);
                 }
             }

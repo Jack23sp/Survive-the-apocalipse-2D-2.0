@@ -414,6 +414,7 @@ MonoBehaviour:
   buildingAccessory: {fileID: 0}
   avoidCollidersNotToCache: []
   tagToAvoid: []
+  thisCollider: {fileID: 4965063269831762831}
 --- !u!114 &-8709607282125297246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,6 +454,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  newName: 
   group: 
   owner: 
   health: 100
@@ -489,6 +491,7 @@ MonoBehaviour:
   oldBuilding: {fileID: 0}
   zoneCollider: {fileID: 0}
   grassUnder: []
+  spritesList: []
   water: 0
 --- !u!114 &-648870203642882778
 MonoBehaviour:
@@ -505,6 +508,7 @@ MonoBehaviour:
   fixedScale: {x: 0.5, y: 0.5}
   targetScale: {x: 0.4, y: 0.4}
   duration: 0.2
+  isAnimating: 0
 --- !u!1 &7045718365760954752
 GameObject:
   m_ObjectHideFlags: 0

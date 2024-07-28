@@ -294,7 +294,6 @@ public class BuildingAccessory : NetworkBehaviour
             sortByDepths[i].enabled = true;
             sortByDepths[i].SetOrder();
         }
-        ModularBuildingManager.singleton.ClearGrass(this.gameObject);
     }
 
     public void ManageHealth(float oldHealth, float newHealth)

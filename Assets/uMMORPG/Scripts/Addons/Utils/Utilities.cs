@@ -401,4 +401,12 @@ public static class Utilities
 
         return numeroSettimanaMese;
     }
+
+
+    public static Vector2 RandomPointInRectangle(Vector2 bottomLeftCorner, Vector2 size, float border)
+    {
+        float randomX = UnityEngine.Random.Range(bottomLeftCorner.x, bottomLeftCorner.x + (size.x + (- border)));
+        float randomY = UnityEngine.Random.Range(bottomLeftCorner.y, bottomLeftCorner.y + (size.y + (- border)));
+        return new Vector2(randomX, randomY);
+    }
 }

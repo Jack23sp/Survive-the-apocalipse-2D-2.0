@@ -949,7 +949,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.84, y: 2.661243}
+    oldSize: {x: 1.84, y: 2.66}
     newSize: {x: 1.84, y: 2.66}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1028,6 +1028,7 @@ MonoBehaviour:
   buildingAccessory: {fileID: 0}
   avoidCollidersNotToCache: []
   tagToAvoid: []
+  thisCollider: {fileID: 4965063269831762831}
 --- !u!114 &-8709607282125297246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,6 +1068,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  newName: 
   group: 
   owner: 
   health: 100
@@ -1107,6 +1109,7 @@ MonoBehaviour:
   oldBuilding: {fileID: 0}
   zoneCollider: {fileID: 0}
   grassUnder: []
+  spritesList: []
   messageText: {fileID: 2016560286}
   message: 
 --- !u!114 &-4014135592792322346
@@ -1124,6 +1127,7 @@ MonoBehaviour:
   fixedScale: {x: 2.5, y: 2.5}
   targetScale: {x: 2.4, y: 2.4}
   duration: 0.2
+  isAnimating: 0
 --- !u!1 &9161825168186185054
 GameObject:
   m_ObjectHideFlags: 0

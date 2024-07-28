@@ -310,7 +310,6 @@ public class ModularBuilding : NetworkBehaviour
         if (isServer) Invoke(nameof(ManageAquifer), 1.0f);
         if (isServer) Invoke(nameof(ManagePin), 1.0f);
         if (isServer || isClient) Invoke(nameof(Register), 1.0f);
-        if (!isServer && !isClient) ModularBuildingManager.singleton.ClearGrass(this.gameObject);
     }
 
     public override void OnStartServer()
@@ -326,7 +325,6 @@ public class ModularBuilding : NetworkBehaviour
         base.OnStartClient();
         Register();
         ManageCentral(main,main);
-        ModularBuildingManager.singleton.ClearGrass(this.gameObject);
 
         NetworkDoorUpManage(upDoorOpen, upDoorOpen);
         NetworkDoorDownManage(downDoorOpen,downDoorOpen);

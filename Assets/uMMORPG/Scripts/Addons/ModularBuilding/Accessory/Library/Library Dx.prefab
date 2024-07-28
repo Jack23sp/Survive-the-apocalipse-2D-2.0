@@ -611,6 +611,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  newName: 
   group: 
   owner: 
   health: 100
@@ -646,6 +647,7 @@ MonoBehaviour:
   oldBuilding: {fileID: 0}
   zoneCollider: {fileID: 0}
   grassUnder: []
+  spritesList: []
   amount: 50
 --- !u!114 &4721467104523403721
 MonoBehaviour:
@@ -676,9 +678,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 971afc6d6d5b48747a1e4b15eae29ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingAccessory: {fileID: 0}
+  buildingAccessory: {fileID: 9141578885154641508}
   avoidCollidersNotToCache: []
   tagToAvoid: []
+  thisCollider: {fileID: 5325849742429894075}
 --- !u!114 &1621316135249525583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,3 +721,4 @@ MonoBehaviour:
   fixedScale: {x: 1.5, y: 1.45}
   targetScale: {x: 1.4, y: 1.35}
   duration: 0.2
+  isAnimating: 0
