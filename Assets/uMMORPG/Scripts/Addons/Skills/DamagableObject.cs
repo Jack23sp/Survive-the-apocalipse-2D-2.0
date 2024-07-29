@@ -124,36 +124,83 @@ public class DamagableObject : MonoBehaviour
         {
             if ((DamagableByRange && !melee) || (DamagableByMelee && melee) || (DamagableByExplosion && explosion))
             {
-                if (DamagableByMelee && melee)
+                if (!tree.tree)
                 {
-                    caster.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("TREE CHOP"));
+                    if (DamagableByMelee && melee)
+                    {
+                        caster.playerResources.RpcPlaySound(SoundManager.singleton.FindSoundByLabel("TREE CHOP"));
+                    }
+                    tree.health -= damage;
+
+                    int scrAmount = ResourceManager.singleton.GetTreeRewards(caster);
+                    GameObject g = Instantiate(ResourceManager.singleton.objectDrop.gameObject, tree.transform.position, Quaternion.identity);
+                    g.GetComponent<CurvedMovement>().startEntity = tree.transform;
+                    g.GetComponent<CurvedMovement>().SpawnAtPosition(new Item(ResourceManager.singleton.woodItem), scrAmount, -1, -1);
+
+                    if (tree.health <= 0)
+                    {
+                        // get x % of experience
+                        float exp = ResourceManager.singleton.AddExperienceAmount(caster, 1);
+                        caster.experience.current += (long)exp;
+                        caster.playerNotification.TargetSpawnNotificationExperince(1);
+                        NetworkServer.Destroy(tree.gameObject);
+                    }
+
+                    int abIndex = AbilityManager.singleton.FindNetworkAbility("Woodcutter", caster.name);
+                    if (abIndex > -1)
+                    {
+                        Ability ab = caster.playerAbility.networkAbilities[abIndex];
+                        int max = AbilityManager.singleton.FindNetworkAbilityMaxLevel("Woodcutter", caster.name);
+                        float next = Mathf.Min(ab.level + AbilityManager.singleton.increaseAbilityOnAction, max);
+                        if (next > max) next = max;
+                        float attrNext = (float)Math.Round(next, 2);
+                        ab.level = attrNext;
+                        caster.playerAbility.networkAbilities[abIndex] = ab;
+                    }
                 }
-                tree.health -= damage;
-
-                int scrAmount = ResourceManager.singleton.GetTreeRewards(caster);
-                GameObject g = Instantiate(ResourceManager.singleton.objectDrop.gameObject, tree.transform.position, Quaternion.identity);
-                g.GetComponent<CurvedMovement>().startEntity = tree.transform;
-                g.GetComponent<CurvedMovement>().SpawnAtPosition(new Item(ResourceManager.singleton.woodItem), scrAmount, -1, -1);
-
-                if (tree.health <= 0)
+                else
                 {
-                    // get x % of experience
-                    float exp = ResourceManager.singleton.AddExperienceAmount(caster,1);
-                    caster.experience.current += (long)exp;
-                    caster.playerNotification.TargetSpawnNotificationExperince(1);
-                    NetworkServer.Destroy(tree.gameObject);
-                }
+                    int abIndex = AbilityManager.singleton.FindNetworkAbility("Ambientalist", caster.name);
+                    if (abIndex > -1)
+                    {
+                        Ability ab = caster.playerAbility.networkAbilities[abIndex];
+                        if (tree.rewardAmount > 0)
+                        {
+                            tree.rewardAmount--;
+                            rand = UnityEngine.Random.Range(0, 101);
+                            if (rand <= ab.level * 2)
+                            {
+                                ScriptableItem scr = tree.reward;
+                                GameObject g = Instantiate(ResourceManager.singleton.objectDrop.gameObject, tree.transform.position, Quaternion.identity);
+                                g.GetComponent<CurvedMovement>().startEntity = tree.transform;
+                                g.GetComponent<CurvedMovement>().SpawnAtPosition(new Item(scr), 1, -1, -1);
+                            }
+                        }
+                        else
+                        {
+                            if (tree.owner != string.Empty || tree.group != string.Empty)
+                            {
+                                rand = UnityEngine.Random.Range(0, 101);
+                                if (rand <= ab.level * 2)
+                                {
+                                    ScriptableItem scr = tree.tree;
+                                    GameObject g = Instantiate(ResourceManager.singleton.objectDrop.gameObject, tree.transform.position, Quaternion.identity);
+                                    g.GetComponent<CurvedMovement>().startEntity = tree.transform;
+                                    g.GetComponent<CurvedMovement>().SpawnAtPosition(new Item(scr), 1, -1, -1);
+                                }
+                                NetworkServer.Destroy(tree.gameObject);
+                            }
+                        }
+                        int max = AbilityManager.singleton.FindNetworkAbilityMaxLevel("Ambientalist", caster.name);
+                        float next = Mathf.Min(ab.level + AbilityManager.singleton.increaseAbilityOnAction, max);
+                        if (next > max) next = max;
+                        float attrNext = (float)Math.Round(next, 2);
+                        ab.level = attrNext;
+                        caster.playerAbility.networkAbilities[abIndex] = ab;
 
-                int abIndex = AbilityManager.singleton.FindNetworkAbility("Woodcutter", caster.name);
-                if (abIndex > -1)
-                {
-                    Ability ab = caster.playerAbility.networkAbilities[abIndex];
-                    int max = AbilityManager.singleton.FindNetworkAbilityMaxLevel("Woodcutter", caster.name);
-                    float next = Mathf.Min(ab.level + AbilityManager.singleton.increaseAbilityOnAction, max);
-                    if (next > max) next = max;
-                    float attrNext = (float)Math.Round(next, 2);
-                    ab.level = attrNext;
-                    caster.playerAbility.networkAbilities[abIndex] = ab;
+                        return;
+
+                    }
                 }
             }
         }
@@ -537,33 +584,36 @@ public class DamagableObject : MonoBehaviour
                 }
             }
         }
-        if (weapon.item.data.maxDurability.baseValue > 0)
-        {
-            if (weapon.item.currentDurability > 0)
-            {
-                ItemSlot equi = caster.playerEquipment.slots[0];
-                if (melee)
-                {
-                    int rand = UnityEngine.Random.Range(0, 5);
-                    if (rand >= 2)
-                    {
-                        equi.item.currentDurability--;
-                        caster.playerEquipment.slots[0] = equi;
-                    }
-                }
-                else
-                {
-                    int rand = UnityEngine.Random.Range(0, 10);
-                    if (rand < 2)
-                    {
-                        equi.item.currentDurability--;
-                        caster.playerEquipment.slots[0] = equi;
-                    }
 
+        if (tree && !tree.tree)
+        {
+            if (weapon.item.data.maxDurability.baseValue > 0)
+            {
+                if (weapon.item.currentDurability > 0)
+                {
+                    ItemSlot equi = caster.playerEquipment.slots[0];
+                    if (melee)
+                    {
+                        int rand = UnityEngine.Random.Range(0, 5);
+                        if (rand >= 2)
+                        {
+                            equi.item.currentDurability--;
+                            caster.playerEquipment.slots[0] = equi;
+                        }
+                    }
+                    else
+                    {
+                        int rand = UnityEngine.Random.Range(0, 10);
+                        if (rand < 2)
+                        {
+                            equi.item.currentDurability--;
+                            caster.playerEquipment.slots[0] = equi;
+                        }
+
+                    }
                 }
             }
         }
-
     }
 
     public string CalculateSoundToPlay(ScriptableBuildingAccessory scriptableBuildingAccessory, WeaponItem weaponItem)

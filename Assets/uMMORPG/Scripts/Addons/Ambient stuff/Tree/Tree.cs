@@ -13,10 +13,21 @@ public class Tree : BuildingAccessory
 
     public DamagableObject damagableObject;
 
+    public ScriptableItem reward;
+    [SyncVar]
+    public int rewardAmount;
+    public ScriptableItem tree;
+
     public new void Start()
     {
         base.Start();
         damagableObject.tree = this;
+        Invoke(nameof(IncreaseReward), 10800.0f);
+    }
+
+    public void IncreaseReward()
+    {
+        rewardAmount = 5;
     }
 
     public void ManageVisibility(bool condition)
