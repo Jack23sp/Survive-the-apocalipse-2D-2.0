@@ -10,6 +10,7 @@ public struct EntityInZone
     public Collider2D collider;
     public int playerInside;
     public List<ZoneEntity> trees;
+    public List<ZoneEntity> fruitTrees;
     public List<ZoneEntity> rocks;
     public List<ZoneEntity> zombie;
     public List<ZoneEntity> notAggresiveAnimal;
@@ -25,6 +26,7 @@ public struct EntityInZone
         collider = coll;
         playerInside = 0;
         trees = new List<ZoneEntity>();
+        fruitTrees = new List<ZoneEntity>();
         rocks = new List<ZoneEntity>();
         zombie = new List<ZoneEntity>();
         notAggresiveAnimal = new List<ZoneEntity>();
@@ -44,13 +46,15 @@ public struct ZoneEntity
     public string typeName;
     public float health;
     public GameObject actual;
+    public int amountFruit;
 
-    public ZoneEntity(Vector2 posit, string type, float heal, GameObject act)
+    public ZoneEntity(Vector2 posit, string type, float heal, GameObject act, int fruits)
     {
         pos = posit;
         typeName = type;
         health = heal;
         actual = act;
+        amountFruit = fruits;
     }
 }
 
@@ -74,6 +78,7 @@ public class SpawnManager : NetworkBehaviour
     public int maxMushroom;
     public int maxGrass;
     public int maxGrain;
+    public int maxFruitTrees;
 
     public List<EntityInZone> zones = new List<EntityInZone>();
 
@@ -84,6 +89,7 @@ public class SpawnManager : NetworkBehaviour
     public List<GameObject> aggressiveAnimal;
     public List<GameObject> flower;
     public List<GameObject> mushroom;
+    public List<GameObject> fruitTrees;
     public GameObject grass;
     public GameObject grain;
     public GameObject childGrass;
@@ -164,6 +170,57 @@ public class SpawnManager : NetworkBehaviour
                         {
                             pos = spawnPoint,
                             typeName = inst.name.Replace("(Clone)",""),
+                            health = inst.GetComponent<BuildingAccessory>().health,
+                            actual = inst
+                        });
+                    }
+                }
+                #endregion
+
+                #region Tree fruits
+                for (int e = 0; e < zones[i].fruitTrees.Count; e++)
+                {
+                    if (zones[i].playerInside == 0) return;
+                    if (zones[i].fruitTrees[e].actual == null)
+                    {
+                        Collider2D[] colliders = Physics2D.OverlapCircleAll(zones[i].fruitTrees[e].pos, 2f, invalidSpawnLayers);
+                        if (colliders.Length == 0)
+                        {
+                            // spawn a random object from the list
+                            for (int j = 0; j < fruitTrees.Count; j++)
+                            {
+                                if (fruitTrees[j].name == zones[i].fruitTrees[e].typeName)
+                                {
+                                    inst = Instantiate(fruitTrees[j], zones[i].fruitTrees[e].pos, Quaternion.identity);
+                                    inst.GetComponent<Tree>().health = zones[i].fruitTrees[e].health;
+                                    inst.GetComponent<Tree>().rewardAmount = zones[i].fruitTrees[e].amountFruit;
+                                    zoneEntity = zones[i].fruitTrees[e];
+                                    zoneEntity.actual = inst;
+                                    zones[i].fruitTrees[e] = zoneEntity;
+                                    NetworkServer.Spawn(inst);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (int x = zones[i].fruitTrees.Count; x < maxFruitTrees; x++)
+                {
+                    if (zones[i].playerInside == 0) return;
+                    Vector2 spawnPoint = GetRandomValidSpawnPoint(zoneCollider, invalidSpawnLayers);
+
+                    if (spawnPoint == Vector2.one) continue;
+                    // check if spawn position is valid
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPoint, 1f, invalidSpawnLayers);
+                    if (colliders.Length == 0)
+                    {
+                        // spawn a random object from the list
+                        inst = Instantiate(fruitTrees[UnityEngine.Random.Range(0, fruitTrees.Count)], spawnPoint, Quaternion.identity);
+                        NetworkServer.Spawn(inst);
+                        zones[i].fruitTrees.Add(new ZoneEntity()
+                        {
+                            pos = spawnPoint,
+                            typeName = inst.name.Replace("(Clone)", ""),
                             health = inst.GetComponent<BuildingAccessory>().health,
                             actual = inst
                         });
@@ -739,6 +796,24 @@ public class SpawnManager : NetworkBehaviour
                                 }
                             }
                         }
+                    }
+                }
+
+                for (int e = 0; e < zones[i].fruitTrees.Count; e++)
+                {
+                    if (zones[i].playerInside > 0) return;
+                    if (zones[i].fruitTrees[e].actual != null)
+                    {
+                        zoneEntity = zones[i].fruitTrees[e];
+                        zoneEntity.health = zoneEntity.actual.GetComponent<BuildingAccessory>().health;
+                        zoneEntity.amountFruit = zoneEntity.actual.GetComponent<Tree>().rewardAmount;
+                        if (NetworkServer.active)
+                        {
+                            GameObject g = zoneEntity.actual;
+                            NetworkServer.Destroy(g.gameObject);
+                        }
+                        zoneEntity.actual = null;
+                        zones[i].fruitTrees[e] = zoneEntity;
                     }
                 }
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1deae2e6552834ebbcb0ca9d47e448, type: 3}
   m_Name: Ambientalist
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 8f778bc153326d543a8d21a1accf24ac, type: 3}
+  image: {fileID: 21300000, guid: 262bc874d05edb54b90566bb2c29f208, type: 3}
   level: 
   maxLevel: 50
   baseValue: 10

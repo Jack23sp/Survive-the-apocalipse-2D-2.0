@@ -227,7 +227,7 @@ Transform:
   - {fileID: 6579476687850044850}
   - {fileID: 3013246115994480670}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8099498057094737609
 MonoBehaviour:
@@ -270,7 +270,7 @@ MonoBehaviour:
   renderer: {fileID: 3512058163099694184}
   navMeshObstacle2D: {fileID: 5446695619619519449}
   oldPositioning: 0
-  isExternal: 0
+  isExternal: 1
   necessaryForPositioning:
     serializedVersion: 2
     m_Bits: 0
@@ -287,7 +287,8 @@ MonoBehaviour:
   cracksImages: []
   sortByDepths: []
   uiToOpen: 0
-  craftingAccessoryItem: {fileID: 0}
+  craftingAccessoryItem: {fileID: 11400000, guid: f050bb7c3dbfe98478c276ddc60215c4,
+    type: 2}
   oldBuilding: {fileID: 0}
   zoneCollider: {fileID: 0}
   grassUnder: []
@@ -304,7 +305,7 @@ MonoBehaviour:
   - {fileID: 2805392337852786987}
   - {fileID: 5710928014202097114}
   damagableObject: {fileID: 5075640720882248899}
-  reward: {fileID: 0}
+  reward: {fileID: 11400000, guid: 62dfe453e9414e0408caac467031984d, type: 2}
   rewardAmount: 5
   tree: {fileID: 11400000, guid: f050bb7c3dbfe98478c276ddc60215c4, type: 2}
 --- !u!212 &3512058163099694184
@@ -430,8 +431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd308fda320142f4a9fe254461aff2c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixedScale: {x: 1.3, y: 1.7}
-  targetScale: {x: 1.3, y: 1.7}
+  fixedScale: {x: 0.8, y: 1.2}
+  targetScale: {x: 0.8, y: 1.2}
   duration: 0.2
   isAnimating: 0
 --- !u!61 &4004295419120170648
@@ -592,7 +593,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.018489048, y: -0.4597026}
+  m_Offset: {x: 0.059206486, y: -0.035553038}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -603,7 +604,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.40295294, y: 0.33322367}
+  m_Size: {x: 1.754499, y: 1.1815228}
   m_EdgeRadius: 0
 --- !u!50 &8779350938749126185
 Rigidbody2D:

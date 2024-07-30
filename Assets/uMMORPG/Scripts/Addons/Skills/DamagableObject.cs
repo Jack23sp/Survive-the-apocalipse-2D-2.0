@@ -178,7 +178,7 @@ public class DamagableObject : MonoBehaviour
                         }
                         else
                         {
-                            if (tree.owner != string.Empty || tree.group != string.Empty)
+                            if (tree.owner == string.Empty && tree.group == string.Empty)
                             {
                                 rand = UnityEngine.Random.Range(0, 101);
                                 if (rand <= ab.level * 2)

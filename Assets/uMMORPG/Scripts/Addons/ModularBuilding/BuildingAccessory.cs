@@ -47,6 +47,7 @@ public partial class Database
         connection.Execute("DELETE FROM furnace_results");
         connection.Execute("DELETE FROM furnace_wood");
         connection.Execute("DELETE FROM aquarium");
+        connection.Execute("DELETE FROM tree");
 
         SaveBuildingBasement();
 
@@ -120,6 +121,11 @@ public partial class Database
             if (ModularBuildingManager.singleton.buildingAccessories[index] is Aquarium)
             {
                 SaveAquarium(index);
+            }
+
+            if (ModularBuildingManager.singleton.buildingAccessories[index] is Tree)
+            {
+                SaveTree(index);
             }
         }
         connection.Commit();
@@ -200,6 +206,11 @@ public partial class Database
                 LoadAquarium(row.ind, ((Aquarium)acc));
             }
 
+            if (acc is Tree)
+            {
+                LoadTree(row.ind, ((Tree)acc));
+            }
+
             NetworkServer.Spawn(g);
         }
     }
@@ -250,7 +261,7 @@ public class BuildingAccessory : NetworkBehaviour
         {
             if (navMeshObstacle2D) navMeshObstacle2D.enabled = true;
             renderer.material = ModularBuildingManager.singleton.spawnedBuildAccessoryMaterial;
-            if (!ModularBuildingManager.singleton.buildingAccessories.Contains(this) && craftingAccessoryItem) ModularBuildingManager.singleton.buildingAccessories.Add(this);
+            if (!ModularBuildingManager.singleton.buildingAccessories.Contains(this) && craftingAccessoryItem && (owner != string.Empty || group != string.Empty)) ModularBuildingManager.singleton.buildingAccessories.Add(this);
         }
         GetComponent<DamagableObject>().buildingAccessory = this;
     }

@@ -46,6 +46,7 @@ public class ModularBuildingManager : MonoBehaviour
     public List<Fence> fences = new List<Fence>();
     public List<Gate> gates = new List<Gate>();
     public List<Aquarium> aquarium = new List<Aquarium>();
+    public List<Tree> trees = new List<Tree>();
     public ModularBuilding[] modularBuildings;
 
     public bool activeBuildingModeDoor;

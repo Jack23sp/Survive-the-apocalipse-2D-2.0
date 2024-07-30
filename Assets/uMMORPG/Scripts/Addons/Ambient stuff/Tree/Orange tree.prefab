@@ -227,7 +227,7 @@ Transform:
   - {fileID: 6579476687850044850}
   - {fileID: 3013246115994480670}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8099498057094737609
 MonoBehaviour:
@@ -270,7 +270,7 @@ MonoBehaviour:
   renderer: {fileID: 3512058163099694184}
   navMeshObstacle2D: {fileID: 5446695619619519449}
   oldPositioning: 0
-  isExternal: 0
+  isExternal: 1
   necessaryForPositioning:
     serializedVersion: 2
     m_Bits: 0
@@ -287,7 +287,8 @@ MonoBehaviour:
   cracksImages: []
   sortByDepths: []
   uiToOpen: 0
-  craftingAccessoryItem: {fileID: 0}
+  craftingAccessoryItem: {fileID: 11400000, guid: e441dfca4cdab5b41a6eb5e748ed5643,
+    type: 2}
   oldBuilding: {fileID: 0}
   zoneCollider: {fileID: 0}
   grassUnder: []
@@ -304,7 +305,7 @@ MonoBehaviour:
   - {fileID: 2805392337852786987}
   - {fileID: 5710928014202097114}
   damagableObject: {fileID: 5075640720882248899}
-  reward: {fileID: 0}
+  reward: {fileID: 11400000, guid: 42a8dddc03d0d8e4bbbe21e3633d8560, type: 2}
   rewardAmount: 5
   tree: {fileID: 11400000, guid: e441dfca4cdab5b41a6eb5e748ed5643, type: 2}
 --- !u!212 &3512058163099694184
@@ -572,7 +573,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05108834, y: -0.27755448}
+  m_Offset: {x: 0.062895834, y: -0.04762733}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -583,7 +584,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.41555494, y: 0.32804024}
+  m_Size: {x: 1.2297381, y: 0.7878945}
   m_EdgeRadius: 0
 --- !u!50 &8779350938749126185
 Rigidbody2D:
