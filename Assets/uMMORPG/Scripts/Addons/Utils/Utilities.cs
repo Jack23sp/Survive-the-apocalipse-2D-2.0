@@ -346,6 +346,11 @@ public static class Utilities
         {
             ((Aquarium)buildingAccessoryNew).dirt = ((Aquarium)buildingAccessoryOld).dirt;
         }
+        if (oldGameObject.GetComponent<Tree>())
+        {
+            ((Tree)buildingAccessoryNew).rewardAmount = ((Tree)buildingAccessoryOld).rewardAmount;
+        }
+
     }
     public static List<GameObject> GetNewConnections(List<Collider2D> newColliders, List<Collider2D> oldColliders)
     {

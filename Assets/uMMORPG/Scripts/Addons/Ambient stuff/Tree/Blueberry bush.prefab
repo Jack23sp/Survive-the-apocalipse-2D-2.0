@@ -227,7 +227,7 @@ Transform:
   - {fileID: 6579476687850044850}
   - {fileID: 3013246115994480670}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8099498057094737609
 MonoBehaviour:
@@ -286,7 +286,7 @@ MonoBehaviour:
   avoidHits: []
   cracksImages: []
   sortByDepths: []
-  uiToOpen: 0
+  uiToOpen: -1
   craftingAccessoryItem: {fileID: 11400000, guid: 76e5704bc0c24cb479b3300b33b51e69,
     type: 2}
   oldBuilding: {fileID: 0}
@@ -580,7 +580,7 @@ GameObject:
   - component: {fileID: 8779350938749126185}
   m_Layer: 23
   m_Name: Square (2)
-  m_TagString: Tree
+  m_TagString: Selector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

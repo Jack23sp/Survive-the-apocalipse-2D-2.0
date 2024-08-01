@@ -9,6 +9,7 @@ public struct SoundSlot
     [Range(0f, 1f)]
     public float volume;
     public AudioClip sounds;
+
 }
 
 

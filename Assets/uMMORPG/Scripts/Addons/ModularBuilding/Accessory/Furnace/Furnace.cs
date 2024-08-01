@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using System;
+using UnityEngine.Rendering.Universal;
 
 public partial class Player
 {
@@ -236,6 +237,16 @@ public class Furnace : BuildingAccessory
 
     [SyncVar(hook = (nameof(ManageActivation)))] public bool on;
     public GameObject fireObject;
+    public AudioSource fireAudioSource;
+    public Light2D light;
+
+    public float minIntensity = 0.5f;
+    public float maxIntensity = 1.5f;
+    public float flickerSpeed = 1.2f;
+    public Color minColor = new Color(1.0f, 0.5f, 0.0f);
+    public Color maxColor = new Color(1.0f, 1.0f, 0.5f);
+
+    private bool isFlickering = false;
 
     public new void Start()
     {
@@ -284,6 +295,58 @@ public class Furnace : BuildingAccessory
             if (ModularBuildingManager.singleton.furnaces.Contains(this)) ModularBuildingManager.singleton.furnaces.Remove(this);
         }
         CancelInvoke();
+    }
+
+    void Update()
+    {
+        if (isFlickering && light)
+        {
+            // Change intensity and color
+            float intensity = Mathf.Lerp(minIntensity, maxIntensity, Mathf.PerlinNoise(Time.time * flickerSpeed, 0.0f));
+            light.intensity = intensity;
+            light.color = Color.Lerp(minColor, maxColor, intensity / maxIntensity);
+        }
+    }
+
+    public void OnEnable()
+    {
+        if(isClient)    
+            isFlickering = on;
+    }
+
+    public void OnDisable()
+    {
+        if (isClient)
+            isFlickering = false;
+    }
+
+    // Method to start or stop the flickering
+    public void SetFlickering(bool flickering)
+    {
+        isFlickering = flickering;
+        if (!light) return;
+        light.enabled = flickering;
+        if (flickering)
+        {
+            // Start playing the sound if not already playing
+            if (fireAudioSource != null && !fireAudioSource.isPlaying)
+            {
+                fireAudioSource.clip = SoundManager.singleton.ambientObjectSounds[SoundManager.singleton.FindSoundByLabel("FURNACE FIRE")].sounds;
+                fireAudioSource.Play();
+            }
+        }
+        else
+        {
+            // Stop playing the sound
+            if (fireAudioSource != null && fireAudioSource.isPlaying)
+            {
+                fireAudioSource.Stop();
+            }
+
+            // Reset the light to maximum intensity and color
+            light.intensity = maxIntensity;
+            light.color = maxColor;
+        }
     }
 
     public void LaunchJob()
@@ -369,8 +432,10 @@ public class Furnace : BuildingAccessory
                 UIFurnace.singleton.Open(UIFurnace.singleton.furnace);
             }
         }
+        isFlickering = newBool;
+        SetFlickering (isFlickering);
 
-        fireObject.SetActive(newBool);
+        if(fireObject) fireObject.SetActive(newBool);
     }
 
     public void OnResultsChanged(SyncList<ItemSlot>.Operation op, int itemIndex, ItemSlot oldItem, ItemSlot newItem)
