@@ -49,6 +49,7 @@ public class UIMobileControl : MonoBehaviour
 
     public void Awake()
     {
+        
         if (!singleton) singleton = this;
 
         chargeButton.onClick.RemoveAllListeners();
@@ -85,8 +86,25 @@ public class UIMobileControl : MonoBehaviour
         if (player != null)
         {
             panel.SetActive(true);
-            player.playerNavMeshMovement2D.JoystickHandling();
             player.playerNavMeshMovement2D.MoveJoystick();
+
+            if (!AttackManager.singleton.overrideControls)
+            {
+                
+                if (AttackManager.singleton && !AttackManager.singleton.isPC) 
+                    player.playerNavMeshMovement2D.JoystickHandling();
+
+                if (AttackManager.singleton && AttackManager.singleton.isPC)
+                {
+                    player.playerNavMeshMovement2D.joystick.input = Vector2.zero;
+                    player.playerNavMeshMovement2D.RotateByclick();
+                }
+            }
+            else
+            {
+                player.playerNavMeshMovement2D.MoveJoystick();
+                player.playerNavMeshMovement2D.RotateByclick();
+            }
 
             if (player.playerEquipment.slots[0].amount > 0)
             {
@@ -272,14 +290,152 @@ public partial class PlayerNavMeshMovement2D
     }
 
     [Client]
+    public void RotateByclick()
+    {
+        if (player.health.current <= 0) return;
+        if (player.playerAdditionalState.additionalState == "SLEEP") return;
+        if (player.name != Player.localPlayer.name) return;
+
+        // don't move if currently typing in an input
+        // we check this after checking h and v to save computations
+        if (Input.GetMouseButton(1) && !Utils.IsCursorOverUserInterface())
+        {
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPosition.z = 0; // In 2D, la posizione z dovrebbe essere zero
+
+            // Ottieni la posizione dell'oggetto
+            Vector3 objectPosition = player.transform.GetChild(0).transform.position;
+
+            // Calcola la direzione normalizzata
+            Vector2 direction = (mouseWorldPosition - objectPosition); 
+            if (direction.magnitude > 1) direction = direction.normalized;
+            int temp = player.playerEquipment.magazineItem.bulletsRemaining;//player.playerWeapon.CheckMunitionInMagazine();
+
+            if (temp <= 0)
+            {
+                if (player.playerEquipment.slots[0].amount > 0)
+                {
+                    bool itm = player.playerWeapon.CheckMagazine(player.playerEquipment.slots[0].item.data.name);
+                    if (itm && prevMunitionCountForSound != temp)
+                    {
+                        player.playerWeapon.CmdChargeMunition(player.playerEquipment.slots[0].item.name);
+                    }
+                    else
+                    {
+                        if (temp == 0 && prevMunitionCountForSound != 0)
+                        {
+                            if (player.playerEquipment.slots[0].item.data.requiredSkill is MunitionSkill)
+                                player.playerSounds.PlaySounds(((MunitionSkill)player.playerEquipment.slots[0].item.data.requiredSkill).projectile.type, "3");
+                        }
+                    }
+                }
+            }
+            prevMunitionCountForSound = temp;
+
+            if (direction != prevJoystick)
+            {
+                player.playerMove.CmdSyncRotation(direction, false);
+                float heading = Mathf.Atan2(direction.x, direction.y);
+                player.playerMove.playerObject.transform.localRotation = Quaternion.Euler(0f, (heading * Mathf.Rad2Deg), 0);
+                player.lookDirection = direction;
+
+                prevJoystick = direction;
+            }
+
+            if (player.playerMove.canAttack && Player.localPlayer.playerAdditionalState.additionalState == "")
+            {
+                if (player.playerMove.states.Contains("AIM"))
+                {
+                    if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo == null)
+                    {
+                        if (player.playerMove.tired > 0 && player.playerMove.tired <= player.playerMove.tiredLimitForAim && player.mana.current == 0)
+                        {
+                            player.playerNotification.TargetSpawnNotification("You are too tired to attack!");
+                        }
+                        else if (player.playerMove.tired > 0 && player.mana.current > 0)
+                        {
+                            player.playerMove.CmdSetState("SHOOT", new string[1] { "AIM" });
+                        }
+                    }
+                    else
+                    {
+                        player.playerMove.CmdSetState("SHOOT", new string[1] { "AIM" });
+                    }
+                }
+                if (!player.playerMove.states.Contains("SHOOT"))
+                {
+                    if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo == null)
+                    {
+                        if (player.playerMove.tired > 0 && player.playerMove.tired <= player.playerMove.tiredLimitForAim && player.mana.current == 0)
+                        {
+                            player.playerNotification.TargetSpawnNotification("You are too tired to attack!");
+                        }
+                        else if (player.playerMove.tired > 0 && player.mana.current > 0)
+                        {
+                            player.playerMove.CmdSetState("SHOOT", new string[0] { });
+                        }
+                    }
+                    else
+                    {
+                        player.playerMove.CmdSetState("SHOOT", new string[0] { });
+                    }
+                }
+                if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo == null)
+                {
+                    if (player.playerMove.tired > 0 && player.mana.current > 0)
+                    {
+                        ((PlayerSkills)player.skills).TryUse(((PlayerSkills)player.skills).GetSkillIndexByName(player.playerEquipment.slots[0].item.data.requiredSkill.name));
+                    }
+                }
+                else if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo != null)
+                {
+                    ((PlayerSkills)player.skills).TryUse(((PlayerSkills)player.skills).GetSkillIndexByName(player.playerEquipment.slots[0].item.data.requiredSkill.name));
+                }
+            }
+            else
+            {
+                if (!player.playerMove.states.Contains("AIM")) player.playerMove.CmdSetState("AIM", new string[1] { "SHOOT" });
+            }
+
+
+            // draw direction for debugging
+            //Debug.DrawLine(transform.position, (transform.position + (Vector3)direction * (player.playerEquipment.slots[0].amount > 0 ? player.playerEquipment.slots[0].item.data.attackRange : 0)), Color.green, 0, false);
+
+            // clear indicator if there is one, and if it's not on a target
+            // (simply looks better)
+            if (direction != Vector2.zero)
+                indicator.ClearIfNoParent();
+
+            // cancel path if we are already doing click movement, otherwise
+            // we will slide
+            agent.ResetMovement();
+
+            // note: SetSpeed() already sets agent.speed to player.speed
+            //agent.velocity = direction * agent.speed;
+
+            // clear requested skill in any case because if we clicked
+            // somewhere else then we don't care about it anymore
+            player.useSkillWhenCloser = -1;
+        }
+        else
+        {
+            prevMunitionCountForSound = 1;
+            if (player.skills.currentSkill > -1) player.skills.CmdResetSkill();
+            if (player.playerMove.states.Contains("SHOOT") || player.playerMove.states.Contains("AIM")) player.playerMove.CmdSetState("", new string[2] { "AIM", "SHOOT" });
+        }
+
+    }
+
+    [Client]
     public void JoystickHandling()
     {
         if (player.health.current <= 0) return;
         if (player.playerAdditionalState.additionalState == "SLEEP" ) return;
         if (player.name != Player.localPlayer.name) return;
+        if (Input.GetMouseButton(1)) return;
 
-        // don't move if currently typing in an input
-        // we check this after checking h and v to save computations
+            // don't move if currently typing in an input
+            // we check this after checking h and v to save computations
         if (!UIUtils.AnyInputActive() && joystick)
         {
             // get horizontal and vertical input

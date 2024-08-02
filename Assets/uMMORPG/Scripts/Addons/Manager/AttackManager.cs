@@ -15,10 +15,18 @@ public class AttackManager : MonoBehaviour
     public List<TargetAttackChecker> checkers = new List<TargetAttackChecker>();
     public Sprite attackImage;
     public Sprite notAttackImage;
+    public bool overrideControls;
+    public bool isPC;
 
     void Start()
     {
         if (!singleton) singleton = this;
+        isPC = !Application.isMobilePlatform;
+    }
+
+    public void CalculateDevice()
+    {
+        isPC = !Application.isMobilePlatform;
     }
 
     public bool CheckAttack(string weaponName, string targetName)

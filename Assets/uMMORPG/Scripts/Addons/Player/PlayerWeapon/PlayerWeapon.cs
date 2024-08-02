@@ -70,12 +70,11 @@ public class PlayerWeapon : NetworkBehaviour
         {
             if (Player.localPlayer == player)
             {
-                destination = (Vector3)JoystickManager.singleton.attackJoystick.input;
+                destination = player.lookDirection;
                 destination *= (player.playerEquipment.slots[0].amount > 0 ? player.playerEquipment.slots[0].item.data.requiredSkill.lineCast : 1f);
 
                 if (player.playerMove.states.Contains("AIM") ||
-                   player.playerMove.states.Contains("SHOOT") &&
-                   JoystickManager.singleton.attackJoystick.input != Vector2.zero)
+                   player.playerMove.states.Contains("SHOOT"))
                 {
                     lineRenderer.SetPosition(1, player.transform.position);
                     lineRenderer.SetPosition(0, lineRenderer.GetPosition(1) + destination);
