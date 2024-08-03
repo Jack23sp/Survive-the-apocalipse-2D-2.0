@@ -62,7 +62,7 @@ MonoBehaviour:
   accessoriesType: 0
   accessoryToAdd: []
   weaponType: -1
-  weight: 0
+  weight: 1
   maxStack: 1
   buyPrice: 0
   sellPrice: 0

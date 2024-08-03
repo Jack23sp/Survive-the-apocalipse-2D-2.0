@@ -840,6 +840,10 @@ public class UISelectedItem : MonoBehaviour
                     {
                         ((ScriptableDumbbell)Player.localPlayer.inventory.slots[index].item.data).Spawn(Player.localPlayer, ModularBuildingManager.singleton.isInventory, index, 0, Player.localPlayer.transform.position);
                     }
+                    else if (Player.localPlayer.inventory.slots[index].item.data is CoffeeBottleItem)
+                    {
+                        ((CoffeeBottleItem)Player.localPlayer.inventory.slots[index].item.data).Drink(Player.localPlayer, index, ModularBuildingManager.singleton.isInventory);
+                    }
                     else
                     {
                         Player.localPlayer.inventory.CmdUseItem(index);
@@ -906,6 +910,10 @@ public class UISelectedItem : MonoBehaviour
                     else if (Player.localPlayer.playerBelt.belt[index].item.data is ScriptableDumbbell)
                     {
                         ((ScriptableDumbbell)Player.localPlayer.playerBelt.belt[index].item.data).Spawn(Player.localPlayer, ModularBuildingManager.singleton.isInventory, index, 0, Player.localPlayer.transform.position);
+                    }
+                    else if (Player.localPlayer.playerBelt.belt[index].item.data is CoffeeBottleItem)
+                    {
+                        ((CoffeeBottleItem)Player.localPlayer.playerBelt.belt[index].item.data).Drink(Player.localPlayer, index, ModularBuildingManager.singleton.isInventory);
                     }
                     else
                     {
