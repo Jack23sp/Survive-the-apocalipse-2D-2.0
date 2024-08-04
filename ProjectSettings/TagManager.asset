@@ -57,6 +57,8 @@ TagManager:
   - PlayerSelector
   - Wallpaper
   - VegetationSpawner
+  - VegatationSpawner
+  - Wheat
   layers:
   - Default
   - TransparentFX
@@ -68,7 +70,7 @@ TagManager:
   - Projectile
   - Player
   - Monster
-  - Npc
+  - Accessory
   - Pet
   - Indicator
   - Basement
@@ -89,7 +91,7 @@ TagManager:
   - ControlSpawnpoint
   - ResourceGathered
   - VegetationSpawner
-  - 
+  - AccessoryPositioning
   m_SortingLayers:
   - name: Terrain
     uniqueID: 1088210625

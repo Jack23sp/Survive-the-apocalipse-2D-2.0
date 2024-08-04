@@ -109,13 +109,17 @@ public class UIBuildingAccessoryManager : MonoBehaviour
         {
             Player.localPlayer.playerModularBuilding.oldBuilding = buildingAccessory;
             Player.localPlayer.playerModularBuilding.fakeBuilding = buildingAccessory.craftingAccessoryItem.GetType();
-            Player.localPlayer.playerModularBuilding.CmdSetFakeBuildingID(buildingAccessory.netIdentity);
+            Player.localPlayer.playerModularBuilding.accessoryInOldBuilding = buildingAccessory.accessoriesInThisForniture;
+            Player.localPlayer.playerModularBuilding.CmdSetFakeBuildingID(buildingAccessory.netIdentity, Player.localPlayer.playerModularBuilding.accessoryInOldBuilding.ToArray());
             Player.localPlayer.playerModularBuilding.CmdManageVisibilityOfObject(false);
             UseItem(buildingAccessory, buildingAccessory.gameObject);
         }
         else if(selected == 1)
         {
-            Player.localPlayer.playerModularBuilding.CmdDeleteAccessory(buildingAccessory.netIdentity);
+            Player.localPlayer.playerModularBuilding.accessoryInOldBuilding = buildingAccessory.accessoriesInThisForniture;
+            Player.localPlayer.playerModularBuilding.CmdSetFakeBuildingID(buildingAccessory.netIdentity, Player.localPlayer.playerModularBuilding.accessoryInOldBuilding.ToArray());
+            Player.localPlayer.playerModularBuilding.CmdSetAccessoriesList(Player.localPlayer.playerModularBuilding.accessoryInOldBuilding.ToArray());
+            Player.localPlayer.playerModularBuilding.CmdDeleteAccessory();
         }
         else if (selected == 3)
         {

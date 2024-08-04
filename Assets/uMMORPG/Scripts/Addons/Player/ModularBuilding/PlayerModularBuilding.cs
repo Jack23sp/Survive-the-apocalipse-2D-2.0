@@ -24,6 +24,8 @@ public class PlayerModularBuilding : NetworkBehaviour
     [SyncVar]
     public NetworkIdentity fakeBuildingID;
 
+    public List<BuildingAccessory> accessoryInOldBuilding = new List<BuildingAccessory>();
+
     public void Assign()
     {
         player = GetComponent<Player>();
@@ -426,15 +428,48 @@ public class PlayerModularBuilding : NetworkBehaviour
     }
 
     [Command]
-    public void CmdSetFakeBuildingID(NetworkIdentity identity)
+    public void CmdSetFakeBuildingID(NetworkIdentity identity, BuildingAccessory [] accessories )
     {
         fakeBuildingID = identity;
+        accessoryInOldBuilding = accessories.ToList();
     }
+
+
+    [Command]
+    public void CmdSetAccessoriesList(BuildingAccessory[] accessories)
+    {
+        accessoryInOldBuilding = accessories.ToList();
+        RpcSyncAccessoryList(accessories);
+    }
+
+    [ClientRpc]
+    public void RpcSyncAccessoryList(BuildingAccessory[] accessoryList)
+    {
+        accessoryInOldBuilding = accessoryList.ToList();
+    }
+
+    [Command]
+    public void CmdCleanAccessoriesList()
+    {
+        accessoryInOldBuilding.Clear();
+        RpcManageVisibilityOfObject();
+    }
+
+    [ClientRpc]
+    public void RpcManageVisibilityOfObject()
+    {
+        accessoryInOldBuilding.Clear();
+    }
+
 
     [Command]
     public void CmdRemoveFakeBuildingID(bool condition)
     {
         fakeBuildingID = null;
+        foreach(BuildingAccessory acc in accessoryInOldBuilding)
+            {
+            RpcManageVisibilityOfObject(acc.netIdentity, condition);
+        }
         RpcManageVisibilityOfObject(fakeBuildingID, condition);
     }
 
@@ -444,6 +479,10 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (fakeBuildingID)
         {
             fakeBuildingID.gameObject.SetActive(condition);
+            foreach(BuildingAccessory acc in accessoryInOldBuilding)
+            {
+                RpcManageVisibilityOfObject(acc.netIdentity, condition);
+            }
             RpcManageVisibilityOfObject(fakeBuildingID, condition);
         }
     }
@@ -1378,30 +1417,41 @@ public class PlayerModularBuilding : NetworkBehaviour
     }
 
     [Command]
-    public void CmdDeleteAccessory(NetworkIdentity identity)
+    public void CmdDeleteAccessory()
     {
-        if (identity)
+        if (fakeBuildingID == null) return;
+
+        if (!fakeBuildingID.gameObject.GetComponent<ModularBuilding>())
         {
-            if(!identity.gameObject.GetComponent<ModularBuilding>())
-                NetworkServer.Destroy(identity.gameObject);
-            else
+            for(int i = 0; i < accessoryInOldBuilding.Count; i++)
             {
-                ModularBuilding modular = identity.gameObject.GetComponent<ModularBuilding>();
-                if(modular)
+                GameObject g = Instantiate(ResourceManager.singleton.objectDrop.gameObject, player.transform.position, Quaternion.identity);
+                g.GetComponent<CurvedMovement>().startEntity = player.transform;
+                g.GetComponent<CurvedMovement>().SpawnAtPosition(new Item(accessoryInOldBuilding[i].craftingAccessoryItem), 1, -1, 0);
+            }
+            for(int e = 0; e < accessoryInOldBuilding.Count; e++)
+            {
+                NetworkServer.Destroy(accessoryInOldBuilding[e].gameObject);
+            }
+            NetworkServer.Destroy(fakeBuildingID.gameObject);
+        }
+        else
+        {
+            ModularBuilding modular = fakeBuildingID.gameObject.GetComponent<ModularBuilding>();
+            if (modular)
+            {
+                GameObject newMainModular = FindNearestFloor(modular);
+
+                Collider2D[] coll = Physics2D.OverlapBoxAll(modular.transform.position, modular.thisCollider.bounds.size, 0, ModularBuildingManager.singleton.accessoryLayerToDestroyWithFloor);
+                for (int i = 0; i < coll.Length; i++)
                 {
-                    GameObject newMainModular = FindNearestFloor(modular);
+                    NetworkServer.Destroy(coll[i].gameObject);
+                }
+                NetworkServer.Destroy(fakeBuildingID.gameObject);
 
-                    Collider2D[] coll = Physics2D.OverlapBoxAll(modular.transform.position, modular.thisCollider.bounds.size, 0, ModularBuildingManager.singleton.accessoryLayerToDestroyWithFloor);
-                    for (int i = 0; i < coll.Length; i++)
-                    {
-                        NetworkServer.Destroy(coll[i].gameObject);
-                    }
-                    NetworkServer.Destroy(identity.gameObject);
-
-                    if (newMainModular)
-                    {
-                        newMainModular.GetComponent<ModularBuilding>().main = true;
-                    }
+                if (newMainModular)
+                {
+                    newMainModular.GetComponent<ModularBuilding>().main = true;
                 }
             }
         }
@@ -1410,7 +1460,7 @@ public class PlayerModularBuilding : NetworkBehaviour
     public GameObject FindNearestFloor(ModularBuilding modular)
     {
         List<ModularBuilding> floor = ModularBuildingManager.singleton.combinedModulars;
-        wallOrdered = floor.Select(x => x).Where(x => x.main == false
+        wallOrdered = floor.Select(x => x).Where(x => x.main == false && x.modularIndex == modular.modularIndex
                                                 && (x.GetComponent<NetworkIdentity>().isClient 
                                                  || x.GetComponent<NetworkIdentity>().isServer) 
                                                  && ModularBuildingManager.singleton.CanDoOtherActionFloor(x, player)).ToList();

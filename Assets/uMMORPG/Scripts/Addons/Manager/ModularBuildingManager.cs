@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Mirror;
 using System.Linq;
 
@@ -111,7 +112,7 @@ public class ModularBuildingManager : MonoBehaviour
     public string buildingAreaRestrainSpawnArea = "You are too close a player spawn area to build";
     public string buildingConstruction = "You cannot build because of some obstacles or out of perimeter of construction";
 
-    private Transform roof, doorOptions, wallOptions;
+    private Transform roof, doorOptions, wallOptions, accessory;
 
 
     void Awake()
@@ -492,6 +493,8 @@ public class ModularBuildingManager : MonoBehaviour
                 }
             }
 
+            roof = doorOptions = wallOptions = accessory = null;
+
             for (int e = 0; e < hit.Length; e++)
             {
                 int index = e;
@@ -508,6 +511,10 @@ public class ModularBuildingManager : MonoBehaviour
                 {
                     wallOptions = hit[index].collider.transform;
                 }
+                if (hit[index].collider.CompareTag("Accessory"))
+                {
+                    accessory = hit[index].collider.transform;
+                }
             }
 
 
@@ -519,6 +526,7 @@ public class ModularBuildingManager : MonoBehaviour
                 {
                     return;
                 }
+                if (spawnedAccesssory || spawnedWall || spawnedBuilding) return;
 
                 if (doorOptions)
                 {
@@ -545,105 +553,19 @@ public class ModularBuildingManager : MonoBehaviour
                         return;
                     }
                 }
+
                 if (hit[index].collider.CompareTag("Selector"))
                 {
                     BuildingAccessory forniture = hit[index].collider.gameObject.GetComponentInParent<BuildingAccessory>();
                     if (forniture.netIdentity.netId == 0) return;
 
-                    switch (forniture.uiToOpen)
+                    if(forniture.accessoriesInThisForniture.Count > 0)
                     {
-                        case -2:
-                            if (CanDoOtherActionForniture(forniture, Player.localPlayer))
-                            {
-                                GameObject g = Instantiate(GameObjectSpawnManager.singleton.confirmManagerAccessory, GameObjectSpawnManager.singleton.canvas);
-                                g.GetComponent<UIBuildingAccessoryManager>().cleanButton.gameObject.SetActive(true);
-                                g.GetComponent<UIBuildingAccessoryManager>().Init(forniture.netIdentity, forniture.craftingAccessoryItem);
-
-                            }
-                            break;
-                        case -1:
-                            if (CanDoOtherActionForniture(forniture, Player.localPlayer))
-                            {
-                                GameObject g = Instantiate(GameObjectSpawnManager.singleton.confirmManagerAccessory, GameObjectSpawnManager.singleton.canvas);
-                                g.GetComponent<UIBuildingAccessoryManager>().Init(forniture.netIdentity, forniture.craftingAccessoryItem);
-                            }
-                            break;
-                        case 0:
-                            BlurManager.singleton.Hide();
-                            UIBathroomSink.singleton.aquifer = forniture.GetComponent<BathroomSink>().aquifer;
-                            buildingAccessory = forniture;
-                            UIBathroomSink.singleton.Open(forniture.GetComponent<BathroomSink>());
-                            break;
-                        case 1:
-                            BlurManager.singleton.Hide();
-                            buildingAccessory = forniture;
-                            UICraft.singleton.Open(forniture.GetComponent<CraftAccessory>());
-                            break;
-                        case 2:
-                            BlurManager.singleton.Hide();
-                            buildingAccessory = forniture;
-                            UIKitchenSink.singleton.aquifer = forniture.GetComponent<KitchenSink>().aquifer;
-                            UIKitchenSink.singleton.Open(forniture.GetComponent<KitchenSink>());
-                            break;
-                        case 3:
-                            BlurManager.singleton.Hide();
-                            buildingAccessory = forniture;
-                            UIRepair.singleton.Open(forniture.GetComponent<Upgrade>());
-                            break;
-                        case 4:
-                            BlurManager.singleton.Hide();
-                            buildingAccessory = forniture;
-                            UIFridge.singleton.Open(forniture.GetComponent<Fridge>());
-                            break;
-                        case 5:
-                            BlurManager.singleton.Hide();
-                            buildingAccessory = forniture;
-                            UICabinet.singleton.Open(forniture.GetComponent<Cabinet>());
-                            break;
-                        case 6:
-                            BlurManager.singleton.Hide();
-                            buildingAccessory = forniture;
-                            UIWeaponStorage.singleton.Open(forniture.GetComponent<WeaponStorage>());
-                            break;
-                        case 7:
-                            BlurManager.singleton.Hide();
-                            buildingAccessory = forniture;
-                            UIWarehouse.singleton.Open(forniture.GetComponent<Warehouse>());
-                            break;
-                        case 8:
-                            BlurManager.singleton.Hide();
-                            buildingAccessory = forniture;
-                            UIBillboard.singleton.Open(forniture.GetComponent<Billboard>());
-                            break;
-                        case 9:
-                            if (CanDoOtherActionForniture(forniture, Player.localPlayer))
-                            {
-                                BlurManager.singleton.Hide();
-                                buildingAccessory = forniture;
-                                UIFlag.singleton.Open(forniture.GetComponent<Flag>());
-                            }
-                            break;
-                        case 10:
-                            BlurManager.singleton.Hide();
-                            buildingAccessory = forniture;
-                            UIFurnace.singleton.Open(forniture.GetComponent<Furnace>());
-                            break;
-                        case 11:
-                            BlurManager.singleton.Hide();
-                            buildingAccessory = forniture;
-                            UIWaterContainer.singleton.Open(forniture.GetComponent<WaterContainer>());
-                            break;
-                        case 12:
-                            BlurManager.singleton.Hide();
-                            buildingAccessory = forniture;
-                            UILibrary.singleton.Open(forniture.GetComponent<Library>());
-                            break;
-                        case 13:
-                            BlurManager.singleton.Hide();
-                            buildingAccessory = forniture;
-                            UIInteractableItemPanel.singleton.Open(forniture.GetComponent<BuildingAccessory>().craftingAccessoryItem, hit[index].collider.gameObject.GetComponentInParent<NetworkIdentity>());
-                            break;
+                        GameObject g = Instantiate(GameObjectSpawnManager.singleton.fornitureAccessory, GameObjectSpawnManager.singleton.canvas);
+                        g.GetComponent<UIAccessorySelector>().Open(forniture);
+                        return;
                     }
+                    SelectorClicked(forniture);
                     return;
                 }
                 if (hit[index].collider.CompareTag("Central"))
@@ -751,6 +673,111 @@ public class ModularBuildingManager : MonoBehaviour
 
     }
 
+    public void SelectorClicked(BuildingAccessory forniture,Button closeButton = null)
+    {
+        switch (forniture.uiToOpen)
+        {
+
+            case -3:               
+                BlurManager.singleton.Hide();
+                UICoffeeMachine.singleton.Open();
+                if (closeButton) closeButton.onClick.Invoke();
+                break;
+            case -2:
+                if (CanDoOtherActionForniture(forniture, Player.localPlayer))
+                {
+                    GameObject g = Instantiate(GameObjectSpawnManager.singleton.confirmManagerAccessory, GameObjectSpawnManager.singleton.canvas);
+                    g.GetComponent<UIBuildingAccessoryManager>().cleanButton.gameObject.SetActive(true);
+                    g.GetComponent<UIBuildingAccessoryManager>().Init(forniture.netIdentity, forniture.craftingAccessoryItem);
+
+                }
+                break;
+            case -1:
+                if (CanDoOtherActionForniture(forniture, Player.localPlayer))
+                {
+                    GameObject g = Instantiate(GameObjectSpawnManager.singleton.confirmManagerAccessory, GameObjectSpawnManager.singleton.canvas);
+                    g.GetComponent<UIBuildingAccessoryManager>().cleanButton.gameObject.SetActive(false);
+                    g.GetComponent<UIBuildingAccessoryManager>().Init(forniture.netIdentity, forniture.craftingAccessoryItem);
+                }
+                break;
+            case 0:
+                BlurManager.singleton.Hide();
+                UIBathroomSink.singleton.aquifer = forniture.GetComponent<BathroomSink>().aquifer;
+                buildingAccessory = forniture;
+                UIBathroomSink.singleton.Open(forniture.GetComponent<BathroomSink>());
+                break;
+            case 1:
+                BlurManager.singleton.Hide();
+                buildingAccessory = forniture;
+                UICraft.singleton.Open(forniture.GetComponent<CraftAccessory>());
+                break;
+            case 2:
+                BlurManager.singleton.Hide();
+                buildingAccessory = forniture;
+                UIKitchenSink.singleton.aquifer = forniture.GetComponent<KitchenSink>().aquifer;
+                UIKitchenSink.singleton.Open(forniture.GetComponent<KitchenSink>());
+                break;
+            case 3:
+                BlurManager.singleton.Hide();
+                buildingAccessory = forniture;
+                UIRepair.singleton.Open(forniture.GetComponent<Upgrade>());
+                break;
+            case 4:
+                BlurManager.singleton.Hide();
+                buildingAccessory = forniture;
+                UIFridge.singleton.Open(forniture.GetComponent<Fridge>());
+                break;
+            case 5:
+                BlurManager.singleton.Hide();
+                buildingAccessory = forniture;
+                UICabinet.singleton.Open(forniture.GetComponent<Cabinet>());
+                break;
+            case 6:
+                BlurManager.singleton.Hide();
+                buildingAccessory = forniture;
+                UIWeaponStorage.singleton.Open(forniture.GetComponent<WeaponStorage>());
+                break;
+            case 7:
+                BlurManager.singleton.Hide();
+                buildingAccessory = forniture;
+                UIWarehouse.singleton.Open(forniture.GetComponent<Warehouse>());
+                break;
+            case 8:
+                BlurManager.singleton.Hide();
+                buildingAccessory = forniture;
+                UIBillboard.singleton.Open(forniture.GetComponent<Billboard>());
+                break;
+            case 9:
+                if (CanDoOtherActionForniture(forniture, Player.localPlayer))
+                {
+                    BlurManager.singleton.Hide();
+                    buildingAccessory = forniture;
+                    UIFlag.singleton.Open(forniture.GetComponent<Flag>());
+                }
+                break;
+            case 10:
+                BlurManager.singleton.Hide();
+                buildingAccessory = forniture;
+                UIFurnace.singleton.Open(forniture.GetComponent<Furnace>());
+                break;
+            case 11:
+                BlurManager.singleton.Hide();
+                buildingAccessory = forniture;
+                UIWaterContainer.singleton.Open(forniture.GetComponent<WaterContainer>());
+                break;
+            case 12:
+                BlurManager.singleton.Hide();
+                buildingAccessory = forniture;
+                UILibrary.singleton.Open(forniture.GetComponent<Library>());
+                break;
+            case 13:
+                BlurManager.singleton.Hide();
+                buildingAccessory = forniture;
+                UIInteractableItemPanel.singleton.Open(forniture.GetComponent<BuildingAccessory>().craftingAccessoryItem, forniture.netIdentity);
+                break;
+        }
+
+    }
     public void AbleBuildingModeWall()
     {
         activeBuildingModeWall = true;
@@ -1173,8 +1200,7 @@ public class ModularBuildingManager : MonoBehaviour
                 Player.localPlayer.playerNotification.SpawnNotification(ImageManager.singleton.refuse, buildingConstruction);
         }
 
-        if (Player.localPlayer.playerModularBuilding.fakeBuilding != null)
-            Player.localPlayer.playerModularBuilding.CmdDeleteAccessory(Player.localPlayer.playerModularBuilding.fakeBuildingID);
+            Player.localPlayer.playerModularBuilding.CmdDeleteAccessory();
 
 
         if (spawnedBuilding || spawnedAccesssory || spawnedWall)

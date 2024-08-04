@@ -254,6 +254,7 @@ public class BuildingAccessory : NetworkBehaviour
     public Collider2D[] grassUnder;
 
     public List<SpriteRenderer> spritesList;
+    public List<BuildingAccessory> accessoriesInThisForniture;
 
     public void Start()
     {

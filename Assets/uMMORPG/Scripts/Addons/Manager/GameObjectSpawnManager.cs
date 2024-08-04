@@ -21,6 +21,7 @@ public class GameObjectSpawnManager : MonoBehaviour
     public GameObject confirmDeleteWall;
     [Header("Manager building accessory")]
     public GameObject confirmManagerAccessory;
+    public GameObject fornitureAccessory;
     [Header("Death Marker")]
     public GameObject deathMarker;
 

@@ -17,7 +17,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
     public void OnInitializeFailed(InitializationFailureReason error)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)

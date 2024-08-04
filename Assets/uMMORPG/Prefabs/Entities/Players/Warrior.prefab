@@ -1397,6 +1397,8 @@ MonoBehaviour:
     amount: 1
   - item: {fileID: 11400000, guid: 2405d9053b455364e9e32c08bb157cb7, type: 2}
     amount: 5
+  - item: {fileID: 11400000, guid: 6932770ceb0479f45baa2ddca8e0b4e2, type: 2}
+    amount: 10
   splitKeys: 300100002f010000
   trash:
     item:
@@ -2395,8 +2397,6 @@ MonoBehaviour:
   animator: {fileID: 2506705415186245405}
   additionalState: 
   bookTitle: 
-  harvesting: {fileID: 0}
-  havestingText: {fileID: 606669371292395177}
 --- !u!114 &1782978134762567769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2920,6 +2920,7 @@ MonoBehaviour:
   player: {fileID: 0}
   zombie: {fileID: 0}
   wall: {fileID: 0}
+  ambient: {fileID: 0}
   caster: {fileID: 0}
   precisionRand: 0
 --- !u!82 &-4264813359093042765

@@ -226,7 +226,8 @@ public class UICentralManager : MonoBehaviour
                 confirmDeleteButton.onClick.AddListener(() =>
                 {
                     if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
-                    Player.localPlayer.playerModularBuilding.CmdDeleteAccessory(modularBuilding.netIdentity);
+                    Player.localPlayer.playerModularBuilding.CmdSetFakeBuildingID(modularBuilding.netIdentity, new BuildingAccessory[0]);
+                    Player.localPlayer.playerModularBuilding.CmdDeleteAccessory();
                     closeButton.onClick.Invoke();
                 });
 
