@@ -21,7 +21,6 @@ MonoBehaviour:
     bonusPerLevel: 0
   maxArmorLevel: 0
   productAfterCooking: {fileID: 0}
-  coverTemperature: 0
   additionalSlot:
     baseValue: 0
     bonusPerLevel: 0
@@ -32,10 +31,6 @@ MonoBehaviour:
   maxWeight:
     baseValue: 0
     bonusPerLevel: 0
-  possibleBagWeight:
-    baseValue: 0
-    bonusPerLevel: 0
-  maxWeightLevel: 0
   skinImages: []
   weaponToSpawn: {fileID: 0}
   munitionImage: {fileID: 0}
@@ -62,7 +57,7 @@ MonoBehaviour:
   itemtoCraftBuilding:
   - itemAndAmount:
       item: {fileID: 11400000, guid: 402b0067f88f5da40ac76d802cd558df, type: 2}
-      amount: 60
+      amount: 20
     ingredients: []
     timeToCraft: 0
     gold: 0

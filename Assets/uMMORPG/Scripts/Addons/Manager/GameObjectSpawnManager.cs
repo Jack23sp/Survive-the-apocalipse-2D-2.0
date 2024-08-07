@@ -24,6 +24,8 @@ public class GameObjectSpawnManager : MonoBehaviour
     public GameObject fornitureAccessory;
     [Header("Death Marker")]
     public GameObject deathMarker;
+    [Header("Player Dummy")]
+    public GameObject playerDummy;
 
     public void Start()
     {
