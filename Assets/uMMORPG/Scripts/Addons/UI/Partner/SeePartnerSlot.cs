@@ -7,6 +7,7 @@ using TMPro;
 public class SeePartnerSlot : MonoBehaviour
 {
     public TextMeshProUGUI guildName;
+    public TextMeshProUGUI headerText;
     public TextMeshProUGUI friendName;
     public TextMeshProUGUI level;
     public TextMeshProUGUI health;
@@ -24,4 +25,6 @@ public class SeePartnerSlot : MonoBehaviour
     public GameObject myGroup;
     public GameObject partnerPanel;
     public GameObject partnerNoPanel;
+    public Button leftArrow;
+    public Button rightArrow;
 }
