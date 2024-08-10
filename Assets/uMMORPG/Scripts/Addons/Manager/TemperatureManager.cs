@@ -5,6 +5,59 @@ using Mirror;
 using UnityEngine.Rendering.Universal;
 using System;
 
+// Pool di oggetti
+public class ObjectPool
+{
+    private Queue<GameObject> pool = new Queue<GameObject>();
+    private GameObject prefab;
+    private int poolSize;
+
+    public ObjectPool(GameObject prefab, int size)
+    {
+        this.prefab = prefab;
+        this.poolSize = size;
+        InitializePool();
+    }
+
+    private void InitializePool()
+    {
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject obj = UnityEngine.Object.Instantiate(prefab);
+            obj.SetActive(false);
+            pool.Enqueue(obj);
+        }
+    }
+
+    public GameObject GetPooledObject()
+    {
+        if (pool.Count > 0)
+        {
+            GameObject obj = pool.Dequeue();
+            obj.SetActive(true);
+            return obj;
+        }
+        return null;
+    }
+
+    public void ReturnPooledObject(GameObject obj)
+    {
+        obj.SetActive(false);
+        pool.Enqueue(obj);
+    }
+
+    public void DeactivateAll()
+    {
+        foreach (GameObject obj in pool)
+        {
+            if (obj.activeSelf)
+            {
+                obj.SetActive(false);
+            }
+        }
+    }
+}
+
 public class TemperatureManager : NetworkBehaviour
 {
 
@@ -187,10 +240,15 @@ public class TemperatureManager : NetworkBehaviour
     public Color colorToActivateLamp;
 
     public float transp;
+    private ObjectPool rainEffectPool;
+    public GameObject rainSlplashObject;
+
+    public LayerMask layerMask;
 
     void Awake()
     {
         if (!singleton) singleton = this;
+        rainEffectPool = new ObjectPool(rainSlplashObject.gameObject, 200);
         ChangeMusic(nightMusic, nightMusic);
     }
 
@@ -236,7 +294,74 @@ public class TemperatureManager : NetworkBehaviour
         {
             snowObject.snowIntensity = 0f;
             rainObject.rainIntensity = Mathf.Lerp(0.0f, 1.0f, 3.0f);
+
+            Invoke(nameof(ManageRainParticle), 0.01f);
         }
+        else
+        {
+            // Disattiva tutti gli oggetti attivi nel pool
+            rainEffectPool.DeactivateAll();
+            CancelInvoke(nameof(ManageRainParticle));
+        }
+    }
+
+    public void ManageRainParticle()
+    {
+        GameObject rainEffect = rainEffectPool.GetPooledObject();
+        if (rainEffect != null)
+        {
+            rainEffect.transform.position = GetValidSpawnPoint(); // Imposta la posizione al punto generato casualmente
+            rainEffect.SetActive(true);
+
+            // Se l'oggetto ha un'animazione, riproducila qui
+            Animator animator = rainEffect.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.Play("Splash"); // Assicurati di avere l'animazione corretta impostata
+            }
+
+            StartCoroutine(DeactivateAfterTime(rainEffect, 1.0f)); // Disattiva dopo 2 secondi
+            Invoke(nameof(ManageRainParticle), 0.01f);
+        }
+
+    }
+
+    //private Vector2 GetRandomScreenPosition()
+    //{
+    //    // Genera una posizione casuale sullo schermo
+    //    Vector2 randomPoint = Camera.main.ScreenToWorldPoint(new Vector2(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height)), layerMask);
+    //    return randomPoint;
+    //}
+
+    Vector2 GetValidSpawnPoint()
+    {
+        int maxAttempts = 100; // Numero massimo di tentativi
+        for (int i = 0; i < maxAttempts; i++)
+        {
+            // Step 1: Genera un punto casuale sullo schermo
+            Vector2 screenPoint = new Vector2(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height));
+
+            // Step 2: Converte il punto dello schermo in coordinate del mondo
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(screenPoint);
+
+            // Step 3: Controlla se il punto è libero da oggetti con i layer specificati
+            Collider2D hitCollider = Physics2D.OverlapPoint(worldPoint, layerMask);
+
+            if (hitCollider == null)
+            {
+                // Se non ci sono oggetti nel punto, il punto è valido
+                return worldPoint;
+            }
+        }
+
+        // Se non è stato trovato un punto valido dopo maxAttempts, ritorna Vector2.zero
+        return Vector2.zero;
+    }
+
+    IEnumerator DeactivateAfterTime(GameObject obj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        rainEffectPool.ReturnPooledObject(obj);
     }
 
     public void SunClouds(float oldValue, float newValue)

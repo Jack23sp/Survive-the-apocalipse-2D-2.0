@@ -150,7 +150,7 @@ MonoBehaviour:
   avoidHits: []
   cracksImages: []
   sortByDepths: []
-  uiToOpen: -1
+  uiToOpen: -3
   craftingAccessoryItem: {fileID: 11400000, guid: 6932770ceb0479f45baa2ddca8e0b4e2,
     type: 2}
   oldBuilding: {fileID: 0}
