@@ -19,7 +19,7 @@ public class FollowPlayer : MonoBehaviour
         player.followPlayer = this;
         if (player.isClient)
         {
-            //marker.transform.parent = null;
+            marker.transform.parent = null;
             marker.transform.position = player.transform.position;
             markerRenderer.color = Color.blue;
             Invoke(nameof(Check), 1.0f);

@@ -40,6 +40,40 @@ public partial class Player
         if (ModularBuildingManager.singleton.CanDoOtherActionForniture(aquarium, this))
             aquarium.dirt = 0;
     }
+
+    [Command]
+    public void CmdLevelUp(NetworkIdentity identity)
+    {
+        Fence fence = identity.GetComponent<Fence>();
+        Gate gate = identity.GetComponent<Gate>();
+
+        if (!gate && !fence) return;
+        if(fence)
+        {
+            fence.LevelDoAction(this);
+        }
+        if(gate)
+        {
+            gate.LevelDoAction(this);
+        }
+    }
+
+    [Command]
+    public void CmdlClaim(NetworkIdentity identity)
+    {
+        Fence fence = identity.GetComponent<Fence>();
+        Gate gate = identity.GetComponent<Gate>();
+
+        if (!gate && !fence) return;
+        if (fence)
+        {
+            fence.ClaimDoAction(this);
+        }
+        if (gate)
+        {
+            gate.ClaimDoAction(this);
+        }
+    }
 }
 
 public class Aquarium : BuildingAccessory

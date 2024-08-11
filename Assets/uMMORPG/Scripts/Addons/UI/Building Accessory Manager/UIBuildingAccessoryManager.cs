@@ -15,6 +15,8 @@ public class UIBuildingAccessoryManager : MonoBehaviour
     public Button moveButton;
     public Button deleteButton;
     public Button cleanButton;
+    public Button claimButton;
+    public Button levelUpButton;
     public Button confirmButton;
     private Button parentButton;
 
@@ -26,6 +28,8 @@ public class UIBuildingAccessoryManager : MonoBehaviour
     public TextMeshProUGUI moveText;
     public TextMeshProUGUI deleteText;
     public TextMeshProUGUI cleanText;
+    public TextMeshProUGUI claimText;
+    public TextMeshProUGUI levelUpText;
 
     public NetworkIdentity accessoryIdentity;
     public ScriptableBuildingAccessory accessoryToAdd;
@@ -58,6 +62,14 @@ public class UIBuildingAccessoryManager : MonoBehaviour
         position = buildingAccessory.gameObject.transform.position;
         closeButton.image.raycastTarget = true;
         moveText.gameObject.SetActive(false);
+
+        //float thief = Player.localPlayer.playerAbility.networkAbilities[AbilityManager.singleton.FindNetworkAbility("Thief", Player.localPlayer.name)].level;
+
+        //claimButton.gameObject.SetActive(scriptableBuildingAccessory is ScriptableFence && ((Fence)buildingAccessory).level < thief);
+        //claimButton.gameObject.SetActive(scriptableBuildingAccessory is ScriptableGate && ((Gate)buildingAccessory).level < thief);
+
+        //levelUpButton.gameObject.SetActive(scriptableBuildingAccessory is ScriptableFence);
+        //levelUpButton.gameObject.SetActive(scriptableBuildingAccessory is ScriptableGate);
 
 
         closeButton.onClick.RemoveAllListeners();
@@ -94,6 +106,21 @@ public class UIBuildingAccessoryManager : MonoBehaviour
             ManageUI(selected);
         });
 
+        claimButton.onClick.RemoveAllListeners();
+        claimButton.onClick.AddListener(() =>
+        {
+            selected = 5;
+            ManageUI(selected);
+        });
+
+        levelUpButton.onClick.RemoveAllListeners();
+        levelUpButton.onClick.AddListener(() =>
+        {
+            selected = 6;
+            ManageUI(selected);
+        });
+
+
         confirmButton.onClick.RemoveAllListeners();
         confirmButton.onClick.AddListener(() =>
         {
@@ -101,6 +128,11 @@ public class UIBuildingAccessoryManager : MonoBehaviour
         });
 
         ManageUI(selected);
+    }
+
+    public void SyncLevelText()
+    {
+        levelUpText.text = "The level of this chain of this construction is " + (buildingAccessory.GetComponent<Fence>() ? buildingAccessory.GetComponent<Fence>().level.ToString() : buildingAccessory.GetComponent<Gate>().level.ToString());
     }
 
     public void ConfirmButton()
@@ -129,6 +161,15 @@ public class UIBuildingAccessoryManager : MonoBehaviour
         {
             Player.localPlayer.CmdCleanAquarium(buildingAccessory.netIdentity);
         }
+        else if (selected == 5)
+        {
+            Player.localPlayer.CmdlClaim(buildingAccessory.netIdentity);
+        }
+        else if (selected == 6)
+        {
+            Player.localPlayer.CmdLevelUp(buildingAccessory.netIdentity);
+        }
+
         CloseButton(true);
     }
 
@@ -237,30 +278,54 @@ public class UIBuildingAccessoryManager : MonoBehaviour
         moveText.gameObject.SetActive(condition == 4);
         cleanText.gameObject.SetActive(condition == 2);
         deleteText.gameObject.SetActive(condition == 1);
+        claimText.gameObject.SetActive(condition == 5);
+        levelUpText.gameObject.SetActive(condition == 6);
 
-            if (condition == 3)
+        claimText.text = string.Empty;
+
+        if (condition == 5)
+        {
+            float thief = Player.localPlayer.playerAbility.networkAbilities[AbilityManager.singleton.FindNetworkAbility("Thief", Player.localPlayer.name)].level;
+            int level = buildingAccessory.GetComponent<Fence>() ? buildingAccessory.GetComponent<Fence>().level : buildingAccessory.GetComponent<Gate>().level;
+            if (thief < level)
+                claimText.text = "To claim this chain of construction you need the ability Thief to level " + (buildingAccessory.GetComponent<Fence>() ? buildingAccessory.GetComponent<Fence>().level.ToString() : buildingAccessory.GetComponent<Gate>().level.ToString());
+            else
+                claimText.text = "Do you want to claim this chain of construction?";
+        }
+
+        if (condition == 6)
+        {
+            levelUpText.text = "Do you want level up this chain of construction?";
+        }
+
+        if (condition == 3)
+        {
+            if (accessoryToAdd && accessoryIdentity)
             {
-                    if (accessoryToAdd && accessoryIdentity)
-                    {
-                        hasAllItemToRepair = 1;
-                        UIUtils.BalancePrefabs(objectToCreate, accessoryToAdd.repairItems.Count, content);
-                        for (int i = 0; i < accessoryToAdd.repairItems.Count; i++)
-                        {
-                            int index = i;
-                            UICraftSlotChild slot = content.GetChild(index).gameObject.GetComponent<UICraftSlotChild>();
-                            slot.ingredientImage.sprite = accessoryToAdd.repairItems[index].items.image;
-                            slot.ingredientImage.preserveAspect = true;
-                            int hasItem = Player.localPlayer.inventory.CountItem(new Item(accessoryToAdd.repairItems[index].items));
-                            if (hasAllItemToRepair > 0) hasAllItemToRepair = Player.localPlayer.inventory.CountItem(new Item(accessoryToAdd.repairItems[index].items));
-                            slot.ingredientsAmount.color = hasItem < accessoryToAdd.repairItems[index].amount ? Color.red : Color.white;
-                            slot.ingredientsAmount.text = accessoryToAdd.repairItems[index].amount + "/" + Player.localPlayer.inventory.CountItem(new Item(accessoryToAdd.repairItems[index].items));
-                        }
-                        confirmButton.interactable = hasAllItemToRepair > 0 && Player.localPlayer.inventory.CanAddItem(new Item(accessoryToAdd), 1) && buildingAccessory.health < buildingAccessory.maxHealth;
-                    }
+                hasAllItemToRepair = 1;
+                UIUtils.BalancePrefabs(objectToCreate, accessoryToAdd.repairItems.Count, content);
+                for (int i = 0; i < accessoryToAdd.repairItems.Count; i++)
+                {
+                    int index = i;
+                    UICraftSlotChild slot = content.GetChild(index).gameObject.GetComponent<UICraftSlotChild>();
+                    slot.ingredientImage.sprite = accessoryToAdd.repairItems[index].items.image;
+                    slot.ingredientImage.preserveAspect = true;
+                    int hasItem = Player.localPlayer.inventory.CountItem(new Item(accessoryToAdd.repairItems[index].items));
+                    if (hasAllItemToRepair > 0) hasAllItemToRepair = Player.localPlayer.inventory.CountItem(new Item(accessoryToAdd.repairItems[index].items));
+                    slot.ingredientsAmount.color = hasItem < accessoryToAdd.repairItems[index].amount ? Color.red : Color.white;
+                    slot.ingredientsAmount.text = accessoryToAdd.repairItems[index].amount + "/" + Player.localPlayer.inventory.CountItem(new Item(accessoryToAdd.repairItems[index].items));
+                }
+                confirmButton.interactable = hasAllItemToRepair > 0 && Player.localPlayer.inventory.CanAddItem(new Item(accessoryToAdd), 1) && buildingAccessory.health < buildingAccessory.maxHealth;
             }
-            else if (condition == 4 || condition == 1 || condition == 2)
-            {
-                confirmButton.interactable = true;
-            }
+        }
+        else if (condition == 4 || condition == 1 || condition == 2 || condition == 6)
+        {
+            confirmButton.interactable = true;
+        }
+
+        if (condition == 5 && claimText.text == "Do you want to claim this chain of construction?")
+        {
+            confirmButton.interactable = true;
+        }
     }
 }

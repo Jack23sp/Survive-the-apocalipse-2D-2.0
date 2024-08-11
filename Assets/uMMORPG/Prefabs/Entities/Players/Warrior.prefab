@@ -2203,6 +2203,7 @@ MonoBehaviour:
   syncInterval: 0.1
   oldBuilding: {fileID: 0}
   fakeBuildingID: {fileID: 0}
+  accessoryInOldBuilding: []
 --- !u!114 &6328524031332488325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2296,6 +2297,40 @@ MonoBehaviour:
   defaultHealth: 0
   defaultDefense: 0
   defaultMana: 0
+  partner:
+    guild: 
+    partnerName: 
+    level: 0
+    currentHealth: 0
+    maxHealth: 0
+    currentStamina: 0
+    staminaMax: 0
+    accuracy: 0
+    currentArmor: 0
+    maxArmor: 0
+    abilities: []
+    boosts: []
+    alliance: []
+    sex: 0
+    hair: 0
+    beard: 0
+    hairColor: 
+    underPants: 0
+    underPantsColor: 
+    eyesColor: 
+    skinColor: 
+    fat: 0
+    height: 0
+    thin: 0
+    muscles: 0
+    breast: 0
+    underwearColor: 
+    hat: 0
+    accessory: 0
+    upper: 0
+    down: 0
+    shoes: 0
+    bag: 0
 --- !u!114 &1910664446576286546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5572,7 +5607,7 @@ PrefabInstance:
     - target: {fileID: 356295907381473653, guid: cf7bbbc0f6f3c5a43a1dc6655250cc0d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 455296385115500134, guid: cf7bbbc0f6f3c5a43a1dc6655250cc0d,
         type: 3}
@@ -5652,7 +5687,7 @@ PrefabInstance:
     - target: {fileID: 6243849617297273476, guid: cf7bbbc0f6f3c5a43a1dc6655250cc0d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -5675,6 +5710,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1017666603281666589}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6050203818982305572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6393394338672910489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fcfb5828ea30ed4fa6bfce5a7a2a8c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 114064821627912484}
+  marker: {fileID: 6393394338672910489}
+  markerRenderer: {fileID: 787755410252899176}
 --- !u!1001 &5107209028939380079
 PrefabInstance:
   m_ObjectHideFlags: 0

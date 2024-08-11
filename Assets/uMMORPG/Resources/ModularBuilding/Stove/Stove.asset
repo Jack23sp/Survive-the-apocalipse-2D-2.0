@@ -174,6 +174,26 @@ MonoBehaviour:
     timeToCraft: 60
     gold: 350
     coin: 5
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: b61bf5f9520edd5489158b8a48218e0e, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0006b231a801e0c4391f0c76fa4f3f36, type: 2}
+      amount: 25
+    timeToCraft: 60
+    gold: 350
+    coin: 5
+  - itemAndAmount:
+      item: {fileID: 11400000, guid: fca0f3b14472e744085274681f23020a, type: 2}
+      amount: 1
+    ingredients:
+    - item: {fileID: 11400000, guid: 0006b231a801e0c4391f0c76fa4f3f36, type: 2}
+      amount: 25
+    - item: {fileID: 11400000, guid: b223fcdc5cbdde74483bb06d63f3b47d, type: 2}
+      amount: 4
+    timeToCraft: 60
+    gold: 350
+    coin: 5
   itemtoCraftFemale: []
   continuePlacing: 0
   canAddSkin: 0

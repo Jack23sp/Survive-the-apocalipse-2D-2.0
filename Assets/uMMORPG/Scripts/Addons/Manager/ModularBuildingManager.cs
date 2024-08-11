@@ -677,7 +677,23 @@ public class ModularBuildingManager : MonoBehaviour
     {
         switch (forniture.uiToOpen)
         {
-
+            case -4:
+                GameObject ins = Instantiate(GameObjectSpawnManager.singleton.confirmManagerAccessory, GameObjectSpawnManager.singleton.canvas);
+                if (CanDoOtherActionForniture(forniture, Player.localPlayer))
+                {
+                    ins.GetComponent<UIBuildingAccessoryManager>().cleanButton.gameObject.SetActive(false);
+                    ins.GetComponent<UIBuildingAccessoryManager>().levelUpButton.gameObject.SetActive(true);
+                    ins.GetComponent<UIBuildingAccessoryManager>().claimButton.gameObject.SetActive(false);
+                    ins.GetComponent<UIBuildingAccessoryManager>().Init(forniture.netIdentity, forniture.craftingAccessoryItem);
+                }
+                else
+                {
+                    ins.GetComponent<UIBuildingAccessoryManager>().cleanButton.gameObject.SetActive(false);
+                    ins.GetComponent<UIBuildingAccessoryManager>().levelUpButton.gameObject.SetActive(false);
+                    ins.GetComponent<UIBuildingAccessoryManager>().claimButton.gameObject.SetActive(true);
+                    ins.GetComponent<UIBuildingAccessoryManager>().Init(forniture.netIdentity, forniture.craftingAccessoryItem);
+                }
+                break;
             case -3:               
                 BlurManager.singleton.Hide();
                 UICoffeeMachine.singleton.Open();

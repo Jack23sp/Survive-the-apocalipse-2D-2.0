@@ -64,6 +64,7 @@ public class PlayerGrassDetector : MonoBehaviour
             if (LayerMask.LayerToName(collision.gameObject.layer) == "Player" && !collision.gameObject.GetComponent<Player>().netIdentity.isLocalPlayer)
             {
                 collision.gameObject.GetComponent<PlayerCharacterCreation>().playerChildObject.gameObject.SetActive(true);
+                collision.gameObject.transform.GetChild(3).gameObject.SetActive(true);
 
                 if(collision.gameObject.GetComponent<Player>())
                 {
@@ -130,6 +131,7 @@ public class PlayerGrassDetector : MonoBehaviour
             if (LayerMask.LayerToName(collision.gameObject.layer) == "Player" && !collision.gameObject.GetComponent<Player>().netIdentity.isLocalPlayer)
             {
                 collision.gameObject.GetComponent<PlayerCharacterCreation>().playerChildObject.gameObject.SetActive(false);
+                collision.gameObject.transform.GetChild(3).gameObject.SetActive(false);
 
                 if (collision.gameObject.GetComponent<Player>())
                 {

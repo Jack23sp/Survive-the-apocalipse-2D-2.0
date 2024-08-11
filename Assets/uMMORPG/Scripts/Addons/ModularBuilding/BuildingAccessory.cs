@@ -17,6 +17,7 @@ public partial class Database
         public float posX { get; set; }
         public float posY { get; set; }
         public string nameRename { get; set; }
+        public int level { get; set; }
     }
 
 
@@ -64,7 +65,12 @@ public partial class Database
                 positioning = ModularBuildingManager.singleton.buildingAccessories[index].oldPositioning,
                 posX = ModularBuildingManager.singleton.buildingAccessories[index].transform.position.x,
                 posY = ModularBuildingManager.singleton.buildingAccessories[index].transform.position.y,
-                nameRename = ModularBuildingManager.singleton.buildingAccessories[index].newName
+                nameRename = ModularBuildingManager.singleton.buildingAccessories[index].newName,
+                level = (ModularBuildingManager.singleton.buildingAccessories[index] is Fence) ?
+                        ((Fence)ModularBuildingManager.singleton.buildingAccessories[index]).level :
+                        (ModularBuildingManager.singleton.buildingAccessories[index] is Gate) ?
+                        ((Gate)ModularBuildingManager.singleton.buildingAccessories[index]).level : 1
+
             });
 
             if (ModularBuildingManager.singleton.buildingAccessories[index] is Billboard)
@@ -149,6 +155,11 @@ public partial class Database
                 acc.health = row.health;
                 acc.oldPositioning = row.positioning;
                 acc.newName = row.nameRename;
+                if(g.GetComponent<Fence>())
+                    g.GetComponent<Fence>().level = row.level;
+                if (g.GetComponent<Gate>())
+                    g.GetComponent<Gate>().level = row.level;
+
             }
 
             if (acc is Billboard)

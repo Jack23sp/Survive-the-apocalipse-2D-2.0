@@ -86,7 +86,7 @@ MonoBehaviour:
   _cooldownCategory: 
   results: {fileID: 0}
   resultsAmount: 0
-  foodToAdd: 11
-  waterToAdd: 5
+  foodToAdd: 2
+  waterToAdd: 7
   maxBlood: 0
   petHealthToAdd: 0
