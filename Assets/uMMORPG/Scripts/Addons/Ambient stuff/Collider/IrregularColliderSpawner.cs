@@ -33,7 +33,6 @@ public class IrregularColliderSpawner : NetworkBehaviour
         _polygonCollider = gameObject.AddComponent<PolygonCollider2D>();
         _polygonCollider.isTrigger = true;
         _polygonCollider.points = GenerateRoundedPolygon(numberOfPoints, radius, irregularity);
-        //DrawPolygon();
     }
 
     void Start()
@@ -88,26 +87,22 @@ public class IrregularColliderSpawner : NetworkBehaviour
                     spawnedObj.parent = identity;
                     NetworkServer.Spawn(obj);
                     objectsCreated++;
-                    Debug.Log($"Created object at {point}");
+                    //Debug.Log($"Created object at {point}");
                 }
                 else
                 {
-                    Debug.Log($"OverlapCircleAll found {colliders.Length} colliders at {point}");
-                    for(int i = 0; i <colliders.Length; i++)
-                    {
-                        Debug.Log("Collider name " + colliders[i].name);
-                    }
+                    //Debug.Log($"OverlapCircleAll found {colliders.Length} colliders at {point}");
                 }
             }
             else
             {
-                Debug.Log($"Point {point} is not in the polygon.");
+                //Debug.Log($"Point {point} is not in the polygon.");
             }
 
             attempts++;
         }
 
-        Debug.Log($"Created {objectsCreated} objects out of {maxObjects} attempts.");
+        //Debug.Log($"Created {objectsCreated} objects out of {maxObjects} attempts.");
     }
 
     private bool IsPointInPolygon(out Vector2 result)
@@ -115,7 +110,7 @@ public class IrregularColliderSpawner : NetworkBehaviour
         result = Vector2.zero;
         if (_polygonCollider == null)
         {
-            Debug.LogError("PolygonCollider2D non assegnato.");
+            //Debug.LogError("PolygonCollider2D non assegnato.");
             return false;
         }
 
@@ -141,39 +136,6 @@ public class IrregularColliderSpawner : NetworkBehaviour
         return false;
     }
 
-    private void DrawPolygon()
-    {
-        LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
-        lineRenderer.positionCount = _polygonCollider.points.Length + 1;
-        for (int i = 0; i < _polygonCollider.points.Length; i++)
-        {
-            lineRenderer.SetPosition(i, _polygonCollider.transform.TransformPoint(_polygonCollider.points[i]));
-        }
-        lineRenderer.SetPosition(_polygonCollider.points.Length, _polygonCollider.transform.TransformPoint(_polygonCollider.points[0]));
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default")) { color = Color.red };
-    }
-
-    [Server]
-    public void InteractWithChild(SpawnedObject child)
-    {
-        Debug.Log($"Interagendo con il figlio con indice {child.index}");
-        // Aggiungi qui la logica di interazione
-        RpcHandleInteraction(child.index);
-    }
-
-    [ClientRpc]
-    void RpcHandleInteraction(int index)
-    {
-        //var obj = spawnedObjects.Find(o => o.index == index);
-        //if (obj != null)
-        //{
-        //    // Logica di interazione lato client
-        //    Debug.Log($"Client: Interagito con il figlio con indice {index}");
-        //}
-    }
-
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -186,25 +148,5 @@ public class IrregularColliderSpawner : NetworkBehaviour
                 obj.obj.GetComponent<SpawnedObject>().RpcSyncState(obj.obj.GetComponent<SpawnedObject>().index);
             }
         }
-    }
-
-    void Update()
-    {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        //    foreach (var spawnedObject in spawnedObjects)
-        //    {
-        //        if (spawnedObject.obj.GetComponent<NetworkIdentity>().isServer || spawnedObject.obj.GetComponent<NetworkIdentity>().isClient)
-        //        {
-        //            if (Vector2.Distance(spawnedObject.obj.transform.position, mousePosition) < 0.1f)
-        //            {
-        //                spawnedObject.obj.GetComponent<SpawnedObject>().OnMouseDown();
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
     }
 }

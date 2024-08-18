@@ -56,8 +56,8 @@ public class UISelectedIBuyItem : MonoBehaviour
         closeButton.onClick.AddListener(() =>
         {
             gold = false;
-            categoryIndex = -1;
-            selectedIndex = -1;
+            //categoryIndex = -1;
+            //selectedIndex = -1;
             panel.SetActive(false);
             slider.value = 1;
             sliderValue.text = "1";
@@ -190,6 +190,7 @@ public class UISelectedIBuyItem : MonoBehaviour
         premium = prem;
         closeButton.image.raycastTarget = true;
         closeButton.image.enabled = true;
+        buyButton.interactable = false;
         panel.SetActive(true);
         ChangeAspect(prem);
     }

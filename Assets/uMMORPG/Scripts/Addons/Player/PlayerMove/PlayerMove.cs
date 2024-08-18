@@ -43,6 +43,7 @@ public class PlayerMove : NetworkBehaviour
         InvokeRepeating(nameof(CheckBloodDropOnIdle), 30.0f,30.0f);
         InvokeRepeating(nameof(CheckBloodDropOnMovement), 5.0f,5.0f);
         InvokeRepeating(nameof(ManageTiredness), 7.0f,7.0f);
+        InvokeRepeating(nameof(BurnFat), 5.0f,5.0f);
     }
 
     public void ManageTiredness()
@@ -203,14 +204,36 @@ public class PlayerMove : NetworkBehaviour
         CmdSetSneak();
     }
 
+    public void BurnFat()
+    {
+        if (player.state == "MOVING")
+        {
+            switch (states.Contains("RUN"))
+            {
+                case true:
+                    player.playerCharacterCreation.fat -= 0.025f;
+                    break;
+
+                case false:
+                    player.playerCharacterCreation.fat -= 0.01f;
+                    break;
+            }
+        }
+    }
+
     [Command]
     public void CmdSetRun()
     {
         if (player.playerWeight.current <= player.playerWeight.max)
         {
             if (!states.Contains("RUN"))
+            {
                 states.Add("RUN");
-            else states.Remove("RUN");
+            }
+            else
+            {
+                states.Remove("RUN");
+            }
             if (states.Contains("SNEAK")) states.Remove("SNEAK");
             CheckSpeed();
             RpcCheckSpeed();

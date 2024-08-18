@@ -13,6 +13,8 @@ public partial class FoodItem : UsableItem
     public int waterToAdd;
     public int maxBlood;
     public int petHealthToAdd;
+    [Header("Nutrient")]
+    public float fatAmount;
 
     // usage
     // -> can we equip this into any slot?
@@ -80,6 +82,8 @@ public partial class FoodItem : UsableItem
                 }
             }
         }
+
+        player.playerCharacterCreation.fat += fatAmount;
     }
 
     // tooltip

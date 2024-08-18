@@ -21,7 +21,6 @@ MonoBehaviour:
     bonusPerLevel: 0
   maxArmorLevel: 0
   productAfterCooking: {fileID: 0}
-  coverTemperature: 0
   additionalSlot:
     baseValue: 0
     bonusPerLevel: 0
@@ -32,10 +31,6 @@ MonoBehaviour:
   maxWeight:
     baseValue: 0
     bonusPerLevel: 0
-  possibleBagWeight:
-    baseValue: 0
-    bonusPerLevel: 0
-  maxWeightLevel: 0
   skinImages: []
   weaponToSpawn: {fileID: 0}
   munitionImage: {fileID: 0}
@@ -89,7 +84,10 @@ MonoBehaviour:
   minLevel: 0
   cooldown: 0
   _cooldownCategory: 
+  results: {fileID: 0}
+  resultsAmount: 0
   foodToAdd: 11
   waterToAdd: 5
   maxBlood: 0
   petHealthToAdd: 0
+  fatAmount: 0.15

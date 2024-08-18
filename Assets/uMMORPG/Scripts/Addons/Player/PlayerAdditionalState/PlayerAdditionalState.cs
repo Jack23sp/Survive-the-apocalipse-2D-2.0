@@ -40,6 +40,32 @@ public class PlayerAdditionalState : NetworkBehaviour
         base.OnStartClient();
         ManageadditionState(additionalState, additionalState);
     }
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        InvokeRepeating(nameof(IncreaseMuscle), 0.0f, 7.0f);
+        InvokeRepeating(nameof(LostMuscle), 120.0f, 120.0f);
+    }
+
+    public void IncreaseMuscle()
+    {
+        if (player.health.current == 0) return;
+        if(additionalState == "EXERCISE" || additionalState == "ABS" || additionalState == "JUMPINGJACK" || additionalState == "PUSHUPS")
+        {
+            if(player.playerCharacterCreation.sex == 0) player.playerCharacterCreation.muscle += 0.01f;
+            BurnFat(0.002f);
+        }
+    }
+
+    public void LostMuscle()
+    {
+        player.playerCharacterCreation.muscle = Mathf.Max(0, player.playerCharacterCreation.muscle - 0.01f);
+    }
+
+    public void BurnFat(float amount)
+    {
+        player.playerCharacterCreation.fat = Mathf.Max(0, player.playerCharacterCreation.fat - amount);
+    }
 
     [Command]
     public void CmdUseBook(Player player,int index,bool isInventory)

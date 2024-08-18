@@ -90,3 +90,4 @@ MonoBehaviour:
   waterToAdd: 0
   maxBlood: 0
   petHealthToAdd: 0
+  fatAmount: 1.5

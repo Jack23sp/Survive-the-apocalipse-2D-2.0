@@ -35,22 +35,6 @@ public class SpawnedObject : NetworkBehaviour
         Overlaychanged(false, false);
     }
 
-    // Metodo per richiedere interazione con l'oggetto principale
-    [Command]
-    public void CmdRequestInteraction()
-    {
-        spawner.InteractWithChild(this);
-    }
-
-    // Metodo per gestire il click del mouse
-    public void OnMouseDown()
-    {
-        if (isClient)
-        {
-            CmdRequestInteraction();
-        }
-    }
-
     [ClientRpc]
     public void RpcSyncState(int newIndex)
     {

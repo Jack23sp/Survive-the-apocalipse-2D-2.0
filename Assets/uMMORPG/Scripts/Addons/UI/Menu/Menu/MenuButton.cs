@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class MenuButton : MonoBehaviour
 {
@@ -46,6 +48,7 @@ public class MenuButton : MonoBehaviour
     public UIQuests quests;
     private Camera minimapCamera;
     public RawImage minimapRaw;
+    public TextMeshProUGUI fatText;
 
     public void Update()
     {
@@ -89,6 +92,7 @@ public class MenuButton : MonoBehaviour
             closeButton.image.enabled = true;
             SpawnpointManageButtonForSpawnpoint(true);
             BlurManager.singleton.Hide();
+            RefreshFatText();
         });
 
         inventoryButton.onClick.RemoveAllListeners();
@@ -342,6 +346,11 @@ public class MenuButton : MonoBehaviour
             minimapCamera.enabled = false;
             options.Open();
         });
+    }
+
+    public void RefreshFatText()
+    {
+       if(Player.localPlayer) fatText.text = "Fat gained : " + (Player.localPlayer.playerCharacterCreation.fat / 30).ToString("F2");
     }
 
     public void Close()

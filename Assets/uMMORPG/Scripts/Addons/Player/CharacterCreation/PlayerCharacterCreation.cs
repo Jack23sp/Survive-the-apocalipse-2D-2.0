@@ -331,6 +331,7 @@ public class PlayerCharacterCreation : NetworkBehaviour
         if (!characterCustomization) return;
         characterCustomization.SetBlendshapeValue(CharacterBlendShapeType.Fat, newWeigth);
         characterCustomization.gameObject.GetComponent<PlayerChildObject>().Manage(player.isLocalPlayer, player);
+        if (MenuButton.singleton) MenuButton.singleton.RefreshFatText();
     }
 
     public void ChangeThin(float oldThin, float newThin)
