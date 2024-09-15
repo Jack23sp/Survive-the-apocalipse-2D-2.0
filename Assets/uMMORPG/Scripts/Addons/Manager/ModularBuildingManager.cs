@@ -74,6 +74,7 @@ public class ModularBuildingManager : MonoBehaviour
 
     public bool isSpawnBuilding;
 
+
     [Header("---------------Sounds--------------------")]
     public AudioClip openSound;
     public AudioClip closeSound;
@@ -85,8 +86,11 @@ public class ModularBuildingManager : MonoBehaviour
     public Material notBuildAccessoryMaterial;
     public Material buildAccessoryMaterial;
     public Material spawnedBuildAccessoryMaterial;
+    public Material claimBuildingMaterial;
     public Material objectPresent;
     public Material objectNotPresent;
+    public Material plantedCompleted;
+    public Material plantedNotCompleted;
     [Header("---------------Aquifer--------------------")]
     public List<Aquifer> aquifers;
 
@@ -112,7 +116,7 @@ public class ModularBuildingManager : MonoBehaviour
     public string buildingAreaRestrainSpawnArea = "You are too close a player spawn area to build";
     public string buildingConstruction = "You cannot build because of some obstacles or out of perimeter of construction";
 
-    private Transform roof, doorOptions, wallOptions, accessory;
+    private Transform roof, doorOptions, wallOptions, accessory, plantable;
 
 
     void Awake()
@@ -493,7 +497,7 @@ public class ModularBuildingManager : MonoBehaviour
                 }
             }
 
-            roof = doorOptions = wallOptions = accessory = null;
+            roof = doorOptions = wallOptions = accessory = plantable = null;
 
             for (int e = 0; e < hit.Length; e++)
             {
@@ -514,6 +518,10 @@ public class ModularBuildingManager : MonoBehaviour
                 if (hit[index].collider.CompareTag("Accessory"))
                 {
                     accessory = hit[index].collider.transform;
+                }
+                if (hit[index].collider.CompareTag("PlantSlot"))
+                {
+                    plantable = hit[index].collider.transform;
                 }
             }
 
@@ -539,6 +547,26 @@ public class ModularBuildingManager : MonoBehaviour
                     //    UIPin.singleton.Open(Player.localPlayer, hit[index].collider.GetComponentInParent<WallManager>().modularBuilding.central.GetComponent<CentralManager>(), hit[index].collider.transform);
                     //}
                     return;
+                }
+
+                if(plantable)
+                {
+                    PlantableSlot slot = plantable.GetComponentInParent<PlantableSlot>();
+                    if (slot.slotRenderer.color.a == 1.0f)
+                    {
+                        if(Player.localPlayer.playerHungry.objectToPlant != string.Empty)
+                        {
+                            Player.localPlayer.playerHungry.CmdPlant(slot.cultivableField.netIdentity, slot.indexPlant, Player.localPlayer.playerHungry.objectToPlant);
+                            return;
+                        }
+                    }
+                    
+                    if (slot.cultivableField.cultivablePoints[slot.indexPlant].isCompleted)
+                    {
+                        Player.localPlayer.playerHungry.CmdPick(slot.cultivableField.netIdentity, slot.indexPlant);
+                    }
+                    
+                    
                 }
                 if (wallOptions)
                 {
@@ -791,6 +819,15 @@ public class ModularBuildingManager : MonoBehaviour
                 buildingAccessory = forniture;
                 UIInteractableItemPanel.singleton.Open(forniture.GetComponent<BuildingAccessory>().craftingAccessoryItem, forniture.netIdentity);
                 break;
+            case 14:
+                if (Player.localPlayer.playerHungry.objectToPlant == string.Empty)
+                {
+                    BlurManager.singleton.Hide();
+                    buildingAccessory = forniture;
+                    UICultivablefield.singleton.Open(forniture.GetComponent<CuiltivableField>());
+                }
+                break;
+
         }
 
     }

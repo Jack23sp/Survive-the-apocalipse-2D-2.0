@@ -231,9 +231,9 @@ public class BuildingAccessory : NetworkBehaviour
 {
     [SyncVar(hook = nameof(ManageName))]
     public string newName;
-    [SyncVar]
+    [SyncVar(hook = nameof(ManageAdmin))]
     public string group;
-    [SyncVar]
+    [SyncVar(hook = nameof(ManageAdmin))]
     public string owner;
     [SyncVar(hook = nameof(ManageHealth))]
     public float health = 100;
@@ -284,6 +284,17 @@ public class BuildingAccessory : NetworkBehaviour
         {
             GetComponent<Warehouse>().ManageName(oldValue, newValue);
         }
+    }
+
+    public void ManageAdmin(string oldValue, string newValue)
+    {
+        renderer.material = ModularBuildingManager.singleton.claimBuildingMaterial;
+        Invoke(nameof(RestoreMaterial), 1.0f);
+    }
+
+    public void RestoreMaterial()
+    {
+        renderer.material = ModularBuildingManager.singleton.spawnedBuildAccessoryMaterial;
     }
 
     public void OnDestroy()

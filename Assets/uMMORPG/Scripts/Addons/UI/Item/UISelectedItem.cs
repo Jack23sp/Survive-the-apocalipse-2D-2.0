@@ -372,6 +372,7 @@ public class UISelectedItem : MonoBehaviour
         description.text = itemSlot.ToolTip();
         munitionItem = new Item();
         slider.gameObject.SetActive(false);
+        slider.value = 1.0f;
         sliderItemImage.gameObject.SetActive(false);
         inAccessory.gameObject.SetActive(false);
         inInventory.gameObject.SetActive(false);
@@ -435,12 +436,33 @@ public class UISelectedItem : MonoBehaviour
                 sliderItemImage.preserveAspect = true;
                 inAccessory.text = "In magazine : " + itemSlot.item.bulletsRemaining + " / " + itemSlot.item.data.maxMunition;
                 inInventory.text = "In inventory : " + Player.localPlayer.inventory.CountItem(new Item(((WeaponItem)itemSlot.item.data).requiredAmmo));
-                slider.value = 0.0f;
-                sliderValue.text = "0";
+                slider.value = 1.0f;
+                sliderValue.text = "1";
                 slider.minValue = 0;
                 slider.maxValue = itemSlot.item.data.maxMunition;
+                manageMunitionInventory.gameObject.SetActive(false);
+                manageMunitionInventoryText.text = "Select";
+            }
+
+            if (itemSlot.item.data is FoodItem && ((FoodItem)itemSlot.item.data).maxBlood == 0)
+            {
+                slider.gameObject.SetActive(true);
+                use = true;
+                sliderItemImage.gameObject.SetActive(false);
+                inAccessory.gameObject.SetActive(true);
+                inInventory.gameObject.SetActive(true);
+                munitionItem = itemSlot.item;
+                sliderItemImage.sprite = itemSlot.item.data.image;
+                sliderItemImage.preserveAspect = true;
+                inAccessory.text = "";
+                inInventory.text = "";
+                slider.value = 1.0f;
+                sliderValue.text = "1";
+                slider.minValue = 0;
+                slider.maxValue = ItemSlot.amount;
                 manageMunitionInventory.gameObject.SetActive(true);
                 manageMunitionInventoryText.text = "Select";
+
             }
 
             if (itemSlot.item.data is FoodItem && ((FoodItem)itemSlot.item.data).maxBlood > 0)
@@ -455,8 +477,8 @@ public class UISelectedItem : MonoBehaviour
                 sliderItemImage.preserveAspect = true;
                 inAccessory.text = "";
                 inInventory.text = "";
-                slider.value = 0.0f;
-                sliderValue.text = "0";
+                slider.value = 1.0f;
+                sliderValue.text = "1";
                 slider.minValue = 0;
                 slider.maxValue = ItemSlot.item.currentBlood > (Player.localPlayer.playerBlood.max - Player.localPlayer.playerBlood.current) ?
                                   (((FoodItem)itemSlot.item.data).maxBlood - ItemSlot.item.currentBlood) : ItemSlot.item.currentBlood;
@@ -846,7 +868,10 @@ public class UISelectedItem : MonoBehaviour
                     }
                     else
                     {
-                        Player.localPlayer.inventory.CmdUseItem(index);
+                        for (int i = 0; i < slider.value; i++)
+                        {
+                            Player.localPlayer.inventory.CmdUseItem(index);
+                        }
                     }
                 }
                 else if (skillSlot)
@@ -917,7 +942,10 @@ public class UISelectedItem : MonoBehaviour
                     }
                     else
                     {
-                        Player.localPlayer.playerBelt.CmdUseBeltItem(index);
+                        for (int i = 0; i < slider.value; i++)
+                        {
+                            Player.localPlayer.playerBelt.CmdUseBeltItem(index);
+                        }
                     }
                 }
             }

@@ -325,6 +325,7 @@ public partial class Player : Entity
     public void CmdCancelAction() { cmdEvents.Add("CancelAction"); }
     bool EventCancelAction() { return cmdEvents.Remove("CancelAction"); }
 
+
     // finite state machine - server ///////////////////////////////////////////
     [Server]
     string UpdateServer_IDLE()

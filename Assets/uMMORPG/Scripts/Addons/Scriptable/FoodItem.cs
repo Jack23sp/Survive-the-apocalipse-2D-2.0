@@ -2,6 +2,11 @@ using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Seasons
+{
+    Nothing = -1,Summer = 0,Autumn = 1, Winter = 2,Spring = 3
+}
+
 [CreateAssetMenu(menuName = "uMMORPG Item/Food", order = 999)]
 public partial class FoodItem : UsableItem
 {
@@ -15,6 +20,10 @@ public partial class FoodItem : UsableItem
     public int petHealthToAdd;
     [Header("Nutrient")]
     public float fatAmount;
+    [Header("Growing")]
+    public Seasons seasonToGrown;
+    public int maxAmountToReturn;
+    //public int timeToGrowth;
 
     // usage
     // -> can we equip this into any slot?

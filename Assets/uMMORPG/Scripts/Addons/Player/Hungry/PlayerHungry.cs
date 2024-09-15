@@ -59,6 +59,8 @@ public class PlayerHungry : NetworkBehaviour
     [HideInInspector] public int healthToRemove = 5;
     UIStatSlot hungrySlot;
 
+    public string objectToPlant;
+
     public void Assign()
     {
         player = GetComponent<Player>();
@@ -141,4 +143,58 @@ public class PlayerHungry : NetworkBehaviour
         if (player.health.current <= 0) player.health.current = 0;
     }
 
+
+    [Command]
+    public void CmdPlant(NetworkIdentity identity, int index, string objectToPlace)
+    {
+        ScriptableItem itm;
+        if (ScriptableItem.All.TryGetValue(objectToPlace.GetStableHashCode(), out itm))
+        {
+            if (itm is FoodItem)
+            {
+                CuiltivableField field = identity.gameObject.GetComponent<CuiltivableField>();
+
+                if (field.cultivablePoints[index].objectName != string.Empty) return;
+
+                if (player.inventory.CountItem(new Item(itm)) > 0)
+                {
+                    int max = UnityEngine.Random.Range(2, ((FoodItem)itm).maxAmountToReturn);
+                    CultivablePoint point = new CultivablePoint
+                    {
+                        percentual = 0.0f,
+                        objectName = objectToPlace,
+                        isCompleted = false,
+                        maxPercentual = 100.0f,
+                        maxToReturn = max,
+                        seasonOfGrowth = ((FoodItem)itm).seasonToGrown.ToString()
+                    };
+                    field.cultivablePoints[index] = point;
+                    player.inventory.RemoveItem(new Item(itm), 1);
+                } 
+            }
+        }
+    }
+
+    [Command]
+    public void CmdPick(NetworkIdentity identity, int index)
+    {
+        CuiltivableField field = identity.gameObject.GetComponent<CuiltivableField>();
+        ScriptableItem itm;
+        if (ScriptableItem.All.TryGetValue(field.cultivablePoints[index].objectName.GetStableHashCode(), out itm))
+        {
+            if (itm is FoodItem)
+            {
+                if (player.inventory.CanAdd(new Item(itm), field.cultivablePoints[index].maxToReturn) )
+                {
+                    player.inventory.AddItem(new Item(itm), field.cultivablePoints[index].maxToReturn);
+                    field.cultivablePoints[index] = new CultivablePoint(string.Empty, string.Empty);
+                }
+                else
+                {
+                    player.playerNotification.TargetSpawnNotification("Free some space in your inventory to take this.");
+                }
+            }
+        }
+
+    }
 }

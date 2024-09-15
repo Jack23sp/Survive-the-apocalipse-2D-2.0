@@ -23,6 +23,7 @@ public class FollowPlayer : MonoBehaviour
             marker.transform.position = player.transform.position;
             markerRenderer.color = Color.blue;
             Invoke(nameof(Check), 1.0f);
+            Invoke(nameof(Follow), 0.5f);
         }
     }
 
@@ -65,8 +66,9 @@ public class FollowPlayer : MonoBehaviour
         }
     }
 
-    //void Update()
-    //{
-    //    marker.transform.position = player.transform.position;
-    //}
+    void Follow()
+    {
+        marker.transform.position = player.transform.position;
+        Invoke(nameof(Follow), 0.5f);
+    }
 }

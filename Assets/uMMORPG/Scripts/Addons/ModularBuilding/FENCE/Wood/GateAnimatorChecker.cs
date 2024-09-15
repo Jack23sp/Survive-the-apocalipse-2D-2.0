@@ -30,12 +30,12 @@ public class GateAnimatorChecker : MonoBehaviour
         {
             if (collision.CompareTag("Player"))
             {
-                if (ModularBuildingManager.singleton.CanDoOtherActionForniture(gate.GetComponent<BuildingAccessory>(), collision.GetComponent<Player>()))
-                {
+                //if (ModularBuildingManager.singleton.CanDoOtherActionForniture(gate.GetComponent<BuildingAccessory>(), collision.GetComponent<Player>()))
+                //{
                     if (players.Contains(collision.GetComponent<Player>()))
                         players.Remove(collision.GetComponent<Player>());
                     gate.playerInside = players.Count;
-                }
+                //}
             }
         }
     }

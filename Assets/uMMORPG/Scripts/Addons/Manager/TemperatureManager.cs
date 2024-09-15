@@ -292,10 +292,12 @@ public class TemperatureManager : NetworkBehaviour
     {
         if (newValue)
         {
-            snowObject.snowIntensity = 0f;
-            rainObject.rainIntensity = Mathf.Lerp(0.0f, 1.0f, 3.0f);
-
-            Invoke(nameof(ManageRainParticle), 0.01f);
+            if (Player.localPlayer)
+            {
+                snowObject.snowIntensity = 0f;
+                rainObject.rainIntensity = Mathf.Lerp(0.0f, 1.0f, 3.0f);
+                Invoke(nameof(ManageRainParticle), 0.01f);
+            }
         }
         else
         {
@@ -422,8 +424,11 @@ public class TemperatureManager : NetworkBehaviour
     {
         if (newValue)
         {
-            snowObject.snowIntensity = 0f;
-            rainObject.rainIntensity = 0f;
+            if (Player.localPlayer)
+            {
+                snowObject.snowIntensity = 0f;
+                rainObject.rainIntensity = 0f;
+            }
         }
     }
 
@@ -431,8 +436,11 @@ public class TemperatureManager : NetworkBehaviour
     {
         if (newValue)
         {
-            rainObject.rainIntensity = 0f;
-            snowObject.snowIntensity = Mathf.Lerp(0.0f, 1.0f, 3.0f);
+            if (Player.localPlayer)
+            {
+                rainObject.rainIntensity = 0f;
+                snowObject.snowIntensity = Mathf.Lerp(0.0f, 1.0f, 3.0f);
+            }
         }
     }
 

@@ -48,6 +48,8 @@ public class Gate : BuildingAccessory
         }
     }
 
+    #region Level
+
     public void LevelDoAction(Player player)
     {
         ExecuteActionLevelUp(player);
@@ -62,7 +64,6 @@ public class Gate : BuildingAccessory
 
         if (leftColliderGate) PropagateActionLevelUp(leftColliderGate, player);
         if (rightColliderGate) PropagateActionLevelUp(rightColliderGate, player);
-
     }
 
     public void ExecuteActionLevelUp(Player player)
@@ -94,10 +95,12 @@ public class Gate : BuildingAccessory
             }
         }
     }
+    #endregion
 
+    #region Claim
     public void ClaimDoAction(Player player)
     {
-        ExecuteActionLevelUp(player);
+        ExecuteActionClaim(player);
 
         if (leftCollider1) PropagateActionClaim(leftCollider1, player);
         if (leftCollider2) PropagateActionClaim(leftCollider2, player);
@@ -121,6 +124,7 @@ public class Gate : BuildingAccessory
     {
         if (collider != null)
         {
+            //ExecuteActionClaim(player);
             RaycastHit2D[] hit = Physics2D.RaycastAll(collider.transform.position, Vector2.zero);
             for (int i = 0; i < hit.Length; i++)
             {
@@ -141,6 +145,7 @@ public class Gate : BuildingAccessory
             }
         }
     }
+    #endregion
 
 
     public new void Start()

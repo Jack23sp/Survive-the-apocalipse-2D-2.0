@@ -350,6 +350,13 @@ public static class Utilities
         {
             ((Tree)buildingAccessoryNew).rewardAmount = ((Tree)buildingAccessoryOld).rewardAmount;
         }
+        if (oldGameObject.GetComponent<CuiltivableField>())
+        {
+            for (int i = 0; i < ((CuiltivableField)buildingAccessoryOld).cultivablePoints.Count; i++)
+            {
+                ((CuiltivableField)buildingAccessoryNew).cultivablePoints.Add(((CuiltivableField)buildingAccessoryOld).cultivablePoints[i]);
+            }
+        }
 
     }
     public static List<GameObject> GetNewConnections(List<Collider2D> newColliders, List<Collider2D> oldColliders)

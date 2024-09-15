@@ -156,6 +156,12 @@ public class PlayerCallback : NetworkBehaviour
         base.OnStartLocalPlayer();
         CheckConsume();
 
+        if (TemperatureManager.singleton.isRainy)
+            TemperatureManager.singleton.CheckRainParticle(TemperatureManager.singleton.isRainy, TemperatureManager.singleton.isRainy);
+
+        if (TemperatureManager.singleton.isSnowy)
+            TemperatureManager.singleton.CheckSnowParticle(TemperatureManager.singleton.isSnowy, TemperatureManager.singleton.isSnowy);
+
         player.equipment.slots.Callback += OnEquipmentChangedOnLocalPlayer;
         player.playerAlliance.guildAlly.Callback += OnAllianceChanged;
 
