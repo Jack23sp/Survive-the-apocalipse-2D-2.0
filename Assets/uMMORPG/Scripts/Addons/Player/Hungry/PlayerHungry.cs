@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System;
 
 public partial class Player
 {
@@ -182,16 +183,33 @@ public class PlayerHungry : NetworkBehaviour
         ScriptableItem itm;
         if (ScriptableItem.All.TryGetValue(field.cultivablePoints[index].objectName.GetStableHashCode(), out itm))
         {
+            int rand = UnityEngine.Random.Range(0, 100);
+            int amount = rand <= (AbilityManager.singleton.FindNetworkAbilityLevel("Farmer", player.name)* 2) ? 
+                                ((field.cultivablePoints[index].maxToReturn) * 2) : 
+                                field.cultivablePoints[index].maxToReturn;
             if (itm is FoodItem)
             {
-                if (player.inventory.CanAdd(new Item(itm), field.cultivablePoints[index].maxToReturn) )
+                if (player.inventory.CanAdd(new Item(itm), amount) )
                 {
-                    player.inventory.AddItem(new Item(itm), field.cultivablePoints[index].maxToReturn);
+                    player.inventory.AddItem(new Item(itm), amount);
                     field.cultivablePoints[index] = new CultivablePoint(string.Empty, string.Empty);
+                    player.playerNotification.TargetSpawnNotificationGeneral(itm.name, "Added " + amount + " to inventory");
                 }
                 else
                 {
                     player.playerNotification.TargetSpawnNotification("Free some space in your inventory to take this.");
+                }
+
+                int abIndex = AbilityManager.singleton.FindNetworkAbility("Farmer", player.name);
+                if (abIndex > -1)
+                {
+                    Ability ab = player.playerAbility.networkAbilities[abIndex];
+                    int max = AbilityManager.singleton.FindNetworkAbilityMaxLevel("Farmer", player.name);
+                    float next = Mathf.Min(ab.level + AbilityManager.singleton.increaseAbilityOnAction, max);
+                    if (next > max) next = max;
+                    float attrNext = (float)Math.Round(next, 2);
+                    ab.level = attrNext;
+                    player.playerAbility.networkAbilities[abIndex] = ab;
                 }
             }
         }

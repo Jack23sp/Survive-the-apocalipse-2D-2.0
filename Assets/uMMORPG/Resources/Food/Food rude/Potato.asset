@@ -91,3 +91,5 @@ MonoBehaviour:
   maxBlood: 0
   petHealthToAdd: 0
   fatAmount: 0.7
+  seasonToGrown: 3
+  maxAmountToReturn: 2

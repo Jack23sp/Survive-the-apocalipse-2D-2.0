@@ -2,6 +2,63 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System;
+
+public partial class Database
+{
+    class cultivable_item
+    {
+        public int buildingIndex { get; set; }
+        public int index { get; set; }
+        public float percentual { get; set; }
+        public string objectName { get; set; }
+        public int isCompleted { get; set; }
+        public float maxPercentual { get; set; }
+        public string seasonOfGrowth { get; set; }
+
+        public int maxToReturn { get; set; }
+    }
+
+    public void SaveCultivable(int index)
+    {
+        CuiltivableField field = ((CuiltivableField)ModularBuildingManager.singleton.cultivableFields[index]);
+
+        for (int i = 0; i < field.cultivablePoints.Count; i++)
+        {
+            int indSave = i;
+            connection.InsertOrReplace(new cultivable_item
+            {
+                buildingIndex = index,
+                index = indSave,
+                percentual = field.cultivablePoints[indSave].percentual,
+                objectName = field.cultivablePoints[indSave].objectName,
+                isCompleted = Convert.ToInt32(field.cultivablePoints[indSave].isCompleted),
+                maxPercentual = field.cultivablePoints[indSave].maxPercentual,
+                seasonOfGrowth = field.cultivablePoints[indSave].seasonOfGrowth,
+                maxToReturn = field.cultivablePoints[indSave].maxToReturn,
+            });
+        }
+    }
+
+    public void LoadCultivable(int index, CuiltivableField cultivableField)
+    {
+        cultivableField.cultivablePoints.Clear();
+
+        foreach (cultivable_item row in connection.Query<cultivable_item>("SELECT * FROM cultivable_item WHERE buildingIndex=?", index))
+        {
+            cultivableField.cultivablePoints.Add(new CultivablePoint()
+            {
+                percentual = row.percentual,
+                objectName = row.objectName,
+                isCompleted = Convert.ToBoolean(row.isCompleted),
+                maxPercentual = row.maxPercentual,
+                seasonOfGrowth = row.seasonOfGrowth,
+                maxToReturn = row.maxToReturn
+            });
+        }
+    }
+
+}
 
 public struct CultivablePoint
 {
@@ -42,6 +99,8 @@ public class CuiltivableField : BuildingAccessory
     {
         base.OnStartClient();
         cultivablePoints.Callback += OnPointChanged;
+        if (!ModularBuildingManager.singleton.cultivableFields.Contains(this)) ModularBuildingManager.singleton.cultivableFields.Add(this);
+
     }
 
     public override void OnStartServer()
@@ -55,6 +114,7 @@ public class CuiltivableField : BuildingAccessory
             }
         }
         InvokeRepeating(nameof(ManageCultivablePoint), 1.0f, 1.0f);
+        if (!ModularBuildingManager.singleton.cultivableFields.Contains(this)) ModularBuildingManager.singleton.cultivableFields.Add(this);
     }
 
     public void ManageCultivablePoint()

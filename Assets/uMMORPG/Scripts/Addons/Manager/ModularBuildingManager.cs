@@ -48,6 +48,7 @@ public class ModularBuildingManager : MonoBehaviour
     public List<Gate> gates = new List<Gate>();
     public List<Aquarium> aquarium = new List<Aquarium>();
     public List<Tree> trees = new List<Tree>();
+    public List<CuiltivableField> cultivableFields = new List<CuiltivableField>();
     public ModularBuilding[] modularBuildings;
 
     public bool activeBuildingModeDoor;

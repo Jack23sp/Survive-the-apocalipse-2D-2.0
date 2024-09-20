@@ -49,6 +49,7 @@ public partial class Database
         connection.Execute("DELETE FROM furnace_wood");
         connection.Execute("DELETE FROM aquarium");
         connection.Execute("DELETE FROM tree");
+        connection.Execute("DELETE FROM cultivable_item");
 
         SaveBuildingBasement();
 
@@ -132,6 +133,11 @@ public partial class Database
             if (ModularBuildingManager.singleton.buildingAccessories[index] is Tree)
             {
                 SaveTree(index);
+            }
+
+            if (ModularBuildingManager.singleton.buildingAccessories[index] is CuiltivableField)
+            {
+                SaveCultivable(index);
             }
         }
         connection.Commit();
@@ -220,6 +226,11 @@ public partial class Database
             if (acc is Tree)
             {
                 LoadTree(row.ind, ((Tree)acc));
+            }
+
+            if (acc is CuiltivableField)
+            {
+                LoadCultivable(row.ind, ((CuiltivableField)acc));
             }
 
             NetworkServer.Spawn(g);

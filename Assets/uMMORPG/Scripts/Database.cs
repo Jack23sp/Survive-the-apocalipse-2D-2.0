@@ -344,6 +344,7 @@ public partial class Database : MonoBehaviour
         connection.CreateTable<Pin>();
         connection.CreateTable<aquarium>();
         connection.CreateTable<tree>();
+        connection.CreateTable<cultivable_item>();
         // addon system hooks
         onConnected.Invoke();
 

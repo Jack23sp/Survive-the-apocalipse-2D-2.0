@@ -90,3 +90,6 @@ MonoBehaviour:
   waterToAdd: 0
   maxBlood: 0
   petHealthToAdd: 0
+  fatAmount: 0
+  seasonToGrown: -1
+  maxAmountToReturn: 0

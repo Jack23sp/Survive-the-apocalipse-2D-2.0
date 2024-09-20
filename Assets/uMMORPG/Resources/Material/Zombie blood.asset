@@ -83,7 +83,12 @@ MonoBehaviour:
   minLevel: 0
   cooldown: 0
   _cooldownCategory: 
+  results: {fileID: 0}
+  resultsAmount: 0
   foodToAdd: 0
   waterToAdd: 0
   maxBlood: 100
   petHealthToAdd: 0
+  fatAmount: 0
+  seasonToGrown: -1
+  maxAmountToReturn: 0
