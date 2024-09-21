@@ -7,7 +7,7 @@ using Mirror;
 using System;
 using System.Reflection;
 
-public class UIBuildingAccessoryManager : MonoBehaviour
+public class UIBuildingAccessoryManager : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static UIBuildingAccessoryManager singleton;
     public Button closeButton;
@@ -44,6 +44,7 @@ public class UIBuildingAccessoryManager : MonoBehaviour
 
     public void Init(NetworkIdentity identity, ScriptableBuildingAccessory scriptableBuildingAccessory, Button UIParentButton = null)
     {
+        Assign();
         selected = 3;
         if (!singleton)
         {
@@ -327,5 +328,15 @@ public class UIBuildingAccessoryManager : MonoBehaviour
         {
             confirmButton.interactable = true;
         }
+    }
+
+    public void Close()
+    {
+        Destroy(this.gameObject);
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 }

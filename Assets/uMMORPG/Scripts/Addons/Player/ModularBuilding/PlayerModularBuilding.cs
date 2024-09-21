@@ -23,6 +23,8 @@ public class PlayerModularBuilding : NetworkBehaviour
     [HideInInspector] public BuildingAccessory oldBuilding;
     [SyncVar]
     public NetworkIdentity fakeBuildingID;
+    [SyncVar]
+    public NetworkIdentity buildingInteractWith;
 
     public List<BuildingAccessory> accessoryInOldBuilding = new List<BuildingAccessory>();
 
@@ -44,6 +46,50 @@ public class PlayerModularBuilding : NetworkBehaviour
         base.OnStartServer();
         Assign();
     }
+
+    [Command]
+    public void CmdInteractwithThis( NetworkIdentity identity)
+    {
+        if (identity.gameObject)
+        {
+            BuildingAccessory acc = identity.gameObject.GetComponent<BuildingAccessory>();
+            if(acc)
+            {
+                buildingInteractWith = identity;
+                acc.AddPlayerThatAreInteract(player.name);
+            }
+        }
+    }
+
+    [Command]
+    public void CmdRemovePlayerInteractWithAccessory(NetworkIdentity identity)
+    {
+        if (buildingInteractWith && buildingInteractWith.netId == identity.netId)
+        {            
+            BuildingAccessory acc = buildingInteractWith.gameObject.GetComponent<BuildingAccessory>();
+            if (acc)
+            {
+                acc.RemovePlayerThatAreInteract(player.name);
+                buildingInteractWith = null;
+            }
+        }
+    }
+
+    public void CloseAllUIPanelOnDeath()
+    {
+        foreach (IUIScript s in ModularBuildingManager.singleton.UIToCloseOnDeath)
+        {
+            if(s != null)
+                s.Close();
+        }
+
+        foreach (IUIScriptNoBuildingRelated s in ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding)
+        {
+            if (s != null)
+                s.Close();
+        }
+    }
+
 
     [Command]
     public void CmdSetPin(NetworkIdentity identity, NetworkIdentity playerIdentity, string firstPIN, string secondPIN)

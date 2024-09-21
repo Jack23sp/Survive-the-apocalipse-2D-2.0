@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
-public class UIFurnace : MonoBehaviour
+public class UIFurnace : MonoBehaviour, IUIScript
 {
     public static UIFurnace singleton;
 
@@ -218,6 +219,7 @@ public class UIFurnace : MonoBehaviour
         Player player = Player.localPlayer;
         if (!player) return;
         furnace = Furnace;
+        Assign();
 
         panel.SetActive(true);
         closeButton.image.raycastTarget = true;
@@ -289,5 +291,25 @@ public class UIFurnace : MonoBehaviour
             }
         }
 
+    }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        panel.SetActive(false);
+        closeButton.image.raycastTarget = false;
+        closeButton.image.enabled = false;
+        RemovePlayerFromBuildingAccessory(furnace.netIdentity);
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
     }
 }

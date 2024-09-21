@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
-public class UICultivablefield : MonoBehaviour
+public class UICultivablefield : MonoBehaviour, IUIScript
 {
     public static UICultivablefield singleton;
     public CuiltivableField cultivableField;
@@ -73,7 +74,8 @@ public class UICultivablefield : MonoBehaviour
 
     public void Open(CuiltivableField cuiltivable)
     {
-        cultivableField = cultivableField;
+        cultivableField = cuiltivable;
+        Assign();
 
         objectSelected.gameObject.SetActive(false);
         plantVegetablesButton.interactable = false;
@@ -149,5 +151,27 @@ public class UICultivablefield : MonoBehaviour
             }
         }
 
+    }
+
+    public void Close()
+    {
+        BlurManager.singleton.Show();
+        closeButton.image.raycastTarget = false;
+        closeButton.image.enabled = false;
+        selectedItem = string.Empty;
+        objectSelected.image = null;
+        description.text = string.Empty;
+        RemovePlayerFromBuildingAccessory(cultivableField.netIdentity);
+        panelCanvas.SetActive(false);
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
     }
 }

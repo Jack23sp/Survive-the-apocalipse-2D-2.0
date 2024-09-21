@@ -85,7 +85,10 @@ public class CraftAccessory : BuildingAccessory
 {
 
     public readonly SyncList<CraftinItemSlot> craftingItem = new SyncList<CraftinItemSlot>();
+    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
+
     public bool checkSex;
+    public bool hasAnimation;
 
     public override void OnStartClient()
     {
@@ -102,6 +105,17 @@ public class CraftAccessory : BuildingAccessory
         }
     }
 
+    public override void AddPlayerThatAreInteract(string playerName)
+    {
+        base.AddPlayerThatAreInteract(playerName);
+        if (!playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Add(playerName);
+    }
+
+    public override void RemovePlayerThatAreInteract(string playerName)
+    {
+        base.RemovePlayerThatAreInteract(playerName);
+        if (playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Remove(playerName);
+    }
 
 
     void OnBeltChanged(SyncList<CraftinItemSlot>.Operation op, int index, CraftinItemSlot oldSlot, CraftinItemSlot newSlot)

@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using Mirror;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UICabinet : MonoBehaviour
+public class UICabinet : MonoBehaviour, IUIScript
 {
     public static UICabinet singleton;
     public GameObject panel;
@@ -29,6 +30,7 @@ public class UICabinet : MonoBehaviour
         if (!player) player = Player.localPlayer;
         if (!player) return;
         cabinet = Cabinet;
+        Assign();
 
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.SetListener(() =>
@@ -146,4 +148,27 @@ public class UICabinet : MonoBehaviour
             }
         }
     }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        closeButton.image.raycastTarget = false;
+        panel.SetActive(false);
+        cabinet = null;
+        ModularBuildingManager.singleton.buildingAccessory = null;
+        closeButton.image.enabled = false;
+        RemovePlayerFromBuildingAccessory(cabinet.netIdentity);
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
+    }
+
 }

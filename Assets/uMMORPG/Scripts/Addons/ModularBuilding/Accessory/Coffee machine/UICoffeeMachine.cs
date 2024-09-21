@@ -41,9 +41,10 @@ public partial class Player
     }
 }
 
-public class UICoffeeMachine : MonoBehaviour
+public class UICoffeeMachine : MonoBehaviour, IUIScript
 {
     public static UICoffeeMachine singleton;
+    public BuildingAccessory coffeeMachine;
     public GameObject panel;
     public Button closeButton;
     public Button useButton;
@@ -61,13 +62,7 @@ public class UICoffeeMachine : MonoBehaviour
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            description.text = string.Empty;
-            actionDescription.text = string.Empty;
-            slider.value = 0;
-            panel.SetActive(false);
-            closeButton.image.raycastTarget = false;
-            BlurManager.singleton.Show();
-            closeButton.interactable = false;
+            Close();
         });
 
         useButton.onClick.RemoveAllListeners();
@@ -112,11 +107,14 @@ public class UICoffeeMachine : MonoBehaviour
     }
 
 
-    public void Open()
+    public void Open(BuildingAccessory buildingAccessory)
     {
+        coffeeMachine = buildingAccessory;
         closeButton.image.raycastTarget = true;
         closeButton.interactable = true;
         panel.SetActive(true);
+        Assign();
+
         slider.value = 0;
         if (ScriptableItem.All.TryGetValue("Coffee".GetStableHashCode(), out ScriptableItem itemData))
         {
@@ -130,5 +128,28 @@ public class UICoffeeMachine : MonoBehaviour
 
         actionDescription.text = string.Empty;
         CheckValue();
+    }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
+        description.text = string.Empty;
+        actionDescription.text = string.Empty;
+        slider.value = 0;
+        panel.SetActive(false);
+        closeButton.image.raycastTarget = false;
+        RemovePlayerFromBuildingAccessory(coffeeMachine.netIdentity);
+        BlurManager.singleton.Show();
+        closeButton.interactable = false;
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
     }
 }

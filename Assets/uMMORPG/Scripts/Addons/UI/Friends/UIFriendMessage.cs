@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIFriendMessage : MonoBehaviour
+public class UIFriendMessage : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static UIFriendMessage singleton;
 
@@ -28,13 +28,7 @@ public class UIFriendMessage : MonoBehaviour
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            panel.SetActive(false);
-            closeButton.image.raycastTarget = false;
-            selectedPlayer = null;
-            playerName = string.Empty;
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
 
         sendButton.onClick.RemoveAllListeners();
@@ -60,6 +54,7 @@ public class UIFriendMessage : MonoBehaviour
 
     public void Open(string friendName)
     {
+        Assign();
         closeButton.image.raycastTarget = true;
         closeButton.image.enabled = true;
         panel.SetActive(true);
@@ -76,5 +71,21 @@ public class UIFriendMessage : MonoBehaviour
     {
         sendButton.interactable = sendButtonText.text != string.Empty;
         sendButtonText.text = messageInputText.text != string.Empty ? "Send!" : "Waiting!";
+    }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        panel.SetActive(false);
+        closeButton.image.raycastTarget = false;
+        selectedPlayer = null;
+        playerName = string.Empty;
+        closeButton.image.enabled = false;
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 }

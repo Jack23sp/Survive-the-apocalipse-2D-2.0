@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using Mirror;
 
-public class UIInteractableItemPanel : MonoBehaviour
+public class UIInteractableItemPanel : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static UIInteractableItemPanel singleton;
     public GameObject panel;
@@ -17,20 +17,17 @@ public class UIInteractableItemPanel : MonoBehaviour
     void Start()
     {
         if (!singleton) singleton = this;
-        closeButton.onClick.RemoveAllListeners();
-        
+
+        closeButton.onClick.RemoveAllListeners();        
         closeButton.onClick.AddListener(() =>
         {
-            panel.SetActive(false);
-            closeButton.image.raycastTarget = false;
-            closeButton.interactable = false;
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
     }
 
     public void Open(ScriptableItem item,NetworkIdentity identity)
     {
+        Assign();
         panel.SetActive(true);
         closeButton.image.raycastTarget = true;
         closeButton.interactable = true;
@@ -58,4 +55,19 @@ public class UIInteractableItemPanel : MonoBehaviour
             }
         });
     }
+
+    public void Close()
+    {
+        panel.SetActive(false);
+        closeButton.image.raycastTarget = false;
+        closeButton.interactable = false;
+        closeButton.image.enabled = false;
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
+    }
+
 }

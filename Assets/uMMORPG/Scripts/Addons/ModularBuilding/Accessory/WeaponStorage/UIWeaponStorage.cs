@@ -9,7 +9,7 @@ public partial class ScriptableItem
     public int weaponType = -1;
 }
 
-public class UIWeaponStorage : MonoBehaviour
+public class UIWeaponStorage : MonoBehaviour, IUIScript
 {
     public static UIWeaponStorage singleton;
     public GameObject panel;
@@ -30,25 +30,18 @@ public class UIWeaponStorage : MonoBehaviour
         if (!singleton) singleton = this;
     }
 
-    public void Close()
-    {
-        panel.SetActive(false);
-    }
-
     public void Open(WeaponStorage storageWeapon)
     {
         player = Player.localPlayer;
         if(!player) return;
 
         weaponStorage = storageWeapon;
+        Assign();
+
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.SetListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            closeButton.image.raycastTarget = false;
             Close();
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
         });
 
         manageButton.gameObject.SetActive(ModularBuildingManager.singleton.CanDoOtherActionForniture(weaponStorage, Player.localPlayer));
@@ -152,4 +145,25 @@ public class UIWeaponStorage : MonoBehaviour
             }
         }
     }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        closeButton.image.raycastTarget = false;
+        panel.SetActive(false);
+        closeButton.image.enabled = false;
+        RemovePlayerFromBuildingAccessory(weaponStorage.netIdentity);
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
+    }
+
 }

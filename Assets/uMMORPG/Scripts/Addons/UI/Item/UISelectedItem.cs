@@ -185,7 +185,7 @@ public partial class PlayerPetControl
     }
 }
 
-public class UISelectedItem : MonoBehaviour
+public class UISelectedItem : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static UISelectedItem singleton;
 
@@ -246,10 +246,7 @@ public class UISelectedItem : MonoBehaviour
 
         closeButton.onClick.AddListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            panel.gameObject.SetActive(false);
-            closeButton.image.raycastTarget = false;
-            Reset(false);
+            Close();
         });
 
         dropButton.onClick.AddListener(() =>
@@ -258,6 +255,19 @@ public class UISelectedItem : MonoBehaviour
         });
 
         slider.onValueChanged.AddListener(delegate { CheckValue(); });
+    }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        panel.gameObject.SetActive(false);
+        closeButton.image.raycastTarget = false;
+        Reset(false);
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 
     public void CheckValue()
@@ -359,6 +369,7 @@ public class UISelectedItem : MonoBehaviour
 
     public void Setup(ItemSlot itemSlot, bool delete, bool use, bool equip)
     {
+        Assign();
         panel.gameObject.SetActive(true);
         closeButton.image.raycastTarget = true;
         closeButton.image.enabled = true;

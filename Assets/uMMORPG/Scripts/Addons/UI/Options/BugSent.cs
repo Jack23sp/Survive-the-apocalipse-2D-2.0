@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BugSent : MonoBehaviour
+public class BugSent : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static BugSent singleton;
     public GameObject panel;
@@ -33,14 +33,7 @@ public class BugSent : MonoBehaviour
 
         closeButton.onClick.AddListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            panel.SetActive(false);
-            closeButton.image.raycastTarget = false;
-            sendImage.color = Color.yellow;
-            inputField.text = string.Empty;
-            sendButtonText.text = "Send!";
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
         inputField.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
     }
@@ -49,6 +42,7 @@ public class BugSent : MonoBehaviour
     {
         player = Player.localPlayer;
         if (!player) return;
+        Assign();
         closeButton.image.enabled = true;
         closeButton.image.raycastTarget = true;
         sendButtonText.text = "Send!";
@@ -60,5 +54,22 @@ public class BugSent : MonoBehaviour
     {
         sendButton.interactable = inputField.text != string.Empty;
         sendImage.color = inputField.text != string.Empty ? waitingToSend : Color.yellow;
+    }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        panel.SetActive(false);
+        closeButton.image.raycastTarget = false;
+        sendImage.color = Color.yellow;
+        inputField.text = string.Empty;
+        sendButtonText.text = "Send!";
+        closeButton.image.enabled = false;
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 }

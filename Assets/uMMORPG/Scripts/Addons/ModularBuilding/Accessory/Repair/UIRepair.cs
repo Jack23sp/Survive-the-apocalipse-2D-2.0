@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
-public class UIRepair : MonoBehaviour
+public class UIRepair : MonoBehaviour, IUIScript
 {
     public static UIRepair singleton;
     private Upgrade repair;
@@ -41,19 +42,16 @@ public class UIRepair : MonoBehaviour
     public void Open(Upgrade upgradeBuilding)
     {
         player = Player.localPlayer;
+
         if (player)
         {
+            Assign();
             repair = upgradeBuilding;
             repairButtonPlaceHolder.gameObject.SetActive(true);
             closeButton.onClick.RemoveAllListeners();
             closeButton.onClick.AddListener(() =>
             {
-                selectedItem = -1;
-                itemName = string.Empty;
-                durabilityContainer.SetActive(false);
-                closeButton.image.enabled = false;
-                BlurManager.singleton.Show();
-                panel.SetActive(false);
+                Close();
             });
 
             repairButton.onClick.RemoveAllListeners();
@@ -158,5 +156,26 @@ public class UIRepair : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Close()
+    {
+        selectedItem = -1;
+        itemName = string.Empty;
+        durabilityContainer.SetActive(false);
+        closeButton.image.enabled = false;
+        RemovePlayerFromBuildingAccessory(repair.netIdentity);
+        BlurManager.singleton.Show();
+        panel.SetActive(false);
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
     }
 }

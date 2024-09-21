@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
 public partial class ScriptableItem
 {
@@ -12,7 +13,7 @@ public partial class ScriptableItem
     public long goldToCraft;
 }
 
-public class UICraft : MonoBehaviour
+public class UICraft : MonoBehaviour, IUIScript
 {
     private Player player;
     public static UICraft singleton;
@@ -109,24 +110,11 @@ public class UICraft : MonoBehaviour
         slider.minValue = 1;
         slider.maxValue = 50;
         craftAccessory = craftAcc;
-
+        Assign();
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            panel.gameObject.SetActive(false);
-            closeButton.image.raycastTarget = false;
-            firstSelected = -1;
-            craftIndex = -1;
-            slider.value = 1;
-            craftButtonGold.interactable = true;
-            craftButtonCoin.interactable = true;
-            craftPanel.SetActive(false);
-            //UIUtils.BalancePrefabs(craftSlotChild, 0, ingredientCraftContent);
-            goldText.text = string.Empty;
-            coinText.text = string.Empty;
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
 
         manageButton.gameObject.SetActive(ModularBuildingManager.singleton.CanDoOtherActionForniture(craftAccessory, Player.localPlayer));
@@ -238,4 +226,32 @@ public class UICraft : MonoBehaviour
         }
     }
 
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        panel.gameObject.SetActive(false);
+        closeButton.image.raycastTarget = false;
+        firstSelected = -1;
+        craftIndex = -1;
+        slider.value = 1;
+        craftButtonGold.interactable = true;
+        craftButtonCoin.interactable = true;
+        craftPanel.SetActive(false);
+        //UIUtils.BalancePrefabs(craftSlotChild, 0, ingredientCraftContent);
+        goldText.text = string.Empty;
+        coinText.text = string.Empty;
+        closeButton.image.enabled = false;
+        RemovePlayerFromBuildingAccessory(craftAccessory.netIdentity);
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
+    }
 }

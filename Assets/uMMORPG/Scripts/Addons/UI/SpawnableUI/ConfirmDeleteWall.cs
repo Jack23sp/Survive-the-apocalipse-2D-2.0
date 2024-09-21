@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ConfirmDeleteWall : MonoBehaviour
+public class ConfirmDeleteWall : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public WallManager wallManager;
     public int positioning;
@@ -13,6 +13,7 @@ public class ConfirmDeleteWall : MonoBehaviour
 
     void Start()
     {
+        Assign();
         panelCancelButton.onClick.AddListener(() =>
         {
             BlurManager.singleton.Show();
@@ -35,6 +36,16 @@ public class ConfirmDeleteWall : MonoBehaviour
                 Player.localPlayer.playerModularBuilding.CmdDeleteWall(wallManager.modularBuilding.identity, positioning);
             panelCancelButton.onClick.Invoke();
         });
+    }
+
+    public void Close()
+    {
+        Destroy(this.gameObject);
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 
 }

@@ -289,6 +289,11 @@ public class BuildingAccessory : NetworkBehaviour
         GetComponent<DamagableObject>().buildingAccessory = this;
     }
 
+    // is empty, do not delete is overridet
+    public virtual void AddPlayerThatAreInteract(string playerName) { }
+
+    public virtual void RemovePlayerThatAreInteract(string playerName) { }
+
     public void ManageName(string oldValue, string newValue)
     { 
         if(this is Warehouse)

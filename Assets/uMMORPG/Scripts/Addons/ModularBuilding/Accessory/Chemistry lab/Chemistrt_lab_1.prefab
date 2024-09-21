@@ -350,7 +350,9 @@ MonoBehaviour:
   zoneCollider: {fileID: 0}
   grassUnder: []
   spritesList: []
+  accessoriesInThisForniture: []
   checkSex: 0
+  hasAnimation: 1
 --- !u!61 &4965063269831762831
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -470,6 +472,7 @@ MonoBehaviour:
   player: {fileID: 0}
   zombie: {fileID: 0}
   wall: {fileID: 0}
+  ambient: {fileID: 0}
   caster: {fileID: 0}
   precisionRand: 0
 --- !u!114 &-4019991546790598595

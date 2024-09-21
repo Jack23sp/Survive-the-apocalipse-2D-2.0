@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Mirror;
 
-public class UIWaterContainer : MonoBehaviour
+public class UIWaterContainer : MonoBehaviour, IUIScript
 {
     public static UIWaterContainer singleton;
     public GameObject panel;
@@ -127,6 +128,7 @@ public class UIWaterContainer : MonoBehaviour
         if (Player.localPlayer)
         {
             waterCont = waterContainer;
+            Assign();
 
             drinkImage.SetActive(true);
             fillImage.SetActive(false);
@@ -142,23 +144,7 @@ public class UIWaterContainer : MonoBehaviour
             closeButton.onClick.RemoveAllListeners();
             closeButton.onClick.AddListener(() =>
             {
-                if (UIButtonSounds.singleton)
-                    if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-                slider.value = 0.0f;
-                panel.SetActive(false);
-                closeButton.image.raycastTarget = false;
-                closeButton.image.enabled = false;
-                drinkImage.SetActive(true);
-                fillImage.SetActive(false);
-                content.gameObject.SetActive(false);
-                panelDrink.SetActive(true);
-                slider.gameObject.SetActive(true);
-                minValue.gameObject.SetActive(true);
-                maxValue.gameObject.SetActive(true);
-                actionButton.gameObject.SetActive(true);
-                waterContainerList.Clear();
-                BlurManager.singleton.Show();
-
+                Close();
             });
 
             drinkButton.onClick.RemoveAllListeners();
@@ -360,5 +346,36 @@ public class UIWaterContainer : MonoBehaviour
             weight.max.text = Player.localPlayer.playerWeight.max.ToString();
             weight.slider.fillAmount = (Player.localPlayer.playerWeight.current != 0 && Player.localPlayer.playerWeight.max != 0) ? (float)Player.localPlayer.playerWeight.current / (float)Player.localPlayer.playerWeight.max : 0;
         }
+    }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton)
+            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        slider.value = 0.0f;
+        panel.SetActive(false);
+        closeButton.image.raycastTarget = false;
+        closeButton.image.enabled = false;
+        drinkImage.SetActive(true);
+        fillImage.SetActive(false);
+        content.gameObject.SetActive(false);
+        panelDrink.SetActive(true);
+        slider.gameObject.SetActive(true);
+        minValue.gameObject.SetActive(true);
+        maxValue.gameObject.SetActive(true);
+        actionButton.gameObject.SetActive(true);
+        waterContainerList.Clear();
+        RemovePlayerFromBuildingAccessory(waterCont.netIdentity);
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
     }
 }

@@ -83,6 +83,11 @@ public abstract partial class Entity : NetworkBehaviour
             pl.animator.SetBool("AIM", pl.playerMove.states.Contains("AIM"));
             pl.animator.SetBool("SHOOT", pl.playerMove.states.Contains("SHOOT"));
 
+            if(pl.state == "DEAD")
+            {
+                pl.playerModularBuilding.CloseAllUIPanelOnDeath();
+            }
+
             if (pl.playerEquipment.weaponIK != null)
             {
 

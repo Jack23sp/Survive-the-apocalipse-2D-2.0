@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Mirror;
 
 
-public class UILibrary : MonoBehaviour
+public class UILibrary : MonoBehaviour, IUIScript
 {
     public static UILibrary singleton;
     public GameObject panel;
@@ -31,15 +31,12 @@ public class UILibrary : MonoBehaviour
         if (!player) player = Player.localPlayer;
         if (!player) return;
         library = libraryPar;
+        Assign();
 
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.SetListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            closeButton.image.raycastTarget = false;
-            panel.SetActive(false);
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
 
         manageButton.gameObject.SetActive(ModularBuildingManager.singleton.CanDoOtherActionForniture(library, Player.localPlayer));
@@ -160,5 +157,25 @@ public class UILibrary : MonoBehaviour
                 slot2.amountOverlay.SetActive(false);
             }
         }
+    }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        closeButton.image.raycastTarget = false;
+        panel.SetActive(false);
+        closeButton.image.enabled = false;
+        RemovePlayerFromBuildingAccessory(library.netIdentity);
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
     }
 }

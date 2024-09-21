@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIItemDetails : MonoBehaviour
+public class UIItemDetails : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static UIItemDetails singleton;
     public Image mainImage;
@@ -24,17 +24,14 @@ public class UIItemDetails : MonoBehaviour
 
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>{
-            panel.SetActive(false);
-            mainImage.raycastTarget = false;
-            mainImage.enabled = false;
-            closeButton.interactable = false;
-            itemCrafting = new ItemCrafting();
+            Close();
         });
     }
 
 
     public void Open(ScriptableItem item, ScriptableBuildingAccessory buildingAccessory)
     {
+        Assign();
         panel.SetActive(true);
         mainImage.raycastTarget = true;
         mainImage.enabled = true;
@@ -58,5 +55,19 @@ public class UIItemDetails : MonoBehaviour
             slot.coins.gameObject.SetActive(false);
         }
 
+    }
+
+    public void Close()
+    {
+        panel.SetActive(false);
+        mainImage.raycastTarget = false;
+        mainImage.enabled = false;
+        closeButton.interactable = false;
+        itemCrafting = new ItemCrafting();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 }

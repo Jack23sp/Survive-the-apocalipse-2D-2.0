@@ -6,7 +6,7 @@ using TMPro;
 using System;
 using System.Linq;
 
-public class UISelectedIBuyItem : MonoBehaviour
+public class UISelectedIBuyItem : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static UISelectedIBuyItem singleton;
     public GameObject panel;
@@ -55,20 +55,7 @@ public class UISelectedIBuyItem : MonoBehaviour
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            gold = false;
-            //categoryIndex = -1;
-            //selectedIndex = -1;
-            panel.SetActive(false);
-            slider.value = 1;
-            sliderValue.text = "1";
-            currency.text = String.Empty;
-            itemName.text = String.Empty;
-            closeButton.image.raycastTarget = false;
-            switchCurrencyAlternativePayment.sprite = ImageManager.singleton.coin;
-            alertObject.SetActive(false);
-            premium = false;
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
 
         switchCurrency.onClick.RemoveAllListeners();
@@ -187,6 +174,7 @@ public class UISelectedIBuyItem : MonoBehaviour
 
     public void Open(bool prem)
     {
+        Assign();
         premium = prem;
         closeButton.image.raycastTarget = true;
         closeButton.image.enabled = true;
@@ -224,5 +212,28 @@ public class UISelectedIBuyItem : MonoBehaviour
         {
             UIUtils.BalancePrefabs(selectedItemChildObject, 0, childContent);
         }
+    }
+
+    public void Close()
+    {
+        gold = false;
+        //categoryIndex = -1;
+        //selectedIndex = -1;
+        panel.SetActive(false);
+        slider.value = 1;
+        sliderValue.text = "1";
+        currency.text = String.Empty;
+        itemName.text = String.Empty;
+        closeButton.image.raycastTarget = false;
+        switchCurrencyAlternativePayment.sprite = ImageManager.singleton.coin;
+        alertObject.SetActive(false);
+        premium = false;
+        closeButton.image.enabled = false;
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 }

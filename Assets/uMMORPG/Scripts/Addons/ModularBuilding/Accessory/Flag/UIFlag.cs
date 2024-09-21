@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
-public class UIFlag : MonoBehaviour
+public class UIFlag : MonoBehaviour, IUIScript
 {
     public static UIFlag singleton;
 
@@ -34,14 +35,12 @@ public class UIFlag : MonoBehaviour
     public void Open(Flag Flag)
     {
         flag = Flag;
+        Assign();
+
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            panel.SetActive(false);
-            closeButton.image.raycastTarget = false;
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
 
         setButton.onClick.RemoveAllListeners();
@@ -148,4 +147,24 @@ public class UIFlag : MonoBehaviour
         return 0;
     }
 
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        panel.SetActive(false);
+        closeButton.image.raycastTarget = false;
+        closeButton.image.enabled = false;
+        RemovePlayerFromBuildingAccessory(flag.netIdentity);
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIAccessorySelector : MonoBehaviour
+public class UIAccessorySelector : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static UIAccessorySelector singleton;
     public Button confirmButton;
@@ -21,7 +21,7 @@ public class UIAccessorySelector : MonoBehaviour
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            Destroy(this.gameObject);
+            Close();
         });
 
         confirmButton.onClick.RemoveAllListeners();
@@ -37,6 +37,7 @@ public class UIAccessorySelector : MonoBehaviour
 
     public void Open(BuildingAccessory mainAccessory)
     {
+        Assign();
         UIUtils.BalancePrefabs(objectToSpawn, 1, mainAccessoryContent);
         UIUtils.BalancePrefabs(objectToSpawn, mainAccessory.accessoriesInThisForniture.Count, accessoriesContent);
 
@@ -105,5 +106,15 @@ public class UIAccessorySelector : MonoBehaviour
 
         }
         #endregion
+    }
+
+    public void Close()
+    {
+        Destroy(this.gameObject);
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 }

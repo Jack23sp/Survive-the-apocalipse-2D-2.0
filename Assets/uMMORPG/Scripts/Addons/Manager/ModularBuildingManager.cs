@@ -119,6 +119,10 @@ public class ModularBuildingManager : MonoBehaviour
 
     private Transform roof, doorOptions, wallOptions, accessory, plantable;
 
+    [Header("---------------UI to close on death--------------------")]
+    public List<MonoBehaviour> UIToCloseOnDeath = new List<MonoBehaviour>();
+    public List<MonoBehaviour> UIToCloseOnDeathNoBuilding = new List<MonoBehaviour>();
+
 
     void Awake()
     {
@@ -725,7 +729,8 @@ public class ModularBuildingManager : MonoBehaviour
                 break;
             case -3:               
                 BlurManager.singleton.Hide();
-                UICoffeeMachine.singleton.Open();
+                buildingAccessory = forniture;
+                UICoffeeMachine.singleton.Open(buildingAccessory);
                 if (closeButton) closeButton.onClick.Invoke();
                 break;
             case -2:
@@ -749,16 +754,19 @@ public class ModularBuildingManager : MonoBehaviour
                 BlurManager.singleton.Hide();
                 UIBathroomSink.singleton.aquifer = forniture.GetComponent<BathroomSink>().aquifer;
                 buildingAccessory = forniture;
+                Player.localPlayer.playerModularBuilding.CmdInteractwithThis(forniture.netIdentity);
                 UIBathroomSink.singleton.Open(forniture.GetComponent<BathroomSink>());
                 break;
             case 1:
                 BlurManager.singleton.Hide();
                 buildingAccessory = forniture;
+                Player.localPlayer.playerModularBuilding.CmdInteractwithThis(forniture.netIdentity);
                 UICraft.singleton.Open(forniture.GetComponent<CraftAccessory>());
                 break;
             case 2:
                 BlurManager.singleton.Hide();
                 buildingAccessory = forniture;
+                Player.localPlayer.playerModularBuilding.CmdInteractwithThis(forniture.netIdentity);
                 UIKitchenSink.singleton.aquifer = forniture.GetComponent<KitchenSink>().aquifer;
                 UIKitchenSink.singleton.Open(forniture.GetComponent<KitchenSink>());
                 break;

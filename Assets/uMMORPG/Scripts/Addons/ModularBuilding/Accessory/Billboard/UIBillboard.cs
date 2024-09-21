@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
-public class UIBillboard : MonoBehaviour
+public class UIBillboard : MonoBehaviour, IUIScript
 {
     public static UIBillboard singleton;
     public GameObject panel;
@@ -30,6 +31,7 @@ public class UIBillboard : MonoBehaviour
     {
         panel.SetActive(true);
         billboard = Billboard;
+        Assign();
 
         manageButton.gameObject.SetActive(ModularBuildingManager.singleton.CanDoOtherActionForniture(billboard, Player.localPlayer));
         manageButton.onClick.RemoveAllListeners();
@@ -64,5 +66,26 @@ public class UIBillboard : MonoBehaviour
             if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
             Player.localPlayer.CmdSetMessage(inputField.text, Player.localPlayer.netIdentity, billboard.netIdentity);
         });
+    }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        panel.SetActive(false);
+        inputField.text = string.Empty;
+        closeButton.image.raycastTarget = false;
+        closeButton.image.enabled = false;
+        RemovePlayerFromBuildingAccessory(billboard.netIdentity);
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
     }
 }

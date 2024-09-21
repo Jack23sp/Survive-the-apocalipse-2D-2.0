@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIResourceGathered : MonoBehaviour
+public class UIResourceGathered : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static UIResourceGathered singleton;
     public GameObject panel;
@@ -21,15 +21,13 @@ public class UIResourceGathered : MonoBehaviour
 
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() => {
-            closeButton.image.raycastTarget = false;
-            panel.SetActive(false);
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
     }
 
     public void Open(ResourceGathered resourceGathered)
     {
+        Assign();
         resource = resourceGathered;
         panel.SetActive(true);
         title.text = resource.buildingType;
@@ -49,5 +47,18 @@ public class UIResourceGathered : MonoBehaviour
                 Player.localPlayer.CmdAddGatheredResorce(index, resource.netIdentity);
             });
         }
+    }
+
+    public void Close()
+    {
+        closeButton.image.raycastTarget = false;
+        panel.SetActive(false);
+        closeButton.image.enabled = false;
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 }

@@ -9,6 +9,8 @@ public class KitchenSink : BuildingAccessory
 {
     public Aquifer aquifer;
 
+    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
+
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -36,6 +38,18 @@ public class KitchenSink : BuildingAccessory
         {
             if (ModularBuildingManager.singleton.kitchenSinks.Contains(this)) ModularBuildingManager.singleton.kitchenSinks.Remove(this);
         }
+    }
+
+    public override void AddPlayerThatAreInteract(string playerName)
+    {
+        base.AddPlayerThatAreInteract(playerName);
+        if (!playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Add(playerName);
+    }
+
+    public override void RemovePlayerThatAreInteract(string playerName)
+    {
+        base.RemovePlayerThatAreInteract(playerName);
+        if (playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Remove(playerName);
     }
 
     public void FindNearestFloorObject()

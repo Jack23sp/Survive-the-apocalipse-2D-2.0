@@ -173,7 +173,7 @@ public partial class Player
     }
 }
 
-public class UIShop : MonoBehaviour
+public class UIShop : MonoBehaviour,IUIScriptNoBuildingRelated
 {
     public static UIShop singleton;
     public Transform premiumContent;
@@ -232,17 +232,7 @@ public class UIShop : MonoBehaviour
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            foreach(Transform t in normalContent)
-            {
-                t.GetComponentInParent<ScrollRect>().verticalNormalizedPosition = 1;
-            }
-            currentItem = 0;
-            simpleScrollSnap.GoToPanel(0);
-            premiumContent.GetComponentInParent<ScrollRect>().verticalNormalizedPosition = 1;
-            closeButton.image.raycastTarget = false;
-            panel.SetActive(false);
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
 
         leftArrow.onClick.RemoveAllListeners();
@@ -267,6 +257,7 @@ public class UIShop : MonoBehaviour
 
     public void Open()
     {
+        Assign();
         panel.SetActive(true);
         closeButton.image.raycastTarget = true;
         closeButton.image.enabled = true;
@@ -310,5 +301,25 @@ public class UIShop : MonoBehaviour
             }
         }
 
+    }
+
+    public void Close()
+    {
+        foreach (Transform t in normalContent)
+        {
+            t.GetComponentInParent<ScrollRect>().verticalNormalizedPosition = 1;
+        }
+        currentItem = 0;
+        simpleScrollSnap.GoToPanel(0);
+        premiumContent.GetComponentInParent<ScrollRect>().verticalNormalizedPosition = 1;
+        closeButton.image.raycastTarget = false;
+        panel.SetActive(false);
+        closeButton.image.enabled = false;
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class ConfirmDropItem : MonoBehaviour
+public class ConfirmDropItem : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static ConfirmDropItem singleton;
     public Button drop;
@@ -44,8 +44,7 @@ public class ConfirmDropItem : MonoBehaviour
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            Manage(false);
-            BlurManager.singleton.Show();
+            Close();
         });
 
         cancel.onClick.RemoveAllListeners();
@@ -65,6 +64,7 @@ public class ConfirmDropItem : MonoBehaviour
 
     public void Manage(bool condition)
     {
+        Assign();
         if(inventory)
             slider.maxValue = Player.localPlayer.inventory.slots[indexSlot].amount;
         else
@@ -73,5 +73,16 @@ public class ConfirmDropItem : MonoBehaviour
         closeButton.image.raycastTarget = condition;
         closeButton.image.enabled = condition;
         panel.SetActive(condition);
+    }
+
+    public void Close()
+    {
+        Manage(false);
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 }

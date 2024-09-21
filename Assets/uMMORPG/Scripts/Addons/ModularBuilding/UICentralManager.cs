@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UICentralManager : MonoBehaviour
+public class UICentralManager : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static UICentralManager singleton;
 
@@ -173,6 +173,7 @@ public class UICentralManager : MonoBehaviour
 
     public void Open(ModularBuilding modular, int mod)
     {
+        Assign();
         closeButton.image.enabled = true;
         panel.SetActive(true);
         deletePanel.SetActive(false);
@@ -191,10 +192,7 @@ public class UICentralManager : MonoBehaviour
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            Reset();
-            BlurManager.singleton.Show();
-            closeButton.image.enabled = false;
+            Close();
         });
 
         if (modular)
@@ -567,5 +565,18 @@ public class UICentralManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        Reset();
+        BlurManager.singleton.Show();
+        closeButton.image.enabled = false;
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 }

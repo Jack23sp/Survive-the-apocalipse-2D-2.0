@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIPin : MonoBehaviour
+public class UIPin : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static UIPin singleton;
     public List<PinButtonSlot> pinButton = new List<PinButtonSlot>();
@@ -58,20 +58,15 @@ public class UIPin : MonoBehaviour
 
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() => {
-            code = string.Empty;
-            codeText.text = code;
-            panelImage.raycastTarget = false;
-            panelImage.enabled = false;
-            panel.SetActive(false);
-            colliderHit = null;
-            centralManager = null;
-            BlurManager.singleton.Show();
+            Close();
         });
     }
 
     public void Open(Player player, CentralManager centralManager, Transform collider)
     {
         this.centralManager = centralManager;
+        Assign();
+
         colliderHit = collider;
         panelImage.raycastTarget = true;
         panelImage.enabled = true;
@@ -79,4 +74,22 @@ public class UIPin : MonoBehaviour
         code = string.Empty;
         codeText.text = code;
     }
+
+    public void Close()
+    {
+        code = string.Empty;
+        codeText.text = code;
+        panelImage.raycastTarget = false;
+        panelImage.enabled = false;
+        panel.SetActive(false);
+        colliderHit = null;
+        centralManager = null;
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
+    }
+
 }

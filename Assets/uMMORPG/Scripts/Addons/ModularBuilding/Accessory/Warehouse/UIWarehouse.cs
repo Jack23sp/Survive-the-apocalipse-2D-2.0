@@ -6,7 +6,7 @@ using Mirror;
 using TMPro;
 
 
-public class UIWarehouse : MonoBehaviour
+public class UIWarehouse : MonoBehaviour, IUIScript
 {
     public static UIWarehouse singleton;
     public GameObject panel;
@@ -35,9 +35,8 @@ public class UIWarehouse : MonoBehaviour
         if (!player) player = Player.localPlayer;
         if (!player) return;
 
-
-
         warehouse = Warehouse;
+        Assign();
 
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.SetListener(() =>
@@ -175,5 +174,26 @@ public class UIWarehouse : MonoBehaviour
                 slot2.amountOverlay.SetActive(false);
             }
         }
+    }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        closeButton.image.raycastTarget = false;
+        panel.SetActive(false);
+        closeButton.image.enabled = false;
+        RemovePlayerFromBuildingAccessory(warehouse.netIdentity);
+        BlurManager.singleton.Show();
+        renameTextHolder.text = string.Empty;
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
     }
 }

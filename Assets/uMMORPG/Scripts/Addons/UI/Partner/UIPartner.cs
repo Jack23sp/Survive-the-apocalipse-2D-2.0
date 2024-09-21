@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIPartner : MonoBehaviour
+public class UIPartner : MonoBehaviour, IUIScriptNoBuildingRelated
 {
 
     public static UIPartner singleton;
@@ -19,15 +19,13 @@ public class UIPartner : MonoBehaviour
     void OnEnable()
     {
         if (!singleton) singleton = this;
+        Assign();
+
         reset = true;
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
-            partnerSlot.gameObject.SetActive(false);
-            reset = false;
-            partnerSlot.leftArrow.onClick.Invoke();
-            reset = true;
+            Close();
         });
 
         partnerSlot.leftArrow.onClick.RemoveAllListeners();
@@ -57,4 +55,19 @@ public class UIPartner : MonoBehaviour
         if (direction == 1) partnerSlot.headerText.text = "Alliance";
         else if (direction == 0) partnerSlot.headerText.text = "Abilities";
     }
+
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(0);
+        partnerSlot.gameObject.SetActive(false);
+        reset = false;
+        partnerSlot.leftArrow.onClick.Invoke();
+        reset = true;
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
+    }
+
 }

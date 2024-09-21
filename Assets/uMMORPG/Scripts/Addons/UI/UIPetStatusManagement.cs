@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIPetStatusManagement : MonoBehaviour
+public class UIPetStatusManagement : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static UIPetStatusManagement singleton;
 
@@ -32,11 +32,7 @@ public class UIPetStatusManagement : MonoBehaviour
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            amount = 0;
-            panel.SetActive(false);
-            closeButton.image.raycastTarget = false;
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
 
         useButton.onClick.RemoveAllListeners();
@@ -94,6 +90,7 @@ public class UIPetStatusManagement : MonoBehaviour
 
     public void Open()
     {
+        Assign();
         BlurManager.singleton.Hide();
         closeButton.image.raycastTarget = true;
         closeButton.image.enabled = true;
@@ -108,5 +105,20 @@ public class UIPetStatusManagement : MonoBehaviour
     public int FindAllCure()
     {
         return Player.localPlayer.inventory.FindItemInInventory(PremiumItemManager.singleton.petFood);
+    }
+
+    public void Close()
+    {
+        amount = 0;
+        panel.SetActive(false);
+        closeButton.image.raycastTarget = false;
+        closeButton.image.enabled = false;
+        BlurManager.singleton.Show();
+        helpObject.gameObject.SetActive(false);
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 }

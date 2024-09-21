@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
 
-public class UIFridge : MonoBehaviour
+public class UIFridge : MonoBehaviour, IUIScript
 {
     public static UIFridge singleton;
     public GameObject panel;
@@ -31,15 +31,12 @@ public class UIFridge : MonoBehaviour
         if (!player) player = Player.localPlayer;
         if (!player) return;
         fridge = Fridge;
+        Assign();
 
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.SetListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            closeButton.image.raycastTarget = false;
-            panel.SetActive(false);
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
 
         manageButton.gameObject.SetActive(ModularBuildingManager.singleton.CanDoOtherActionForniture(fridge, Player.localPlayer));
@@ -151,5 +148,24 @@ public class UIFridge : MonoBehaviour
 
             }
         }
+    }
+    public void Close()
+    {
+        if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
+        closeButton.image.raycastTarget = false;
+        panel.SetActive(false);
+        closeButton.image.enabled = false;
+        RemovePlayerFromBuildingAccessory(fridge.netIdentity);
+        BlurManager.singleton.Show();
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeath.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeath.Add(this);
+    }
+
+    public void RemovePlayerFromBuildingAccessory(NetworkIdentity identity)
+    {
+        Player.localPlayer.playerModularBuilding.CmdRemovePlayerInteractWithAccessory(identity);
     }
 }

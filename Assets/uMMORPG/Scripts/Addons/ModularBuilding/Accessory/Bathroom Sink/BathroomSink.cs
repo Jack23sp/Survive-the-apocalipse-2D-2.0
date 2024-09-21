@@ -9,6 +9,8 @@ public class BathroomSink : BuildingAccessory
 {
     public Aquifer aquifer;
 
+    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
+
     public new void Start()
     {
         base.Start();
@@ -37,6 +39,19 @@ public class BathroomSink : BuildingAccessory
         base.OnStartClient();
         Invoke(nameof(FindNearestFloorObject), 0.5f);
     }
+
+    public override void AddPlayerThatAreInteract(string playerName)
+    {
+        base.AddPlayerThatAreInteract(playerName);
+        if (!playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Add(playerName);
+    }
+
+    public override void RemovePlayerThatAreInteract(string playerName)
+    {
+        base.RemovePlayerThatAreInteract(playerName);
+        if (playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Remove(playerName);
+    }
+
 
     public void FindNearestFloorObject()
     {

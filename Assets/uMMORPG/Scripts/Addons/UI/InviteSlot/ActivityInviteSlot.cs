@@ -26,7 +26,7 @@ public struct InviteRequest
     }
 }
 
-public class ActivityInviteSlot : MonoBehaviour
+public class ActivityInviteSlot : MonoBehaviour, IUIScriptNoBuildingRelated
 {
     public static ActivityInviteSlot singleton;
 
@@ -138,6 +138,8 @@ public class ActivityInviteSlot : MonoBehaviour
 
     public void Setup(string titleS, string descriptionS, bool hasTimer, int iType, string myPlayer, string target, bool insert)
     {
+        Assign();
+
         panel.SetActive(true);
         declineButton.image.enabled = true;
         if (hasTimer)
@@ -174,5 +176,19 @@ public class ActivityInviteSlot : MonoBehaviour
     public void SetTimer(int timer)
     {
         acceptText.text = "Accept (" + timer + ")";
+    }
+
+    public void Close()
+    {
+        foreach(InviteRequest req in Player.localPlayer.playerScreenNotification.invitation)
+        {
+            if(Player.localPlayer.playerScreenNotification.invitation.Count > 0)
+                declineButton.onClick.Invoke();
+        }
+    }
+
+    public void Assign()
+    {
+        if (!ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Contains(this)) ModularBuildingManager.singleton.UIToCloseOnDeathNoBuilding.Add(this);
     }
 }
