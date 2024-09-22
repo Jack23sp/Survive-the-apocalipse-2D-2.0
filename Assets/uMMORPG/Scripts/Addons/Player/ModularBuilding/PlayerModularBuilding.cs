@@ -47,6 +47,20 @@ public class PlayerModularBuilding : NetworkBehaviour
         Assign();
     }
 
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+        if(buildingInteractWith != null)
+        {
+            BuildingAccessory acc = buildingInteractWith.gameObject.GetComponent<BuildingAccessory>();
+            if (acc)
+            {
+                buildingInteractWith = null;
+                acc.RemovePlayerThatAreInteract(player.name);
+            }
+        }
+    }
+
     [Command]
     public void CmdInteractwithThis( NetworkIdentity identity)
     {

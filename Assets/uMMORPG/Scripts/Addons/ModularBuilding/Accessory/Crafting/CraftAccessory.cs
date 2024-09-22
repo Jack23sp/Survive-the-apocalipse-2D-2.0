@@ -87,14 +87,26 @@ public class CraftAccessory : BuildingAccessory
     public readonly SyncList<CraftinItemSlot> craftingItem = new SyncList<CraftinItemSlot>();
     public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
 
+    private Player plInteractCheck;
+    #region effect
+    public ParticleSystem pSystem;
+    #endregion
+
+
     public bool checkSex;
     public bool hasAnimation;
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+    }
 
     public override void OnStartClient()
     {
         base.OnStartClient();
         craftingItem.Callback += OnBeltChanged;
     }
+
 
     public new void Start()
     {
@@ -117,6 +129,18 @@ public class CraftAccessory : BuildingAccessory
         if (playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Remove(playerName);
     }
 
+    public void SetOrder()
+    {
+        if (pSystem)
+        {
+            ParticleSystemRenderer rend = pSystem.GetComponent<ParticleSystemRenderer>();
+            if (rend)
+            {
+                rend.sortingOrder = renderer.sortingOrder + 1;
+            }
+        }
+    }
+
 
     void OnBeltChanged(SyncList<CraftinItemSlot>.Operation op, int index, CraftinItemSlot oldSlot, CraftinItemSlot newSlot)
     {
@@ -128,6 +152,18 @@ public class CraftAccessory : BuildingAccessory
                 UICraft.singleton.SpawnCraftAtBegins(true, true);
                 UICraft.singleton.Craft(UICraft.singleton.craftIndex);
             }
+        }
+
+        if(craftingItem.Count > 0)
+        {
+            pSystem.gameObject.SetActive(true); 
+            SetOrder();
+            pSystem.Play();
+        }
+        else
+        {
+            pSystem.gameObject.SetActive(false);
+            pSystem.Stop();
         }
     }
 }

@@ -793,6 +793,7 @@ public class ModularBuildingManager : MonoBehaviour
             case 7:
                 BlurManager.singleton.Hide();
                 buildingAccessory = forniture;
+                Player.localPlayer.playerModularBuilding.CmdInteractwithThis(forniture.netIdentity);
                 UIWarehouse.singleton.Open(forniture.GetComponent<Warehouse>());
                 break;
             case 8:

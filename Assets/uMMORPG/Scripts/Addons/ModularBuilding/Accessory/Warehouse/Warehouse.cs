@@ -202,6 +202,11 @@ public class Warehouse : BuildingAccessory
     public List<GameObject> warehouseNameObjects = new List<GameObject>(); 
     public TextMeshProUGUI warehouseNameText;
 
+    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
+
+    private Player plInteractCheck;
+
+
     new void Start()
     {
         base.Start();
@@ -233,10 +238,20 @@ public class Warehouse : BuildingAccessory
     }
 
     public new void ManageName (string oldvalue, string newValue)
-    {     
-        for(int i = 0; i < warehouseNameObjects.Count; i++)
+    {
+        if (playerThatInteractWhitThis.Count == 0)
         {
-            warehouseNameObjects[i].SetActive(newValue != string.Empty);
+            for (int i = 0; i < warehouseNameObjects.Count; i++)
+            {
+                warehouseNameObjects[i].SetActive(false);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < warehouseNameObjects.Count; i++)
+            {
+                warehouseNameObjects[i].SetActive(newValue != string.Empty);
+            }
         }
 
         if(newValue != string.Empty)
@@ -252,10 +267,68 @@ public class Warehouse : BuildingAccessory
     public override void OnStartClient()
     {
         base.OnStartClient();
-
+        playerThatInteractWhitThis.Callback += PlayerInteraction;
         slots.Callback += OnWarehouseInventoryChanged;
         ManageName(base.newName, base.newName);
+        for (int i = 0; i < warehouseNameObjects.Count; i++)
+        {
+            warehouseNameObjects[i].SetActive(newName != string.Empty);
+        }
     }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        Invoke(nameof(CheckPlayer), 3.0f);
+    }
+    public void CheckPlayer()
+    {
+        if (netIdentity.observers != null && netIdentity.observers.Count > 0)
+        {
+            for (int i = playerThatInteractWhitThis.Count - 1; i >= 0; i--)
+            {
+                if (!Player.onlinePlayers.TryGetValue(playerThatInteractWhitThis[i], out plInteractCheck))
+                {
+                    playerThatInteractWhitThis.RemoveAt(i);
+                }
+            }
+        }
+        Invoke(nameof(CheckPlayer), 3.0f);
+    }
+
+    public override void AddPlayerThatAreInteract(string playerName)
+    {
+        base.AddPlayerThatAreInteract(playerName);
+        if (!playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Add(playerName);
+    }
+
+    public override void RemovePlayerThatAreInteract(string playerName)
+    {
+        base.RemovePlayerThatAreInteract(playerName);
+        if (playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Remove(playerName);
+    }
+
+
+    void PlayerInteraction(SyncList<string>.Operation op, int index, string oldSlot, string newSlot)
+    {
+        if (playerThatInteractWhitThis.Count == 0)
+        {
+            renderer.sprite = ImageManager.singleton.warehouseClosed[oldPositioning];
+            for (int i = 0; i < warehouseNameObjects.Count; i++)
+            {
+                warehouseNameObjects[i].SetActive(true);
+            }
+        }
+        else
+        {
+            renderer.sprite = ImageManager.singleton.warehouseOpen[oldPositioning];
+            for (int i = 0; i < warehouseNameObjects.Count; i++)
+            {
+                warehouseNameObjects[i].SetActive(false);
+            }
+        }
+    }
+
 
     void OnWarehouseInventoryChanged(SyncList<ItemSlot>.Operation op, int index, ItemSlot oldSlot, ItemSlot newSlot)
     {

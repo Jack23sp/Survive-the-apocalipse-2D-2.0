@@ -33,7 +33,9 @@ public class ImageManager : MonoBehaviour
 
     public Sprite waterImage;
     public Sprite upgrade;
-
+    [Header("Warehouse")]
+    public List<Sprite> warehouseOpen = new List<Sprite>();
+    public List<Sprite> warehouseClosed = new List<Sprite>();
     void Start()
     {
         if (!singleton) singleton = this;    

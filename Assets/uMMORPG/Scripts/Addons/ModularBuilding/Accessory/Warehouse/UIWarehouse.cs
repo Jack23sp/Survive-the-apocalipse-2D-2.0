@@ -41,12 +41,7 @@ public class UIWarehouse : MonoBehaviour, IUIScript
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.SetListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            closeButton.image.raycastTarget = false;
-            panel.SetActive(false);
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
-            renameTextHolder.text = string.Empty;
+            Close();
         });
 
         manageButton.gameObject.SetActive(ModularBuildingManager.singleton.CanDoOtherActionForniture(warehouse, Player.localPlayer));

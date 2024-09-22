@@ -330,6 +330,7 @@ public static class Utilities
             {
                 ((Warehouse)buildingAccessoryNew).slots.Add(((Warehouse)buildingAccessoryOld).slots[i]);
             }
+            ((Warehouse)buildingAccessoryNew).newName = ((Warehouse)buildingAccessoryOld).newName;
         }
         if (oldGameObject.GetComponent<WaterContainer>())
         {

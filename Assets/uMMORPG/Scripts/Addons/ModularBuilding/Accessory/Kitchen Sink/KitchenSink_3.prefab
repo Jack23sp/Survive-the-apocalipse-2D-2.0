@@ -387,7 +387,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.007
+      scalar: 0.01
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -704,7 +704,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 50000
+    maxNumParticles: 100000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -970,7 +970,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50000
+      scalar: 200000
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4885,7 +4885,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 850132101
   m_SortingLayer: -5
-  m_SortingOrder: 0
+  m_SortingOrder: 28666
   m_RenderMode: 1
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -5257,6 +5257,7 @@ MonoBehaviour:
   spritesList: []
   accessoriesInThisForniture: []
   aquifer: {fileID: 0}
+  pSystem: {fileID: 8530310305223446538}
 --- !u!61 &8348470995215356350
 BoxCollider2D:
   m_ObjectHideFlags: 0
