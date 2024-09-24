@@ -36,6 +36,10 @@ public class ImageManager : MonoBehaviour
     [Header("Warehouse")]
     public List<Sprite> warehouseOpen = new List<Sprite>();
     public List<Sprite> warehouseClosed = new List<Sprite>();
+    [Space(5)]
+    public Sprite openEyeImage;
+    public Sprite closeEyeImage;
+
     void Start()
     {
         if (!singleton) singleton = this;    

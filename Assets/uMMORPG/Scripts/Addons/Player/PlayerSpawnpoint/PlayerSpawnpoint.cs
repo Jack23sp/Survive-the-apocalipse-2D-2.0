@@ -18,13 +18,15 @@ public partial struct Spawnpoint
     public float spawnPositionx;
     public float spawnPositiony;
     public bool prefered;
+    public string color;
 
-    public Spawnpoint(string Name, float SpawnPositionX, float SpawnPositionY, bool Prefered)
+    public Spawnpoint(string Name, float SpawnPositionX, float SpawnPositionY, bool Prefered, string Color)
     {
         name = Name;
         spawnPositionx = SpawnPositionX;
         spawnPositiony = SpawnPositionY;
         prefered = Prefered;
+        color = Color;
     }
 }
 
@@ -41,6 +43,7 @@ public partial class Database
         public float posX { get; set; }
         public float posY { get; set; }
         public int prefered { get; set; }
+        public string color { get; set; }
     }
 
     class Pin
@@ -74,7 +77,8 @@ public partial class Database
                 spawnpointName = spawnpoint.spawnpoint[i].name,
                 posX = spawnpoint.spawnpoint[i].spawnPositionx,
                 posY = spawnpoint.spawnpoint[i].spawnPositiony,
-                prefered = Convert.ToInt32(spawnpoint.spawnpoint[i].prefered)
+                prefered = Convert.ToInt32(spawnpoint.spawnpoint[i].prefered),
+                color = spawnpoint.spawnpoint[i].color
             });
         }
 
@@ -107,7 +111,7 @@ public partial class Database
 
         foreach (spawnpoint row in connection.Query<spawnpoint>("SELECT * FROM spawnpoint WHERE characterName=?", player.name))
         {
-            Spawnpoint sp = new Spawnpoint(row.spawnpointName, row.posX, row.posY, Convert.ToBoolean(row.prefered));
+            Spawnpoint sp = new Spawnpoint(row.spawnpointName, row.posX, row.posY, Convert.ToBoolean(row.prefered), row.color);
             spawnpoint.spawnpoint.Add(sp);
         }
     }
@@ -139,6 +143,9 @@ public class PlayerSpawnpoint : NetworkBehaviour
     List<string> spawnPointToRemove = new List<string>();
     Transform[] orderedTransform = new Transform[0];
     public List<Vector3> pins = new List<Vector3>();
+    public List<GameObject> spawnpointObjects = new List<GameObject>();
+    public bool pin, pointofSpawn, path;
+
 
     public void Assign()
     {
@@ -166,6 +173,43 @@ public class PlayerSpawnpoint : NetworkBehaviour
     {
         base.OnStartLocalPlayer();
         TargetPin(pins.ToArray());
+        spawnpoint.Callback += SpawnInRealWorld;
+        SpawnSpawnpointInRealWorld();
+    }
+
+    void SpawnInRealWorld(SyncList<Spawnpoint>.Operation op, int index, Spawnpoint oldValue, Spawnpoint newValue)
+    {
+        SpawnSpawnpointInRealWorld();
+    }
+
+    public void SpawnSpawnpointInRealWorld()
+    {
+        DestroyConcreteSpawnpoint();
+        CreateConcreteSpawnpoint();
+    }
+
+    public void DestroyConcreteSpawnpoint()
+    {
+        for (int i = 0; i < spawnpointObjects.Count; i++)
+        {
+            Destroy(spawnpointObjects[i]);
+        }
+        spawnpointObjects.Clear();
+    }
+
+    public void CreateConcreteSpawnpoint()
+    {
+        for (int i = 0; i < spawnpoint.Count; i++)
+        {
+            GameObject g = Instantiate(GameObjectSpawnManager.singleton.spawnpointMarker, new Vector2(spawnpoint[i].spawnPositionx, spawnpoint[i].spawnPositiony), Quaternion.identity);
+            Color newColor;
+
+            if (ColorUtility.TryParseHtmlString(spawnpoint[i].color, out newColor))
+            {
+                g.GetComponent<SpriteRenderer>().color = newColor;
+            }
+            spawnpointObjects.Add(g);
+        }
     }
 
     public void OrderSpawnpoint()
@@ -311,7 +355,7 @@ public class PlayerSpawnpoint : NetworkBehaviour
 
         if (possibleSpawnpoint > 0)
         {
-            Spawnpoint sp = new Spawnpoint(name, x, y, prefered);
+            Spawnpoint sp = new Spawnpoint(name, x, y, prefered, Utilities.GenerateRandomColorHex());
             player.playerSpawnpoint.spawnpoint.Add(sp);
         }
         player.playerSpawnpoint.OrderSpawnpoint();

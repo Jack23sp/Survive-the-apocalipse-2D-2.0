@@ -22,8 +22,10 @@ public class GameObjectSpawnManager : MonoBehaviour
     [Header("Manager building accessory")]
     public GameObject confirmManagerAccessory;
     public GameObject fornitureAccessory;
-    [Header("Death Marker")]
+    [Header("Map Markers")]
     public GameObject deathMarker;
+    public GameObject pinMarker;
+    public GameObject spawnpointMarker;
     [Header("Player Dummy")]
     public GameObject playerDummy;
 

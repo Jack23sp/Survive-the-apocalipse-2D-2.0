@@ -422,4 +422,26 @@ public static class Utilities
         float randomY = UnityEngine.Random.Range(bottomLeftCorner.y, bottomLeftCorner.y + (size.y + (- border)));
         return new Vector2(randomX, randomY);
     }
+
+    public static Color GenerateRandomColor()
+    {
+        float r = UnityEngine.Random.Range(0f, 1f);
+        float g = UnityEngine.Random.Range(0f, 1f);
+        float b = UnityEngine.Random.Range(0f, 1f);
+
+        return new Color(r, g, b);
+    }
+
+    public static string GenerateRandomColorHex()
+    {
+        float r = UnityEngine.Random.Range(0f, 1f);
+        float g = UnityEngine.Random.Range(0f, 1f);
+        float b = UnityEngine.Random.Range(0f, 1f);
+
+        int rInt = Mathf.FloorToInt(r * 255);
+        int gInt = Mathf.FloorToInt(g * 255);
+        int bInt = Mathf.FloorToInt(b * 255);
+
+        return $"#{rInt:X2}{gInt:X2}{bInt:X2}";
+    }
 }

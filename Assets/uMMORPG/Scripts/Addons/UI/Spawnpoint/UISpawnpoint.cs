@@ -136,6 +136,12 @@ public class UISpawnpoint : MonoBehaviour
         {
             int index = i;
             SpawnpointSlot slot = spawnpointContent.GetChild(index).GetComponent<SpawnpointSlot>();
+            Color newColor;
+
+            if (ColorUtility.TryParseHtmlString(player.playerSpawnpoint.spawnpoint[index].color, out newColor))
+            {
+                slot.GetComponent<Image>().color = newColor;
+            }
             slot.prefered = player.playerSpawnpoint.spawnpoint[index].prefered;
             slot.preferButton.image.sprite = player.playerSpawnpoint.spawnpoint[index].prefered ? SpawnpointManager.singleton.prefered : SpawnpointManager.singleton.notPrefered;
             slot.preferButton.onClick.RemoveAllListeners();
