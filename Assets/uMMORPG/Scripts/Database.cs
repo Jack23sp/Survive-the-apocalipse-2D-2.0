@@ -345,6 +345,7 @@ public partial class Database : MonoBehaviour
         connection.CreateTable<aquarium>();
         connection.CreateTable<tree>();
         connection.CreateTable<cultivable_item>();
+        connection.CreateTable<WeatherAndTimeInfo>();
         // addon system hooks
         onConnected.Invoke();
 

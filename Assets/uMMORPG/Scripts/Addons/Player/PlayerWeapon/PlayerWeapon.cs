@@ -15,10 +15,14 @@ public class PlayerWeapon : NetworkBehaviour
     [SyncVar] public int shooted;
     [SyncVar] public int chargedMunition;
     public LineRenderer lineRenderer;
+    public LineRenderer destinationLineRenderer;
     public List<Monster> nearMonster = new List<Monster>();
+    public Vector3 destinationPoint = new Vector3();
 
 
     private Vector3 destination;
+    private Vector3 directionToPoint;
+    private float dist;
 
     public override void OnStartClient()
     {
@@ -73,6 +77,26 @@ public class PlayerWeapon : NetworkBehaviour
                 destination = player.lookDirection;
                 destination *= (player.playerEquipment.slots[0].amount > 0 ? player.playerEquipment.slots[0].item.data.requiredSkill.lineCast : 1f);
 
+                directionToPoint = player.transform.position - destinationPoint;
+                directionToPoint = directionToPoint.normalized;
+
+                dist = Vector3.Distance(destinationPoint, player.transform.position);
+
+                if (destinationPoint != Vector3.zero)
+                {
+                    directionToPoint *= (dist * -1);
+                }
+                else
+                {
+                    directionToPoint *= 0.0f;
+                }
+                
+                if (dist <= 2 && destination != Vector3.zero)
+                {
+                    destinationPoint = Vector3.zero;
+                    if(ClickOnRenderTexture.singleton) Destroy(ClickOnRenderTexture.singleton.destination);
+                }
+
                 if (player.playerMove.states.Contains("AIM") ||
                    player.playerMove.states.Contains("SHOOT"))
                 {
@@ -84,6 +108,9 @@ public class PlayerWeapon : NetworkBehaviour
                     lineRenderer.SetPosition(1, player.transform.position);
                     lineRenderer.SetPosition(0, lineRenderer.GetPosition(1));
                 }
+            
+                destinationLineRenderer.SetPosition(1, player.transform.position);
+                destinationLineRenderer.SetPosition(0, destinationLineRenderer.GetPosition(1) + directionToPoint);
             }
         }
     }

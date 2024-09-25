@@ -10,6 +10,8 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using Mirror;
 using UnityEngine.Events;
+using System.Net;
+using System.Net.Sockets;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -207,6 +209,7 @@ public partial class NetworkManagerMMO : NetworkManager
         //SpawnManager();
 
         // invoke saving
+        InvokeRepeating(nameof(SaveWeatherAndInfo), 144.0f, 144.0f);
         InvokeRepeating(nameof(SavePlayers), saveInterval, saveInterval);
 
         // addon system hooks
@@ -222,6 +225,7 @@ public partial class NetworkManagerMMO : NetworkManager
     public override void OnStopServer()
     {
         CancelInvoke(nameof(SavePlayers));
+        CancelInvoke(nameof(SaveWeatherAndInfo));
 
         // addon system hooks
         onStopServer.Invoke();
@@ -626,6 +630,43 @@ public partial class NetworkManagerMMO : NetworkManager
         Database.singleton.CharacterSaveMany(Player.onlinePlayers.Values);
         if (Player.onlinePlayers.Count > 0)
             Debug.Log("saved " + Player.onlinePlayers.Count + " player(s)");
+    }
+
+    public void SaveWeatherAndInfo()
+    {
+        for(int i = 0; i < serverList.Count; i++)
+        {
+            if (serverList[i].ip == GetLocalIPAddress())
+            {
+                Database.singleton.SaveWeatherAndTimeInfo(GetLocalIPAddress());
+            }
+        }
+    }
+
+    public string GetLocalIPAddress()
+    {
+        string localIP = "";
+        try
+        {
+            foreach (var address in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+            {
+                if (address.AddressFamily == AddressFamily.InterNetwork) // IPV4 address
+                {
+                    localIP = address.ToString();
+                    break;
+                }
+            }
+            if (string.IsNullOrEmpty(localIP))
+            {
+                Debug.LogError("No network adapters with an IPv4 address found.");
+            }
+        }
+        catch (SocketException e)
+        {
+            Debug.LogError("SocketException: " + e.ToString());
+        }
+
+        return localIP;
     }
 
     // stop/disconnect /////////////////////////////////////////////////////////

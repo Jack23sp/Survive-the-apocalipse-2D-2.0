@@ -52,6 +52,9 @@ public class ClickOnRenderTexture : MonoBehaviour
     public List<GameObject> destinationUIObjectToManage = new List<GameObject>();
     private int selectedIndex;
 
+    public Button destinationDestroyButton;
+    public TextMeshProUGUI selectedCategory;
+
     public void OnEnable()
     {
         if (!singleton) singleton = this;
@@ -87,7 +90,10 @@ public class ClickOnRenderTexture : MonoBehaviour
             selectedIndex = 0;
             ManageDetectionOnTypeButtonClick();
             ManageVisibilityofUIBasedOnCategory(selectedIndex);
+            selectedCategory.text = "Pin";
         });
+
+        selectedButton[0].button.onClick.Invoke();
 
         selectedButton[0].seeButton.onClick.RemoveAllListeners();
         selectedButton[0].seeButton.onClick.AddListener(() =>
@@ -106,6 +112,7 @@ public class ClickOnRenderTexture : MonoBehaviour
             selectedIndex = 1;
             ManageDetectionOnTypeButtonClick();
             ManageVisibilityofUIBasedOnCategory(selectedIndex);
+            selectedCategory.text = "Spawnpoint";
         });
 
         selectedButton[1].seeButton.onClick.RemoveAllListeners();
@@ -126,6 +133,7 @@ public class ClickOnRenderTexture : MonoBehaviour
             selectedIndex = 2;
             ManageDetectionOnTypeButtonClick();
             ManageVisibilityofUIBasedOnCategory(selectedIndex);
+            selectedCategory.text = "Destination";
         });
 
         selectedButton[2].seeButton.onClick.RemoveAllListeners();
@@ -146,6 +154,13 @@ public class ClickOnRenderTexture : MonoBehaviour
             indexMove = -1;
         });
 
+        destinationDestroyButton.onClick.RemoveAllListeners();
+        destinationDestroyButton.onClick.AddListener(() =>
+        {
+            if (destination) Destroy(destination);
+            Player.localPlayer.playerWeapon.destinationPoint = new Vector3(0.0f, 0.0f, 0.0f);
+            ManageVisibility(2, false);
+        });
 
         for (int i = 0; i < maxPin; i++)
         {
@@ -335,23 +350,19 @@ public class ClickOnRenderTexture : MonoBehaviour
                 float offsetX = Mathf.Abs(percentX * (size.x / 100));
                 float offsetY = Mathf.Abs(percentY * (size.y / 100));
 
-                if (move && indexMove > -1)
+                if (percentX > 100.0f || percentY > 100.0f) return;
+
+                Vector3 position = anchor.position + new Vector3(offsetX, offsetY, 0f);
+
+                if (destination)
                 {
-                    if (percentX > 100.0f || percentY > 100.0f) return;
-                    pin[indexMove].transform.position = anchor.position + new Vector3(offsetX, offsetY, 0f);
-                }
-                else
-                {
-                    if (percentX > 100.0f || percentY > 100.0f) return;
-
-                    Vector3 position = anchor.position + new Vector3(offsetX, offsetY, 0f);
-
-                    if (destination) Destroy(destination);
-
-                        destination = Instantiate(prefabToInstantiateDestination, position, Quaternion.identity);
-                        destination.GetComponent<DeathSymbol>().dontDestroyAtBegin = true;
+                    //Player.localPlayer.playerWeapon.destinationPoint = new Vector3(0.0f,0.0f,0.0f);
+                    Destroy(destination);
                 }
 
+                destination = Instantiate(prefabToInstantiateDestination, position, Quaternion.identity);
+                Player.localPlayer.playerWeapon.destinationPoint = position;
+                destination.GetComponent<DeathSymbol>().dontDestroyAtBegin = true;
             }
         }
     }

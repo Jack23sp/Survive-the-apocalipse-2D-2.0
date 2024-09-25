@@ -58,10 +58,73 @@ public class ObjectPool
     }
 }
 
+partial class Database
+{
+    class WeatherAndTimeInfo
+    {
+        //[PrimaryKey] // important for performance: O(log n) instead of O(n)
+        //[Collation("NOCASE")] // [COLLATE NOCASE for case insensitive compare. this way we can't both create 'Archer' and 'archer' as characters]
+        public string ServerName { get; set; }
+        public int day { get; set; }
+        public int hours { get; set; }
+        public int minutes { get; set; }
+        public int seconds { get; set; }
+        public string ambientColour { get; set; }
+        public string season { get; set; }
+        
+    }
+
+    public void SaveWeatherAndTimeInfo(string serverName)
+    {
+        connection.BeginTransaction();
+        TemperatureManager temp = TemperatureManager.singleton;
+        // inventory: remove old entries first, then add all new ones
+        // (we could use UPDATE where slot=... but deleting everything makes
+        //  sure that there are never any ghosts)
+        connection.Execute("DELETE FROM WeatherAndTimeInfo WHERE ServerName=?", serverName);
+        // note: .Insert causes a 'Constraint' exception. use Replace.
+            connection.InsertOrReplace(new WeatherAndTimeInfo
+            {
+                ServerName = serverName,
+                day = temp.days,
+                hours = temp.hours,
+                minutes = temp.minutes,
+                seconds = temp.seconds,
+                ambientColour = temp.colorSync,
+                season = temp.season
+            });
+        connection.Commit();
+    }
+
+    public void LoadWeatherAndTimeInfo(string serverName)
+    {
+        TemperatureManager temp = TemperatureManager.singleton;
+
+
+        foreach (WeatherAndTimeInfo row in connection.Query<WeatherAndTimeInfo>("SELECT * FROM WeatherAndTimeInfo WHERE ServerName=?", serverName))
+        {
+            temp.days = row.day;
+            temp.hours = row.hours;
+            temp.minutes = row.minutes;
+            temp.seconds = row.seconds;
+            temp.colorSync = row.ambientColour;
+            temp.season = row.season; 
+            Color color;
+
+            if (ColorUtility.TryParseHtmlString("#" + row.ambientColour, out color))
+            {
+                temp.desiredColor = color;
+            }
+        }
+
+    }
+}
+
 public class TemperatureManager : NetworkBehaviour
 {
 
     public static TemperatureManager singleton;
+    public NetworkManagerMMO manager;
 
     [SyncVar]
     public string season = "Winter";
@@ -195,6 +258,7 @@ public class TemperatureManager : NetworkBehaviour
     public Color MidnightColor;
 
     public Color desiredColor;
+    private Color targetColor;
 
     private bool prevRainy;
     private bool prevWindy;
@@ -506,6 +570,10 @@ public class TemperatureManager : NetworkBehaviour
         prevWindy = isWindy;
         prevSunny = isSunny;
         prevSnowy = isSnowy;
+        if (manager)
+            Database.singleton.LoadWeatherAndTimeInfo(manager.GetLocalIPAddress());
+        else
+            Debug.LogError("TemperatureManager script missing manager assignment");
     }
 
     public void ChangeLightColor(string oldColor, string newColor)
@@ -517,34 +585,9 @@ public class TemperatureManager : NetworkBehaviour
         }
     }
 
-    private void UpdateColor(Color targetColor)
+    private void UpdateColor()
     {
-        if (targetColor.r > desiredColor.r)
-        {
-            desiredColor.r += Time.deltaTime / desiredSmooth;
-        }
-        else if (targetColor.r < desiredColor.r)
-        {
-            desiredColor.r -= Time.deltaTime / desiredSmooth;
-        }
-
-        if (targetColor.g > desiredColor.g)
-        {
-            desiredColor.g += Time.deltaTime / desiredSmooth;
-        }
-        else if (targetColor.g < desiredColor.g)
-        {
-            desiredColor.g -= Time.deltaTime / desiredSmooth;
-        }
-
-        if (targetColor.b > desiredColor.b)
-        {
-            desiredColor.b += Time.deltaTime / desiredSmooth;
-        }
-        else if (targetColor.b < desiredColor.b)
-        {
-            desiredColor.b -= Time.deltaTime / desiredSmooth;
-        }
+        desiredColor = Color.Lerp(desiredColor, targetColor, Time.deltaTime / desiredSmooth);
     }
 
     float CalculateLuminance(Color color)
@@ -623,44 +666,47 @@ public class TemperatureManager : NetworkBehaviour
             if (hours >= 0 && hours < _StayAtNight)
             {
                 desiredSmooth = basicSmooth * _StayAtNight;
-                UpdateColor(MidnightColor);
+                targetColor = MidnightColor; // Imposta il colore target
                 nightMusic = true;
             }
             // Inizio alba
             else if (hours >= _StayAtNight && hours < _Sunrise)
             {
                 desiredSmooth = basicSmooth * (_Sunrise - _StayAtNight);
-                UpdateColor(sunsetSunriseColor);
+                targetColor = sunsetSunriseColor;
                 nightMusic = true;
             }
             // Alba fino a mezzogiorno
             else if (hours >= _Sunrise && hours < _LightestPoint)
             {
                 desiredSmooth = basicSmooth * (_LightestPoint - _Sunrise);
-                UpdateColor(halfDayColor);
+                targetColor = halfDayColor;
                 nightMusic = false;
             }
             // Effetto tramonto
             else if (hours >= _Sunset && hours < _Sunset + 1)
             {
                 desiredSmooth = basicSmooth;
-                UpdateColor(sunsetSunriseColor);
+                targetColor = sunsetSunriseColor;
                 nightMusic = false;
             }
             // Effetto tramonto
             else if (hours >= _Sunset + 1 && hours < _Sunset + 2)
             {
                 desiredSmooth = basicSmooth * ((_Sunset + 2) - (_Sunset + 1));
-                UpdateColor(MidnightColor);
+                targetColor = MidnightColor;
                 nightMusic = true;
             }
             // Tramonto fino a sera dello stesso giorno
             else if (hours >= _Sunset + 2 && hours <= 23)
             {
                 desiredSmooth = basicSmooth * (23 - (_Sunset + 2));
-                UpdateColor(MidnightColor);
+                targetColor = MidnightColor;
                 nightMusic = true;
             }
+
+            // Aggiorna il colore desiderato verso il target
+            UpdateColor();
         }
     }
 
