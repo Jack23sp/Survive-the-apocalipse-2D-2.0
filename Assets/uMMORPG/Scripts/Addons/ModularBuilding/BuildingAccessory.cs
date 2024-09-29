@@ -278,6 +278,10 @@ public class BuildingAccessory : NetworkBehaviour
     public List<SpriteRenderer> spritesList;
     public List<BuildingAccessory> accessoriesInThisForniture;
 
+    public List<GameObject> actionObjects = new List<GameObject>();
+
+    public readonly SyncList<ActionPlayerSlot> actionPlayerSlot = new SyncList<ActionPlayerSlot>();
+
     public void Start()
     {
         if (isServer || isClient)
@@ -287,6 +291,19 @@ public class BuildingAccessory : NetworkBehaviour
             if (!ModularBuildingManager.singleton.buildingAccessories.Contains(this) && craftingAccessoryItem && (owner != string.Empty || group != string.Empty)) ModularBuildingManager.singleton.buildingAccessories.Add(this);
         }
         GetComponent<DamagableObject>().buildingAccessory = this;
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        for(int i = 0; i < actionObjects.Count; i++)
+        {
+            int index = i;
+            actionPlayerSlot.Add(new ActionPlayerSlot
+            {
+                player = null, slot = index
+            });
+        }
     }
 
     // is empty, do not delete is overridet
@@ -344,6 +361,9 @@ public class BuildingAccessory : NetworkBehaviour
             sortByDepths[i].enabled = true;
             sortByDepths[i].SetOrder();
         }
+
+        foreach (GameObject g in actionObjects)
+            g.SetActive(true);
     }
 
     public void ManageHealth(float oldHealth, float newHealth)

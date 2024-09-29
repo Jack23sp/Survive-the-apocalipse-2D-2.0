@@ -1,0 +1,17 @@
+{
+    "name": "ScriptBoy.Fly2D.Editor",
+    "references": [
+        "GUID:ded52a146af1f6d4eb355ecc2357c824"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -346,6 +346,7 @@ public partial class Database : MonoBehaviour
         connection.CreateTable<tree>();
         connection.CreateTable<cultivable_item>();
         connection.CreateTable<WeatherAndTimeInfo>();
+        connection.CreateTable<cleaning>();
         // addon system hooks
         onConnected.Invoke();
 
@@ -755,6 +756,7 @@ public partial class Database : MonoBehaviour
                 LoadThirsty(player);
                 LoadSkin(player);
                 LoadAds(player);
+                LoadPlayerCleaning(player);
 
                 // set 'online' directly. otherwise it would only be set during
                 // the next CharacterSave() call, which might take 5-10 minutes.
@@ -1036,6 +1038,7 @@ public partial class Database : MonoBehaviour
         SaveBoost(player);
         SaveSkin(player);
         SaveAds(player);
+        SavePlayerCleaning(player);
 
         // addon system hooks
         onCharacterSave.Invoke(player);

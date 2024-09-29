@@ -88,6 +88,12 @@ public abstract partial class Entity : NetworkBehaviour
                 pl.playerModularBuilding.CloseAllUIPanelOnDeath();
             }
 
+            if(pl.state != "IDLE" && pl.isLocalPlayer)
+            {
+                if(pl.playerMove.whereActionIsGoing)
+                    pl.playerMove.CmdRemoveInteraction();
+            }
+
             if (pl.playerEquipment.weaponIK != null)
             {
 

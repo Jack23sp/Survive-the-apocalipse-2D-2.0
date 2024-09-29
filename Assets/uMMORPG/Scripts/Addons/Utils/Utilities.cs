@@ -444,4 +444,129 @@ public static class Utilities
 
         return $"#{rInt:X2}{gInt:X2}{bInt:X2}";
     }
+
+
+    public static bool IsColliderCompletelyInside(Collider2D innerCollider, Collider2D outerCollider)
+    {
+        List<Vector2> points = GetColliderPoints(innerCollider);
+
+        foreach (Vector2 point in points)
+        {
+            Vector2 worldPoint = innerCollider.transform.TransformPoint(point);
+            if (!outerCollider.OverlapPoint(worldPoint))
+            {
+                return false; // Il punto non è contenuto, quindi il collider non è completamente all'interno
+            }
+        }
+
+        return true; // Tutti i punti sono contenuti
+    }
+
+
+    public static List<Vector2> GetColliderPoints(Collider2D collider)
+    {
+        List<Vector2> points = new List<Vector2>();
+
+        if (collider is PolygonCollider2D polyCollider)
+        {
+            points.AddRange(polyCollider.points);
+        }
+        else if (collider is BoxCollider2D boxCollider)
+        {
+            Vector2 size = boxCollider.size * 0.5f;
+            points.Add(new Vector2(-size.x, -size.y));
+            points.Add(new Vector2(size.x, -size.y));
+            points.Add(new Vector2(size.x, size.y));
+            points.Add(new Vector2(-size.x, size.y));
+        }
+        else if (collider is CircleCollider2D circleCollider)
+        {
+            int segments = 16; // Maggiore è il numero, migliore è l'approssimazione
+            float angleStep = 360f / segments;
+
+            for (int i = 0; i < segments; i++)
+            {
+                float angle = Mathf.Deg2Rad * angleStep * i;
+                Vector2 point = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * circleCollider.radius;
+                points.Add(point + circleCollider.offset);
+            }
+        }
+        else if (collider is CapsuleCollider2D capsuleCollider)
+        {
+            // Approssimazione del CapsuleCollider2D
+            int segments = 16; // Numero di segmenti per approssimare le semi-circonferenze
+            float height = capsuleCollider.size.y;
+            float width = capsuleCollider.size.x;
+            float radius;
+            float lineHeight;
+            List<Vector2> capsulePoints = new List<Vector2>();
+
+            if (capsuleCollider.direction == CapsuleDirection2D.Vertical)
+            {
+                radius = width * 0.5f;
+                lineHeight = height - width;
+
+                // Semi-circonferenza superiore
+                for (int i = 0; i <= segments; i++)
+                {
+                    float angle = Mathf.PI * i / segments;
+                    Vector2 point = new Vector2(
+                        Mathf.Cos(angle) * radius,
+                        Mathf.Sin(angle) * radius + lineHeight * 0.5f
+                    );
+                    capsulePoints.Add(point);
+                }
+
+                // Semi-circonferenza inferiore
+                for (int i = 0; i <= segments; i++)
+                {
+                    float angle = Mathf.PI * (1 + i / (float)segments);
+                    Vector2 point = new Vector2(
+                        Mathf.Cos(angle) * radius,
+                        Mathf.Sin(angle) * radius - lineHeight * 0.5f
+                    );
+                    capsulePoints.Add(point);
+                }
+            }
+            else // CapsuleDirection2D.Horizontal
+            {
+                radius = height * 0.5f;
+                lineHeight = width - height;
+
+                // Semi-circonferenza destra
+                for (int i = 0; i <= segments; i++)
+                {
+                    float angle = Mathf.PI / 2 + Mathf.PI * i / segments;
+                    Vector2 point = new Vector2(
+                        Mathf.Cos(angle) * radius + lineHeight * 0.5f,
+                        Mathf.Sin(angle) * radius
+                    );
+                    capsulePoints.Add(point);
+                }
+
+                // Semi-circonferenza sinistra
+                for (int i = 0; i <= segments; i++)
+                {
+                    float angle = 3 * Mathf.PI / 2 + Mathf.PI * i / segments;
+                    Vector2 point = new Vector2(
+                        Mathf.Cos(angle) * radius - lineHeight * 0.5f,
+                        Mathf.Sin(angle) * radius
+                    );
+                    capsulePoints.Add(point);
+                }
+            }
+
+            // Aggiungi l'offset del collider
+            for (int i = 0; i < capsulePoints.Count; i++)
+            {
+                capsulePoints[i] += capsuleCollider.offset;
+            }
+
+            points.AddRange(capsulePoints);
+        }
+        // Aggiungi altri tipi di collider se necessario
+
+        return points;
+    }
+
 }

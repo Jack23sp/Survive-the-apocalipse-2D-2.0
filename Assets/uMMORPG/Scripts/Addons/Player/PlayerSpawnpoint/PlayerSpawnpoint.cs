@@ -260,6 +260,7 @@ public class PlayerSpawnpoint : NetworkBehaviour
         }
         player.playerMove.tired = player.playerMove.maxTiredness;
         player.playerAdditionalState.additionalState = string.Empty;
+        player.health.cleaningState = 0;
     }
 
     [Command]

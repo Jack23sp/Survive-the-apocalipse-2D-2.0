@@ -9,6 +9,7 @@ public class PlayerGrassDetector : MonoBehaviour
     public List<Player> nearPlayer = new List<Player>();
     private string returnString;
     public BoxCollider2D zoneInside = null;
+    public List<InteractableAction> interactableActions = new List<InteractableAction>();
 
     public void Start()
     {
@@ -77,6 +78,12 @@ public class PlayerGrassDetector : MonoBehaviour
                 }
             }
 
+            if(collision.CompareTag("InteractSlot"))
+            {
+                if (!interactableActions.Contains(collision.GetComponent<InteractableAction>()))
+                    interactableActions.Add(collision.GetComponent<InteractableAction>());
+            }
+
             if (collision.CompareTag("Basement"))
             {
                 ModularBuilding modularBuilding = collision.GetComponent<ModularBuilding>();
@@ -142,6 +149,13 @@ public class PlayerGrassDetector : MonoBehaviour
                     }
                 }
             }
+
+            if (collision.CompareTag("InteractSlot"))
+            {
+                if (interactableActions.Contains(collision.GetComponent<InteractableAction>()))
+                    interactableActions.Remove(collision.GetComponent<InteractableAction>());
+            }
+
         }
     }
 }

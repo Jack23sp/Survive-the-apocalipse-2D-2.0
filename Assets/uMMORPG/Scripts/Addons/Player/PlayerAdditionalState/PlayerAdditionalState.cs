@@ -112,6 +112,7 @@ public class PlayerAdditionalState : NetworkBehaviour
                            (condition && state == "ABS") ||
                            (condition && state == "JUMPINGJACK") ||
                            (condition && state == "SLEEP") ||
+                           (condition && state == "SIT") ||
                            (condition && state == "PUSHUPS")) ? state : "";
         
         CancelInvoke(nameof(IncreaseAbility));
@@ -136,6 +137,7 @@ public class PlayerAdditionalState : NetworkBehaviour
            oldValue != "JUMPINGJACK" &&
            oldValue != "HARVESTING" &&
            oldValue != "PUSHUPS" && 
+           oldValue != "SIT" && 
            oldValue != "SLEEP")
         {
             previousAnimatorController = animator.runtimeAnimatorController;
@@ -204,15 +206,18 @@ public class PlayerAdditionalState : NetworkBehaviour
             if(newValue == "JUMPINGJACK") animator.runtimeAnimatorController = ExerciseManager.singleton.jumpinJackAnimator;
             if(newValue == "ABS") animator.runtimeAnimatorController = ExerciseManager.singleton.sitUpAnimator;
             if(newValue == "SLEEP") animator.runtimeAnimatorController = AnimatorManager.singleton.sleepRuntimeController;
+            if(newValue == "SIT") animator.runtimeAnimatorController = AnimatorManager.singleton.sitRuntimeController;
 
 
-
-            for (int i = 0; i < player.playerWeaponIK.weaponsHolder.Count; i++)
+            if (newValue == "EXERCISE")
             {
-                if (player.playerWeaponIK.weaponsHolder[i].parent.name.Replace("(Clone)", "").Contains("Dumbbell"))
+                for (int i = 0; i < player.playerWeaponIK.weaponsHolder.Count; i++)
                 {
-                    player.playerWeaponIK.weaponsHolder[i].parent.transform.localPosition = player.playerWeaponIK.weaponsHolder[i].weaponHolder.idle.pos;
-                    Utilities.ApplyEulerRotation(player.playerWeaponIK.weaponsHolder[i].parent.transform, player.playerWeaponIK.weaponsHolder[i].weaponHolder.idle.rot);
+                    if (player.playerWeaponIK.weaponsHolder[i].parent.name.Replace("(Clone)", "").Contains("Dumbbell"))
+                    {
+                        player.playerWeaponIK.weaponsHolder[i].parent.transform.localPosition = player.playerWeaponIK.weaponsHolder[i].weaponHolder.idle.pos;
+                        Utilities.ApplyEulerRotation(player.playerWeaponIK.weaponsHolder[i].parent.transform, player.playerWeaponIK.weaponsHolder[i].weaponHolder.idle.rot);
+                    }
                 }
             }
 

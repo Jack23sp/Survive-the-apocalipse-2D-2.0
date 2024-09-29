@@ -22,7 +22,9 @@
         "UnityEngine.Purchasing.Stores",
         "UnityEngine.Advertisements",
         "Google.Play.Games",
-        "Google.Play.Games.Editor"
+        "Google.Play.Games.Editor",
+        "ScriptBoy.Fly2D.Runtime",
+        "ScriptBoy.Fly2D.Editor"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
