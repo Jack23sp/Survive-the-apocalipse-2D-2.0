@@ -338,7 +338,7 @@ Material:
     - _TimeScale: 1
     - _TimeSettings: 0
     - _TimeValue: 0
-    - _TransparencyThreshold: 0.85
+    - _TransparencyThreshold: 0.28
     - _UVDistortFade: 1
     - _UVRotateSpeed: 1
     - _UberFading: 0

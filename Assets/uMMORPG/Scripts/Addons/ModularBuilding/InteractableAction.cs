@@ -6,7 +6,8 @@ using Mirror;
 public enum AnimationType
 {
     Sit = 1,
-    MoveTo = 2
+    MoveTo = 2,
+    Lay = 3
 }
 
 public struct ActionPlayerSlot
@@ -22,6 +23,7 @@ public class InteractableAction : MonoBehaviour
     public List<AnimationType> additionalActionToDo = new List<AnimationType>();
     public BuildingAccessory mainAccessory;
     public Vector2 direction;
-    public Transform sitTransform;
     public Transform moveToTransform;
+    public float overrideSortByDepth;
+    public SpriteRenderer spriteToManage;
 }

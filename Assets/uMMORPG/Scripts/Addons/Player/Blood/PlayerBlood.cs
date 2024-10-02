@@ -82,6 +82,7 @@ public class PlayerBlood : NetworkBehaviour
     {
         player = GetComponent<Player>();
         player.playerBlood = this;
+        player.GetComponent<PlayerMove>().originalCanvasPosition = playerImage.transform.parent.localPosition;
     }
 
     public void Spawn(float heigh)

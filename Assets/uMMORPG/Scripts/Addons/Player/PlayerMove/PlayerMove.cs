@@ -27,12 +27,16 @@ public class PlayerMove : NetworkBehaviour
 
     private PlayerSkills playerSkills;
     private PlayerGrassDetector grassDetector;
-    [SyncVar]
+    [SyncVar(hook = (nameof(ChangeSorthByDepth)))]
     public NetworkIdentity whereActionIsGoing;
+    private float previousSorthByDepth = 0.0f;
+    [SyncVar(hook = (nameof(ChangePositionOfSprite)))]
+    public Vector3 movePosition;
+    [HideInInspector] public Vector3 originalCanvasPosition;
 
     public void Awake()
     {
-        playerSkills = GetComponent<PlayerSkills>();
+        playerSkills = GetComponent<PlayerSkills>();        
     }
 
     public override void OnStartServer()
@@ -66,6 +70,52 @@ public class PlayerMove : NetworkBehaviour
 
     }
 
+    public void ChangeSorthByDepth (NetworkIdentity oldIdentity, NetworkIdentity newIdentity)
+    {
+        if(newIdentity)
+        {
+            BuildingAccessory acc = newIdentity.gameObject.GetComponent<BuildingAccessory>();
+            for(int i = 0; i < acc.actionPlayerSlot.Count; i++)
+            {
+                if (acc.actionPlayerSlot[i].player && acc.actionPlayerSlot[i].player == player.netIdentity)
+                {
+                    InteractableAction interactable = acc.actionObjects[acc.actionPlayerSlot[i].slot].GetComponent<InteractableAction>();
+                    if (!interactable) continue;
+                    if (interactable.overrideSortByDepth != 0.0f)
+                    {
+                        player.transform.GetChild(0).gameObject.GetComponentInChildren<SortByDepth>().precision = interactable.overrideSortByDepth;
+                    }
+                    if (interactable.spriteToManage)
+                        interactable.spriteToManage.enabled = true;
+                }
+            }
+        }
+        else
+        {
+            player.transform.GetChild(0).gameObject.GetComponentInChildren<SortByDepth>().precision = previousSorthByDepth;
+            if (oldIdentity)
+            {
+                BuildingAccessory acc = oldIdentity.gameObject.GetComponent<BuildingAccessory>();
+                int count = 0;
+                for (int i = 0; i < acc.actionPlayerSlot.Count; i++)
+                {
+                    if (acc.actionPlayerSlot[i].player)
+                    {
+                        count ++;
+                    }
+                }
+                if(count == 0)
+                {
+                    for (int i = 0; i < acc.actionObjects.Count; i++)
+                    {
+                        if (acc.actionObjects[i].gameObject.GetComponent<InteractableAction>().spriteToManage)
+                            acc.actionObjects[i].gameObject.GetComponent<InteractableAction>().spriteToManage.enabled = false;
+                    }
+                }
+            }
+        }
+    }
+
     public void ManageUITiredness(int oldValue, int newValue)
     {
         UIPlayerInformation.singleton.Tired();
@@ -82,6 +132,18 @@ public class PlayerMove : NetworkBehaviour
         ManageUITiredness(tired, tired);
         grassDetector = player.GetComponentInChildren<PlayerGrassDetector>();
         Invoke(nameof(CheckNearInteractableObject), 0.3f);
+    }
+
+    public void ChangePositionOfSprite(Vector3 oldValue, Vector3 newValue)
+    {
+        if(newValue == Vector3.zero)
+        {
+            player.playerBlood.playerImage.transform.parent.localPosition = originalCanvasPosition;
+        }
+        else
+        {
+            player.playerBlood.playerImage.transform.parent.position = newValue;
+        }
     }
 
     public void CheckNearInteractableObject()
@@ -110,8 +172,17 @@ public class PlayerMove : NetworkBehaviour
                     UIInteractionPanel.singleton.actionButton.onClick.AddListener(() =>
                     {
                         CmdSetInteractionPlayer(grassDetector.interactableActions[index].mainAccessory.netIdentity, grassDetector.interactableActions[index].index);
-                        CmdSyncRotation(grassDetector.interactableActions[index].direction, false);
-                        player.playerAdditionalState.CmdSetAnimation(grassDetector.interactableActions[index].animationType.ToString().ToUpper(), "");
+                        if (grassDetector.interactableActions[index].animationType == AnimationType.Sit)
+                        {
+                            CmdSyncRotation(grassDetector.interactableActions[index].direction, false);
+                            player.playerAdditionalState.CmdSetAnimation(grassDetector.interactableActions[index].animationType.ToString().ToUpper(), "");
+                        }
+                        else if (grassDetector.interactableActions[index].animationType == AnimationType.MoveTo)
+                        {
+                            CmdSyncRotation(grassDetector.interactableActions[index].direction, false);
+                            player.playerAdditionalState.CmdSetAnimation(grassDetector.interactableActions[index].additionalActionToDo[0].ToString().ToUpper(), "");
+                            CmdSetMovePosition(grassDetector.interactableActions[index].moveToTransform.position);
+                        }
                         UIInteractionPanel.singleton.actionButton.gameObject.SetActive(false);
                     });
                     Invoke(nameof(CheckNearInteractableObject), 0.3f);
@@ -145,16 +216,28 @@ public class PlayerMove : NetworkBehaviour
         whereActionIsGoing = acc.netIdentity;
     }
 
+    [Command]
+    public void CmdSetMovePosition(Vector3 newPosition)
+    {
+        movePosition = newPosition;
+    }
 
 
     [Command]
     public void CmdRemoveInteraction()
     {
-        if(whereActionIsGoing)
+        RemoveInteraction();
+    }
+
+    public void RemoveInteraction()
+    {
+        movePosition = Vector3.zero;
+
+        if (whereActionIsGoing)
         {
             BuildingAccessory acc = whereActionIsGoing.gameObject.GetComponent<BuildingAccessory>();
             if (!acc) return;
-            for(int i = 0; i < acc.actionPlayerSlot.Count; i++)
+            for (int i = 0; i < acc.actionPlayerSlot.Count; i++)
             {
                 if (acc.actionPlayerSlot[i].player != null && acc.actionPlayerSlot[i].player.netId == player.netIdentity.netId)
                 {
@@ -241,6 +324,7 @@ public class PlayerMove : NetworkBehaviour
         ChangeRotation(tempVector, tempVector);
         StateSpeedManager.singleton.originalSpeed = player.agent2D.speed;
         player.agent2D.SetSpeed(StateSpeedManager.singleton.originalSpeed);
+        previousSorthByDepth = player.transform.GetChild(0).gameObject.GetComponentInChildren<SortByDepth>().precision;
     }
 
     private void OnstatesChanged(SyncList<string>.Operation op, int itemIndex, string oldItem, string newItem)

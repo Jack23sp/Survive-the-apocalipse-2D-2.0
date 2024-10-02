@@ -2380,6 +2380,8 @@ MonoBehaviour:
   position: 0
   torch: {fileID: 4809315587414768220}
   whereActionIsGoing: {fileID: 0}
+  movePosition: {x: 0, y: 0, z: 0}
+  originalCanvasPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &2374971191668140629
 MonoBehaviour:
   m_ObjectHideFlags: 0
