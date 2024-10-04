@@ -1406,6 +1406,14 @@ MonoBehaviour:
     amount: 10
   - item: {fileID: 11400000, guid: 6091ed6e9e2a2274ab7d3438772b74a7, type: 2}
     amount: 10
+  - item: {fileID: 11400000, guid: c17447b3c1d647a4ca2014169f69b19a, type: 2}
+    amount: 10
+  - item: {fileID: 11400000, guid: bce180653810bad44a2832af97d3ad1b, type: 2}
+    amount: 10
+  - item: {fileID: 11400000, guid: 5fd1c0ea876b99549954d24128b985cf, type: 2}
+    amount: 10
+  - item: {fileID: 11400000, guid: 41aeb1d06a04d0f4ab145d7bc2d304f1, type: 2}
+    amount: 10
   splitKeys: 300100002f010000
   trash:
     item:

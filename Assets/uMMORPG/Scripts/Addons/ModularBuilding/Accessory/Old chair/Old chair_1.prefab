@@ -1,5 +1,85 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1993117706774511680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3037955730969041443}
+  - component: {fileID: 7457665956732549891}
+  - component: {fileID: 3544669261302772078}
+  m_Layer: 0
+  m_Name: SitCollider
+  m_TagString: InteractSlot
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3037955730969041443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993117706774511680}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.808, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6582981195499376960}
+  m_Father: {fileID: 7103790511408276528}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &7457665956732549891
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993117706774511680}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.02209492, y: 0.11827022}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.05, y: 0.05}
+  m_EdgeRadius: 0
+--- !u!114 &3544669261302772078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993117706774511680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7332aea4337a8df47b6523a6d1613f4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  animationType: 2
+  additionalActionToDo: 01000000
+  mainAccessory: {fileID: 1229784091034220834}
+  direction: {x: 0, y: -1}
+  moveToTransform: {fileID: 6582981195499376960}
+  overrideSortByDepth: 0
+  spriteToManage: {fileID: 0}
 --- !u!1 &3811828348981166209
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +229,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825503457d134484d81ff76b629cd90e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3945669596892997999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6582981195499376960}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6582981195499376960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945669596892997999}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.604, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3037955730969041443}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4847900824252674430
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +476,7 @@ Transform:
   - {fileID: 7074046784299773035}
   - {fileID: 5488878015826223743}
   - {fileID: 1701019120419051967}
+  - {fileID: 3037955730969041443}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -489,6 +601,9 @@ MonoBehaviour:
   zoneCollider: {fileID: 0}
   grassUnder: []
   spritesList: []
+  accessoriesInThisForniture: []
+  actionObjects:
+  - {fileID: 1993117706774511680}
 --- !u!61 &4965063269831762831
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -608,6 +723,7 @@ MonoBehaviour:
   player: {fileID: 0}
   zombie: {fileID: 0}
   wall: {fileID: 0}
+  ambient: {fileID: 0}
   caster: {fileID: 0}
   precisionRand: 0
 --- !u!114 &-8316444156205617215
