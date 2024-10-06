@@ -2387,6 +2387,7 @@ MonoBehaviour:
   canAttack: 0
   position: 0
   torch: {fileID: 4809315587414768220}
+  grassDetector: {fileID: 0}
   whereActionIsGoing: {fileID: 0}
   movePosition: {x: 0, y: 0, z: 0}
   originalCanvasPosition: {x: 0, y: 0, z: 0}

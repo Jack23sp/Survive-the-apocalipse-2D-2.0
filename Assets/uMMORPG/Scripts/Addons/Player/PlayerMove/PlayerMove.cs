@@ -26,7 +26,7 @@ public class PlayerMove : NetworkBehaviour
     public GameObject torch;
 
     private PlayerSkills playerSkills;
-    private PlayerGrassDetector grassDetector;
+    [HideInInspector] public PlayerGrassDetector grassDetector;
     [SyncVar(hook = (nameof(ChangeSorthByDepth)))]
     public NetworkIdentity whereActionIsGoing;
     private float previousSorthByDepth = 0.0f;
@@ -146,52 +146,75 @@ public class PlayerMove : NetworkBehaviour
         }
     }
 
+    public new void CancelInvoke()
+    {
+        CancelInvoke(nameof(CheckNearInteractableObject));
+    }
+
+    public void InitializeInvoke()
+    {
+        Invoke(nameof(CheckNearInteractableObject), 0.3f);
+    }
+
     public void CheckNearInteractableObject()
     {
-
-        if (whereActionIsGoing)
+        try
         {
-            UIInteractionPanel.singleton.actionButton.gameObject.SetActive(false);
-            Invoke(nameof(CheckNearInteractableObject), 0.3f);
-            return;
-        }
-
-        UIInteractionPanel.singleton.actionButton.gameObject.SetActive(false);
-
-        SortInteractableActionsByDistance();
-        for(int i = 0; i < grassDetector.interactableActions.Count; i++)
-        {
-            int index = i;
-            if (grassDetector.interactableActions[index].mainAccessory.actionPlayerSlot[grassDetector.interactableActions[index].index].player == null)
+            if (whereActionIsGoing)
             {
-                if(Vector3.Distance(grassDetector.interactableActions[index].transform.position, player.transform.position ) < 0.3f)
+                UIInteractionPanel.singleton.actionButton.gameObject.SetActive(false);
+                Invoke(nameof(CheckNearInteractableObject), 0.3f);
+                return;
+            }
+
+            UIInteractionPanel.singleton.actionButton.gameObject.SetActive(false);
+
+            SortInteractableActionsByDistance();
+            for (int i = 0; i < grassDetector.interactableActions.Count; i++)
+            {
+                int index = i;
+                if (grassDetector.interactableActions[index] &&
+                    grassDetector.interactableActions[index].mainAccessory.gameObject.activeInHierarchy &&
+                    grassDetector.interactableActions[index].mainAccessory.actionPlayerSlot[grassDetector.interactableActions[index].index].player == null)
                 {
-                        
-                    UIInteractionPanel.singleton.actionButton.gameObject.SetActive(true);
-                    UIInteractionPanel.singleton.actionButton.onClick.RemoveAllListeners();
-                    UIInteractionPanel.singleton.actionButton.onClick.AddListener(() =>
+                    if (Vector3.Distance(grassDetector.interactableActions[index].transform.position, player.transform.position) < 0.3f)
                     {
-                        CmdSetInteractionPlayer(grassDetector.interactableActions[index].mainAccessory.netIdentity, grassDetector.interactableActions[index].index);
-                        if (grassDetector.interactableActions[index].animationType == AnimationType.Sit)
+
+                        UIInteractionPanel.singleton.actionButton.gameObject.SetActive(true);
+                        UIInteractionPanel.singleton.actionButton.onClick.RemoveAllListeners();
+                        UIInteractionPanel.singleton.actionButton.onClick.AddListener(() =>
                         {
-                            CmdSyncRotation(grassDetector.interactableActions[index].direction, false);
-                            player.playerAdditionalState.CmdSetAnimation(grassDetector.interactableActions[index].animationType.ToString().ToUpper(), "");
-                        }
-                        else if (grassDetector.interactableActions[index].animationType == AnimationType.MoveTo)
-                        {
-                            CmdSyncRotation(grassDetector.interactableActions[index].direction, false);
-                            player.playerAdditionalState.CmdSetAnimation(grassDetector.interactableActions[index].additionalActionToDo[0].ToString().ToUpper(), "");
-                            CmdSetMovePosition(grassDetector.interactableActions[index].moveToTransform.position);
-                        }
-                        UIInteractionPanel.singleton.actionButton.gameObject.SetActive(false);
-                    });
-                    Invoke(nameof(CheckNearInteractableObject), 0.3f);
-                    return;
+                            CmdSetInteractionPlayer(grassDetector.interactableActions[index].mainAccessory.netIdentity, grassDetector.interactableActions[index].index);
+                            if (grassDetector.interactableActions[index].animationType == AnimationType.Sit)
+                            {
+                                CmdSyncRotation(grassDetector.interactableActions[index].direction, false);
+                                player.playerAdditionalState.CmdSetAnimation(grassDetector.interactableActions[index].animationType.ToString().ToUpper(), "");
+                            }
+                            else if (grassDetector.interactableActions[index].animationType == AnimationType.MoveTo)
+                            {
+                                CmdSyncRotation(grassDetector.interactableActions[index].direction, false);
+                                player.playerAdditionalState.CmdSetAnimation(grassDetector.interactableActions[index].additionalActionToDo[0].ToString().ToUpper(), "");
+                                CmdSetMovePosition(grassDetector.interactableActions[index].moveToTransform.position);
+                            }
+                            UIInteractionPanel.singleton.actionButton.gameObject.SetActive(false);
+                        });
+                        Invoke(nameof(CheckNearInteractableObject), 0.3f);
+                        return;
+                    }
                 }
             }
         }
+        catch
+        {
+            CancelInvoke();
+            InitializeInvoke();
+        }
+        finally
+        {
+            CancelInvoke();
+            InitializeInvoke();
 
-        Invoke(nameof(CheckNearInteractableObject), 0.3f);
+        }
     }
 
     void SortInteractableActionsByDistance()
