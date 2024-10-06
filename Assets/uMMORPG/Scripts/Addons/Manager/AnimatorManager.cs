@@ -9,6 +9,7 @@ public class AnimatorManager : MonoBehaviour
     public RuntimeAnimatorController sleepRuntimeController;
     //public RuntimeAnimatorController harvestingRuntimeController;
     public RuntimeAnimatorController sitRuntimeController;
+    public RuntimeAnimatorController laydownRuntimeController;
 
     void Start()
     {
