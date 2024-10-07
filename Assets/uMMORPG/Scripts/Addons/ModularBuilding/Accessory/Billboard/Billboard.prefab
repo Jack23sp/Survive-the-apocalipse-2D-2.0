@@ -1051,6 +1051,7 @@ MonoBehaviour:
   player: {fileID: 0}
   zombie: {fileID: 0}
   wall: {fileID: 0}
+  ambient: {fileID: 0}
   caster: {fileID: 0}
   precisionRand: 0
 --- !u!114 &1366667180
@@ -1110,6 +1111,9 @@ MonoBehaviour:
   zoneCollider: {fileID: 0}
   grassUnder: []
   spritesList: []
+  accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: -8709607282125297246}
   messageText: {fileID: 2016560286}
   message: 
 --- !u!114 &-4014135592792322346

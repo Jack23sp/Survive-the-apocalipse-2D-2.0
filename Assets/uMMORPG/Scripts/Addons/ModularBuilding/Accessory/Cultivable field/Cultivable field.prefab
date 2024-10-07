@@ -132,6 +132,8 @@ MonoBehaviour:
   grassUnder: []
   spritesList: []
   accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: 1425251588717109689}
   slots:
   - {fileID: 8705734178382648125}
   - {fileID: 1942598844128628679}

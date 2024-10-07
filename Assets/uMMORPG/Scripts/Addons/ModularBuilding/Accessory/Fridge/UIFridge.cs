@@ -18,6 +18,7 @@ public class UIFridge : MonoBehaviour, IUIScript
     public Button manageButton;
 
     public Fridge fridge;
+    public bool isReadOnly;
 
 
     void Start()
@@ -26,8 +27,9 @@ public class UIFridge : MonoBehaviour, IUIScript
     }
 
 
-    public void Open(Fridge Fridge)
+    public void Open(Fridge Fridge, bool isReadOnly)
     {
+        this.isReadOnly = isReadOnly;
         if (!player) player = Player.localPlayer;
         if (!player) return;
         fridge = Fridge;
@@ -69,7 +71,7 @@ public class UIFridge : MonoBehaviour, IUIScript
 
                 if (player.inventory.slots[icopy].item.data.canUseFridge)
                 {
-                    slot.button.interactable = true;
+                    slot.button.interactable = isReadOnly ? false : true;
                 }
                 else
                 {
@@ -117,6 +119,7 @@ public class UIFridge : MonoBehaviour, IUIScript
 
             if (itemSlot2.amount > 0)
             {
+                slot2.button.interactable = isReadOnly ? false : true;
                 int icopy = a;
                 //slot2.registerItem.index = icopy;
                 //slot2.registerItem.fridgeSlot = true;

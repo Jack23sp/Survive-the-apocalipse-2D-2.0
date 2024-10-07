@@ -15,9 +15,6 @@ public class PlayerMove : NetworkBehaviour
 {
     [HideInInspector] public Player player;
     [SyncVar (hook=(nameof(ChangeRotation)))]public Vector2 tempVector = new Vector2();
-    [SyncVar(hook = nameof(ManageUITiredness))] public int tired = 200;
-    public int tiredLimitForAim = 30;
-    public int maxTiredness = 100;
     public readonly SyncList<string> states = new SyncList<string>();
     public GameObject playerObject;
     [SyncVar (hook = (nameof(ChangeAttackMode)))]
@@ -26,13 +23,6 @@ public class PlayerMove : NetworkBehaviour
     public GameObject torch;
 
     private PlayerSkills playerSkills;
-    [HideInInspector] public PlayerGrassDetector grassDetector;
-    [SyncVar(hook = (nameof(ChangeSorthByDepth)))]
-    public NetworkIdentity whereActionIsGoing;
-    private float previousSorthByDepth = 0.0f;
-    [SyncVar(hook = (nameof(ChangePositionOfSprite)))]
-    public Vector3 movePosition;
-    [HideInInspector] public Vector3 originalCanvasPosition;
 
     public void Awake()
     {
@@ -49,77 +39,10 @@ public class PlayerMove : NetworkBehaviour
         InvokeRepeating(nameof(CheckRunConsumeStamina), 1.0f,1.0f);
         InvokeRepeating(nameof(CheckBloodDropOnIdle), 30.0f,30.0f);
         InvokeRepeating(nameof(CheckBloodDropOnMovement), 5.0f,5.0f);
-        InvokeRepeating(nameof(ManageTiredness), 7.0f,7.0f);
-        InvokeRepeating(nameof(BurnFat), 5.0f,5.0f);
     }
 
-    public void ManageTiredness()
-    {
-        if(tired > 0 && player.playerAdditionalState.additionalState != "SLEEP") tired--;
-        
-        if (tired == 0 && player.playerAdditionalState.additionalState != "SLEEP")
-        {
-            player.playerAdditionalState.additionalState = "SLEEP";
-            return;
-        }
 
-        if (player.playerAdditionalState.additionalState == "SLEEP")
-        {
-            tired++;
-        }
 
-    }
-
-    public void ChangeSorthByDepth (NetworkIdentity oldIdentity, NetworkIdentity newIdentity)
-    {
-        if(newIdentity)
-        {
-            BuildingAccessory acc = newIdentity.gameObject.GetComponent<BuildingAccessory>();
-            for(int i = 0; i < acc.actionPlayerSlot.Count; i++)
-            {
-                if (acc.actionPlayerSlot[i].player && acc.actionPlayerSlot[i].player == player.netIdentity)
-                {
-                    InteractableAction interactable = acc.actionObjects[acc.actionPlayerSlot[i].slot].GetComponent<InteractableAction>();
-                    if (!interactable) continue;
-                    if (interactable.overrideSortByDepth != 0.0f)
-                    {
-                        player.transform.GetChild(0).gameObject.GetComponentInChildren<SortByDepth>().precision = interactable.overrideSortByDepth;
-                    }
-                    if (interactable.spriteToManage)
-                        interactable.spriteToManage.enabled = true;
-                }
-            }
-        }
-        else
-        {
-            player.transform.GetChild(0).gameObject.GetComponentInChildren<SortByDepth>().precision = previousSorthByDepth;
-            if (oldIdentity)
-            {
-                BuildingAccessory acc = oldIdentity.gameObject.GetComponent<BuildingAccessory>();
-                int count = 0;
-                for (int i = 0; i < acc.actionPlayerSlot.Count; i++)
-                {
-                    if (acc.actionPlayerSlot[i].player)
-                    {
-                        count ++;
-                    }
-                }
-                if(count == 0)
-                {
-                    for (int i = 0; i < acc.actionObjects.Count; i++)
-                    {
-                        if (acc.actionObjects[i].gameObject.GetComponent<InteractableAction>().spriteToManage)
-                            acc.actionObjects[i].gameObject.GetComponent<InteractableAction>().spriteToManage.enabled = false;
-                    }
-                }
-            }
-        }
-    }
-
-    public void ManageUITiredness(int oldValue, int newValue)
-    {
-        UIPlayerInformation.singleton.Tired();
-    }
 
     public override void OnStartLocalPlayer()
     {
@@ -128,150 +51,9 @@ public class PlayerMove : NetworkBehaviour
         {
             UIMobileControl.singleton.enableAttackButton.image.sprite = player.equipment.slots[0].amount > 0 ? player.equipment.slots[0].item.data.image : null;
         }
-
-        ManageUITiredness(tired, tired);
-        grassDetector = player.GetComponentInChildren<PlayerGrassDetector>();
-        Invoke(nameof(CheckNearInteractableObject), 0.3f);
-    }
-
-    public void ChangePositionOfSprite(Vector3 oldValue, Vector3 newValue)
-    {
-        if(newValue == Vector3.zero)
-        {
-            player.playerBlood.playerImage.transform.parent.localPosition = originalCanvasPosition;
-        }
-        else
-        {
-            player.playerBlood.playerImage.transform.parent.position = newValue;
-        }
-    }
-
-    public new void CancelInvoke()
-    {
-        CancelInvoke(nameof(CheckNearInteractableObject));
-    }
-
-    public void InitializeInvoke()
-    {
-        Invoke(nameof(CheckNearInteractableObject), 0.3f);
-    }
-
-    public void CheckNearInteractableObject()
-    {
-        try
-        {
-            if (whereActionIsGoing)
-            {
-                UIInteractionPanel.singleton.actionButton.gameObject.SetActive(false);
-                Invoke(nameof(CheckNearInteractableObject), 0.3f);
-                return;
-            }
-
-            UIInteractionPanel.singleton.actionButton.gameObject.SetActive(false);
-
-            SortInteractableActionsByDistance();
-            for (int i = 0; i < grassDetector.interactableActions.Count; i++)
-            {
-                int index = i;
-                if (grassDetector.interactableActions[index] &&
-                    grassDetector.interactableActions[index].mainAccessory.gameObject.activeInHierarchy &&
-                    grassDetector.interactableActions[index].mainAccessory.actionPlayerSlot[grassDetector.interactableActions[index].index].player == null)
-                {
-                    if (Vector3.Distance(grassDetector.interactableActions[index].transform.position, player.transform.position) < 0.3f)
-                    {
-
-                        UIInteractionPanel.singleton.actionButton.gameObject.SetActive(true);
-                        UIInteractionPanel.singleton.actionButton.onClick.RemoveAllListeners();
-                        UIInteractionPanel.singleton.actionButton.onClick.AddListener(() =>
-                        {
-                            CmdSetInteractionPlayer(grassDetector.interactableActions[index].mainAccessory.netIdentity, grassDetector.interactableActions[index].index);
-                            if (grassDetector.interactableActions[index].animationType == AnimationType.Sit)
-                            {
-                                CmdSyncRotation(grassDetector.interactableActions[index].direction, false);
-                                player.playerAdditionalState.CmdSetAnimation(grassDetector.interactableActions[index].animationType.ToString().ToUpper(), "");
-                            }
-                            else if (grassDetector.interactableActions[index].animationType == AnimationType.MoveTo)
-                            {
-                                CmdSyncRotation(grassDetector.interactableActions[index].direction, false);
-                                player.playerAdditionalState.CmdSetAnimation(grassDetector.interactableActions[index].additionalActionToDo[0].ToString().ToUpper(), "");
-                                CmdSetMovePosition(grassDetector.interactableActions[index].moveToTransform.position);
-                            }
-                            UIInteractionPanel.singleton.actionButton.gameObject.SetActive(false);
-                        });
-                        Invoke(nameof(CheckNearInteractableObject), 0.3f);
-                        return;
-                    }
-                }
-            }
-        }
-        catch
-        {
-            CancelInvoke();
-            InitializeInvoke();
-        }
-        finally
-        {
-            CancelInvoke();
-            InitializeInvoke();
-
-        }
-    }
-
-    void SortInteractableActionsByDistance()
-    {
-        grassDetector.interactableActions.Sort((a, b) =>
-        {
-            float distanceASqr = (player.transform.position - a.transform.position).sqrMagnitude;
-            float distanceBSqr = (player.transform.position - b.transform.position).sqrMagnitude;
-
-            return distanceASqr.CompareTo(distanceBSqr);
-        });
-    }
-
-    [Command]
-    public void CmdSetInteractionPlayer(NetworkIdentity identity, int index)
-    {
-        BuildingAccessory acc = identity.gameObject.GetComponent<BuildingAccessory>();
-        if (!acc) return;
-        ActionPlayerSlot plSlot = acc.actionPlayerSlot[index];
-        plSlot.player = player.netIdentity;
-        acc.actionPlayerSlot[index] = plSlot;
-        whereActionIsGoing = acc.netIdentity;
-    }
-
-    [Command]
-    public void CmdSetMovePosition(Vector3 newPosition)
-    {
-        movePosition = newPosition;
     }
 
 
-    [Command]
-    public void CmdRemoveInteraction()
-    {
-        RemoveInteraction();
-    }
-
-    public void RemoveInteraction()
-    {
-        movePosition = Vector3.zero;
-
-        if (whereActionIsGoing)
-        {
-            BuildingAccessory acc = whereActionIsGoing.gameObject.GetComponent<BuildingAccessory>();
-            if (!acc) return;
-            for (int i = 0; i < acc.actionPlayerSlot.Count; i++)
-            {
-                if (acc.actionPlayerSlot[i].player != null && acc.actionPlayerSlot[i].player.netId == player.netIdentity.netId)
-                {
-                    ActionPlayerSlot plSlot = acc.actionPlayerSlot[i];
-                    plSlot.player = null;
-                    acc.actionPlayerSlot[i] = plSlot;
-                    whereActionIsGoing = null;
-                }
-            }
-        }
-    }
 
 
     public void ChangeAttackMode(bool oldValue, bool newValue)
@@ -347,7 +129,6 @@ public class PlayerMove : NetworkBehaviour
         ChangeRotation(tempVector, tempVector);
         StateSpeedManager.singleton.originalSpeed = player.agent2D.speed;
         player.agent2D.SetSpeed(StateSpeedManager.singleton.originalSpeed);
-        previousSorthByDepth = player.transform.GetChild(0).gameObject.GetComponentInChildren<SortByDepth>().precision;
     }
 
     private void OnstatesChanged(SyncList<string>.Operation op, int itemIndex, string oldItem, string newItem)
@@ -400,22 +181,6 @@ public class PlayerMove : NetworkBehaviour
         CmdSetSneak();
     }
 
-    public void BurnFat()
-    {
-        if (player.state == "MOVING")
-        {
-            switch (states.Contains("RUN"))
-            {
-                case true:
-                    player.playerCharacterCreation.fat -= 0.025f;
-                    break;
-
-                case false:
-                    player.playerCharacterCreation.fat -= 0.01f;
-                    break;
-            }
-        }
-    }
 
     [Command]
     public void CmdSetRun()

@@ -19,15 +19,16 @@ public class UILibrary : MonoBehaviour, IUIScript
     public Button manageButton;
 
     public Library library;
-
+    public bool isReadOnly;
 
     void Start()
     {
         if (!singleton) singleton = this;
     }
 
-    public void Open(Library libraryPar)
+    public void Open(Library libraryPar, bool isReadOnly)
     {
+        this.isReadOnly = isReadOnly;
         if (!player) player = Player.localPlayer;
         if (!player) return;
         library = libraryPar;
@@ -69,7 +70,7 @@ public class UILibrary : MonoBehaviour, IUIScript
 
                 if (player.inventory.slots[icopy].item.data.canUseLibrary)
                 {
-                    slot.button.interactable = true;
+                    slot.button.interactable = this.isReadOnly ? false: true;
                 }
                 else
                 {

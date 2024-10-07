@@ -69194,6 +69194,7 @@ MonoBehaviour:
   closeButton: {fileID: 1704943088233899816}
   manageButton: {fileID: 7981592660711406575}
   library: {fileID: 0}
+  isReadOnly: 0
 --- !u!1001 &7981592662179205438
 PrefabInstance:
   m_ObjectHideFlags: 0

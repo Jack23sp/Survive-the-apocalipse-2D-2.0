@@ -98,7 +98,6 @@ GameObject:
   - component: {fileID: 8390149283651224745}
   - component: {fileID: 5619837092981586961}
   - component: {fileID: 1501198947606051866}
-  - component: {fileID: 5185906841927404540}
   m_Layer: 0
   m_Name: Rug 12
   m_TagString: Forniture
@@ -248,27 +247,6 @@ MonoBehaviour:
   zoneCollider: {fileID: 0}
   grassUnder: []
   spritesList: []
---- !u!114 &5185906841927404540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6816874964235752371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a1ba7290c0deb84fae98d140cdbc9ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DamagableByRange: 1
-  DamagableByMelee: 1
-  DamagableByExplosion: 1
-  tree: {fileID: 0}
-  rock: {fileID: 0}
-  modularBuilding: {fileID: 0}
-  buildingAccessory: {fileID: 0}
-  player: {fileID: 0}
-  zombie: {fileID: 0}
-  wall: {fileID: 0}
-  caster: {fileID: 0}
-  precisionRand: 0
+  accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: 0}

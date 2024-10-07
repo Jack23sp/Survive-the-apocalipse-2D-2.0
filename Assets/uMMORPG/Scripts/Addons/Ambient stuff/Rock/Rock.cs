@@ -8,7 +8,7 @@ public class Rock : BuildingAccessory
     public ItemDropChance dropChance;
     public SpriteRenderer snowLayer;
     public SpriteRenderer cracksImage;
-    public DamagableObject damagableObject;
+    //public DamagableObject damagableObject;
 
     public new void Start()
     {

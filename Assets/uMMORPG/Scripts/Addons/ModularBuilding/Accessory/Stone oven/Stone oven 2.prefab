@@ -914,7 +914,11 @@ MonoBehaviour:
   grassUnder: []
   spritesList: []
   accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: -8709607282125297246}
+  pSystem: {fileID: 0}
   checkSex: 0
+  hasAnimation: 0
 --- !u!61 &4965063269831762831
 BoxCollider2D:
   m_ObjectHideFlags: 0

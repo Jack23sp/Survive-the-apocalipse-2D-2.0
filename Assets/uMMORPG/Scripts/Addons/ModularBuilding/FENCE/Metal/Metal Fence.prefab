@@ -223,6 +223,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  newName: 
   group: 
   owner: 
   health: 100
@@ -253,6 +254,10 @@ MonoBehaviour:
   oldBuilding: {fileID: 0}
   zoneCollider: {fileID: 0}
   grassUnder: []
+  spritesList: []
+  accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: -140054997105116201}
 --- !u!61 &4965063269831762831
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -349,6 +354,7 @@ MonoBehaviour:
   buildingAccessory: {fileID: 1229784091034220834}
   avoidCollidersNotToCache: []
   tagToAvoid: []
+  thisCollider: {fileID: 0}
 --- !u!114 &-140054997105116201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,6 +377,7 @@ MonoBehaviour:
   player: {fileID: 0}
   zombie: {fileID: 0}
   wall: {fileID: 0}
+  ambient: {fileID: 0}
   caster: {fileID: 0}
   precisionRand: 0
 --- !u!1 &6833281517584047005

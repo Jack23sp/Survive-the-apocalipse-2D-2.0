@@ -279,7 +279,7 @@ public class DamagableObject : MonoBehaviour
                     {
                         rand = UnityEngine.Random.Range(1, 101);
 
-                        if (caster.playerMove.tired > 0 && caster.playerMove.tired <= caster.playerMove.tiredLimitForAim)
+                        if (caster.playerTired.tired > 0 && caster.playerTired.tired <= caster.playerTired.tiredLimitForAim)
                         {
                             if (Vector2.Distance(caster.transform.position, player.transform.position) > ((WeaponItem)weapon.item.data).tiredDistance)
                             {
@@ -299,7 +299,7 @@ public class DamagableObject : MonoBehaviour
                                 }
                             }
                         }
-                        else if (caster.playerMove.tired > 0)
+                        else if (caster.playerTired.tired > 0)
                         {
                             if (Vector2.Distance(caster.transform.position, player.transform.position) > ((WeaponItem)weapon.item.data).tiredDistance)
                             {
@@ -418,7 +418,7 @@ public class DamagableObject : MonoBehaviour
 
             if (!melee)
             {
-                if (caster.playerMove.tired > 0 && caster.playerMove.tired <= caster.playerMove.tiredLimitForAim)
+                if (caster.playerTired.tired > 0 && caster.playerTired.tired <= caster.playerTired.tiredLimitForAim)
                 {
                     if (Vector2.Distance(caster.transform.position, zombie.transform.position) > ((WeaponItem)weapon.item.data).tiredDistance)
                     {
@@ -439,7 +439,7 @@ public class DamagableObject : MonoBehaviour
                         }
                     }
                 }
-                else if (caster.playerMove.tired > 0)
+                else if (caster.playerTired.tired > 0)
                 {
                     if (Vector2.Distance(caster.transform.position, zombie.transform.position) > ((WeaponItem)weapon.item.data).tiredDistance)
                     {

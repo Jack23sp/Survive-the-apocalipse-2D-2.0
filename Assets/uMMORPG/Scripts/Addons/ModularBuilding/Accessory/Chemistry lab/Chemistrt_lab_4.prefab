@@ -485,6 +485,8 @@ MonoBehaviour:
   grassUnder: []
   spritesList: []
   accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: 7629502901952893186}
   pSystem: {fileID: 210343795098011266}
   checkSex: 0
   hasAnimation: 1

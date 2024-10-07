@@ -43,9 +43,9 @@ public class SlashDamagePlayerSkill : DamageSkill
         {
             if (caster is Player)
             {
-                if (((Player)caster).playerMove.tired > 0)
+                if (((Player)caster).playerTired.tired > 0)
                 {
-                    if (((Player)caster).playerMove.tired <= ((Player)caster).playerMove.tiredLimitForAim && ((Player)caster).mana.current > 0)
+                    if (((Player)caster).playerTired.tired <= ((Player)caster).playerTired.tiredLimitForAim && ((Player)caster).mana.current > 0)
                     {
                         ((Player)caster).mana.current--;
 

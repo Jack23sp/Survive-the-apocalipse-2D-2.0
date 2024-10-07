@@ -12,7 +12,7 @@ public partial class CoffeeBottleItem : UsableItem
         ItemSlot slot;
         slot = isInventory ? player.inventory.slots[inventoryIndex] : player.playerBelt.belt[inventoryIndex];
 
-        player.playerMove.tired = player.playerMove.maxTiredness;
+        player.playerTired.tired = player.playerTired.maxTiredness;
 
         slot.DecreaseAmount(1);
         if (isInventory)

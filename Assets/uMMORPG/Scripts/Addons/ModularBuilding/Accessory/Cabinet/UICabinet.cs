@@ -18,15 +18,16 @@ public class UICabinet : MonoBehaviour, IUIScript
     public Button manageButton;
 
     public Cabinet cabinet;
-
+    public bool isReadOnly;
 
     void Start()
     {
         if (!singleton) singleton = this;
     }
 
-    public void Open(Cabinet Cabinet)
+    public void Open(Cabinet Cabinet, bool isReadOnly)
     {
+        this.isReadOnly = isReadOnly;
         if (!player) player = Player.localPlayer;
         if (!player) return;
         cabinet = Cabinet;
@@ -67,6 +68,7 @@ public class UICabinet : MonoBehaviour, IUIScript
             slot.image.preserveAspect = true;
             slot.dragAndDropable.enabled = false;
             slot.tooltip.enabled = false;
+
             if (itemSlot.amount > 0)
             {
                 slot.durabilitySlider.fillAmount = itemSlot.item.data.maxDurability.baseValue > 0 ? ((float)itemSlot.item.currentDurability / (float)itemSlot.item.data.maxDurability.Get(itemSlot.item.durabilityLevel)) : 0;
@@ -74,7 +76,7 @@ public class UICabinet : MonoBehaviour, IUIScript
 
                 if (player.inventory.slots[icopy].item.data.canUseCabinet)
                 {
-                    slot.button.interactable = true;
+                    slot.button.interactable = this.isReadOnly ? false : true;
                 }
                 else
                 {
@@ -122,6 +124,7 @@ public class UICabinet : MonoBehaviour, IUIScript
             if (itemSlot2.amount > 0)
             {
                 int icopy = a;
+                slot2.button.interactable = this.isReadOnly ? false : true;
                 slot2.button.onClick.RemoveAllListeners();
                 slot2.button.onClick.SetListener(() =>
                 {

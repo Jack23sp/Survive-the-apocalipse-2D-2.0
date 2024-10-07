@@ -327,15 +327,15 @@ public class PlayerCallback : NetworkBehaviour
 
         if (UIWeaponStorage.singleton && UIWeaponStorage.singleton.panel.activeInHierarchy)
         {
-            UIWeaponStorage.singleton.Open(UIWeaponStorage.singleton.weaponStorage);
+            UIWeaponStorage.singleton.Open(UIWeaponStorage.singleton.weaponStorage, UIWeaponStorage.singleton.isReadOnly);
         }
         if (UIFridge.singleton.panel.activeInHierarchy)
         {
-            UIFridge.singleton.Open(UIFridge.singleton.fridge);
+            UIFridge.singleton.Open(UIFridge.singleton.fridge, UIFridge.singleton.isReadOnly);
         }
         if (UIWarehouse.singleton.panel.activeInHierarchy)
         {
-            UIWarehouse.singleton.Open(UIWarehouse.singleton.warehouse);
+            UIWarehouse.singleton.Open(UIWarehouse.singleton.warehouse, UIWarehouse.singleton.isReadOnly);
         }
         if (UIInventoryCustom.singleton)
         {
@@ -343,7 +343,7 @@ public class PlayerCallback : NetworkBehaviour
         }
         if (UICabinet.singleton && UICabinet.singleton.panel.activeInHierarchy)
         {
-            UICabinet.singleton.Open(UICabinet.singleton.cabinet);
+            UICabinet.singleton.Open(UICabinet.singleton.cabinet, UICabinet.singleton.isReadOnly);
         }
         if (UIFurnace.singleton && UIFurnace.singleton.panel.activeInHierarchy)
         {
@@ -351,7 +351,7 @@ public class PlayerCallback : NetworkBehaviour
         }
         if (UILibrary.singleton.panel.activeInHierarchy)
         {
-            UILibrary.singleton.Open(UILibrary.singleton.library);
+            UILibrary.singleton.Open(UILibrary.singleton.library, UILibrary.singleton.isReadOnly);
         }
         if (UIFrontStats.singleton && UIFrontStats.singleton.panel.activeInHierarchy)
         {
@@ -552,6 +552,7 @@ public class PlayerCallback : NetworkBehaviour
             if (player.health.current == 0)
             {
                 ModularBuildingManager.singleton.CancelBuildingMode();
+                player.health.CmdCallHealthReachZero();
                 Invoke(nameof(OpenSpawnpointPanelOnDeath), 2.0f);
             }
             UIPlayerInformation.singleton.Open();

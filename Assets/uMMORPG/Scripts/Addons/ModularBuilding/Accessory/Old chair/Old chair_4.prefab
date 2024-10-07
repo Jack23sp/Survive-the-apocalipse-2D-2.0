@@ -514,6 +514,7 @@ MonoBehaviour:
   accessoriesInThisForniture: []
   actionObjects:
   - {fileID: 8449912997300210906}
+  damagableObject: {fileID: -703682347028792975}
 --- !u!61 &4965063269831762831
 BoxCollider2D:
   m_ObjectHideFlags: 0

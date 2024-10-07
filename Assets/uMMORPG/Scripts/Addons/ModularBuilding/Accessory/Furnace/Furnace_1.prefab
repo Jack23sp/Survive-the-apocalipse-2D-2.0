@@ -790,6 +790,9 @@ MonoBehaviour:
   zoneCollider: {fileID: 0}
   grassUnder: []
   spritesList: []
+  accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: -8709607282125297246}
   on: 0
   fireObject: {fileID: 777925636}
   fireAudioSource: {fileID: 4404659548318601938}

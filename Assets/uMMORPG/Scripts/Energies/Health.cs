@@ -103,6 +103,19 @@ public class Health : Energy
         }
     }
 
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+        Player.localPlayer.playerAccessoryInteraction.RemoveInteraction();
+    }
+
+    [Command]
+    public void CmdCallHealthReachZero()
+    {
+        Player.localPlayer.playerAccessoryInteraction.RemoveInteraction();
+        Player.localPlayer.playerAdditionalState.SetState("", false, 0.1f, 30, null);
+    }
+
     public void InvokeStopClean()
     {
         CancelInvoke(nameof(CleanPlayer));

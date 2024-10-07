@@ -23,15 +23,16 @@ public class UIWarehouse : MonoBehaviour, IUIScript
     public Button renameButton;
 
     public Warehouse warehouse;
-
+    public bool isReadOnly;
 
     void Start()
     {
         if (!singleton) singleton = this;
     }
 
-    public void Open(Warehouse Warehouse)
+    public void Open(Warehouse Warehouse, bool isReadOnly)
     {
+        this.isReadOnly = isReadOnly;
         if (!player) player = Player.localPlayer;
         if (!player) return;
 
@@ -81,7 +82,7 @@ public class UIWarehouse : MonoBehaviour, IUIScript
 
                 if (player.inventory.slots[icopy].item.data.canUseFridge)
                 {
-                    slot.button.interactable = true;
+                    slot.button.interactable = this.isReadOnly ? false: true;
                 }
                 else
                 {
@@ -132,6 +133,7 @@ public class UIWarehouse : MonoBehaviour, IUIScript
             if (itemSlot2.amount > 0)
             {
                 int icopy = a;
+                slot2.button.interactable = this.isReadOnly ? false : true;
                 slot2.registerItem.index = index;
                 slot2.durabilitySlider.fillAmount = itemSlot2.item.data.maxDurability.baseValue > 0 ? ((float)itemSlot2.item.currentDurability / (float)itemSlot2.item.data.maxDurability.Get(itemSlot2.item.durabilityLevel)) : 0;
                 slot2.unsanitySlider.fillAmount = itemSlot2.item.data.maxUnsanity > 0 ? ((float)itemSlot2.item.currentUnsanity / (float)itemSlot2.item.data.maxUnsanity) : 0;

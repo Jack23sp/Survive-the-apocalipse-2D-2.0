@@ -332,16 +332,16 @@ public class Warehouse : BuildingAccessory
 
     void OnWarehouseInventoryChanged(SyncList<ItemSlot>.Operation op, int index, ItemSlot oldSlot, ItemSlot newSlot)
     {
-        if (!(op == SyncList<ItemSlot>.Operation.OP_ADD))
-        {
-            if (UIWarehouse.singleton)
+        //if (!(op == SyncList<ItemSlot>.Operation.OP_ADD))
+        //{
+            if (UIWarehouse.singleton && UIWarehouse.singleton.panel.activeInHierarchy)
             {
                 if (ModularBuildingManager.singleton.buildingAccessory && UIWarehouse.singleton.warehouse && UIWarehouse.singleton.panel.activeInHierarchy)
                 {
-                    UIWarehouse.singleton.Open(UIWarehouse.singleton.warehouse);
+                    UIWarehouse.singleton.Open(UIWarehouse.singleton.warehouse, UIWarehouse.singleton.isReadOnly);
                 }
             }
-        }
+        //}
     }
     public void CheckUnsanity()
     {

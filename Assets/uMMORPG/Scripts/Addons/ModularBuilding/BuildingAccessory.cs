@@ -281,6 +281,7 @@ public class BuildingAccessory : NetworkBehaviour
     public List<GameObject> actionObjects = new List<GameObject>();
 
     public readonly SyncList<ActionPlayerSlot> actionPlayerSlot = new SyncList<ActionPlayerSlot>();
+    public DamagableObject damagableObject;
 
     public void Start()
     {
@@ -290,7 +291,7 @@ public class BuildingAccessory : NetworkBehaviour
             renderer.material = ModularBuildingManager.singleton.spawnedBuildAccessoryMaterial;
             if (!ModularBuildingManager.singleton.buildingAccessories.Contains(this) && craftingAccessoryItem && (owner != string.Empty || group != string.Empty)) ModularBuildingManager.singleton.buildingAccessories.Add(this);
         }
-        GetComponent<DamagableObject>().buildingAccessory = this;
+        damagableObject.buildingAccessory = this;
     }
 
     public override void OnStartServer()

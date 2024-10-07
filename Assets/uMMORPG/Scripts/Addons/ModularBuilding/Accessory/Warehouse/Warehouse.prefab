@@ -973,6 +973,8 @@ MonoBehaviour:
   grassUnder: []
   spritesList: []
   accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: -4573079516942171549}
   amount: 20
   warehouseNameObjects:
   - {fileID: 908977086389321159}

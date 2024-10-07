@@ -24,14 +24,16 @@ public class UIWeaponStorage : MonoBehaviour, IUIScript
     public Button manageButton;
 
     private Image img;
+    public bool isReadOnly;
 
     void Start()
     {
         if (!singleton) singleton = this;
     }
 
-    public void Open(WeaponStorage storageWeapon)
+    public void Open(WeaponStorage storageWeapon, bool isReadOnly)
     {
+        this.isReadOnly = isReadOnly;
         player = Player.localPlayer;
         if(!player) return;
 
@@ -71,7 +73,7 @@ public class UIWeaponStorage : MonoBehaviour, IUIScript
             {
                 if (player.inventory.slots[icopy].item.data.canUseWeaponStorage)
                 {
-                    slot.button.interactable = true;
+                    slot.button.interactable = this.isReadOnly ? false : true;
                 }
                 else
                 {
@@ -113,6 +115,7 @@ public class UIWeaponStorage : MonoBehaviour, IUIScript
             UIInventorySlot slot = weapon[index];
             if (weaponStorage.weapon[index].amount > 0)
             {
+                slot.button.interactable = this.isReadOnly ? false : true;
                 slot.gameObject.transform.parent.GetComponent<Image>().enabled = false;
                 slot.gameObject.SetActive(true);
                 slot.image.color = Color.white;

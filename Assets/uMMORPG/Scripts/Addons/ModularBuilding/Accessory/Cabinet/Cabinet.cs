@@ -238,16 +238,16 @@ public class Cabinet : BuildingAccessory
 
     public void OnInventoryChanged(SyncList<ItemSlot>.Operation op, int index, ItemSlot oldSlot, ItemSlot newSlot)
     {
-        if (!(op == SyncList<ItemSlot>.Operation.OP_ADD))
-        {
-            if (UICabinet.singleton)
+        //if (!(op == SyncList<ItemSlot>.Operation.OP_ADD))
+        //{
+            if (UICabinet.singleton && UICabinet.singleton.panel.activeInHierarchy)
             {
                 if (ModularBuildingManager.singleton.buildingAccessory && UICabinet.singleton.cabinet && ModularBuildingManager.singleton.buildingAccessory.netId == UICabinet.singleton.cabinet.netId)
                 {
-                    UICabinet.singleton.Open((Cabinet)ModularBuildingManager.singleton.buildingAccessory);
+                    UICabinet.singleton.Open((Cabinet)ModularBuildingManager.singleton.buildingAccessory, UICabinet.singleton.isReadOnly);
                 }
             }
-        }
+        //}
     }
 
     public int Add(Item item, int amount)

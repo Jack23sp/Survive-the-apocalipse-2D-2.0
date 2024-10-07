@@ -240,7 +240,7 @@ public partial class PlayerNavMeshMovement2D
     public void MoveJoystick()
     {
         if (player.health.current <= 0) return;
-        if (player.playerAdditionalState.additionalState == "SLEEP" && player.playerMove.tired <= 20) return;
+        if (player.playerAdditionalState.additionalState == "SLEEP" && player.playerTired.tired <= 20) return;
         if (player.name != Player.localPlayer.name) return;
         // don't move if currently typing in an input
         // we check this after checking h and v to save computations
@@ -348,11 +348,11 @@ public partial class PlayerNavMeshMovement2D
                 {
                     if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo == null)
                     {
-                        if (player.playerMove.tired > 0 && player.playerMove.tired <= player.playerMove.tiredLimitForAim && player.mana.current == 0)
+                        if (player.playerTired.tired > 0 && player.playerTired.tired <= player.playerTired.tiredLimitForAim && player.mana.current == 0)
                         {
                             player.playerNotification.TargetSpawnNotification("You are too tired to attack!");
                         }
-                        else if (player.playerMove.tired > 0 && player.mana.current > 0)
+                        else if (player.playerTired.tired > 0 && player.mana.current > 0)
                         {
                             player.playerMove.CmdSetState("SHOOT", new string[1] { "AIM" });
                         }
@@ -366,11 +366,11 @@ public partial class PlayerNavMeshMovement2D
                 {
                     if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo == null)
                     {
-                        if (player.playerMove.tired > 0 && player.playerMove.tired <= player.playerMove.tiredLimitForAim && player.mana.current == 0)
+                        if (player.playerTired.tired > 0 && player.playerTired.tired <= player.playerTired.tiredLimitForAim && player.mana.current == 0)
                         {
                             player.playerNotification.TargetSpawnNotification("You are too tired to attack!");
                         }
-                        else if (player.playerMove.tired > 0 && player.mana.current > 0)
+                        else if (player.playerTired.tired > 0 && player.mana.current > 0)
                         {
                             player.playerMove.CmdSetState("SHOOT", new string[0] { });
                         }
@@ -382,7 +382,7 @@ public partial class PlayerNavMeshMovement2D
                 }
                 if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo == null)
                 {
-                    if (player.playerMove.tired > 0 && player.mana.current > 0)
+                    if (player.playerTired.tired > 0 && player.mana.current > 0)
                     {
                         ((PlayerSkills)player.skills).TryUse(((PlayerSkills)player.skills).GetSkillIndexByName(player.playerEquipment.slots[0].item.data.requiredSkill.name));
                     }
@@ -492,11 +492,11 @@ public partial class PlayerNavMeshMovement2D
                     {
                         if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo == null)
                         {
-                            if (player.playerMove.tired > 0 && player.playerMove.tired <= player.playerMove.tiredLimitForAim && player.mana.current == 0)
+                            if (player.playerTired.tired > 0 && player.playerTired.tired <= player.playerTired.tiredLimitForAim && player.mana.current == 0)
                             {
                                 player.playerNotification.TargetSpawnNotification("You are too tired to attack!");
                             }
-                            else if (player.playerMove.tired > 0 && player.mana.current > 0)
+                            else if (player.playerTired.tired > 0 && player.mana.current > 0)
                             {
                                 player.playerMove.CmdSetState("SHOOT", new string[1] { "AIM" });
                             }
@@ -510,11 +510,11 @@ public partial class PlayerNavMeshMovement2D
                     {
                         if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo == null)
                         {
-                            if (player.playerMove.tired > 0 && player.playerMove.tired <= player.playerMove.tiredLimitForAim && player.mana.current == 0)
+                            if (player.playerTired.tired > 0 && player.playerTired.tired <= player.playerTired.tiredLimitForAim && player.mana.current == 0)
                             {
                                 player.playerNotification.TargetSpawnNotification("You are too tired to attack!");
                             }
-                            else if (player.playerMove.tired > 0 && player.mana.current > 0)
+                            else if (player.playerTired.tired > 0 && player.mana.current > 0)
                             {
                                 player.playerMove.CmdSetState("SHOOT", new string[0] { });
                             }
@@ -526,7 +526,7 @@ public partial class PlayerNavMeshMovement2D
                     }
                     if (player.playerEquipment.slots[0].amount > 0 && ((WeaponItem)player.playerEquipment.slots[0].item.data).requiredAmmo == null)
                     {
-                        if (player.playerMove.tired > 0 && player.mana.current > 0) 
+                        if (player.playerTired.tired > 0 && player.mana.current > 0) 
                         { 
                             ((PlayerSkills)player.skills).TryUse(((PlayerSkills)player.skills).GetSkillIndexByName(player.playerEquipment.slots[0].item.data.requiredSkill.name));
                         }

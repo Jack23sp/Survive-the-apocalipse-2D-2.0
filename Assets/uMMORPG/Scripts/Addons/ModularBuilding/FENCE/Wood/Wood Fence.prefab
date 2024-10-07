@@ -118,6 +118,8 @@ MonoBehaviour:
   grassUnder: []
   spritesList: []
   accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: 1553882682217481189}
   leftCollider1: {fileID: 4092654703486619958}
   leftCollider2: {fileID: 1788977430009821325}
   leftCollider3: {fileID: 3014107375983363161}

@@ -536,6 +536,7 @@ MonoBehaviour:
   - {fileID: 3392832674310304430}
   - {fileID: 2356675760357598888}
   - {fileID: 8771007543292243737}
+  damagableObject: {fileID: -6080033226681397428}
 --- !u!61 &8033511534199614752
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1028,6 +1028,8 @@ MonoBehaviour:
   grassUnder: []
   spritesList: []
   accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: 5705235709791555771}
   spriteRenderers:
   - {fileID: 4124601218598336738}
   - {fileID: 7905263065559068427}

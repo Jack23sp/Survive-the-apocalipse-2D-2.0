@@ -90,9 +90,9 @@ public abstract partial class Entity : NetworkBehaviour
 
             if(pl.state != "IDLE" && pl.isLocalPlayer)
             {
-                if (pl.playerMove.whereActionIsGoing)
+                if (pl.playerAccessoryInteraction.whereActionIsGoing)
                 {
-                    pl.playerMove.CmdRemoveInteraction();
+                    pl.playerAccessoryInteraction.CmdRemoveInteraction();
                 }
             }
 

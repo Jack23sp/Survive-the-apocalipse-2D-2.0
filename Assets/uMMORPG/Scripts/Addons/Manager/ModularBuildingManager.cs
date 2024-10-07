@@ -778,23 +778,23 @@ public class ModularBuildingManager : MonoBehaviour
             case 4:
                 BlurManager.singleton.Hide();
                 buildingAccessory = forniture;
-                UIFridge.singleton.Open(forniture.GetComponent<Fridge>());
+                UIFridge.singleton.Open(forniture.GetComponent<Fridge>(),true);
                 break;
             case 5:
                 BlurManager.singleton.Hide();
                 buildingAccessory = forniture;
-                UICabinet.singleton.Open(forniture.GetComponent<Cabinet>());
+                UICabinet.singleton.Open(forniture.GetComponent<Cabinet>(),true);
                 break;
             case 6:
                 BlurManager.singleton.Hide();
                 buildingAccessory = forniture;
-                UIWeaponStorage.singleton.Open(forniture.GetComponent<WeaponStorage>());
+                UIWeaponStorage.singleton.Open(forniture.GetComponent<WeaponStorage>(), true);
                 break;
             case 7:
                 BlurManager.singleton.Hide();
                 buildingAccessory = forniture;
                 Player.localPlayer.playerModularBuilding.CmdInteractwithThis(forniture.netIdentity);
-                UIWarehouse.singleton.Open(forniture.GetComponent<Warehouse>());
+                UIWarehouse.singleton.Open(forniture.GetComponent<Warehouse>(),true);
                 break;
             case 8:
                 BlurManager.singleton.Hide();
@@ -822,7 +822,7 @@ public class ModularBuildingManager : MonoBehaviour
             case 12:
                 BlurManager.singleton.Hide();
                 buildingAccessory = forniture;
-                UILibrary.singleton.Open(forniture.GetComponent<Library>());
+                UILibrary.singleton.Open(forniture.GetComponent<Library>(),true);
                 break;
             case 13:
                 BlurManager.singleton.Hide();

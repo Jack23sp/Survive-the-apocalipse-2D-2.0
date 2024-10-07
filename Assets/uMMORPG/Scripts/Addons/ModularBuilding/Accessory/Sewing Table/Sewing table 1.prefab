@@ -330,7 +330,12 @@ MonoBehaviour:
   zoneCollider: {fileID: 0}
   grassUnder: []
   spritesList: []
+  accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: -6101154065632573097}
+  pSystem: {fileID: 0}
   checkSex: 1
+  hasAnimation: 0
 --- !u!61 &4965063269831762831
 BoxCollider2D:
   m_ObjectHideFlags: 0

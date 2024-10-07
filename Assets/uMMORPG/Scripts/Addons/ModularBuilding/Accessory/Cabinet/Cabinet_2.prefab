@@ -532,6 +532,8 @@ MonoBehaviour:
   grassUnder: []
   spritesList: []
   accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: 4774655631771629265}
   maxSlotAmount: 50
 --- !u!61 &4965063269831762831
 BoxCollider2D:

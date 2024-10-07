@@ -143,12 +143,12 @@ public class UIBuildingAccessoryManager : MonoBehaviour, IUIScriptNoBuildingRela
             Player.localPlayer.playerModularBuilding.oldBuilding = buildingAccessory;
             Player.localPlayer.playerModularBuilding.fakeBuilding = buildingAccessory.craftingAccessoryItem.GetType();
             Player.localPlayer.playerModularBuilding.accessoryInOldBuilding = buildingAccessory.accessoriesInThisForniture;
-            Player.localPlayer.playerMove.CancelInvoke();
-            Player.localPlayer.playerMove.grassDetector.interactableActions.Clear();
+            Player.localPlayer.playerAccessoryInteraction.CancelInvoke();
+            Player.localPlayer.playerAccessoryInteraction.grassDetector.interactableActions.Clear();
             Player.localPlayer.playerModularBuilding.CmdSetFakeBuildingID(buildingAccessory.netIdentity, Player.localPlayer.playerModularBuilding.accessoryInOldBuilding.ToArray());
             Player.localPlayer.playerModularBuilding.CmdManageVisibilityOfObject(false);
             UseItem(buildingAccessory, buildingAccessory.gameObject);
-            Player.localPlayer.playerMove.InitializeInvoke();
+            Player.localPlayer.playerAccessoryInteraction.InitializeInvoke();
         }
         else if(selected == 1)
         {

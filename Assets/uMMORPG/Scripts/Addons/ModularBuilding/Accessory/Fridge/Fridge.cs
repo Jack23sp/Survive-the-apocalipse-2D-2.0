@@ -291,16 +291,16 @@ public class Fridge : BuildingAccessory
 
     void OnItemsChange(SyncList<ItemSlot>.Operation op, int index, ItemSlot oldSlot, ItemSlot newSlot)
     {
-        if (!(op == SyncList<ItemSlot>.Operation.OP_ADD))
-        {
-            if (UIFridge.singleton)
+        //if (!(op == SyncList<ItemSlot>.Operation.OP_ADD))
+        //{
+            if (UIFridge.singleton && UIFridge.singleton.panel.activeInHierarchy)
             {
                 if (ModularBuildingManager.singleton.buildingAccessory && UIFridge.singleton.fridge && ModularBuildingManager.singleton.buildingAccessory.netId == UIFridge.singleton.fridge.netId)
                 {
-                    UIFridge.singleton.Open((Fridge)ModularBuildingManager.singleton.buildingAccessory);
+                    UIFridge.singleton.Open((Fridge)ModularBuildingManager.singleton.buildingAccessory, UIFridge.singleton.isReadOnly);
                 }
             }
-        }
+        //}
     }
 
     public void CheckUnsanity()

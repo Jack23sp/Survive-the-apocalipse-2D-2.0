@@ -105,7 +105,7 @@ public class PlayerAdditionalState : NetworkBehaviour
         SetState(animationName, true, 0.1f, 30, AbilityManager.singleton.FindAbility(abilityName));
     }
 
-    public void SetState(string state,bool condition, float amount, float timer, ScriptableAbility scriptableAbility)
+    public void SetState(string state,bool condition, float amount, float timer, ScriptableAbility scriptableAbility = null)
     {
         additionalState = ((condition && state == "READING") || 
                            (condition && state == "EXERCISE") ||

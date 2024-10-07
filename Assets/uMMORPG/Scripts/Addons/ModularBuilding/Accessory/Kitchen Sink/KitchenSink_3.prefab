@@ -5256,6 +5256,8 @@ MonoBehaviour:
   grassUnder: []
   spritesList: []
   accessoriesInThisForniture: []
+  actionObjects: []
+  damagableObject: {fileID: 8594837836418020979}
   aquifer: {fileID: 0}
   pSystem: {fileID: 8530310305223446538}
 --- !u!61 &8348470995215356350

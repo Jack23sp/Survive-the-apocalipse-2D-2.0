@@ -246,16 +246,16 @@ public class WeaponStorage : BuildingAccessory
 
     void OnWeaponInventoryChanged(SyncList<ItemSlot>.Operation op, int index, ItemSlot oldSlot, ItemSlot newSlot)
     {
-        if (!(op == SyncList<ItemSlot>.Operation.OP_ADD))
-        {
-            if (UIWeaponStorage.singleton)
+        //if (!(op == SyncList<ItemSlot>.Operation.OP_ADD))
+        //{
+            if (UIWeaponStorage.singleton && UIWeaponStorage.singleton.panel.activeInHierarchy)
             {
                 if (ModularBuildingManager.singleton.buildingAccessory && UIWeaponStorage.singleton.weaponStorage && ModularBuildingManager.singleton.buildingAccessory.netId == UIWeaponStorage.singleton.weaponStorage.netId)
                 {
-                    UIWeaponStorage.singleton.Open(UIWeaponStorage.singleton.weaponStorage);
+                    UIWeaponStorage.singleton.Open(UIWeaponStorage.singleton.weaponStorage, UIWeaponStorage.singleton.isReadOnly);
                 }
             }
-        }
+        //}
     }
 
     // For weapon make one lost for each one
