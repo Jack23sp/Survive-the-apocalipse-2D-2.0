@@ -29,13 +29,7 @@ public class UICultivablefield : MonoBehaviour, IUIScript
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            BlurManager.singleton.Show();
-            closeButton.image.raycastTarget = false;
-            closeButton.image.enabled = false;
-            selectedItem = string.Empty;
-            objectSelected.image = null;
-            description.text = string.Empty;
-            panelCanvas.SetActive(false);
+            Close();
         });
 
         plantVegetablesButton.onClick.RemoveAllListeners();

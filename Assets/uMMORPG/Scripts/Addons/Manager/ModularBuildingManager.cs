@@ -778,16 +778,19 @@ public class ModularBuildingManager : MonoBehaviour
             case 4:
                 BlurManager.singleton.Hide();
                 buildingAccessory = forniture;
+                Player.localPlayer.playerModularBuilding.CmdInteractwithThis(forniture.netIdentity);
                 UIFridge.singleton.Open(forniture.GetComponent<Fridge>(),true);
                 break;
             case 5:
                 BlurManager.singleton.Hide();
                 buildingAccessory = forniture;
+                Player.localPlayer.playerModularBuilding.CmdInteractwithThis(forniture.netIdentity);
                 UICabinet.singleton.Open(forniture.GetComponent<Cabinet>(),true);
                 break;
             case 6:
                 BlurManager.singleton.Hide();
                 buildingAccessory = forniture;
+                Player.localPlayer.playerModularBuilding.CmdInteractwithThis(forniture.netIdentity);
                 UIWeaponStorage.singleton.Open(forniture.GetComponent<WeaponStorage>(), true);
                 break;
             case 7:
@@ -822,6 +825,7 @@ public class ModularBuildingManager : MonoBehaviour
             case 12:
                 BlurManager.singleton.Hide();
                 buildingAccessory = forniture;
+
                 UILibrary.singleton.Open(forniture.GetComponent<Library>(),true);
                 break;
             case 13:

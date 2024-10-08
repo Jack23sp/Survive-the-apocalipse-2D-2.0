@@ -202,6 +202,9 @@ public class Cabinet : BuildingAccessory
 
     public int maxSlotAmount = 25;
 
+    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
+    public GameObject otherPlayerAreInteractWithThisAccessory;
+
     public new void Start()
     {
         base.Start();
@@ -234,6 +237,25 @@ public class Cabinet : BuildingAccessory
     {
         base.OnStartClient();
         inventory.Callback += OnInventoryChanged;
+        playerThatInteractWhitThis.Callback += PlayerInteraction;
+    }
+
+    public override void AddPlayerThatAreInteract(string playerName)
+    {
+        base.AddPlayerThatAreInteract(playerName);
+        if (!playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Add(playerName);
+    }
+
+    public override void RemovePlayerThatAreInteract(string playerName)
+    {
+        base.RemovePlayerThatAreInteract(playerName);
+        if (playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Remove(playerName);
+    }
+
+
+    void PlayerInteraction(SyncList<string>.Operation op, int index, string oldSlot, string newSlot)
+    {
+        otherPlayerAreInteractWithThisAccessory.SetActive(playerThatInteractWhitThis.Count > 0);
     }
 
     public void OnInventoryChanged(SyncList<ItemSlot>.Operation op, int index, ItemSlot oldSlot, ItemSlot newSlot)

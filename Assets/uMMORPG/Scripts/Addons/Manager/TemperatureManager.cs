@@ -5,6 +5,19 @@ using Mirror;
 using UnityEngine.Rendering.Universal;
 using System;
 
+
+public class TimeResult
+{
+    public int Totaldays { get; set; }
+    public int Hours { get; set; }
+    public int Minutes { get; set; }
+    public int Seconds { get; set; }
+
+    public override string ToString()
+    {
+        return $"Totaldays: {Totaldays}, Hours: {Hours}, Minutes: {Minutes}, Seconds: {Seconds}";
+    }
+}
 // Pool di oggetti
 public class ObjectPool
 {
@@ -65,6 +78,7 @@ partial class Database
         //[PrimaryKey] // important for performance: O(log n) instead of O(n)
         //[Collation("NOCASE")] // [COLLATE NOCASE for case insensitive compare. this way we can't both create 'Archer' and 'archer' as characters]
         public string ServerName { get; set; }
+        public int totalDays { get; set; }
         public int day { get; set; }
         public int hours { get; set; }
         public int minutes { get; set; }
@@ -87,6 +101,7 @@ partial class Database
             {
                 ServerName = serverName,
                 day = temp.days,
+                totalDays = temp.Totaldays,
                 hours = temp.hours,
                 minutes = temp.minutes,
                 seconds = temp.seconds,
@@ -103,6 +118,7 @@ partial class Database
 
         foreach (WeatherAndTimeInfo row in connection.Query<WeatherAndTimeInfo>("SELECT * FROM WeatherAndTimeInfo WHERE ServerName=?", serverName))
         {
+            temp.Totaldays = row.totalDays;
             temp.days = row.day;
             temp.hours = row.hours;
             temp.minutes = row.minutes;
@@ -151,6 +167,8 @@ public class TemperatureManager : NetworkBehaviour
     public bool isSunny;
     [SyncVar(hook = (nameof(CheckSnowParticle)))]
     public bool isSnowy;
+    [SyncVar]
+    public int Totaldays;
 
     [Space(5)]
 
@@ -734,10 +752,12 @@ public class TemperatureManager : NetworkBehaviour
                 {
                     if (days >= (WinterDayDuration + SpringDayDuration + SummerDuration + AutumnDayDuration))
                     {
+                        Totaldays++;
                         days = 0;
                     }
                     else
                     {
+                        Totaldays++;
                         days++;
                     }
                     seconds = 0;
@@ -819,6 +839,71 @@ public class TemperatureManager : NetworkBehaviour
 
 
     }
+
+
+    public TimeResult AddTime(int additionalSeconds)
+    {
+        seconds += additionalSeconds;
+
+        if (seconds >= 60)
+        {
+            minutes += seconds / 60;
+            seconds = seconds % 60;
+        }
+
+        if (minutes >= 60)
+        {
+            hours += minutes / 60;
+            minutes = minutes % 60;
+        }
+
+        if (hours >= 24)
+        {
+            Totaldays += hours / 24;
+            hours = hours % 24;
+        }
+
+        return new TimeResult
+        {
+            Totaldays = Totaldays,
+            Hours = hours,
+            Minutes = minutes,
+            Seconds = seconds
+        };
+    }
+
+    public int CalculateSecondsRemaining(int currentSeconds, int currentMinutes, int currentHours, int currentTotalDays,
+                                         int targetSeconds, int targetMinutes, int targetHours, int targetTotalDays)
+    {
+        int ConvertToTotalSeconds(int seconds, int minutes, int hours, int totalDays)
+        {
+            return seconds + (minutes * 60) + (hours * 3600) + (totalDays * 86400);
+        }
+
+        int currentTotalSeconds = ConvertToTotalSeconds(currentSeconds, currentMinutes, currentHours, currentTotalDays);
+        int targetTotalSeconds = ConvertToTotalSeconds(targetSeconds, targetMinutes, targetHours, targetTotalDays);
+
+        int secondsRemaining = targetTotalSeconds - currentTotalSeconds;
+
+        return Math.Max(secondsRemaining, 0);
+    }
+
+
+
+    public bool HasReachedOrPassed(int currentSeconds, int currentMinutes, int currentHours, int currentTotalDays,
+                                   int targetSeconds, int targetMinutes, int targetHours, int targetTotalDays)
+    {
+        int ConvertToTotalSeconds(int seconds, int minutes, int hours, int totalDays)
+        {
+            return seconds + (minutes * 60) + (hours * 3600) + (totalDays * 86400);
+        }
+
+        int targetTotalSeconds = ConvertToTotalSeconds(targetSeconds, targetMinutes, targetHours, targetTotalDays);
+        int currentTotalSeconds = ConvertToTotalSeconds(currentSeconds, currentMinutes, currentHours, currentTotalDays);
+
+        return targetTotalSeconds >= currentTotalSeconds;
+    }
+
 
     public void ChangeWeatherConditions()
     {

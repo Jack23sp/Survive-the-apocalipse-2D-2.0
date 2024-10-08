@@ -39,11 +39,7 @@ public class UIFurnace : MonoBehaviour, IUIScript
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            panel.SetActive(false);
-            closeButton.image.raycastTarget = false;
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
 
         onButton.onClick.RemoveAllListeners();

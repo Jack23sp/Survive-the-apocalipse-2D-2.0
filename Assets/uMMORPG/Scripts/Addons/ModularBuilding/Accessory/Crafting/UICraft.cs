@@ -47,6 +47,7 @@ public class UICraft : MonoBehaviour, IUIScript
     public int craftIndex = -1;
 
     List<ItemCrafting> crafts = new List<ItemCrafting>();
+    private int secondsRemaining = 0;
 
 
     public void Start()
@@ -64,9 +65,9 @@ public class UICraft : MonoBehaviour, IUIScript
         runtimeBuildCraftItem.item = crafts[index].itemAndAmount.item.name;
         runtimeBuildCraftItem.owner = player.name;
         runtimeBuildCraftItem.owner = player.guild.guild.name;
-        runtimeBuildCraftItem.timeBegin = DateTime.UtcNow.ToString();
-        runtimeBuildCraftItem.timeEnd = DateTime.UtcNow.AddSeconds(crafts[index].timeToCraft).ToString();
-        runtimeBuildCraftItem.serverTimeBegin = runtimeBuildCraftItem.serverTimeEnd = String.Empty;
+        //runtimeBuildCraftItem.timeBegin = DateTime.UtcNow.ToString();
+        //runtimeBuildCraftItem.timeEnd = DateTime.UtcNow.AddSeconds(crafts[index].timeToCraft).ToString();
+        //runtimeBuildCraftItem.serverTimeBegin = runtimeBuildCraftItem.serverTimeEnd = String.Empty;
         runtimeBuildCraftItem.index = index;
         runtimeBuildCraftItem.amount = Convert.ToInt32(slider.value);
         runtimeBuildCraftItem.sex = player.playerCharacterCreation.sex;
@@ -93,12 +94,12 @@ public class UICraft : MonoBehaviour, IUIScript
         craftButtonGold.interactable = player.gold >= crafts[index].gold * Convert.ToInt32(slider.value);
     }
 
-    public void SetItemCraftingTime(int index)
-    {
-        runtimeBuildCraftItem.timeBegin = DateTime.UtcNow.ToString();
-        runtimeBuildCraftItem.timeEnd = DateTime.UtcNow.AddSeconds(crafts[index].timeToCraft).ToString();
-        runtimeBuildCraftItem.serverTimeBegin = runtimeBuildCraftItem.serverTimeEnd = String.Empty;
-    }
+    //public void SetItemCraftingTime(int index)
+    //{
+    //    runtimeBuildCraftItem.timeBegin = DateTime.UtcNow.ToString();
+    //    runtimeBuildCraftItem.timeEnd = DateTime.UtcNow.AddSeconds(crafts[index].timeToCraft).ToString();
+    //    runtimeBuildCraftItem.serverTimeBegin = runtimeBuildCraftItem.serverTimeEnd = String.Empty;
+    //}
 
     public void SetupForButton(int index)
     {
@@ -128,15 +129,14 @@ public class UICraft : MonoBehaviour, IUIScript
         craftButtonGold.onClick.RemoveAllListeners();
         craftButtonGold.onClick.AddListener(() =>
         {
-            SetItemCraftingTime(craftIndex);
+            //SetItemCraftingTime(craftIndex);
             Player.localPlayer.playerModularBuilding.CmdAddToCraft(runtimeBuildCraftItem, 0, craftAccessory.netIdentity, craftIndex, Convert.ToInt32(slider.value));
         });
 
         craftButtonCoin.onClick.RemoveAllListeners();
         craftButtonCoin.onClick.AddListener(() =>
         {
-            SetItemCraftingTime(craftIndex);
-            runtimeBuildCraftItem.timeEnd = runtimeBuildCraftItem.timeBegin;
+            //SetItemCraftingTime(craftIndex);
             Player.localPlayer.playerModularBuilding.CmdAddToCraft(runtimeBuildCraftItem, 1, craftAccessory.netIdentity, craftIndex, Convert.ToInt32(slider.value));
         });
 
@@ -197,9 +197,11 @@ public class UICraft : MonoBehaviour, IUIScript
                 slot.itemName.text = craftAccessory.craftingItem[index].item;
                 slot.itemAmountOverlay.gameObject.SetActive(craftAccessory.craftingItem[index].amount > 1);
                 slot.itemAmount.text = craftAccessory.craftingItem[index].amount.ToString();
-                difference = DateTime.Parse(craftAccessory.craftingItem[index].timeEnd) - DateTime.UtcNow;
-                slot.claimButton.gameObject.SetActive(difference.TotalSeconds <= 0);
-                slot.timer.text = difference.TotalSeconds <= 0 ? string.Empty : Utilities.ConvertToTimerLong(Convert.ToInt64(difference.TotalSeconds));
+                //difference = DateTime.Parse(craftAccessory.craftingItem[index].timeEnd) - DateTime.UtcNow;
+                secondsRemaining = TemperatureManager.singleton.CalculateSecondsRemaining(TemperatureManager.singleton.Totaldays, TemperatureManager.singleton.hours, TemperatureManager.singleton.minutes, TemperatureManager.singleton.seconds,
+                                                                                          craftAccessory.craftingItem[index].totalDays, craftAccessory.craftingItem[index].hours, craftAccessory.craftingItem[index].minutes, craftAccessory.craftingItem[index].seconds);
+                slot.claimButton.gameObject.SetActive(secondsRemaining <= 0);
+                slot.timer.text = secondsRemaining <= 0 ? string.Empty : Utilities.ConvertToTimerLong(Convert.ToInt64(secondsRemaining));
                 slot.scrollView.SetActive(false);
                 slot.claimButton.onClick.RemoveAllListeners();
                 slot.claimButton.onClick.AddListener(() =>
@@ -219,9 +221,10 @@ public class UICraft : MonoBehaviour, IUIScript
             {
                 int index = i;
                 UICraftSlot slot = contentFinished.GetChild(index).GetComponent<UICraftSlot>();
-                difference = DateTime.Parse(craftAccessory.craftingItem[index].timeEnd) - DateTime.UtcNow;
-                slot.claimButton.gameObject.SetActive(difference.TotalSeconds <= 0);
-                slot.timer.text = difference.TotalSeconds <= 0 ? string.Empty : Utilities.ConvertToTimerLong(Convert.ToInt64(difference.TotalSeconds));
+                secondsRemaining = TemperatureManager.singleton.CalculateSecondsRemaining(TemperatureManager.singleton.Totaldays, TemperatureManager.singleton.hours, TemperatureManager.singleton.minutes, TemperatureManager.singleton.seconds,
+                                                                                          craftAccessory.craftingItem[index].totalDays, craftAccessory.craftingItem[index].hours, craftAccessory.craftingItem[index].minutes, craftAccessory.craftingItem[index].seconds);
+                slot.claimButton.gameObject.SetActive(secondsRemaining <= 0);
+                slot.timer.text = secondsRemaining <= 0 ? string.Empty : Utilities.ConvertToTimerLong(Convert.ToInt64(secondsRemaining));
             }
         }
     }

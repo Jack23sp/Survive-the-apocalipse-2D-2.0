@@ -36,13 +36,7 @@ public class UICabinet : MonoBehaviour, IUIScript
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.SetListener(() =>
         {
-            if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
-            closeButton.image.raycastTarget = false;
-            panel.SetActive(false);
-            cabinet = null;
-            ModularBuildingManager.singleton.buildingAccessory = null;
-            closeButton.image.enabled = false;
-            BlurManager.singleton.Show();
+            Close();
         });
 
         manageButton.gameObject.SetActive(ModularBuildingManager.singleton.CanDoOtherActionForniture(cabinet, Player.localPlayer));
@@ -157,10 +151,10 @@ public class UICabinet : MonoBehaviour, IUIScript
         if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
         closeButton.image.raycastTarget = false;
         panel.SetActive(false);
-        cabinet = null;
         ModularBuildingManager.singleton.buildingAccessory = null;
         closeButton.image.enabled = false;
         RemovePlayerFromBuildingAccessory(cabinet.netIdentity);
+        cabinet = null;
         BlurManager.singleton.Show();
     }
 

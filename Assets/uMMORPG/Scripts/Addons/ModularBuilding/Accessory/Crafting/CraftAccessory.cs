@@ -7,10 +7,10 @@ using System;
 [System.Serializable]
 public partial struct CraftinItemSlot
 {
-    public string timeBegin;
-    public string timeEnd;
-    public string serverTimeBegin;
-    public string serverTimeEnd;
+    public int totalDays;
+    public int hours;
+    public int minutes;
+    public int seconds;
     public string item;
     public int amount;
     public string owner;
@@ -24,10 +24,10 @@ public partial class Database
     class craft_item_accessory
     {
         public int buildingindex { get; set; }
-        public string timeBegin { get; set; }
-        public string timeEnd { get; set; }
-        public string serverTimeBegin { get; set; }
-        public string serverTimeEnd { get; set; }
+        public int totalDays { get; set; }
+        public int hours { get; set; }
+        public int minutes { get; set; }
+        public int seconds { get; set; }
         public string item { get; set; }
         public int amount { get; set; }
         public string owner { get; set; }
@@ -45,10 +45,10 @@ public partial class Database
                 connection.InsertOrReplace(new craft_item_accessory
                 {
                     buildingindex = index,
-                    timeBegin = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].timeBegin,
-                    timeEnd = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].timeEnd,
-                    serverTimeBegin = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].serverTimeBegin,
-                    serverTimeEnd = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].serverTimeEnd,
+                    totalDays = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].totalDays,
+                    hours = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].hours,
+                    minutes = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].minutes,
+                    seconds = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].seconds,
                     item = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].item,
                     amount = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].amount,
                     owner = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].owner,
@@ -66,10 +66,10 @@ public partial class Database
         {
             craftAccessory.craftingItem.Add(new CraftinItemSlot()
             {
-                timeBegin = row.timeBegin,
-                timeEnd = row.timeEnd,
-                serverTimeBegin = row.serverTimeBegin,
-                serverTimeEnd = row.serverTimeEnd,
+                totalDays = row.totalDays,
+                hours = row.hours,
+                minutes = row.minutes,
+                seconds = row.seconds,
                 item = row.item,
                 amount = row.amount,
                 owner = row.owner,

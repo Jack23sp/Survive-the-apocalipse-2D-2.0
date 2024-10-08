@@ -203,7 +203,7 @@ public class Warehouse : BuildingAccessory
     public TextMeshProUGUI warehouseNameText;
 
     public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
-
+    public GameObject otherPlayerAreInteractWithThisAccessory;
     private Player plInteractCheck;
 
 
@@ -311,6 +311,8 @@ public class Warehouse : BuildingAccessory
 
     void PlayerInteraction(SyncList<string>.Operation op, int index, string oldSlot, string newSlot)
     {
+        otherPlayerAreInteractWithThisAccessory.SetActive(playerThatInteractWhitThis.Count > 0);
+
         if (playerThatInteractWhitThis.Count == 0)
         {
             renderer.sprite = ImageManager.singleton.warehouseClosed[oldPositioning];

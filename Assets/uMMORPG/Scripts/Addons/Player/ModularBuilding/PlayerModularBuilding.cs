@@ -1206,6 +1206,80 @@ public class PlayerModularBuilding : NetworkBehaviour
         }
     }
 
+    //[Command]
+    //public void CmdAddToCraft(CraftinItemSlot craftSlot, int currencyType, NetworkIdentity identity, int craftIndex, int sliderValue)
+    //{
+    //    CraftAccessory buildingAccessory = identity.GetComponent<CraftAccessory>();
+    //    if (!buildingAccessory) return;
+    //    ScriptableBuildingAccessory scriptableBuildingAccessory = buildingAccessory.craftingAccessoryItem;
+
+    //    DateTime time = DateTime.UtcNow;
+    //    craftSlot.serverTimeEnd = time.AddSeconds(currencyType == 0 ? scriptableBuildingAccessory.itemtoCraft[craftIndex].timeToCraft : 0).ToString();
+    //    craftSlot.serverTimeBegin = time.ToString();
+
+    //    craft.Clear();
+
+    //    if (craftSlot.sex < 1)
+    //    {
+    //        for (int i = 0; i < scriptableBuildingAccessory.itemtoCraft.Count; i++)
+    //        {
+    //            craft.Add(scriptableBuildingAccessory.itemtoCraft[i]);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        for (int i = 0; i < scriptableBuildingAccessory.itemtoCraftFemale.Count; i++)
+    //        {
+    //            craft.Add(scriptableBuildingAccessory.itemtoCraftFemale[i]);
+    //        }
+    //    }
+
+    //    for (int e = 0; e < craft[craftSlot.index].ingredients.Count; e++)
+    //    {
+    //        int index_e = e;
+    //        if (player.inventory.CountItem(new Item(craft[craftSlot.index].ingredients[index_e].item)) < (craft[craftSlot.index].ingredients[index_e].amount * sliderValue))
+    //        {
+    //            return;
+    //        }
+    //    }
+
+
+    //    if (currencyType == 0)
+    //    {
+    //        if (player.gold >= (craft[craftSlot.index].gold * sliderValue))
+    //        {
+    //            for (int e = 0; e < craft[craftSlot.index].ingredients.Count; e++)
+    //            {
+    //                int index_e = e;
+    //                player.inventory.RemoveItem(new Item(craft[craftSlot.index].ingredients[index_e].item), (craft[craftSlot.index].ingredients[index_e].amount * sliderValue));
+    //            }
+
+    //            buildingAccessory.craftingItem.Add(craftSlot);
+    //            player.gold -= (craft[craftSlot.index].gold * sliderValue);
+
+    //            player.quests.SyncCraftOnServer(new DetailOfQuest(craftSlot.item.Replace("(Clone)", ""), craftSlot.amount));
+    //            player.playerPoints.craftPoint++;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (player.itemMall.coins >= (craft[craftSlot.index].coin * sliderValue))
+    //        {
+    //            for (int e = 0; e < craft[craftSlot.index].ingredients.Count; e++)
+    //            {
+    //                int index_e = e;
+    //                player.inventory.RemoveItem(new Item(craft[craftSlot.index].ingredients[index_e].item), (craft[craftSlot.index].ingredients[index_e].amount * sliderValue));
+    //            }
+
+    //            buildingAccessory.craftingItem.Add(craftSlot);
+    //            player.itemMall.coins -= (craft[craftSlot.index].coin * sliderValue);
+
+    //            player.quests.SyncCraftOnServer(new DetailOfQuest(craftSlot.item.Replace("(Clone)", ""), craftSlot.amount));
+    //            player.playerPoints.craftPoint++;
+    //        }
+    //    }
+    //}
+
     [Command]
     public void CmdAddToCraft(CraftinItemSlot craftSlot, int currencyType, NetworkIdentity identity, int craftIndex, int sliderValue)
     {
@@ -1213,9 +1287,11 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (!buildingAccessory) return;
         ScriptableBuildingAccessory scriptableBuildingAccessory = buildingAccessory.craftingAccessoryItem;
 
-        DateTime time = DateTime.UtcNow;
-        craftSlot.serverTimeEnd = time.AddSeconds(currencyType == 0 ? scriptableBuildingAccessory.itemtoCraft[craftIndex].timeToCraft : 0).ToString();
-        craftSlot.serverTimeBegin = time.ToString();
+        TimeResult timeresult = TemperatureManager.singleton.AddTime(currencyType == 0 ? scriptableBuildingAccessory.itemtoCraft[craftIndex].timeToCraft : 0);
+        craftSlot.totalDays = timeresult.Totaldays;
+        craftSlot.hours = timeresult.Hours;
+        craftSlot.minutes = timeresult.Minutes;
+        craftSlot.seconds = timeresult.Seconds;
 
         craft.Clear();
 
@@ -1280,16 +1356,17 @@ public class PlayerModularBuilding : NetworkBehaviour
         }
     }
 
+
     [Command]
     public void CmdClaimCraftedItem(int index, NetworkIdentity identity)
     {
         CraftAccessory buildingAccessory = identity.GetComponent<CraftAccessory>();
-        TimeSpan difference;
+        int difference;
         if (!buildingAccessory) return;
 
         ScriptableBuildingAccessory scriptableBuildingAccessory = buildingAccessory.craftingAccessoryItem;
-
-        difference = DateTime.Parse(buildingAccessory.craftingItem[index].serverTimeEnd) - DateTime.UtcNow;
+        difference = TemperatureManager.singleton.CalculateSecondsRemaining(TemperatureManager.singleton.Totaldays, TemperatureManager.singleton.hours, TemperatureManager.singleton.minutes, TemperatureManager.singleton.seconds,
+                                                                            buildingAccessory.craftingItem[index].totalDays, buildingAccessory.craftingItem[index].hours, buildingAccessory.craftingItem[index].minutes, buildingAccessory.craftingItem[index].seconds);
 
         craft.Clear();
 
@@ -1308,7 +1385,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             }
         }
 
-        if (difference.TotalSeconds > 0)
+        if (difference > 0)
         {
             return;
         }

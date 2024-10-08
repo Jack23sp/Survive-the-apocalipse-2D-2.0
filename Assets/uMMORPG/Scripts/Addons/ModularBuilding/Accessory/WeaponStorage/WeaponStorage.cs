@@ -212,6 +212,10 @@ public partial class Database
 public class WeaponStorage : BuildingAccessory
 {
     public SyncList<ItemSlot> weapon = new SyncList<ItemSlot>();
+
+    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
+    public GameObject otherPlayerAreInteractWithThisAccessory;
+
     public new void Start()
     {
         base.Start();
@@ -240,9 +244,27 @@ public class WeaponStorage : BuildingAccessory
     public override void OnStartClient()
     {
         base.OnStartClient();
-
         weapon.Callback += OnWeaponInventoryChanged;
+        playerThatInteractWhitThis.Callback += PlayerInteraction;
     }
+
+    public override void AddPlayerThatAreInteract(string playerName)
+    {
+        base.AddPlayerThatAreInteract(playerName);
+        if (!playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Add(playerName);
+    }
+
+    public override void RemovePlayerThatAreInteract(string playerName)
+    {
+        base.RemovePlayerThatAreInteract(playerName);
+        if (playerThatInteractWhitThis.Contains(playerName)) playerThatInteractWhitThis.Remove(playerName);
+    }
+
+    void PlayerInteraction(SyncList<string>.Operation op, int index, string oldSlot, string newSlot)
+    {
+        otherPlayerAreInteractWithThisAccessory.SetActive(playerThatInteractWhitThis.Count > 0);
+    }
+
 
     void OnWeaponInventoryChanged(SyncList<ItemSlot>.Operation op, int index, ItemSlot oldSlot, ItemSlot newSlot)
     {
