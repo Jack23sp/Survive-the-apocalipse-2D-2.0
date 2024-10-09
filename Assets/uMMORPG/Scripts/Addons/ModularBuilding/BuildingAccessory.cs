@@ -29,6 +29,8 @@ public partial class Database
 
         connection.Execute("DELETE FROM billboard");
 
+        connection.Execute("DELETE FROM craft_item_accessory");
+
         connection.Execute("DELETE FROM warehouse_item");
         connection.Execute("DELETE FROM warehouse_item_accessories");
 

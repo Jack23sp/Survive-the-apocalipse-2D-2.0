@@ -7,10 +7,7 @@ using System;
 [System.Serializable]
 public partial struct CraftinItemSlot
 {
-    public int totalDays;
-    public int hours;
-    public int minutes;
-    public int seconds;
+    public int totalSeconds;
     public string item;
     public int amount;
     public string owner;
@@ -24,10 +21,7 @@ public partial class Database
     class craft_item_accessory
     {
         public int buildingindex { get; set; }
-        public int totalDays { get; set; }
-        public int hours { get; set; }
-        public int minutes { get; set; }
-        public int seconds { get; set; }
+        public int totalSeconds { get; set; }
         public string item { get; set; }
         public int amount { get; set; }
         public string owner { get; set; }
@@ -45,10 +39,7 @@ public partial class Database
                 connection.InsertOrReplace(new craft_item_accessory
                 {
                     buildingindex = index,
-                    totalDays = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].totalDays,
-                    hours = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].hours,
-                    minutes = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].minutes,
-                    seconds = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].seconds,
+                    totalSeconds = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].totalSeconds,
                     item = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].item,
                     amount = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].amount,
                     owner = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].owner,
@@ -66,10 +57,7 @@ public partial class Database
         {
             craftAccessory.craftingItem.Add(new CraftinItemSlot()
             {
-                totalDays = row.totalDays,
-                hours = row.hours,
-                minutes = row.minutes,
-                seconds = row.seconds,
+                totalSeconds = row.totalSeconds,
                 item = row.item,
                 amount = row.amount,
                 owner = row.owner,
@@ -105,6 +93,17 @@ public class CraftAccessory : BuildingAccessory
     {
         base.OnStartClient();
         craftingItem.Callback += OnBeltChanged;
+        if (craftingItem.Count > 0)
+        {
+            pSystem.gameObject.SetActive(true);
+            SetOrder();
+            pSystem.Play();
+        }
+        else
+        {
+            pSystem.gameObject.SetActive(false);
+            pSystem.Stop();
+        }
     }
 
 

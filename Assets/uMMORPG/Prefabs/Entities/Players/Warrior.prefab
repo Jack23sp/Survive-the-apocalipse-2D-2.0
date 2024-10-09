@@ -1398,26 +1398,26 @@ MonoBehaviour:
     amount: 100
   - item: {fileID: 11400000, guid: 585e089a2c12be14da6dc34bcc01f12c, type: 2}
     amount: 100
-  - item: {fileID: 11400000, guid: f0bdff804fc005745ade29d87540bb2c, type: 2}
+  - item: {fileID: 11400000, guid: 1fd8d43c6ea1d4644915428948eda882, type: 2}
     amount: 100
-  - item: {fileID: 11400000, guid: 1ceb5791010f8194aab97cba59732c56, type: 2}
+  - item: {fileID: 11400000, guid: 5540556fdc09d1c44a8b63879682db49, type: 2}
     amount: 100
-  - item: {fileID: 11400000, guid: 5953abd1d7b8d934bb0266bdf76e8cd5, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: 2405d9053b455364e9e32c08bb157cb7, type: 2}
-    amount: 5
-  - item: {fileID: 11400000, guid: 6932770ceb0479f45baa2ddca8e0b4e2, type: 2}
-    amount: 10
-  - item: {fileID: 11400000, guid: 6091ed6e9e2a2274ab7d3438772b74a7, type: 2}
-    amount: 10
-  - item: {fileID: 11400000, guid: c17447b3c1d647a4ca2014169f69b19a, type: 2}
-    amount: 10
-  - item: {fileID: 11400000, guid: bce180653810bad44a2832af97d3ad1b, type: 2}
-    amount: 10
-  - item: {fileID: 11400000, guid: 5fd1c0ea876b99549954d24128b985cf, type: 2}
-    amount: 10
-  - item: {fileID: 11400000, guid: 41aeb1d06a04d0f4ab145d7bc2d304f1, type: 2}
-    amount: 10
+  - item: {fileID: 11400000, guid: fbb8cfa278ce0ac42b7c8f92494a6340, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 34431e8339a9363458f8b3f45b1e0f1b, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: d73d3f1588d2d9546b0c094166d3468c, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 96e03e61c6c04de41a5434e3cc90e2c8, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 2960f08180d621e4c96e153d3cbfb9d9, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 7973967b96b8fba4eb4b5ec8c567ddad, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 378e777e3a406764e9c9ffdd773aad86, type: 2}
+    amount: 100
+  - item: {fileID: 11400000, guid: 2ff313c05771867429e9dcb1ff98ad60, type: 2}
+    amount: 100
   splitKeys: 300100002f010000
   trash:
     item:

@@ -31,7 +31,7 @@ public class UIBookPanel : MonoBehaviour
             bookImage.sprite = itemData.image;
             bookImage.preserveAspect = true;
             bookTitle.text = title.ToString();
-            bookTime.text = Utilities.ConvertToTimerMinuteAndSeconds(seconds);
+            bookTime.text = Utilities.ConvertToTimer(seconds);
             panel.SetActive(true);
             Invoke(nameof(RefreshOnlyTime), 1.0f);
         }
@@ -40,7 +40,7 @@ public class UIBookPanel : MonoBehaviour
     public void RefreshOnlyTime()
     {
         seconds--;
-        bookTime.text = Utilities.ConvertToTimerMinuteAndSeconds(seconds);
+        bookTime.text = Utilities.ConvertToTimer(seconds);
         if(seconds == 0)
         {
             seconds = originalSeconds;

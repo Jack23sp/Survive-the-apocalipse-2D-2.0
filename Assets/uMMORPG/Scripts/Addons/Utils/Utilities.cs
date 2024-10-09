@@ -98,83 +98,70 @@ public static class Utilities
 
     public static string ConvertToTimer(int totalSecond)
     {
-        int day = 86400;
-        int hour = 3600;
-        int minutes = 60;
+        int days = Math.Abs(totalSecond) / 86400; // 1 giorno = 86400 secondi
+        int hours = (Math.Abs(totalSecond) % 86400) / 3600; // Calcola le ore rimanenti
+        int minutes = (Math.Abs(totalSecond) % 3600) / 60; // Calcola i minuti rimanenti
+        int seconds = Math.Abs(totalSecond) % 60; // Calcola i secondi rimanenti
 
-        int tDay = 0;
-        int tHours = 0;
-        int tMinutes = 0;
+        // Costruiamo l'output dinamicamente in base a ciò che ha valore
+        string formattedTime = "";
 
+        // Aggiungiamo solo i giorni se > 0
+        if (days > 0)
+        {
+            formattedTime += string.Format("{0:D2}:", days);
+        }
 
-        tDay = totalSecond / day;
-        totalSecond = (totalSecond - (tDay * day));
+        // Aggiungiamo solo le ore se > 0 o se ci sono giorni
+        if (days > 0 || hours > 0)
+        {
+            formattedTime += string.Format("{0:D2}:", hours);
+        }
 
-        tHours = totalSecond / hour;
-        totalSecond = (totalSecond - (tHours * hour));
+        // Aggiungiamo i minuti solo se ci sono ore o giorni o se i secondi sono >= 60
+        if (days > 0 || hours > 0 || Math.Abs(totalSecond) >= 60)
+        {
+            formattedTime += string.Format("{0:D2}:", minutes);
+        }
 
-        tMinutes = totalSecond / minutes;
-        totalSecond = (totalSecond - (tMinutes * minutes));
+        // Aggiungiamo sempre i secondi
+        formattedTime += string.Format("{0:D2}", seconds);
 
-        string Sday = tDay < 10 ? "0" + tDay : tDay.ToString();
-        string Shours = tHours < 10 ? "0" + tHours : tHours.ToString();
-        string SMinute = tMinutes < 10 ? "0" + tMinutes : tMinutes.ToString();
-        string SSeconds = totalSecond < 10 ? "0" + totalSecond : totalSecond.ToString();
-
-        return Sday + " : " + Shours + " : " + SMinute + " : " + SSeconds;
-
-    }
-
-    public static string ConvertToTimerMinuteAndSeconds(int totalSecond)
-    {
-        int hour = 3600;
-        int minutes = 60;
-
-        int tHours = 0;
-        int tMinutes = 0;
-
-
-
-        tHours = totalSecond / hour;
-        totalSecond = (totalSecond - (tHours * hour));
-
-        tMinutes = totalSecond / minutes;
-        totalSecond = (totalSecond - (tMinutes * minutes));
-
-        string SMinute = tMinutes < 10 ? "0" + tMinutes : tMinutes.ToString();
-        string SSeconds = totalSecond < 10 ? "0" + totalSecond : totalSecond.ToString();
-
-        return SMinute + " : " + SSeconds;
-
+        return formattedTime;
     }
 
     public static string ConvertToTimerLong(long totalSecond)
     {
-        long day = 86400;
-        long hour = 3600;
-        long minutes = 60;
+        long days = Math.Abs(totalSecond) / 86400; // 1 giorno = 86400 secondi
+        long hours = (Math.Abs(totalSecond) % 86400) / 3600; // Calcola le ore rimanenti
+        long minutes = (Math.Abs(totalSecond) % 3600) / 60; // Calcola i minuti rimanenti
+        long seconds = Math.Abs(totalSecond) % 60; // Calcola i secondi rimanenti
 
-        long tDay = 0;
-        long tHours = 0;
-        long tMinutes = 0;
+        // Costruiamo l'output dinamicamente in base a ciò che ha valore
+        string formattedTime = "";
 
+        // Aggiungiamo solo i giorni se > 0
+        if (days > 0)
+        {
+            formattedTime += string.Format("{0:D2}:", days);
+        }
 
-        tDay = totalSecond / day;
-        totalSecond = (totalSecond - (tDay * day));
+        // Aggiungiamo solo le ore se > 0 o se ci sono giorni
+        if (days > 0 || hours > 0)
+        {
+            formattedTime += string.Format("{0:D2}:", hours);
+        }
 
-        tHours = totalSecond / hour;
-        totalSecond = (totalSecond - (tHours * hour));
+        // Aggiungiamo i minuti solo se ci sono ore o giorni o se i secondi sono >= 60
+        if (days > 0 || hours > 0 || Math.Abs(totalSecond) >= 60)
+        {
+            formattedTime += string.Format("{0:D2}:", minutes);
+        }
 
-        tMinutes = totalSecond / minutes;
-        totalSecond = (totalSecond - (tMinutes * minutes));
+        // Aggiungiamo sempre i secondi
+        formattedTime += string.Format("{0:D2}", seconds);
 
-        string Sday = tDay < 10 ? "0" + tDay : tDay.ToString();
-        string Shours = tHours < 10 ? "0" + tHours : tHours.ToString();
-        string SMinute = tMinutes < 10 ? "0" + tMinutes : tMinutes.ToString();
-        string SSeconds = totalSecond < 10 ? "0" + totalSecond : totalSecond.ToString();
-
-        return Sday + " : " + Shours + " : " + SMinute + " : " + SSeconds;
-
+        return formattedTime;
     }
 
     [Serializable]

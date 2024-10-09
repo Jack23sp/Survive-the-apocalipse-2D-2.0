@@ -198,10 +198,9 @@ public class UICraft : MonoBehaviour, IUIScript
                 slot.itemAmountOverlay.gameObject.SetActive(craftAccessory.craftingItem[index].amount > 1);
                 slot.itemAmount.text = craftAccessory.craftingItem[index].amount.ToString();
                 //difference = DateTime.Parse(craftAccessory.craftingItem[index].timeEnd) - DateTime.UtcNow;
-                secondsRemaining = TemperatureManager.singleton.CalculateSecondsRemaining(TemperatureManager.singleton.Totaldays, TemperatureManager.singleton.hours, TemperatureManager.singleton.minutes, TemperatureManager.singleton.seconds,
-                                                                                          craftAccessory.craftingItem[index].totalDays, craftAccessory.craftingItem[index].hours, craftAccessory.craftingItem[index].minutes, craftAccessory.craftingItem[index].seconds);
-                slot.claimButton.gameObject.SetActive(secondsRemaining <= 0);
-                slot.timer.text = secondsRemaining <= 0 ? string.Empty : Utilities.ConvertToTimerLong(Convert.ToInt64(secondsRemaining));
+                secondsRemaining = TemperatureManager.singleton.totalSeconds - craftAccessory.craftingItem[index].totalSeconds;
+                slot.claimButton.gameObject.SetActive(secondsRemaining > 0);
+                slot.timer.text = secondsRemaining > 0 ? string.Empty : Utilities.ConvertToTimer(secondsRemaining);
                 slot.scrollView.SetActive(false);
                 slot.claimButton.onClick.RemoveAllListeners();
                 slot.claimButton.onClick.AddListener(() =>
@@ -221,10 +220,9 @@ public class UICraft : MonoBehaviour, IUIScript
             {
                 int index = i;
                 UICraftSlot slot = contentFinished.GetChild(index).GetComponent<UICraftSlot>();
-                secondsRemaining = TemperatureManager.singleton.CalculateSecondsRemaining(TemperatureManager.singleton.Totaldays, TemperatureManager.singleton.hours, TemperatureManager.singleton.minutes, TemperatureManager.singleton.seconds,
-                                                                                          craftAccessory.craftingItem[index].totalDays, craftAccessory.craftingItem[index].hours, craftAccessory.craftingItem[index].minutes, craftAccessory.craftingItem[index].seconds);
-                slot.claimButton.gameObject.SetActive(secondsRemaining <= 0);
-                slot.timer.text = secondsRemaining <= 0 ? string.Empty : Utilities.ConvertToTimerLong(Convert.ToInt64(secondsRemaining));
+                secondsRemaining = TemperatureManager.singleton.totalSeconds - craftAccessory.craftingItem[index].totalSeconds;
+                slot.claimButton.gameObject.SetActive(secondsRemaining > 0);
+                slot.timer.text = secondsRemaining > 0 ? string.Empty : Utilities.ConvertToTimer(secondsRemaining);
             }
         }
     }

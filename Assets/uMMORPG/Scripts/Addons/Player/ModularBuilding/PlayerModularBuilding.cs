@@ -1287,11 +1287,7 @@ public class PlayerModularBuilding : NetworkBehaviour
         if (!buildingAccessory) return;
         ScriptableBuildingAccessory scriptableBuildingAccessory = buildingAccessory.craftingAccessoryItem;
 
-        TimeResult timeresult = TemperatureManager.singleton.AddTime(currencyType == 0 ? scriptableBuildingAccessory.itemtoCraft[craftIndex].timeToCraft : 0);
-        craftSlot.totalDays = timeresult.Totaldays;
-        craftSlot.hours = timeresult.Hours;
-        craftSlot.minutes = timeresult.Minutes;
-        craftSlot.seconds = timeresult.Seconds;
+        craftSlot.totalSeconds = TemperatureManager.singleton.totalSeconds + (currencyType == 0 ? scriptableBuildingAccessory.itemtoCraft[craftIndex].timeToCraft : 0);
 
         craft.Clear();
 
@@ -1361,12 +1357,9 @@ public class PlayerModularBuilding : NetworkBehaviour
     public void CmdClaimCraftedItem(int index, NetworkIdentity identity)
     {
         CraftAccessory buildingAccessory = identity.GetComponent<CraftAccessory>();
-        int difference;
         if (!buildingAccessory) return;
 
         ScriptableBuildingAccessory scriptableBuildingAccessory = buildingAccessory.craftingAccessoryItem;
-        difference = TemperatureManager.singleton.CalculateSecondsRemaining(TemperatureManager.singleton.Totaldays, TemperatureManager.singleton.hours, TemperatureManager.singleton.minutes, TemperatureManager.singleton.seconds,
-                                                                            buildingAccessory.craftingItem[index].totalDays, buildingAccessory.craftingItem[index].hours, buildingAccessory.craftingItem[index].minutes, buildingAccessory.craftingItem[index].seconds);
 
         craft.Clear();
 
@@ -1385,7 +1378,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             }
         }
 
-        if (difference > 0)
+        if (TemperatureManager.singleton.totalSeconds < buildingAccessory.craftingItem[index].totalSeconds)
         {
             return;
         }
