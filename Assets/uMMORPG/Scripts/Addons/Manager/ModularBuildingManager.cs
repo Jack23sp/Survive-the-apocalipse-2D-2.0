@@ -1262,12 +1262,22 @@ public class ModularBuildingManager : MonoBehaviour
         if (spawnedAccesssory)
         {
             if (spawnedAccesssory.GetComponent<BuildingAccessory>().CheckPossibleSpawn())
+            {
                 Player.localPlayer.playerModularBuilding.CmdCreateAccessory(inventoryIndex, isInventory, scriptableBuildingAccessory.name, spawnedAccesssory.GetComponent<BuildingAccessory>().oldPositioning, spawnedAccesssory.transform.position, Player.localPlayer.playerModularBuilding.fakeBuildingID);
+                Player.localPlayer.playerModularBuilding.CmdDeleteAccessory();
+            }
             else
+            {
                 Player.localPlayer.playerNotification.SpawnNotification(ImageManager.singleton.refuse, buildingConstruction);
+                if (Player.localPlayer.playerModularBuilding.fakeBuildingID != null)
+                {
+                    Player.localPlayer.playerModularBuilding.CmdManageVisibilityOfObject(true);
+                    Player.localPlayer.playerModularBuilding.CmdRemoveFakeBuildingID(true);
+                    Player.localPlayer.playerModularBuilding.oldBuilding = null;
+                }
+            }
         }
 
-            Player.localPlayer.playerModularBuilding.CmdDeleteAccessory();
 
 
         if (spawnedBuilding || spawnedAccesssory || spawnedWall)

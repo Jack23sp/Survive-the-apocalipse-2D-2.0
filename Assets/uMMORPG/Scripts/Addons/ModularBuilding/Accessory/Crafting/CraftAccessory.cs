@@ -32,28 +32,25 @@ public partial class Database
 
     public void SaveCraftAccessory(int index)
     {
-        for (int i = 0; i < ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem.Count; i++)
+        for (int e = 0; e < ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem.Count; e++)
         {
-            for (int e = 0; e < ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem.Count; e++)
+            connection.InsertOrReplace(new craft_item_accessory
             {
-                connection.InsertOrReplace(new craft_item_accessory
-                {
-                    buildingindex = index,
-                    totalSeconds = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].totalSeconds,
-                    item = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].item,
-                    amount = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].amount,
-                    owner = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].owner,
-                    guild = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].guild,
-                    ind = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].index,
-                    sex = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].sex
-                });
-            }
+                buildingindex = index,
+                totalSeconds = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].totalSeconds,
+                item = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].item,
+                amount = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].amount,
+                owner = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].owner,
+                guild = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].guild,
+                ind = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].index,
+                sex = ((CraftAccessory)ModularBuildingManager.singleton.buildingAccessories[index]).craftingItem[e].sex
+            });
         }
     }
 
     public void LoadCraftAccessory(int index, CraftAccessory craftAccessory)
     {
-        foreach (craft_item_accessory row in connection.Query<craft_item_accessory>("SELECT * FROM craft_item_accessory WHERE ind=?", index))
+        foreach (craft_item_accessory row in connection.Query<craft_item_accessory>("SELECT * FROM craft_item_accessory WHERE buildingindex=?", index))
         {
             craftAccessory.craftingItem.Add(new CraftinItemSlot()
             {
@@ -95,14 +92,20 @@ public class CraftAccessory : BuildingAccessory
         craftingItem.Callback += OnBeltChanged;
         if (craftingItem.Count > 0)
         {
-            pSystem.gameObject.SetActive(true);
-            SetOrder();
-            pSystem.Play();
+            if (pSystem)
+            {
+                pSystem.gameObject.SetActive(true);
+                pSystem.Play();
+                SetOrder();
+            }
         }
         else
         {
-            pSystem.gameObject.SetActive(false);
-            pSystem.Stop();
+            if (pSystem)
+            {
+                pSystem.gameObject.SetActive(false);
+                pSystem.Stop();
+            }
         }
     }
 
@@ -141,7 +144,7 @@ public class CraftAccessory : BuildingAccessory
     }
 
 
-    void OnBeltChanged(SyncList<CraftinItemSlot>.Operation op, int index, CraftinItemSlot oldSlot, CraftinItemSlot newSlot)
+    protected void OnBeltChanged(SyncList<CraftinItemSlot>.Operation op, int index, CraftinItemSlot oldSlot, CraftinItemSlot newSlot)
     {
         if (UICraft.singleton)
         {
@@ -153,16 +156,22 @@ public class CraftAccessory : BuildingAccessory
             }
         }
 
-        if(craftingItem.Count > 0)
+        if (craftingItem.Count > 0)
         {
-            pSystem.gameObject.SetActive(true); 
-            SetOrder();
-            pSystem.Play();
+            if (pSystem)
+            {
+                pSystem.gameObject.SetActive(true);
+                pSystem.Play();
+                SetOrder();
+            }
         }
         else
         {
-            pSystem.gameObject.SetActive(false);
-            pSystem.Stop();
+            if (pSystem)
+            {
+                pSystem.gameObject.SetActive(false);
+                pSystem.Stop();
+            }
         }
     }
 }

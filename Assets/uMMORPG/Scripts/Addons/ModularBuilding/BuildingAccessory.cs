@@ -101,7 +101,6 @@ public partial class Database
                 SaveFridge(index);
             }
 
-
             if (ModularBuildingManager.singleton.buildingAccessories[index] is CraftAccessory)
             {
                 SaveCraftAccessory(index);

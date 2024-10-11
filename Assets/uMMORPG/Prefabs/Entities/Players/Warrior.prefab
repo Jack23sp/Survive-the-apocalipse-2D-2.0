@@ -1418,6 +1418,8 @@ MonoBehaviour:
     amount: 100
   - item: {fileID: 11400000, guid: 2ff313c05771867429e9dcb1ff98ad60, type: 2}
     amount: 100
+  - item: {fileID: 11400000, guid: 86fc6423bfe3e4844b8c1e3b9643e9b6, type: 2}
+    amount: 1000
   splitKeys: 300100002f010000
   trash:
     item:

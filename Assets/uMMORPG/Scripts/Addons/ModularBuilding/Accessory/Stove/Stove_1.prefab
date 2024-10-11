@@ -697,7 +697,7 @@ GameObject:
   - component: {fileID: 7103790511408276528}
   - component: {fileID: 3093243275220581819}
   - component: {fileID: 8099498057094737609}
-  - component: {fileID: 7582651710736323204}
+  - component: {fileID: 7085270867944061192}
   - component: {fileID: 4965063269831762831}
   - component: {fileID: 8390149283651224745}
   - component: {fileID: 8001320487794890210}
@@ -804,7 +804,7 @@ MonoBehaviour:
   serverOnly: 0
   visible: 0
   hasSpawned: 0
---- !u!114 &7582651710736323204
+--- !u!114 &7085270867944061192
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -813,12 +813,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6816874964235752371}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32d3f3c811745c040bd05077401a6b7c, type: 3}
+  m_Script: {fileID: 11500000, guid: 89b2c43752e71d745b2c463023c10694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0
   newName: 
   group: 
   owner: 
@@ -864,6 +864,10 @@ MonoBehaviour:
   pSystem: {fileID: 0}
   checkSex: 0
   hasAnimation: 0
+  objectToManageActivation:
+  - {fileID: 6320516461120220244}
+  - {fileID: 4354743894806678447}
+  - {fileID: 4475246291299530553}
 --- !u!61 &4965063269831762831
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -957,7 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 971afc6d6d5b48747a1e4b15eae29ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingAccessory: {fileID: 7582651710736323204}
+  buildingAccessory: {fileID: 7085270867944061192}
   avoidCollidersNotToCache: []
   tagToAvoid: []
   thisCollider: {fileID: 4965063269831762831}
