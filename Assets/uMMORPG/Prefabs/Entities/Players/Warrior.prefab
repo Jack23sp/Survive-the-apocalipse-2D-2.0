@@ -2225,6 +2225,7 @@ MonoBehaviour:
   syncInterval: 0.1
   oldBuilding: {fileID: 0}
   fakeBuildingID: {fileID: 0}
+  buildingPlacer: {fileID: 0}
   buildingInteractWith: {fileID: 0}
   accessoryInOldBuilding: []
 --- !u!114 &6328524031332488325

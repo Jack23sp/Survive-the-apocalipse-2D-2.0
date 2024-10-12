@@ -114,6 +114,8 @@ public class Health : Energy
     {
         Player.localPlayer.playerAccessoryInteraction.RemoveInteraction();
         Player.localPlayer.playerAdditionalState.SetState("", false, 0.1f, 30, null);
+        Player.localPlayer.playerModularBuilding.RemoveFakeBuildingID(false);
+        Player.localPlayer.playerModularBuilding.RemoveAccessoryPlacer();
     }
 
     public void InvokeStopClean()

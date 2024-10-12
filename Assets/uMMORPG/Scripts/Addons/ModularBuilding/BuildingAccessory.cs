@@ -431,6 +431,14 @@ public class BuildingAccessory : NetworkBehaviour
         {
             if (avoidHits.Count > 0) return false;
 
+            if(Player.localPlayer.playerModularBuilding.buildingPlacer)
+            {
+                if(colliderHits.Contains(Player.localPlayer.playerModularBuilding.buildingPlacer.GetComponent<Collider2D>()))
+                {
+                    colliderHits.Remove(Player.localPlayer.playerModularBuilding.buildingPlacer.GetComponent<Collider2D>());
+                }
+            }
+
             if (basementColliderHits.Count == 1)
             {
 

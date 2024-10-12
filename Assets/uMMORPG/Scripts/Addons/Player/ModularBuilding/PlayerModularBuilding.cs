@@ -23,6 +23,7 @@ public class PlayerModularBuilding : NetworkBehaviour
     [HideInInspector] public BuildingAccessory oldBuilding;
     [SyncVar]
     public NetworkIdentity fakeBuildingID;
+    public GameObject buildingPlacer;
     [SyncVar]
     public NetworkIdentity buildingInteractWith;
 
@@ -45,6 +46,13 @@ public class PlayerModularBuilding : NetworkBehaviour
     {
         base.OnStartServer();
         Assign();
+    }
+
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+        RemoveAccessoryPlacer();
+        RemoveFakeBuildingID(true);
     }
 
     public override void OnStopClient()
@@ -508,6 +516,11 @@ public class PlayerModularBuilding : NetworkBehaviour
             }
         }
         fakeBuildingID = identity;
+        BuildingAccessory acc = fakeBuildingID.gameObject.GetComponent<BuildingAccessory>();
+        GameObject g = Instantiate(acc.craftingAccessoryItem.buildingList[acc.oldPositioning].buildingObjectPlacer, acc.transform.position, Quaternion.identity);
+        NetworkServer.Spawn(g);
+        buildingPlacer = g;
+
         accessoryInOldBuilding = accessories.ToList();
     }
 
@@ -547,12 +560,22 @@ public class PlayerModularBuilding : NetworkBehaviour
 
     public void RemoveFakeBuildingID (bool condition)
     {
-        fakeBuildingID = null;
         foreach (BuildingAccessory acc in accessoryInOldBuilding)
         {
             RpcManageVisibilityOfObject(acc.netIdentity, condition);
         }
-        RpcManageVisibilityOfObject(fakeBuildingID, condition);
+        if (fakeBuildingID) RpcManageVisibilityOfObject(fakeBuildingID, condition);
+        RemoveAccessoryPlacer();
+        fakeBuildingID = null;
+    }
+
+    public void RemoveAccessoryPlacer()
+    {
+        if (buildingPlacer)
+        {
+            NetworkServer.Destroy(buildingPlacer);
+            buildingPlacer = null;
+        }
     }
 
     [Command]
@@ -1590,6 +1613,7 @@ public class PlayerModularBuilding : NetworkBehaviour
             {
                 NetworkServer.Destroy(accessoryInOldBuilding[e].gameObject);
             }
+            RemoveAccessoryPlacer();
             NetworkServer.Destroy(fakeBuildingID.gameObject);
         }
         else
