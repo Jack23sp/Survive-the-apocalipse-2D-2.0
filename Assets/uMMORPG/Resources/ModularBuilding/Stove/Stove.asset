@@ -218,14 +218,22 @@ MonoBehaviour:
   - buildingName: 
     buildingObject: {fileID: 6816874964235752371, guid: 7e81637ab2cf4d947b72432cd3172ef5,
       type: 3}
+    buildingObjectPlacer: {fileID: 6816874964235752371, guid: 8a6567e4bbd461c49b1c05668c730ded,
+      type: 3}
   - buildingName: 
     buildingObject: {fileID: 725824731160318321, guid: 5968ea4d5ea321f4cae305a918931560,
+      type: 3}
+    buildingObjectPlacer: {fileID: 725824731160318321, guid: cc2471ae650705048a3796748805d586,
       type: 3}
   - buildingName: 
     buildingObject: {fileID: 9068317129651482629, guid: d6c43eae4422a134ab72716a7b2efae7,
       type: 3}
+    buildingObjectPlacer: {fileID: 9068317129651482629, guid: 05d7585f003798d47bfd7c889d90a0f5,
+      type: 3}
   - buildingName: 
     buildingObject: {fileID: 5647960006870899982, guid: dba551d1ca61a074c83add0722b974a2,
+      type: 3}
+    buildingObjectPlacer: {fileID: 5647960006870899982, guid: d6fc1b734f5f550428bb843b82b79084,
       type: 3}
   isMetal: 1
   isWood: 0

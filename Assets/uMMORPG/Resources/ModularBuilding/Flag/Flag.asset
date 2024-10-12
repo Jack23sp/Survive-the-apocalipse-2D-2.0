@@ -21,7 +21,6 @@ MonoBehaviour:
     bonusPerLevel: 0
   maxArmorLevel: 0
   productAfterCooking: {fileID: 0}
-  coverTemperature: 0
   additionalSlot:
     baseValue: 0
     bonusPerLevel: 0
@@ -32,10 +31,6 @@ MonoBehaviour:
   maxWeight:
     baseValue: 0
     bonusPerLevel: 0
-  possibleBagWeight:
-    baseValue: 0
-    bonusPerLevel: 0
-  maxWeightLevel: 0
   skinImages: []
   weaponToSpawn: {fileID: 0}
   munitionImage: {fileID: 0}
@@ -98,6 +93,8 @@ MonoBehaviour:
   buildingList:
   - buildingName: 
     buildingObject: {fileID: 5342134745558256410, guid: b34a73cfb532f5d478de8e15b5b358cc,
+      type: 3}
+    buildingObjectPlacer: {fileID: 5342134745558256410, guid: 2b1f09963cdfc2248887625e1d64c174,
       type: 3}
   isMetal: 1
   isWood: 0

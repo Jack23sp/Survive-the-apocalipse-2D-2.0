@@ -145,6 +145,7 @@ public class UIBuildingAccessoryManager : MonoBehaviour, IUIScriptNoBuildingRela
             Player.localPlayer.playerModularBuilding.accessoryInOldBuilding = buildingAccessory.accessoriesInThisForniture;
             Player.localPlayer.playerAccessoryInteraction.CancelInvoke();
             Player.localPlayer.playerAccessoryInteraction.grassDetector.interactableActions.Clear();
+            if (parentButton) parentButton.onClick.Invoke();
             Player.localPlayer.playerModularBuilding.CmdSetFakeBuildingID(buildingAccessory.netIdentity, Player.localPlayer.playerModularBuilding.accessoryInOldBuilding.ToArray());
             Player.localPlayer.playerModularBuilding.CmdManageVisibilityOfObject(false);
             UseItem(buildingAccessory, buildingAccessory.gameObject);
@@ -153,6 +154,7 @@ public class UIBuildingAccessoryManager : MonoBehaviour, IUIScriptNoBuildingRela
         else if(selected == 1)
         {
             Player.localPlayer.playerModularBuilding.accessoryInOldBuilding = buildingAccessory.accessoriesInThisForniture;
+            if (parentButton) parentButton.onClick.Invoke();
             Player.localPlayer.playerModularBuilding.CmdSetFakeBuildingID(buildingAccessory.netIdentity, Player.localPlayer.playerModularBuilding.accessoryInOldBuilding.ToArray());
             Player.localPlayer.playerModularBuilding.CmdSetAccessoriesList(Player.localPlayer.playerModularBuilding.accessoryInOldBuilding.ToArray());
             Player.localPlayer.playerModularBuilding.CmdDeleteAccessory();
@@ -268,6 +270,7 @@ public class UIBuildingAccessoryManager : MonoBehaviour, IUIScriptNoBuildingRela
             {
                 parentButton.onClick.Invoke();
                 BlurManager.singleton.Show();
+                parentButton = null;
             }
         }
         Destroy(singleton);

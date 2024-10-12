@@ -80,6 +80,8 @@ MonoBehaviour:
   - buildingName: 
     buildingObject: {fileID: 6816874964235752371, guid: d504a4c789e9a0d4b86709e077373f96,
       type: 3}
+    buildingObjectPlacer: {fileID: 6816874964235752371, guid: 65798bfada6141a49b9ea86fe934fba4,
+      type: 3}
   isMetal: 0
   isWood: 0
   isStone: 0

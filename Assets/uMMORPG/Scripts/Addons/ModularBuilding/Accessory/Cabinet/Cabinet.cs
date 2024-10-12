@@ -202,7 +202,6 @@ public class Cabinet : BuildingAccessory
 
     public int maxSlotAmount = 25;
 
-    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
     public GameObject otherPlayerAreInteractWithThisAccessory;
 
     public new void Start()

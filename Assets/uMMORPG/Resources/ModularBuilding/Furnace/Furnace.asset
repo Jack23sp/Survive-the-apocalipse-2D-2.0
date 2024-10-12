@@ -21,7 +21,6 @@ MonoBehaviour:
     bonusPerLevel: 0
   maxArmorLevel: 0
   productAfterCooking: {fileID: 0}
-  coverTemperature: 0
   additionalSlot:
     baseValue: 0
     bonusPerLevel: 0
@@ -32,10 +31,6 @@ MonoBehaviour:
   maxWeight:
     baseValue: 0
     bonusPerLevel: 0
-  possibleBagWeight:
-    baseValue: 0
-    bonusPerLevel: 0
-  maxWeightLevel: 0
   skinImages: []
   weaponToSpawn: {fileID: 0}
   munitionImage: {fileID: 0}
@@ -92,14 +87,22 @@ MonoBehaviour:
   - buildingName: 
     buildingObject: {fileID: 6816874964235752371, guid: 80f60b0c6d98df247ad0ff51b7e717e8,
       type: 3}
+    buildingObjectPlacer: {fileID: 6816874964235752371, guid: 428984d2383756e48ae47be0833c96ee,
+      type: 3}
   - buildingName: 
     buildingObject: {fileID: 6816874964235752371, guid: dd005b806e3b5eb428af0a7073d00929,
+      type: 3}
+    buildingObjectPlacer: {fileID: 6816874964235752371, guid: 8f399ac4c4ea94b4daac075f80ac522f,
       type: 3}
   - buildingName: 
     buildingObject: {fileID: 6816874964235752371, guid: 04a72fd652eefff45b12dc86e91fe36a,
       type: 3}
+    buildingObjectPlacer: {fileID: 6816874964235752371, guid: b330d253aaa4a4b4fb37f92ad0ccab44,
+      type: 3}
   - buildingName: 
     buildingObject: {fileID: 6816874964235752371, guid: 1866d2dfc1bf6b84aa7789994daa5935,
+      type: 3}
+    buildingObjectPlacer: {fileID: 6816874964235752371, guid: ebede58954a232545b4f9e6af133b382,
       type: 3}
   isMetal: 0
   isWood: 0

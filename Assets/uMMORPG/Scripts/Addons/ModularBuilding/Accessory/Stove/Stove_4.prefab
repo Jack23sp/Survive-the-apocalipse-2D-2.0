@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8853484321661111647}
   - component: {fileID: 977186679123332185}
+  - component: {fileID: 8168239089861995127}
   m_Layer: 16
   m_Name: Pan 2
   m_TagString: Untagged
@@ -70,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 850132101
+  m_SortingLayer: -5
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: da898c598ec4e924ab24fa2148f7a089, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -84,6 +85,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8168239089861995127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698548072273512093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac259bb166c30734bb3ffbf353020244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 977186679123332185}
+  precision: 99.8
+  offset: 0
+  identity: {fileID: 0}
+  onlyOnStart: 1
 --- !u!1 &2979821391111999123
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,6 +765,9 @@ MonoBehaviour:
   - {fileID: 192032535844813053}
   - {fileID: 5298363389193358924}
   - {fileID: 6966080885820056783}
+  - {fileID: 6070598119353889776}
+  - {fileID: 8168239089861995127}
+  - {fileID: 7204152819414488301}
   uiToOpen: 1
   craftingAccessoryItem: {fileID: 11400000, guid: fe9dfa51c0d70b649b6a1c935459cc74,
     type: 2}
@@ -912,6 +933,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7106838539597747958}
   - component: {fileID: 8280517108237390322}
+  - component: {fileID: 7204152819414488301}
   m_Layer: 16
   m_Name: Pan 3
   m_TagString: Untagged
@@ -972,8 +994,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 850132101
+  m_SortingLayer: -5
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: c117fc14f75f0ca42838216a3216ba98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -986,6 +1008,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7204152819414488301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7855257471140438215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac259bb166c30734bb3ffbf353020244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 8280517108237390322}
+  precision: 99.8
+  offset: 0
+  identity: {fileID: 0}
+  onlyOnStart: 1
 --- !u!1 &7967935227159082736
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,6 +1035,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1991941272012122964}
   - component: {fileID: 832343282029322425}
+  - component: {fileID: 6070598119353889776}
   m_Layer: 16
   m_Name: Pan
   m_TagString: Untagged
@@ -1056,8 +1096,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 850132101
+  m_SortingLayer: -5
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: da898c598ec4e924ab24fa2148f7a089, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1070,3 +1110,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6070598119353889776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7967935227159082736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac259bb166c30734bb3ffbf353020244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 832343282029322425}
+  precision: 99.8
+  offset: 0
+  identity: {fileID: 0}
+  onlyOnStart: 1

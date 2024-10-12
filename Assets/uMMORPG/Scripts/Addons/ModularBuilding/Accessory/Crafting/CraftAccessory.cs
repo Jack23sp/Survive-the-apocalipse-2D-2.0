@@ -70,7 +70,6 @@ public class CraftAccessory : BuildingAccessory
 {
 
     public readonly SyncList<CraftinItemSlot> craftingItem = new SyncList<CraftinItemSlot>();
-    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
 
     private Player plInteractCheck;
     #region effect

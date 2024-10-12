@@ -214,6 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2715259613560292018}
   - component: {fileID: 5066600683272280236}
+  - component: {fileID: 1370259019698019421}
   m_Layer: 16
   m_Name: Pan 2
   m_TagString: Untagged
@@ -274,8 +275,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 850132101
+  m_SortingLayer: -5
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: da898c598ec4e924ab24fa2148f7a089, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -288,6 +289,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1370259019698019421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4354743894806678447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac259bb166c30734bb3ffbf353020244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 5066600683272280236}
+  precision: 99.8
+  offset: 0
+  identity: {fileID: 0}
+  onlyOnStart: 1
 --- !u!1 &4475246291299530553
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +316,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2981927215514479705}
   - component: {fileID: 1051125275065156874}
+  - component: {fileID: 2338386746201415390}
   m_Layer: 16
   m_Name: Pan 3
   m_TagString: Untagged
@@ -358,8 +377,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 850132101
+  m_SortingLayer: -5
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: c117fc14f75f0ca42838216a3216ba98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -372,6 +391,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2338386746201415390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4475246291299530553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac259bb166c30734bb3ffbf353020244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 1051125275065156874}
+  precision: 99.8
+  offset: 0
+  identity: {fileID: 0}
+  onlyOnStart: 1
 --- !u!1 &4837204768300555997
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +648,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7142914183959146973}
   - component: {fileID: 7155237658900767820}
+  - component: {fileID: 3855722077107356855}
   m_Layer: 16
   m_Name: Pan
   m_TagString: Untagged
@@ -672,8 +709,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 850132101
+  m_SortingLayer: -5
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: da898c598ec4e924ab24fa2148f7a089, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -686,6 +723,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3855722077107356855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6320516461120220244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac259bb166c30734bb3ffbf353020244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 7155237658900767820}
+  precision: 99.8
+  offset: 0
+  identity: {fileID: 0}
+  onlyOnStart: 1
 --- !u!1 &6816874964235752371
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,6 +905,9 @@ MonoBehaviour:
   - {fileID: 7068169158187323410}
   - {fileID: 773754725234698850}
   - {fileID: 2064843167281919700}
+  - {fileID: 3855722077107356855}
+  - {fileID: 1370259019698019421}
+  - {fileID: 2338386746201415390}
   uiToOpen: 1
   craftingAccessoryItem: {fileID: 11400000, guid: fe9dfa51c0d70b649b6a1c935459cc74,
     type: 2}

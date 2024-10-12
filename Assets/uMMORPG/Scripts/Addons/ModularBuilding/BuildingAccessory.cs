@@ -282,6 +282,8 @@ public class BuildingAccessory : NetworkBehaviour
     public List<GameObject> actionObjects = new List<GameObject>();
 
     public readonly SyncList<ActionPlayerSlot> actionPlayerSlot = new SyncList<ActionPlayerSlot>();
+    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
+
     public DamagableObject damagableObject;
 
     public void Start()

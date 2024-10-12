@@ -490,6 +490,23 @@ public class PlayerModularBuilding : NetworkBehaviour
     [Command]
     public void CmdSetFakeBuildingID(NetworkIdentity identity, BuildingAccessory [] accessories )
     {
+        BuildingAccessory accessory = identity.gameObject.GetComponent<BuildingAccessory>();
+        if(accessory.playerThatInteractWhitThis.Count > 0)
+        {
+            player.playerNotification.TargetSpawnNotification("You can't move or delete this accessory because someone is using it.");
+            return;
+        }
+        if (accessory.actionPlayerSlot.Count > 0)
+        {
+            foreach (ActionPlayerSlot action in accessory.actionPlayerSlot)
+            {
+                if(action.player)
+                {
+                    player.playerNotification.TargetSpawnNotification("You can't move or delete this accessory because someone is using it.");
+                    return;
+                }
+            }
+        }
         fakeBuildingID = identity;
         accessoryInOldBuilding = accessories.ToList();
     }
@@ -525,9 +542,14 @@ public class PlayerModularBuilding : NetworkBehaviour
     [Command]
     public void CmdRemoveFakeBuildingID(bool condition)
     {
+        RemoveFakeBuildingID(condition);
+    }
+
+    public void RemoveFakeBuildingID (bool condition)
+    {
         fakeBuildingID = null;
-        foreach(BuildingAccessory acc in accessoryInOldBuilding)
-            {
+        foreach (BuildingAccessory acc in accessoryInOldBuilding)
+        {
             RpcManageVisibilityOfObject(acc.netIdentity, condition);
         }
         RpcManageVisibilityOfObject(fakeBuildingID, condition);
@@ -536,10 +558,15 @@ public class PlayerModularBuilding : NetworkBehaviour
     [Command]
     public void CmdManageVisibilityOfObject( bool condition)
     {
+        ManageVisibilityOfObject(condition);
+    }
+
+    public void ManageVisibilityOfObject (bool condition)
+    {
         if (fakeBuildingID)
         {
             fakeBuildingID.gameObject.SetActive(condition);
-            foreach(BuildingAccessory acc in accessoryInOldBuilding)
+            foreach (BuildingAccessory acc in accessoryInOldBuilding)
             {
                 RpcManageVisibilityOfObject(acc.netIdentity, condition);
             }

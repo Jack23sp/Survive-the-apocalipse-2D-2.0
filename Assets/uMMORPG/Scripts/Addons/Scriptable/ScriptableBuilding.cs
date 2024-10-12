@@ -32,6 +32,7 @@ public partial struct BuildingToCreate
 {
     public string buildingName;
     public GameObject buildingObject;
+    public GameObject buildingObjectPlacer;
 }
 
 

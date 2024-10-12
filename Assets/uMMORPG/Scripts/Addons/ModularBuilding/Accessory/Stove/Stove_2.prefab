@@ -165,6 +165,9 @@ MonoBehaviour:
   - {fileID: 1144425756428952527}
   - {fileID: 4547513525158458888}
   - {fileID: 9049442065252419683}
+  - {fileID: 4464602046881948315}
+  - {fileID: 8771133030550154341}
+  - {fileID: 387159805491030080}
   uiToOpen: 1
   craftingAccessoryItem: {fileID: 11400000, guid: fe9dfa51c0d70b649b6a1c935459cc74,
     type: 2}
@@ -497,6 +500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 466399120765955156}
   - component: {fileID: 1593479729752591838}
+  - component: {fileID: 8771133030550154341}
   m_Layer: 16
   m_Name: Pan 2
   m_TagString: Untagged
@@ -557,8 +561,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 850132101
+  m_SortingLayer: -5
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: da898c598ec4e924ab24fa2148f7a089, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -571,6 +575,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8771133030550154341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2740886931869409723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac259bb166c30734bb3ffbf353020244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 1593479729752591838}
+  precision: 99.8
+  offset: 0
+  identity: {fileID: 0}
+  onlyOnStart: 1
 --- !u!1 &5191937704326496210
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5150534600221529555}
   - component: {fileID: 144253637212322454}
+  - component: {fileID: 4464602046881948315}
   m_Layer: 16
   m_Name: Pan
   m_TagString: Untagged
@@ -641,8 +663,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 850132101
+  m_SortingLayer: -5
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: da898c598ec4e924ab24fa2148f7a089, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -655,6 +677,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4464602046881948315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191937704326496210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac259bb166c30734bb3ffbf353020244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 144253637212322454}
+  precision: 99.8
+  offset: 0
+  identity: {fileID: 0}
+  onlyOnStart: 1
 --- !u!1 &5790963228544284308
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,6 +908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1978678287329254758}
   - component: {fileID: 8205758106010566196}
+  - component: {fileID: 387159805491030080}
   m_Layer: 16
   m_Name: Pan 3
   m_TagString: Untagged
@@ -929,8 +969,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 850132101
+  m_SortingLayer: -5
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: c117fc14f75f0ca42838216a3216ba98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -943,6 +983,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &387159805491030080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7013563175224017790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac259bb166c30734bb3ffbf353020244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 8205758106010566196}
+  precision: 99.9
+  offset: 0
+  identity: {fileID: 0}
+  onlyOnStart: 1
 --- !u!1 &8066265398940172796
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,7 +1108,7 @@ MonoBehaviour:
   - {x: 0.6499634, y: -1.25, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 172644
+  m_InstanceId: 891918
 --- !u!114 &8923799076747056474
 MonoBehaviour:
   m_ObjectHideFlags: 0

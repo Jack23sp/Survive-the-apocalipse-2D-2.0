@@ -9,7 +9,6 @@ public class KitchenSink : BuildingAccessory
 {
     public Aquifer aquifer;
 
-    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
     private Player plInteractCheck;
     #region effect
         public ParticleSystem pSystem;

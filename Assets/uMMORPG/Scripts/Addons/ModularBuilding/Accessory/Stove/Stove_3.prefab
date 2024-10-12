@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6858352030374918230}
   - component: {fileID: 4330584643246003555}
+  - component: {fileID: 6205142938022899040}
   m_Layer: 16
   m_Name: Pan 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6858352030374918230
 Transform:
   m_ObjectHideFlags: 0
@@ -70,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 850132101
+  m_SortingLayer: -5
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: da898c598ec4e924ab24fa2148f7a089, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -84,6 +85,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6205142938022899040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253207457566924495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac259bb166c30734bb3ffbf353020244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 4330584643246003555}
+  precision: 99.8
+  offset: 0
+  identity: {fileID: 0}
+  onlyOnStart: 1
 --- !u!1 &1286328458247192390
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,13 +449,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2153383367471468433}
   - component: {fileID: 9143563023470392028}
+  - component: {fileID: 4930042536843401542}
   m_Layer: 16
   m_Name: Pan 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2153383367471468433
 Transform:
   m_ObjectHideFlags: 0
@@ -491,8 +510,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 850132101
+  m_SortingLayer: -5
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: c117fc14f75f0ca42838216a3216ba98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -505,6 +524,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4930042536843401542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6051387172698966899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac259bb166c30734bb3ffbf353020244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 9143563023470392028}
+  precision: 99.8
+  offset: 0
+  identity: {fileID: 0}
+  onlyOnStart: 1
 --- !u!1 &7157861663726719179
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,13 +551,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4086511217540638583}
   - component: {fileID: 6456648342966291333}
+  - component: {fileID: 1741955473597254822}
   m_Layer: 16
   m_Name: Pan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4086511217540638583
 Transform:
   m_ObjectHideFlags: 0
@@ -575,8 +612,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 850132101
+  m_SortingLayer: -5
   m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: da898c598ec4e924ab24fa2148f7a089, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -589,6 +626,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1741955473597254822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7157861663726719179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac259bb166c30734bb3ffbf353020244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 6456648342966291333}
+  precision: 99.8
+  offset: 0
+  identity: {fileID: 0}
+  onlyOnStart: 1
 --- !u!1 &8053074862023309195
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,6 +974,9 @@ MonoBehaviour:
   - {fileID: 269013034353113257}
   - {fileID: 3096773463332096104}
   - {fileID: 4273259096384863490}
+  - {fileID: 1741955473597254822}
+  - {fileID: 6205142938022899040}
+  - {fileID: 4930042536843401542}
   uiToOpen: 1
   craftingAccessoryItem: {fileID: 11400000, guid: fe9dfa51c0d70b649b6a1c935459cc74,
     type: 2}

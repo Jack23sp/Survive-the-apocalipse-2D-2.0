@@ -202,7 +202,6 @@ public class Warehouse : BuildingAccessory
     public List<GameObject> warehouseNameObjects = new List<GameObject>(); 
     public TextMeshProUGUI warehouseNameText;
 
-    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
     public GameObject otherPlayerAreInteractWithThisAccessory;
     private Player plInteractCheck;
 

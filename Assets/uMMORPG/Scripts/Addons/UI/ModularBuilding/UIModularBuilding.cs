@@ -59,7 +59,7 @@ public class UIModularBuilding : MonoBehaviour
             if (UIButtonSounds.singleton) UIButtonSounds.singleton.ButtonPress(1);
             if (Player.localPlayer.playerModularBuilding.fakeBuildingID != null)
             {
-                Player.localPlayer.playerModularBuilding.CmdManageVisibilityOfObject( true);
+                Player.localPlayer.playerModularBuilding.CmdManageVisibilityOfObject(true);
                 Player.localPlayer.playerModularBuilding.CmdRemoveFakeBuildingID(true);
                 Player.localPlayer.playerModularBuilding.oldBuilding = null;
             }

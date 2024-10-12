@@ -213,8 +213,10 @@ public class WeaponStorage : BuildingAccessory
 {
     public SyncList<ItemSlot> weapon = new SyncList<ItemSlot>();
 
-    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
     public GameObject otherPlayerAreInteractWithThisAccessory;
+
+    public List<GameObject> doorsOpen = new List<GameObject>();
+    public List<GameObject> doorsClosed = new List<GameObject>();
 
     public new void Start()
     {
@@ -246,6 +248,7 @@ public class WeaponStorage : BuildingAccessory
         base.OnStartClient();
         weapon.Callback += OnWeaponInventoryChanged;
         playerThatInteractWhitThis.Callback += PlayerInteraction;
+        InteractionCall();
     }
 
     public override void AddPlayerThatAreInteract(string playerName)
@@ -262,9 +265,23 @@ public class WeaponStorage : BuildingAccessory
 
     void PlayerInteraction(SyncList<string>.Operation op, int index, string oldSlot, string newSlot)
     {
-        otherPlayerAreInteractWithThisAccessory.SetActive(playerThatInteractWhitThis.Count > 0);
+        InteractionCall();
     }
 
+
+    public void InteractionCall()
+    {
+        otherPlayerAreInteractWithThisAccessory.SetActive(playerThatInteractWhitThis.Count > 0);
+        foreach (GameObject open in doorsOpen)
+        {
+            open.SetActive(playerThatInteractWhitThis.Count > 0);
+        }
+
+        foreach (GameObject open in doorsClosed)
+        {
+            open.SetActive(playerThatInteractWhitThis.Count == 0);
+        }
+    }
 
     void OnWeaponInventoryChanged(SyncList<ItemSlot>.Operation op, int index, ItemSlot oldSlot, ItemSlot newSlot)
     {

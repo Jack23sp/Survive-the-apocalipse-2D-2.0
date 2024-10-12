@@ -8,7 +8,6 @@ using System.Linq;
 public class BathroomSink : BuildingAccessory
 {
     public Aquifer aquifer;
-    public readonly SyncList<string> playerThatInteractWhitThis = new SyncList<string>();
     
     private Player plInteractCheck;
     #region effect
