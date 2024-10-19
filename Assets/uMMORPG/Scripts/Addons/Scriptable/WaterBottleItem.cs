@@ -39,4 +39,9 @@ public partial class WaterBottleItem : UsableItem
 {
     public int maxWater = 100;
 
+    public void SetAnimation(Player player)
+    {
+        player.playerAdditionalState.SetState("DRINK", true, 0, 0, null);
+    }
+
 }

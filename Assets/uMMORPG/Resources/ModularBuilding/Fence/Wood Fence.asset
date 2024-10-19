@@ -88,7 +88,7 @@ MonoBehaviour:
   - buildingName: 
     buildingObject: {fileID: 203251253726611786, guid: 131051c8f184ef74f8067ea340f2bfab,
       type: 3}
-    buildingObjectPlacer: {fileID: 203251253726611786, guid: dd6c07a5fda14db40a1c8791ec0d7162,
+    buildingObjectPlacer: {fileID: 203251253726611786, guid: 7f3dca3802f94314db199f040f948ebd,
       type: 3}
   - buildingName: 
     buildingObject: {fileID: 6816874964235752371, guid: adfb8790f8f6d0e4ca18bdfa605d9163,

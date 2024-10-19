@@ -215,6 +215,11 @@ public class PlayerThirsty : NetworkBehaviour
             slot.item.waterContainer -= diff;
             if (isInventory) player.inventory.slots[inventoryIndex] = slot;
             else player.playerBelt.belt[inventoryIndex] = slot;
+
+            if (slot.item.data is WaterBottleItem)
+            {
+                ((WaterBottleItem)slot.item.data).SetAnimation(player);
+            }
             TargetRefreshSelectedItemSlider();
         }
     }

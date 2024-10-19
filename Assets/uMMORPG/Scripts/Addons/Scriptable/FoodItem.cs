@@ -90,6 +90,8 @@ public partial class FoodItem : UsableItem
                     g.GetComponent<CurvedMovement>().SpawnAtPosition(new Item(results), resultsAmount, -1, 0);
                 }
             }
+
+            player.playerAdditionalState.SetState("EAT", true, 0, 0, null);
         }
 
         player.playerCharacterCreation.fat += fatAmount;

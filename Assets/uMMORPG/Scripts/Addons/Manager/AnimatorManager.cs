@@ -10,6 +10,8 @@ public class AnimatorManager : MonoBehaviour
     //public RuntimeAnimatorController harvestingRuntimeController;
     public RuntimeAnimatorController sitRuntimeController;
     public RuntimeAnimatorController laydownRuntimeController;
+    public RuntimeAnimatorController drinkRuntimeController;
+    public RuntimeAnimatorController eatRuntimeController;
 
     void Start()
     {

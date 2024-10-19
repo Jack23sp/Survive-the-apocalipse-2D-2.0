@@ -19,6 +19,7 @@ public class PlayerAdditionalState : NetworkBehaviour
     private GameObject dumbbell2;
     private ScriptableAbility ability;
     private float amountToAdd;
+    private string changeState;
 
     [SyncVar (hook = nameof(ManageadditionState))] public string additionalState;
     [SyncVar] public string bookTitle = string.Empty;
@@ -107,22 +108,39 @@ public class PlayerAdditionalState : NetworkBehaviour
 
     public void SetState(string state,bool condition, float amount, float timer, ScriptableAbility scriptableAbility = null)
     {
-        additionalState = ((condition && state == "READING") || 
-                           (condition && state == "EXERCISE") ||
-                           (condition && state == "ABS") ||
-                           (condition && state == "JUMPINGJACK") ||
-                           (condition && state == "SLEEP") ||
-                           (condition && state == "SIT") ||
-                           (condition && state == "LAY") ||
-                           (condition && state == "PUSHUPS")) ? state : "";
-        
-        CancelInvoke(nameof(IncreaseAbility));
-        ability = scriptableAbility;
-        amountToAdd = amount;
-            
-        if(condition)
+        if (player.health.current == 0)
         {
-            InvokeRepeating(nameof(IncreaseAbility), timer, timer);
+            additionalState = "";
+            ability = null;
+            amountToAdd = 0;
+            CancelInvoke(nameof(IncreaseAbility));
+        }
+        else if((state == "DRINK" || state == "EAT") && player.playerAccessoryInteraction.whereActionIsGoing == null)
+        {
+            additionalState = state;
+            ability = null;
+            amountToAdd = 0;
+            CancelInvoke(nameof(IncreaseAbility));
+        }
+        else
+        {
+            additionalState = ((condition && state == "READING") ||
+               (condition && state == "EXERCISE") ||
+               (condition && state == "ABS") ||
+               (condition && state == "JUMPINGJACK") ||
+               (condition && state == "SLEEP") ||
+               (condition && state == "SIT") ||
+               (condition && state == "LAY") ||
+               (condition && state == "PUSHUPS")) ? state : "";
+
+            CancelInvoke(nameof(IncreaseAbility));
+            ability = scriptableAbility;
+            amountToAdd = amount;
+
+            if (condition)
+            {
+                InvokeRepeating(nameof(IncreaseAbility), timer, timer);
+            }
         }
     }
 
@@ -140,6 +158,8 @@ public class PlayerAdditionalState : NetworkBehaviour
            oldValue != "PUSHUPS" && 
            oldValue != "SIT" && 
            oldValue != "LAY" && 
+           oldValue != "EAT" && 
+           oldValue != "DRINK" && 
            oldValue != "SLEEP")
         {
             previousAnimatorController = animator.runtimeAnimatorController;
@@ -210,6 +230,16 @@ public class PlayerAdditionalState : NetworkBehaviour
             if(newValue == "SLEEP") animator.runtimeAnimatorController = AnimatorManager.singleton.sleepRuntimeController;
             if(newValue == "SIT") animator.runtimeAnimatorController = AnimatorManager.singleton.sitRuntimeController;
             if(newValue == "LAY") animator.runtimeAnimatorController = AnimatorManager.singleton.laydownRuntimeController;
+            if (newValue == "EAT")
+            {
+                animator.runtimeAnimatorController = AnimatorManager.singleton.eatRuntimeController;
+                CallChangeToDefaultController(animator);
+            }
+            if (newValue == "DRINK")
+            {
+                animator.runtimeAnimatorController = AnimatorManager.singleton.drinkRuntimeController;
+                CallChangeToDefaultController(animator);
+            }
 
 
             if (newValue == "EXERCISE")
@@ -257,6 +287,22 @@ public class PlayerAdditionalState : NetworkBehaviour
         {
             UIBookPanel.singleton.ClosePanel();
         }
+    }
+
+    public void CallChangeToDefaultController(Animator animator)
+    {
+        changeState = additionalState;
+        AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(0);
+        float animationLength = currentState.length + 1.0f;
+        Invoke(nameof(ChangeToDefaultController), animationLength);
+    }
+
+    public void ChangeToDefaultController()
+    {
+        if (additionalState != changeState || player.health.currentTimer == 0) return;
+
+        if (previousWeapon) previousWeapon.SetActive(true);
+        animator.runtimeAnimatorController = previousAnimatorController;
     }
 
     public void IncreaseAbility()
