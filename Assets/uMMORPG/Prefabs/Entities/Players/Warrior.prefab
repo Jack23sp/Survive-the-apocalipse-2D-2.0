@@ -521,7 +521,6 @@ GameObject:
   - component: {fileID: 4155525745602580902}
   - component: {fileID: 464575906772447637}
   - component: {fileID: 6482543566119774359}
-  - component: {fileID: 4672243097576595661}
   - component: {fileID: 6480985071160133470}
   - component: {fileID: 563125883405915997}
   - component: {fileID: 6175117951656240602}
@@ -530,7 +529,6 @@ GameObject:
   - component: {fileID: 4248894107178099370}
   - component: {fileID: 1217336421360846278}
   - component: {fileID: 3784020243539760538}
-  - component: {fileID: 4853219613345177250}
   - component: {fileID: 5000401545185987892}
   - component: {fileID: 114036776171772128}
   - component: {fileID: 114392801299842010}
@@ -1002,72 +1000,16 @@ MonoBehaviour:
   stunTimeEnd: 0
   inSafeZone: 0
   lookDirection: {x: 0, y: -1}
-  playerAbility: {fileID: 0}
-  playerAccuracy: {fileID: 0}
-  playerAlliance: {fileID: 0}
-  playerArmor: {fileID: 0}
-  playerBlood: {fileID: 0}
-  playerBoost: {fileID: 0}
-  playerCharacterCreation: {fileID: 0}
-  playerConservative: {fileID: 0}
-  playerDance: {fileID: 0}
-  playerEmoji: {fileID: 0}
-  playerFoodUnsanity: {fileID: 0}
-  playerFriends: {fileID: 0}
-  playerHungry: {fileID: 0}
-  followPlayer: {fileID: 0}
-  playerMiss: {fileID: 0}
-  playerModularBuilding: {fileID: 0}
-  playerMonsterGrab: {fileID: 0}
-  playerNotification: {fileID: 0}
-  playerObserver: {fileID: 0}
-  playerOptions: {fileID: 0}
-  playerOverlays: {fileID: 0}
-  playerPartner: {fileID: 0}
-  playerTutorial: {fileID: 0}
-  playerAccessoryInteraction: {fileID: 0}
-  playerAdditionalState: {fileID: 0}
-  playerBelt: {fileID: 0}
-  playerCallback: {fileID: 0}
-  friendResurrect: {fileID: 0}
-  playerItemDrop: {fileID: 0}
-  playerMove: {fileID: 0}
-  playerNavMeshMovement2D: {fileID: 0}
-  playerPick: {fileID: 0}
-  playerScreenNotification: {fileID: 0}
-  playerShootPrecision: {fileID: 0}
-  playerSounds: {fileID: 0}
-  playerSpawnpoint: {fileID: 0}
-  playerTired: {fileID: 0}
-  playerWeapon: {fileID: 0}
-  playerPoints: {fileID: 0}
-  playerPoisoned: {fileID: 0}
-  playerRadio: {fileID: 0}
-  playerResources: {fileID: 0}
-  playerTeleport: {fileID: 0}
-  playerTemperature: {fileID: 0}
-  playerThirsty: {fileID: 0}
-  playerTorch: {fileID: 0}
-  agent2D: {fileID: 0}
-  playerUpgrade: {fileID: 0}
-  playerWeaponIK: {fileID: 0}
-  playerWeight: {fileID: 0}
-  playerWet: {fileID: 0}
-  mallItems: []
   experience: {fileID: 464575906772447637}
   strength: {fileID: 0}
   intelligence: {fileID: 0}
   chat: {fileID: 114438020945256178}
   crafting: {fileID: 0}
   guild: {fileID: 6482543566119774359}
-  indicator: {fileID: 4672243097576595661}
   inventory: {fileID: 6480985071160133470}
   itemMall: {fileID: 563125883405915997}
   looting: {fileID: 6175117951656240602}
   mountControl: {fileID: 0}
-  npcRevive: {fileID: 0}
-  npcTeleport: {fileID: 0}
-  npcTrading: {fileID: 0}
   party: {fileID: 7443181142516901471}
   petControl: {fileID: 1190274451174652869}
   quests: {fileID: 4248894107178099370}
@@ -1095,8 +1037,60 @@ MonoBehaviour:
   pendingSkill: -1
   pendingDestination: {x: 0, y: 0}
   pendingDestinationValid: 0
+  playerAbility: {fileID: 0}
+  playerAccuracy: {fileID: 0}
+  playerAlliance: {fileID: 0}
+  playerArmor: {fileID: 0}
+  playerBlood: {fileID: 0}
+  playerBoost: {fileID: 0}
+  playerCharacterCreation: {fileID: 0}
+  playerConservative: {fileID: 0}
+  playerDance: {fileID: 0}
+  playerEmoji: {fileID: 0}
+  playerFoodUnsanity: {fileID: 0}
+  playerFriends: {fileID: 0}
+  playerHungry: {fileID: 0}
+  followPlayer: {fileID: 0}
+  playerMiss: {fileID: 0}
+  playerModularBuilding: {fileID: 0}
+  playerMonsterGrab: {fileID: 0}
+  playerNotification: {fileID: 0}
+  playerObserver: {fileID: 0}
+  playerOptions: {fileID: 0}
+  playerOverlays: {fileID: 0}
+  playerPartner: {fileID: 0}
+  playerTutorial: {fileID: 0}
+  playerAccessoryInteraction: {fileID: 0}
+  playerAdditionalState: {fileID: 0}
+  playerBelt: {fileID: 0}
+  playerCallback: {fileID: 0}
   playerEquipment: {fileID: 0}
+  friendResurrect: {fileID: 0}
+  playerItemDrop: {fileID: 0}
+  playerMove: {fileID: 0}
+  playerNavMeshMovement2D: {fileID: 0}
+  playerPick: {fileID: 0}
   playerNames: []
+  playerScreenNotification: {fileID: 0}
+  playerShootPrecision: {fileID: 0}
+  playerSounds: {fileID: 0}
+  playerSpawnpoint: {fileID: 0}
+  playerTired: {fileID: 0}
+  playerWeapon: {fileID: 0}
+  playerPoints: {fileID: 0}
+  playerPoisoned: {fileID: 0}
+  playerRadio: {fileID: 0}
+  playerResources: {fileID: 0}
+  playerTeleport: {fileID: 0}
+  playerTemperature: {fileID: 0}
+  playerThirsty: {fileID: 0}
+  playerTorch: {fileID: 0}
+  agent2D: {fileID: 0}
+  playerUpgrade: {fileID: 0}
+  playerWeaponIK: {fileID: 0}
+  playerWeight: {fileID: 0}
+  playerWet: {fileID: 0}
+  mallItems: []
 --- !u!114 &114438020945256178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1183,13 +1177,11 @@ MonoBehaviour:
   avatarCamera: {fileID: 20925768905277832}
   rawImage: {fileID: 3053964930258929015}
   magazineItem:
-    accessories: []
-    currentDurability: 0
-    durabilityLevel: 0
-    bagLevel: 0
-    skin: 0
-    bulletsRemaining: 0
-    alreadyAddedAccessory: 1
+    hash: 0
+    summoned: {fileID: 0}
+    summonedHealth: 0
+    summonedLevel: 0
+    summonedExperience: 0
     accuracyLevel: 0
     currentArmor: 0
     armorLevel: 0
@@ -1204,11 +1196,13 @@ MonoBehaviour:
     batteryLevel: 0
     weight: 0
     wet: 0
-    hash: 0
-    summoned: {fileID: 0}
-    summonedHealth: 0
-    summonedLevel: 0
-    summonedExperience: 0
+    accessories: []
+    currentDurability: 0
+    durabilityLevel: 0
+    bagLevel: 0
+    skin: 0
+    bulletsRemaining: 0
+    alreadyAddedAccessory: 1
   slotInfo:
   - requiredCategory: Weapon
     location: {fileID: 114439749695880884}
@@ -1300,21 +1294,6 @@ MonoBehaviour:
   overlaySuffix: ']'
   inviteFrom: 
   inviteWaitSeconds: 3
---- !u!114 &4672243097576595661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289234771990996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cf87f9a132ee49b894d360bfe7b0f83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indicatorPrefab: {fileID: 1415353125337104, guid: 34a489ea6a9bf4d09a676e1822ca80b8,
-    type: 3}
-  indicator: {fileID: 0}
 --- !u!114 &6480985071160133470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1423,13 +1402,11 @@ MonoBehaviour:
   splitKeys: 300100002f010000
   trash:
     item:
-      accessories: []
-      currentDurability: 0
-      durabilityLevel: 0
-      bagLevel: 0
-      skin: 0
-      bulletsRemaining: 0
-      alreadyAddedAccessory: 0
+      hash: 0
+      summoned: {fileID: 0}
+      summonedHealth: 0
+      summonedLevel: 0
+      summonedExperience: 0
       accuracyLevel: 0
       currentArmor: 0
       armorLevel: 0
@@ -1444,11 +1421,13 @@ MonoBehaviour:
       batteryLevel: 0
       weight: 0
       wet: 0
-      hash: 0
-      summoned: {fileID: 0}
-      summonedHealth: 0
-      summonedLevel: 0
-      summonedExperience: 0
+      accessories: []
+      currentDurability: 0
+      durabilityLevel: 0
+      bagLevel: 0
+      skin: 0
+      bulletsRemaining: 0
+      alreadyAddedAccessory: 0
     amount: 0
 --- !u!114 &563125883405915997
 MonoBehaviour:
@@ -1657,24 +1636,6 @@ MonoBehaviour:
   player: {fileID: 0}
   skillExperience: 0
   _currentSkillDirection: {x: 0, y: -1}
---- !u!114 &4853219613345177250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289234771990996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61c4dbe3870274197a48771e0ee93e91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0.1
-  player: {fileID: 114064821627912484}
-  indicator: {fileID: 4672243097576595661}
-  key: 9
 --- !u!114 &5000401545185987892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1761,12 +1722,11 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   agent: {fileID: 114036776171772128}
+  player: {fileID: 114064821627912484}
+  rubberbanding: {fileID: 114502432644699358}
   joystick: {fileID: 0}
   moveJoystick: {fileID: 0}
   prevMunitionCountForSound: 0
-  player: {fileID: 114064821627912484}
-  indicator: {fileID: 4672243097576595661}
-  rubberbanding: {fileID: 114502432644699358}
 --- !u!114 &114800021995300088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2034,13 +1994,11 @@ MonoBehaviour:
   bag: -1
   accessorySlot:
     item:
-      accessories: []
-      currentDurability: 0
-      durabilityLevel: 0
-      bagLevel: 0
-      skin: 0
-      bulletsRemaining: 0
-      alreadyAddedAccessory: 0
+      hash: 0
+      summoned: {fileID: 0}
+      summonedHealth: 0
+      summonedLevel: 0
+      summonedExperience: 0
       accuracyLevel: 0
       currentArmor: 0
       armorLevel: 0
@@ -2055,21 +2013,21 @@ MonoBehaviour:
       batteryLevel: 0
       weight: 0
       wet: 0
-      hash: 0
-      summoned: {fileID: 0}
-      summonedHealth: 0
-      summonedLevel: 0
-      summonedExperience: 0
+      accessories: []
+      currentDurability: 0
+      durabilityLevel: 0
+      bagLevel: 0
+      skin: 0
+      bulletsRemaining: 0
+      alreadyAddedAccessory: 0
     amount: 0
   hatsSlot:
     item:
-      accessories: []
-      currentDurability: 0
-      durabilityLevel: 0
-      bagLevel: 0
-      skin: 0
-      bulletsRemaining: 0
-      alreadyAddedAccessory: 0
+      hash: 0
+      summoned: {fileID: 0}
+      summonedHealth: 0
+      summonedLevel: 0
+      summonedExperience: 0
       accuracyLevel: 0
       currentArmor: 0
       armorLevel: 0
@@ -2084,11 +2042,13 @@ MonoBehaviour:
       batteryLevel: 0
       weight: 0
       wet: 0
-      hash: 0
-      summoned: {fileID: 0}
-      summonedHealth: 0
-      summonedLevel: 0
-      summonedExperience: 0
+      accessories: []
+      currentDurability: 0
+      durabilityLevel: 0
+      bagLevel: 0
+      skin: 0
+      bulletsRemaining: 0
+      alreadyAddedAccessory: 0
     amount: 0
   characterCustomization: {fileID: 5857863884594549370}
   joystickManager: {fileID: 0}
@@ -2735,13 +2695,11 @@ MonoBehaviour:
   isOn: 0
   torchItem:
     item:
-      accessories: []
-      currentDurability: 0
-      durabilityLevel: 0
-      bagLevel: 0
-      skin: 0
-      bulletsRemaining: 0
-      alreadyAddedAccessory: 0
+      hash: 0
+      summoned: {fileID: 0}
+      summonedHealth: 0
+      summonedLevel: 0
+      summonedExperience: 0
       accuracyLevel: 0
       currentArmor: 0
       armorLevel: 0
@@ -2756,11 +2714,13 @@ MonoBehaviour:
       batteryLevel: 0
       weight: 0
       wet: 0
-      hash: 0
-      summoned: {fileID: 0}
-      summonedHealth: 0
-      summonedLevel: 0
-      summonedExperience: 0
+      accessories: []
+      currentDurability: 0
+      durabilityLevel: 0
+      bagLevel: 0
+      skin: 0
+      bulletsRemaining: 0
+      alreadyAddedAccessory: 0
     amount: 0
   torch: {fileID: 3147639766385760634}
   personalTorch: {fileID: 4673730336395415540}
@@ -2832,13 +2792,11 @@ MonoBehaviour:
   player: {fileID: 114064821627912484}
   searchedItem:
     item:
-      accessories: []
-      currentDurability: 0
-      durabilityLevel: 0
-      bagLevel: 0
-      skin: 0
-      bulletsRemaining: 0
-      alreadyAddedAccessory: 0
+      hash: 0
+      summoned: {fileID: 0}
+      summonedHealth: 0
+      summonedLevel: 0
+      summonedExperience: 0
       accuracyLevel: 0
       currentArmor: 0
       armorLevel: 0
@@ -2853,11 +2811,13 @@ MonoBehaviour:
       batteryLevel: 0
       weight: 0
       wet: 0
-      hash: 0
-      summoned: {fileID: 0}
-      summonedHealth: 0
-      summonedLevel: 0
-      summonedExperience: 0
+      accessories: []
+      currentDurability: 0
+      durabilityLevel: 0
+      bagLevel: 0
+      skin: 0
+      bulletsRemaining: 0
+      alreadyAddedAccessory: 0
     amount: 0
   heartBeatAudioSource: {fileID: 7050997585960497453}
 --- !u!114 &-7210716539980657632

@@ -4,14 +4,12 @@ using System;
 using UnityEngine;
 using Mirror;
 
-[RequireComponent(typeof(PlayerIndicator))]
 [RequireComponent(typeof(NetworkNavMeshAgentRubberbanding2D))]
 [DisallowMultipleComponent]
 public partial class PlayerNavMeshMovement2D : NavMeshMovement2D
 {
     [Header("Components")]
     public Player player;
-    public PlayerIndicator indicator;
     public NetworkNavMeshAgentRubberbanding2D rubberbanding;
 
     public override void Reset()
@@ -95,11 +93,6 @@ public partial class PlayerNavMeshMovement2D : NavMeshMovement2D
                 // draw direction for debugging
                 Debug.DrawLine(transform.position, transform.position + (Vector3)direction, Color.green, 0, false);
 
-                // clear indicator if there is one, and if it's not on a target
-                // (simply looks better)
-                if (direction != Vector2.zero)
-                    indicator.ClearIfNoParent();
-
                 // cancel path if we are already doing click movement, otherwise
                 // we will slide
                 agent.ResetMovement();
@@ -142,7 +135,6 @@ public partial class PlayerNavMeshMovement2D : NavMeshMovement2D
                 // accidentally in a room without a door etc.
                 Vector2 worldPos = cam.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 bestDestination = NearestValidDestination(worldPos);
-                indicator.SetViaPosition(bestDestination);
 
                 // casting or stunned? then set pending destination
                 if (player.state == "CASTING" || player.state == "STUNNED")
